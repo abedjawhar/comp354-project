@@ -1,0 +1,39 @@
+plugins {
+    id "net.ltgt.apt" version "0.10"
+}
+
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'application'
+
+group 'comp354'
+version '1.0-SNAPSHOT'
+
+mainClassName = 'com.github.comp354project.Main'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    // You can declare any Maven/Ivy/file repository here.
+    mavenCentral()
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    // Project dependencies
+    compile group: 'org.wildfly.swarm', name: 'javafx', version: '2018.1.0'
+    compile group: 'org.xderial', name: 'sqlite-jdbc', version: '3.21.0.1'
+    compile 'com.google.dagger:dagger:2.14.1'
+    apt 'com.google.dagger:dagger-compiler:2.14.1'
+
+    // Test dependencies
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.4.1' //version required
+}
