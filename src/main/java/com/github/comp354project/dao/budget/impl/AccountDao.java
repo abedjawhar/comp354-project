@@ -1,8 +1,8 @@
 package com.github.comp354project.dao.budget.impl;
 
-import com.github.comp354project.dao.budget.IBankAccountDao;
+import com.github.comp354project.dao.budget.IAccountDao;
 
-public class BankAccountDao implements IBankAccountDao {
+public class AccountDao implements IAccountDao {
 
     @Override
     public Double getBalance() {

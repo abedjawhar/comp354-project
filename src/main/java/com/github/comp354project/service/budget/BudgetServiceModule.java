@@ -1,6 +1,6 @@
 package com.github.comp354project.service.budget;
 
-import com.github.comp354project.service.budget.impl.BankAccountService;
+import com.github.comp354project.service.budget.impl.AccountService;
 import dagger.Module;
 import dagger.Provides;
 
@@ -10,7 +10,7 @@ import dagger.Provides;
 @Module
 public class BudgetServiceModule {
 
-    @Provides static IBankAccountService provideBankAccountService(BankAccountService bankAccountService) {
-        return bankAccountService;
+    @Provides static IAccountService provideAccountService(AccountService accountService) {
+        return accountService;
     }
 }

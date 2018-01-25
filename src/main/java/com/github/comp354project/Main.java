@@ -1,7 +1,6 @@
 package com.github.comp354project;
 
-import com.github.comp354project.service.budget.BudgetServiceModule;
-import com.github.comp354project.service.budget.IBankAccountService;
+import com.github.comp354project.service.budget.IAccountService;
 import com.github.comp354project.viewController.PrimaryViewController;
 import javafx.application.Application;
 
@@ -13,7 +12,7 @@ import javax.inject.Inject;
 public class Main {
 
     @Inject
-    IBankAccountService bankAccountService;
+    IAccountService bankAccountService;
 
     public static void main(String[] args) {
         Application.launch(PrimaryViewController.class, args);

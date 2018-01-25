@@ -1,17 +1,17 @@
 package com.github.comp354project.dao.budget;
 
-import com.github.comp354project.dao.budget.impl.BankAccountDao;
+import com.github.comp354project.dao.budget.impl.AccountDao;
 import dagger.Module;
 import dagger.Provides;
 
 /**
- * Budget DAO module for database accesses
+ * Budget DAO module for database accesses for classes linked to budget
  */
 @Module
 public class BudgetDaoModule {
 
     @Provides
-    static IBankAccountDao provideBankAccountService() {
-        return new BankAccountDao();
+    static IAccountDao provideAccountDao() {
+        return new AccountDao();
     }
 }

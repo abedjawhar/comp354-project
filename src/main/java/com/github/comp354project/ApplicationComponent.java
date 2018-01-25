@@ -7,11 +7,24 @@ import dagger.Component;
 
 import javax.inject.Singleton;
 
+/**
+ * This class is used to 'connect all modules together'
+ * It is also used to inject the classes that require this component
+ *
+ * All defined modules should be written here
+ */
 @Component(modules={
         BudgetServiceModule.class,
         BudgetDaoModule.class
 })
 @Singleton
 public interface ApplicationComponent {
+
+    /**
+     * The view needs classes defined in the services. The inject method
+     * lets us do this.
+     * Create an inject method for every different classes (controllers) in the views that would need them
+     * @param primaryViewController
+     */
     void inject(PrimaryViewController primaryViewController);
 }
