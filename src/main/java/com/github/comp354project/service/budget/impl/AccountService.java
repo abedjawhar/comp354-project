@@ -9,6 +9,7 @@ public class AccountService implements IAccountService {
 
     private IAccountDao bankAccountDao;
 
+    // Add inject to the constructor in your service/dao class to instantiate the sub classes
     @Inject
     public AccountService(IAccountDao bankAccountDao) {
         this.bankAccountDao = bankAccountDao;
