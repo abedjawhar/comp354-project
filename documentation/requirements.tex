@@ -1,12 +1,14 @@
-\documentclass[12pt]{article}
+ss[11pt]{article}
 \usepackage{color}
+\usepackage{enumitem}
+\usepackage{booktabs}
 \pagestyle{empty}
 \setcounter{secnumdepth}{2}
 
 \topmargin=0cm
 \oddsidemargin=0cm
 \textheight=22.0cm
-\textwidth=16cm
+\textwidth=17cm
 \parindent=0cm
 \parskip=0.15cm
 \topskip=0truecm
@@ -17,6 +19,31 @@
 \belowdisplayshortskip=2mm
 \normalbaselineskip=12pt
 \normalbaselines
+
+% use case stuff
+\newcounter{use case ID}
+
+% environment slightly edited from https://tex.stackexchange.com/questions/10293/latex-template-for-use-cases
+\newcommand\tabularhead[1]{
+\begin{table}[ht]
+	\addtocounter{use case ID}{1}
+	\caption{Use Case \arabic{use case ID} - #1}
+	\vspace{0.2cm}
+	\begin{tabular}{|p{0.2\linewidth}|p{0.70\linewidth}|}
+	\hline
+		\textbf{Action} & \textbf{#1} \\
+		\hline}
+
+	\newcommand\addrow[2]{#1 & #2\\ \hline}
+
+	\newcommand\addmulrow[2]{ \begin{minipage}[t][][t]{2.5cm}#1\end{minipage}
+		&\begin{minipage}[t][][t]{11cm}
+		\begin{enumerate}[itemsep=-1ex] #2   \end{enumerate}
+	\end{minipage}\\ \hline}
+
+	\newenvironment{usecase}{\tabularhead}
+{\hline\end{tabular}\end{table}}
+
 
 \begin{document}
 
@@ -45,6 +72,7 @@ Anne-Laure Ehresmann & 27858906 \\
 
 \tableofcontents
 \listoffigures
+\listoftables
 
 \clearpage
 
@@ -89,43 +117,31 @@ Project team              & To follow-up the status of the project against the r
 \label{fig:use-case-diagram}
 \end{figure}
 
-\subsubsection{Use Case 1} \label{uc:1}
+\begin{usecase}{Create user account}
+	\addrow{Summary}{User gives information about a new user account, system validates it and creates the account.}
+	\addrow{Scope}{money and budget management application}
 
-\noindent
-{\bf Name}\\
-Give a name.
+	\addrow{Level}{user-goal}
 
-\noindent
-{\bf Summary}\\
-A short summary/description/story.
+	\addrow{Actors}{\textbf{User}}
 
-\noindent
-{\bf Actors}\\
+	\addmulrow{Stakeholders and Interests}{
+		\item User: Wants fast and easy account creation, clear and comprehensible display, proof of successful account creation.
+		\item Company: Wants user interests to be fulfilled, wants to prevent erroneous input, wants fast communication with the local accountdatabase as well as fault tolerance in case of database conflicts, issues with editing authorisation, or other possible database problems.}
+	\addrow{Pre-Conditions}{User has opened the application and is in the startup menu.}
+	\addrow{Success Guarantee}{Account successfully saved in local account database, with name and password as specified by the user.}
+	\addmulrow{Main Success Flow}{
+		\item User enters a username and password.
+		\item System validates username and password (format, whether username is already used, etc).
+		\item System creates new account.
+		\item System notifies the user of the successful account creation, then returns to startup menu.}
+	\addrow{Exceptions}{}
+	\addrow{PostConditions}{}
+	\addrow{Priority}{}
+	\addrow{Traces to Test Cases}{}
+\end{usecase}
 
-\noindent
-{\bf Precondition}\\
 
-\noindent
-{\bf Main Scenario}\\
-\vspace*{-0.2in}
-\begin{enumerate}
-\item Describe step 1.
-\item Describe step 2.
-\item Describe step 3.
-\end{enumerate}
-
-\noindent
-{\bf Exceptions}\\
-
-\noindent
-{\bf Postcondition}\\
-
-\noindent
-{\bf Priority}\\
-
-\noindent
-{\bf Traces to Test Cases}\\
-Add when test cases done.
 
 \subsubsection{Use Case 2} \label{uc:2}
 
