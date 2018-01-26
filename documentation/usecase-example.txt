@@ -1,0 +1,15 @@
+ID: 1
+Name: Create User-Account
+Scope: money and budget management application
+Level: user-goal
+Actors: User (Primary)
+Stakeholders and Interests:
+	- User: Wants fast and easy account creation, clear and comprehensible display, proof of successful account creation.
+	- Company: Wants user interests to be fulfilled, wants to prevent erroneous input, wants fast communication with the local account database as well as fault tolerance in case of database conflicts, issues with editing authorisation, or other possible database problems.
+Pre-Conditions: User has opened the application and is in the startup menu.
+Success Guarantee: Account successfully saved in local account database, with name and password as specified by the user.
+Main Success Flow:
+	1. User enters a username and password.
+	2. System validates username and password (format, whether username is already used, etc).
+	3. System creates new account.
+	4. System notifies the user of the successful account creation, then returns to startup menu. (could automatically log in)
