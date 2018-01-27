@@ -20,7 +20,7 @@ public class PrimaryViewController extends Application {
     IAccountService accountService;
 
     @Inject
-    IUserService userService;
+   IUserService userService;
 
     public PrimaryViewController() {
         // Inject the class into the component to inject dependencies

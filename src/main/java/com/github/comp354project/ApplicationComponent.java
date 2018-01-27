@@ -1,7 +1,5 @@
 package com.github.comp354project;
 
-import com.github.comp354project.dao.budget.BudgetDaoModule;
-import com.github.comp354project.dao.user.UserDaoModule;
 import com.github.comp354project.service.budget.BudgetServiceModule;
 import com.github.comp354project.service.user.UserServiceModule;
 import com.github.comp354project.viewController.PrimaryViewController;
@@ -15,13 +13,11 @@ import javax.inject.Singleton;
  *
  * All defined modules should be written here
  */
+@Singleton
 @Component(modules={
         BudgetServiceModule.class,
-        BudgetDaoModule.class,
         UserServiceModule.class,
-        UserDaoModule.class
 })
-@Singleton
 public interface ApplicationComponent {
 
     /**

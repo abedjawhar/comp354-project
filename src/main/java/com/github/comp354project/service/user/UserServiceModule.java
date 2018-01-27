@@ -1,6 +1,5 @@
 package com.github.comp354project.service.user;
 
-import com.github.comp354project.service.user.impl.UserService;
 import dagger.Module;
 import dagger.Provides;
 
