@@ -1,13 +1,10 @@
-package com.github.comp354project.service.budget;
+package com.github.comp354project.service.account;
 
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Module for budgets
- */
 @Module
-public class BudgetServiceModule {
+public class AccountServiceModule {
 
     @Provides static IAccountService provideAccountService(AccountService accountService) {
         return accountService;

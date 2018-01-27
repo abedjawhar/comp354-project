@@ -1,6 +1,6 @@
 package com.github.comp354project;
 
-import com.github.comp354project.service.budget.IAccountService;
+import com.github.comp354project.service.account.IAccountService;
 import com.github.comp354project.viewController.PrimaryViewController;
 import javafx.application.Application;
 

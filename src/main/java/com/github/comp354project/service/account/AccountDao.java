@@ -1,4 +1,4 @@
-package com.github.comp354project.service.budget;
+package com.github.comp354project.service.account;
 
 import com.github.comp354project.service.sqlite.IConnectionService;
 

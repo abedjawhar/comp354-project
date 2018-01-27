@@ -1,15 +1,15 @@
-package com.github.comp354project.service.user;
+package com.github.comp354project.service.account.remote;
 
 import com.github.comp354project.service.sqlite.IConnectionService;
 
 import javax.inject.Inject;
 
-public class UserDao {
+public class RemoteAccountDao {
 
     private IConnectionService connectionService;
 
     @Inject
-    public UserDao(IConnectionService connectionService){
+    public RemoteAccountDao(IConnectionService connectionService){
         this.connectionService = connectionService;
     }
 }

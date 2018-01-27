@@ -1,6 +1,7 @@
 package com.github.comp354project;
 
-import com.github.comp354project.service.budget.BudgetServiceModule;
+import com.github.comp354project.service.account.AccountServiceModule;
+import com.github.comp354project.service.account.remote.RemoteAccountModule;
 import com.github.comp354project.service.sqlite.ConnectionModule;
 import com.github.comp354project.service.user.UserServiceModule;
 import com.github.comp354project.viewController.PrimaryViewController;
@@ -16,9 +17,10 @@ import javax.inject.Singleton;
  */
 @Singleton
 @Component(modules={
-        BudgetServiceModule.class,
+        AccountServiceModule.class,
         UserServiceModule.class,
-        ConnectionModule.class
+        ConnectionModule.class,
+        RemoteAccountModule.class
 })
 public interface ApplicationComponent {
 

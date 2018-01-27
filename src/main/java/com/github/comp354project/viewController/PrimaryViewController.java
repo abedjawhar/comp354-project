@@ -2,7 +2,7 @@ package com.github.comp354project.viewController;
 
 import com.github.comp354project.ApplicationComponent;
 import com.github.comp354project.DaggerApplicationComponent;
-import com.github.comp354project.service.budget.IAccountService;
+import com.github.comp354project.service.account.IAccountService;
 import com.github.comp354project.service.user.IUserService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -40,7 +40,6 @@ public class PrimaryViewController extends Application {
         // The views are located in /src/main/resources/fxml
         Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/primary-view.fxml"));
         primaryStage.setMaximized(true);
-        primaryStage.setTitle("My Budget - Total balance: " + this.accountService.getBalance());
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
