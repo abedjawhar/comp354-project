@@ -1,8 +1,13 @@
 package com.github.comp354project.service.budget;
 
+import com.github.comp354project.service.sqlite.IConnectionService;
+
 import javax.inject.Inject;
 
 public class AccountDao  {
+
+    @Inject
+    IConnectionService connectionService;
 
     @Inject
     public AccountDao() {}

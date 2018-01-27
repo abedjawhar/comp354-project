@@ -12,7 +12,11 @@ import javafx.stage.Stage;
 
 import javax.inject.Inject;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 public class PrimaryViewController extends Application {
+    private static final Logger logger = LogManager.getLogger(PrimaryViewController.class);
 
     // Declare classes you need here and annotate with inject.
     // Dagger will take care of instatiating the class!
@@ -20,9 +24,10 @@ public class PrimaryViewController extends Application {
     IAccountService accountService;
 
     @Inject
-   IUserService userService;
+    IUserService userService;
 
     public PrimaryViewController() {
+        logger.trace("initializing...");
         // Inject the class into the component to inject dependencies
         ApplicationComponent component = DaggerApplicationComponent.builder().build();
         // The Application component class needs an inject method with the name of the class. No need to implement,

@@ -1,6 +1,7 @@
 package com.github.comp354project;
 
 import com.github.comp354project.service.budget.BudgetServiceModule;
+import com.github.comp354project.service.sqlite.ConnectionModule;
 import com.github.comp354project.service.user.UserServiceModule;
 import com.github.comp354project.viewController.PrimaryViewController;
 import dagger.Component;
@@ -17,6 +18,7 @@ import javax.inject.Singleton;
 @Component(modules={
         BudgetServiceModule.class,
         UserServiceModule.class,
+        ConnectionModule.class
 })
 public interface ApplicationComponent {
 
