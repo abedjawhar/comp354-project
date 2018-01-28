@@ -3,18 +3,19 @@ package com.github.comp354project.service.account;
 import com.github.comp354project.service.DatabaseException;
 import com.github.comp354project.service.account.remote.GetRemoteAccountRequest;
 import com.github.comp354project.service.account.remote.IRemoteAccountService;
+import com.github.comp354project.service.dao.IAccountDao;
 
 import javax.inject.Inject;
 import java.util.List;
 
 public class AccountService implements IAccountService {
 
-    private AccountDao bankAccountDao;
+    private IAccountDao accountDao;
     private IRemoteAccountService remoteAccountService;
 
     @Inject
-    public AccountService(AccountDao bankAccountDao, IRemoteAccountService remoteAccountService) {
-        this.bankAccountDao = bankAccountDao;
+    public AccountService(IAccountDao accountDao, IRemoteAccountService remoteAccountService) {
+        this.accountDao = accountDao;
         this.remoteAccountService = remoteAccountService;
     }
 

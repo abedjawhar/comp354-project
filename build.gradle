@@ -41,3 +41,15 @@ dependencies {
 task wrapper(type: Wrapper) {
     gradleVersion = '4.4.1' //version required
 }
+
+test {
+    environment "env", "test"
+    environment "db", "sqlite/test/mymoney.db"
+    classpath += files("/config/test/log")
+}
+
+run {
+    environment "env", "run"
+    environment "db", "sqlite/run/mymoney.db"
+    classpath += files('/config/run/log')
+}

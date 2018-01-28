@@ -1,15 +1,16 @@
 package com.github.comp354project.service.user;
 
 import com.github.comp354project.service.DatabaseException;
+import com.github.comp354project.service.dao.IUserDao;
 
 import javax.inject.Inject;
 
 public class UserService implements IUserService {
 
-    private UserDao userDao;
+    private IUserDao userDao;
 
     @Inject
-    public UserService(UserDao userDao) {
+    public UserService(IUserDao userDao) {
         this.userDao = userDao;
     }
 

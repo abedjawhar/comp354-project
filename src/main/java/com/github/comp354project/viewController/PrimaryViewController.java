@@ -27,7 +27,6 @@ public class PrimaryViewController extends Application {
     IUserService userService;
 
     public PrimaryViewController() {
-        logger.trace("initializing...");
         // Inject the class into the component to inject dependencies
         ApplicationComponent component = DaggerApplicationComponent.builder().build();
         // The Application component class needs an inject method with the name of the class. No need to implement,

@@ -12,7 +12,6 @@ import java.sql.SQLException;
 
 @Singleton
 public class ConnectionService implements IConnectionService {
-    private static final String DB_NAME = "jdbc:sqlite:sqlite/mymoney.db";
     private static final Logger logger = LogManager.getLogger(ConnectionService.class);
 
     @Inject
@@ -21,8 +20,9 @@ public class ConnectionService implements IConnectionService {
 
     @Override
     public Connection getConnection() throws DatabaseException{
+        String dbName = "jdbc:sqlite:" + System.getenv("db");
         try {
-            return DriverManager.getConnection(DB_NAME);
+            return DriverManager.getConnection(dbName);
         } catch(SQLException e){
             logger.error(e.toString());
             throw new DatabaseException("Failed to get connection", e);
