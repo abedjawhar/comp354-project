@@ -1,4 +1,4 @@
-package com.github.comp354project.service;
+package com.github.comp354project.service.exceptions;
 
 public class DatabaseException extends RuntimeException {
     public DatabaseException(String message){

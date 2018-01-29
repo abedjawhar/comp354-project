@@ -2,6 +2,7 @@ package com.github.comp354project.service.account;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.Singular;
 
 import java.util.List;
 
@@ -14,5 +15,6 @@ public class Account {
     private String type;
     private Double balance;
     private String currency;
+    @Singular
     private List<Transaction> transactions;
 }

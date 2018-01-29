@@ -1,9 +1,9 @@
 package com.github.comp354project.service.sqlite;
 
-import com.github.comp354project.service.DatabaseException;
+import com.github.comp354project.service.exceptions.DatabaseException;
 
 import java.sql.Connection;
 
-public interface IConnectionService {
+public interface IConnectionProvider {
     Connection getConnection() throws DatabaseException;
 }

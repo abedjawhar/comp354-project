@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class User {
-    private Integer ID;
     private String username;
     private String password;
     private String firstName;

@@ -1,6 +1,6 @@
 package com.github.comp354project.service.sqlite;
 
-import com.github.comp354project.service.DatabaseException;
+import com.github.comp354project.service.exceptions.DatabaseException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,20 +11,19 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 @Singleton
-public class ConnectionService implements IConnectionService {
-    private static final Logger logger = LogManager.getLogger(ConnectionService.class);
+public class ConnectionProvider implements IConnectionProvider{
+    private static final Logger logger = LogManager.getLogger(ConnectionProvider.class);
 
     @Inject
-    public ConnectionService(){
+    public ConnectionProvider(){
     }
 
-    @Override
     public Connection getConnection() throws DatabaseException{
         String dbName = "jdbc:sqlite:" + System.getenv("db");
         try {
             return DriverManager.getConnection(dbName);
         } catch(SQLException e){
-            logger.error(e.toString());
+            logger.error(e);
             throw new DatabaseException("Failed to get connection", e);
         }
     }

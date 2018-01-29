@@ -1,6 +1,7 @@
 package com.github.comp354project.service.account.remote;
 
 import com.github.comp354project.service.dao.IRemoteAccountDao;
+import com.github.comp354project.service.exceptions.InvalidParameterException;
 
 import javax.inject.Inject;
 
@@ -13,7 +14,7 @@ public class RemoteAccountService implements IRemoteAccountService {
     }
 
     @Override
-    public GetRemoteAccountResponse getAccount(GetRemoteAccountRequest request) throws IllegalArgumentException {
+    public GetRemoteAccountResponse getAccount(GetRemoteAccountRequest request) throws InvalidParameterException {
         return null;
     }
 }

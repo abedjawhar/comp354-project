@@ -1,15 +1,16 @@
 package com.github.comp354project.service.dao;
 
-import com.github.comp354project.service.sqlite.IConnectionService;
+import com.github.comp354project.service.sqlite.IConnectionProvider;
 
 import javax.inject.Inject;
+import java.sql.Connection;
 
 public class SQLiteUserDao implements IUserDao{
 
-    private IConnectionService connectionService;
+    private IConnectionProvider connectionProvider;
 
     @Inject
-    public SQLiteUserDao(IConnectionService connectionService){
-        this.connectionService = connectionService;
+    public SQLiteUserDao(IConnectionProvider connectionProvider){
+        this.connectionProvider = connectionProvider;
     }
 }

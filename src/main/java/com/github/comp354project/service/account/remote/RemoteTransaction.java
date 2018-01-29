@@ -6,11 +6,12 @@ import lombok.Data;
 @Data
 @Builder
 public class RemoteTransaction {
-    private String ID;
-    private String accountID;
-    private String date;
-    private String amount;
+    private Integer ID;
+    private Integer accountID;
+    private Integer date;
+    private Double amount;
+    private String currency;
     private String type;
-    private String sourceID;
-    private String destinationID;
+    private Integer sourceID;
+    private Integer destinationID;
 }

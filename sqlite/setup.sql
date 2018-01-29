@@ -1,11 +1,11 @@
-DROP TABLE RemoteAccountTransaction;
-DROP TABLE RemoteAccount;
-DROP TABLE AccountTransaction;
-DROP TABLE Account;
-DROP TABLE User;
+DROP TABLE IF EXISTS RemoteAccountTransaction;
+DROP TABLE IF EXISTS RemoteAccount;
+DROP TABLE IF EXISTS AccountTransaction;
+DROP TABLE IF EXISTS Account;
+DROP TABLE IF EXISTS User;
 
 CREATE TABLE RemoteAccount (
-  id INTEGER AUTO_INCREMENT PRIMARY KEY,
+  id INTEGER PRIMARY KEY,
   bank_name VARCHAR(255) NOT NULL,
   type VARCHAR(255) NOT NULL,
   balance REAL NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE RemoteAccount (
   );
   
  CREATE TABLE RemoteAccountTransaction(
- 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
+ 	id INTEGER PRIMARY KEY,
     account_id INTEGER NOT NULL,
     date INTEGER NOT NULL,
     amount REAL NOT NULL,
@@ -53,22 +53,26 @@ CREATE TABLE AccountTransaction(
     FOREIGN KEY(account_id) REFERENCES Account(id));
     
 INSERT INTO RemoteAccount (
+   id,
    bank_name,
    type,
    balance,
    currency)
   VALUES
   (
+    1,
     "TD",
     "Checking",
     15823.12,
     "CAD"),
    (
+     2,
      "BMO",
      "Savings",
      55135.123,
      "CAD"),
     (
+      3,
       "Desjardins",
       "Checking",
       1312.12,
@@ -94,7 +98,15 @@ INSERT INTO RemoteAccountTransaction (
 	NULL,
 	2),
 	(
-	1,
+    1,
+    1517099082,
+    232,
+    "CAD",
+    "Transfer",
+    NULL,
+    3),
+	(
+	2,
 	1517095342,
 	142.12,
 	"CAD",

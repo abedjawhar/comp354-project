@@ -1,7 +1,8 @@
 package com.github.comp354project.service.user;
 
-import com.github.comp354project.service.DatabaseException;
+import com.github.comp354project.service.exceptions.DatabaseException;
 import com.github.comp354project.service.dao.IUserDao;
+import com.github.comp354project.service.exceptions.InvalidParameterException;
 
 import javax.inject.Inject;
 
@@ -15,12 +16,12 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User createUser(User user) throws IllegalArgumentException, DatabaseException {
+    public User createUser(User user) throws InvalidParameterException, DatabaseException {
         return null;
     }
 
     @Override
-    public User getUser(String username) throws IllegalArgumentException, DatabaseException {
+    public User getUser(String username) throws InvalidParameterException, DatabaseException {
         return null;
     }
 }

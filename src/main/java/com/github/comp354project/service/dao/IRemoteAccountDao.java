@@ -1,8 +1,9 @@
 package com.github.comp354project.service.dao;
 
-import com.github.comp354project.service.DatabaseException;
+import com.github.comp354project.service.exceptions.DatabaseException;
 import com.github.comp354project.service.account.remote.RemoteAccount;
+import com.github.comp354project.service.exceptions.InvalidParameterException;
 
 public interface IRemoteAccountDao {
-    RemoteAccount getRemoteAccount(String ID) throws IllegalArgumentException, DatabaseException;
+    RemoteAccount getRemoteAccount(Integer ID) throws InvalidParameterException, DatabaseException;
 }

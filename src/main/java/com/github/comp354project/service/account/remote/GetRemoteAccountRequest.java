@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 @Builder
 public class GetRemoteAccountRequest {
-    private String accountID;
+    private Integer accountID;
 }

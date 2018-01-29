@@ -7,7 +7,7 @@ import dagger.Provides;
 public class ConnectionModule {
 
     @Provides
-    static IConnectionService provideConnectionService(ConnectionService connectionService) {
-        return connectionService;
+    static IConnectionProvider provideConnection(ConnectionProvider connectionProvider) {
+        return connectionProvider;
     }
 }
