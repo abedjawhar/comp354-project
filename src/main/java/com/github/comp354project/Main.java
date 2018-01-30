@@ -11,9 +11,6 @@ import javax.inject.Inject;
  */
 public class Main {
 
-    @Inject
-    IAccountService bankAccountService;
-
     public static void main(String[] args) {
         Application.launch(PrimaryViewController.class, args);
     }

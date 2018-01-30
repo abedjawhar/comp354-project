@@ -1,0 +1,111 @@
+\documentclass[11pt]{article}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\pagestyle{empty}
+\setcounter{secnumdepth}{2}
+
+\topmargin=0cm
+\oddsidemargin=0cm
+\textheight=22.0cm
+\textwidth=17cm
+\parindent=0cm
+\parskip=0.15cm
+\topskip=0truecm
+\raggedbottom
+\abovedisplayskip=3mm
+\belowdisplayskip=3mm
+\abovedisplayshortskip=0mm
+\belowdisplayshortskip=2mm
+\normalbaselineskip=12pt
+\normalbaselines
+
+% use case stuff
+\newcounter{use case ID}
+
+% environment slightly edited from https://tex.stackexchange.com/questions/10293/latex-template-for-use-cases
+\newcommand\tabularhead[1]{
+\begin{table}[ht]
+    \addtocounter{use case ID}{1}
+    \caption{Use Case \arabic{use case ID} - #1}
+    \vspace{0.2cm}
+    \begin{tabular}{|p{0.2\linewidth}|p{0.70\linewidth}|}
+    \hline
+        \textbf{Action} & \textbf{#1} \\
+        \hline}
+
+    \newcommand\addrow[2]{#1 & #2\\ \hline}
+
+    \newcommand\addmulrow[2]{ \begin{minipage}[t][][t]{2.5cm}#1\end{minipage}
+        &\begin{minipage}[t][][t]{11cm}
+        \begin{enumerate}[itemsep=-1ex] #2   \end{enumerate}
+    \end{minipage}\vfill\\ \hline}
+
+    \newenvironment{usecase}{\tabularhead}
+{\hline\end{tabular}\end{table}}
+
+
+\begin{document}
+
+\vspace*{0.5in}
+\centerline{\bf\Large Diary}
+
+\vspace*{0.5in}
+\centerline{\bf\Large Marc-Antoine Dube}
+
+\vspace*{0.5in}
+\centerline{\bf\Large 31 January 2018}
+
+\section{Iterations}
+\subsection{Iteration 1}
+\textbf{Role: } Coder
+
+\subsubsection{Week 1}
+Nothing does that week as the project had not been started and we had not met our teams.
+
+\subsubsection{Week 2}
+Week 2 was the beginning of the project.
+
+\textbf{Team Meeting}
+\begin{itemize}
+    \item First team meeting
+    \item Discuss the project
+    \item Split the team in different groups
+    \item Discuss the technologies to be used in the project
+\end{itemize}
+
+\textbf{Tasks performed}
+\item Create the foundations for the code
+\begin{itemize}
+    \item Configure Gradle as our build and dependency manager
+    \item Configure Dagger as our dependency injection framework
+    \item Configure JavaFX as our front-end technology
+\end{itemize}
+
+\subsubsection{Week 3}
+In week 3, we mainly discussed our use cases and domain models during the lab.
+
+\textbf{Team Meeting}
+\begin{itemize}
+    \item Work on the domain model as a team
+    \item Work on the use case diagrams as a team
+    \item Present the code foundations to the other coders and other interested members of the team
+\end{itemize}
+
+\textbf{Tasks performed}
+\begin{itemize}
+    \item Start writing basic services and DAOs
+\end{itemize}
+
+\subsubsection{Week 4}
+The end of week 3 and beginning of week 4 was tough.
+I had an appendicitis that required surgery and I could not work to my full potential.
+
+\subsubsection{Week 5}
+
+
+\subsection{Iteration 2}
+
+\subsection{Iteration 3}
+
+\end{document}
