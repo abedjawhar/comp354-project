@@ -212,6 +212,73 @@ Project team              & To follow-up the status of the project against the r
     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
+\begin{usecase}{View Transaction for Specific Bank Account}
+    \addrow{Case ID}{05}
+    \addrow{Summary}{User selects specific bank account and views transactions associated with with selected bank account}
+    \addrow{Scope}{money and budget management application}
+    \addrow{Level}{user-goal}
+    \addrow{Actors}{\textbf{User}}
+    \addmulrow{Stakeholders and Interests}{
+        \item User: Wants quick and convenient viewing of previous transactions from one specific bank account
+  \item Company: Wants to give user ability to micromanage every aspect of the application down to each bank account and transaction.}
+    \addrow{Pre-Conditions}{User has added one or more bank accounts to his myMoney account. }
+    \addrow{Success Guarantee}{User can view transaction by bank account.}
+    \addmulrow{Main Success Flow}{
+        \item User selects specific bank account from list of all accounts.
+        \item System displays all previous transactions under under specified bank account.
+        \item User selects desired transaction.
+        \item System shows all information about desired transaction, such as date and amount withdrawn, deposited, or transferred.}
+    \addrow{Exceptions}{}
+    \addrow{PostConditions}{}
+    \addrow{Priority}{}
+    \addrow{Traces to Test Cases}{}
+\end{usecase}
+
+\begin{usecase}{View All Transactions}
+    \addrow{Case ID}{06}
+    \addrow{Summary}{User can view all transactions that have been made from all bank accounts}
+    \addrow{Scope}{money and budget management application}
+    \addrow{Level}{user-goal}
+    \addrow{Actors}{\textbf{User}}
+    \addmulrow{Stakeholders and Interests}{
+        \item User: Wants easy and convenient viewing of all transactions among all bank accounts.
+        \item Company: Wants user interests to be fulfilled.}
+    \addrow{Pre-Conditions}{Account has been created and one or more bank accounts have been added to the system.}
+    \addrow{Success Guarantee}{User is able to conveniently view all transactions from all institutions in one display.}
+    \addmulrow{Main Success Flow}{
+        \item User selects View All Transactions option.
+        \item System shows all transactions across all accounts on one display.
+        \item User can select desired transaction in the list.
+        \item System shows all information regarding selected transaction such as date and amount.}
+    \addrow{Exceptions}{}
+    \addrow{PostConditions}{}
+    \addrow{Priority}{}
+    \addrow{Traces to Test Cases}{}
+\end{usecase}
+
+\begin{usecase}{View Transactions by Category}
+    \addrow{Case ID}{07}
+    \addrow{Summary}{User can view transaction according to categories of spending.}
+    \addrow{Scope}{money and budget management application}
+    \addrow{Level}{user-goal}
+    \addrow{Actors}{\textbf{User}}
+    \addmulrow{Stakeholders and Interests}{
+        \item User: Wants to view transactions in different categories of spending such as rent, bills, leisure, etc., to view and monitor spending habits and allocate budget to each category of spending.
+        \item Company: Wants to optimize the ease in which a user can allocate his/her budget, and track spending habits.}
+    \addrow{Pre-Conditions}{User has made transactions and labeled the transaction according to which category it belongs.}
+    \addrow{Success Guarantee}{User can easily categorize and view transactions.}
+    \addmulrow{Main Success Flow}{
+        \item User selects View All Transactions .
+        \item System shows all transactions across all accounts on one display.
+       \item User selects to view transaction by categories.
+        \item System groups transactions by similar category.
+        \item System displays transactions grouped by category.}
+    \addrow{Exceptions}{}
+    \addrow{PostConditions}{}
+    \addrow{Priority}{}
+    \addrow{Traces to Test Cases}{}
+\end{usecase}
+
 \subsubsection{Use Case 2} \label{uc:2}
 
 \section{Non-Functional Constraints}
