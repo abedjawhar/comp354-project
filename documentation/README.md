@@ -26,9 +26,10 @@ If you have any problems with installing LaTeX or with a particular package just
 ## Iteration 1 checklist (*due: 23:59 Sunday 11 February 2018*):
 
 + Each student must submit a diary (document done in LaTeX)
-+ Use Cases
-+ Scenarios
-+ Domain Modeling
++ Use Cases: proper ordering in document. Quality control: verify vocabulary used, phrasing, spelling mistakes...
++ Domain Modeling: include in document.
++ do model of SQL organisation.
++ use case diagram
 
 ## Iteration 2 checklist:
 

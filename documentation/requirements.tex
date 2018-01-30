@@ -1,4 +1,4 @@
-ss[11pt]{article}
+\documentclass[11pt]{article}
 \usepackage{color}
 \usepackage{enumitem}
 \usepackage{booktabs}
@@ -26,22 +26,22 @@ ss[11pt]{article}
 % environment slightly edited from https://tex.stackexchange.com/questions/10293/latex-template-for-use-cases
 \newcommand\tabularhead[1]{
 \begin{table}[ht]
-	\addtocounter{use case ID}{1}
-	\caption{Use Case \arabic{use case ID} - #1}
-	\vspace{0.2cm}
-	\begin{tabular}{|p{0.2\linewidth}|p{0.70\linewidth}|}
-	\hline
-		\textbf{Action} & \textbf{#1} \\
-		\hline}
+    \addtocounter{use case ID}{1}
+    \caption{Use Case \arabic{use case ID} - #1}
+    \vspace{0.2cm}
+    \begin{tabular}{|p{0.2\linewidth}|p{0.70\linewidth}|}
+    \hline
+        \textbf{Action} & \textbf{#1} \\
+        \hline}
 
-	\newcommand\addrow[2]{#1 & #2\\ \hline}
+    \newcommand\addrow[2]{#1 & #2\\ \hline}
 
-	\newcommand\addmulrow[2]{ \begin{minipage}[t][][t]{2.5cm}#1\end{minipage}
-		&\begin{minipage}[t][][t]{11cm}
-		\begin{enumerate}[itemsep=-1ex] #2   \end{enumerate}
-	\end{minipage}\\ \hline}
+    \newcommand\addmulrow[2]{ \begin{minipage}[t][][t]{2.5cm}#1\end{minipage}
+        &\begin{minipage}[t][][t]{11cm}
+        \begin{enumerate}[itemsep=-1ex] #2   \end{enumerate}
+    \end{minipage}\vfill\\ \hline}
 
-	\newenvironment{usecase}{\tabularhead}
+    \newenvironment{usecase}{\tabularhead}
 {\hline\end{tabular}\end{table}}
 
 
@@ -118,30 +118,99 @@ Project team              & To follow-up the status of the project against the r
 \end{figure}
 
 \begin{usecase}{Create user account}
-	\addrow{Summary}{User gives information about a new user account, system validates it and creates the account.}
-	\addrow{Scope}{money and budget management application}
+    \rule{0pt}{4ex}
+    \addrow{Case ID}{02}
+    \addrow{Summary}{User gives information about a new user account, system validates it and creates the account.}
+    \addrow{Scope}{money and budget management application}
+    \addrow{Level}{user-goal}
+    \addrow{Actors}{\textbf{User}}
+    \addmulrow{Stakeholders and Interests}{
+        \item User: Wants fast and easy account creation, clear and comprehensible display, proof of successful account creation.
+        \item Company: Wants user interests to be fulfilled, wants to prevent erroneous input, wants fast communication with the local accountdatabase as well as fault tolerance in case of database conflicts, issues with editing authorisation, or other possible database problems.}
+    \addrow{Pre-Conditions}{User has opened the application and is in the startup menu.}
+    \addrow{Success Guarantee}{Account successfully saved in local account database, with name and password as specified by the user.}
+    \addmulrow{Main Success Flow}{
+        \item User enters a username and password.
+        \item System validates username and password (format, whether username is already used, etc).
+        \item System creates new account.
+        \item System notifies the user of the successful account creation, then returns to home menu.}
+    \addrow{Exceptions}{}
+    \addrow{PostConditions}{}
+    \addrow{Priority}{}
+    \addrow{Traces to Test Cases}{}
+\end{usecase}
 
-	\addrow{Level}{user-goal}
-
-	\addrow{Actors}{\textbf{User}}
-
-	\addmulrow{Stakeholders and Interests}{
-		\item User: Wants fast and easy account creation, clear and comprehensible display, proof of successful account creation.
-		\item Company: Wants user interests to be fulfilled, wants to prevent erroneous input, wants fast communication with the local accountdatabase as well as fault tolerance in case of database conflicts, issues with editing authorisation, or other possible database problems.}
-	\addrow{Pre-Conditions}{User has opened the application and is in the startup menu.}
-	\addrow{Success Guarantee}{Account successfully saved in local account database, with name and password as specified by the user.}
-	\addmulrow{Main Success Flow}{
-		\item User enters a username and password.
-		\item System validates username and password (format, whether username is already used, etc).
-		\item System creates new account.
-		\item System notifies the user of the successful account creation, then returns to startup menu.}
-	\addrow{Exceptions}{}
-	\addrow{PostConditions}{}
-	\addrow{Priority}{}
-	\addrow{Traces to Test Cases}{}
+\begin{usecase}{Delete user account}
+    \addrow{Case ID}{02}
+    \addrow{Summary}{User deletes a user account from the local accounts database, removing all bank accounts information associated with that account as well.}
+    \addrow{Scope}{money and budget management application}
+    \addrow{Level}{user-goal}
+    \addrow{Actors}{\textbf{User}}
+    \addmulrow{Stakeholders and Interests}{
+        \item User: Wants easy navigation and secure account deletion, no risk of accidental deletion, proof of successful account deletion.
+        \item Company: Wants user interests to be fulfilled, wants to ensure clean deletion from the database. }
+    \addrow{Pre-Conditions}{User has logged in the user account he wants to delete.}
+    \addrow{Success Guarantee}{user account is successfully deleted, all associated bank information is deleted, and user is returned to the home menu.}
+    \addmulrow{Main Success Flow}{
+        \item User enters the account settings, then selects 'delete account'.
+        \item System brings up a confirmation menu to ensure that this selection was no accidentally entered.
+        \item User affirms his choice.
+        \item System successfully deletes all relevant entries in the local database, then notifies the user of this successful deletion.
+        \item User confirms having read this notification.
+        \item System brings the user back to the home menu.}
+    \addrow{Exceptions}{}
+    \addrow{PostConditions}{}
+    \addrow{Priority}{}
+    \addrow{Traces to Test Cases}{}
 \end{usecase}
 
 
+\begin{usecase}{Add bank account to a user account}
+    \addrow{Case ID}{03}
+    \addrow{Summary}{User gives information about a new bank account, system sends it to the bank for verification then creates necessary entries in the local database once the bank approves the information.}
+    \addrow{Scope}{money and budget management application}
+    \addrow{Level}{user-goal}
+    \addrow{Actors}{\textbf{User}, Bank}
+    \addmulrow{Stakeholders and Interests}{
+        \item User: Wants fast and easy account creation, clear and comprehensible display, proof of successful account creation.
+        \item Company: Wants user interests to be fulfilled, wants to prevent erroneous input, wants fast communication with the local account database as well as the bank, wants fault tolerance in case of database conflicts, issues with the bank, or other possible local database problems.
+        \item Bank: Wants to satisfy its customer base, wants correctly formatted account information given to its API, inexpensive and non-redundant communication of bank account data to third-party applications.}
+    \addrow{Pre-Conditions}{User has logged in a user account and is in the user home menu.}
+    \addrow{Success Guarantee}{Bank account successfully saved in local account database, with information corresponding the data validated by thebank.}
+    \addmulrow{Main Success Flow}{
+        \item User enters his bank name, bank account number, card expiry date, and card security code.
+        \item System validates input, and sends it to the bank to be verified and connected.
+        \item Bank validates bank account details.
+        \item System records the valid bank account details securely in its database, and notifies the user of the successful addition of the bank account in the database.}
+    \addrow{Exceptions}{}
+    \addrow{PostConditions}{}
+    \addrow{Priority}{}
+    \addrow{Traces to Test Cases}{}
+\end{usecase}
+
+\begin{usecase}{Remove bank account from a user account}
+    \addrow{Case ID}{04}
+    \addrow{Summary}{User deletes a bank account from the local database.}
+    \addrow{Scope}{money and budget management application}
+    \addrow{Level}{user-goal}
+    \addrow{Actors}{\textbf{User}}
+    \addmulrow{Stakeholders and Interests}{
+        \item User: Wants easy navigation and secure account deletion, no risk of accidental deletion, proof of successful account deletion.
+        \item Company: Wants user interests to be fulfilled, wants to ensure clean deletion from the database. }
+    \addrow{Pre-Conditions}{User has logged in the user account whose active association with a bank account is the one the user wants to delete.}
+    \addrow{Success Guarantee}{bank account is successfully removed from that user account, all associated bank information is deleted from the local database, and user is returned to the account home menu.}
+    \addmulrow{Main Success Flow}{
+        \item User selects the account he wants to remove, then selects 'remove account'.
+        \item System brings up a confirmation menu to ensure that this selection was no accidentally entered.
+        \item User affirms his choice.
+        \item System successfully deletes all relevant entries in the local database, then notifies the user of this successful deletion.
+        \item User confirms having read this notification.
+        \item System brings the user back to the home account menu.}
+    \addrow{Exceptions}{}
+    \addrow{PostConditions}{}
+    \addrow{Priority}{}
+    \addrow{Traces to Test Cases}{}
+\end{usecase}
 
 \subsubsection{Use Case 2} \label{uc:2}
 
@@ -162,3 +231,4 @@ Describe input file format.
 Describe output file format.
 
 \end{document}
+
