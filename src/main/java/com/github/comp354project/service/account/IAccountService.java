@@ -7,6 +7,6 @@ import com.github.comp354project.service.exceptions.InvalidParameterException;
 import java.util.List;
 
 public interface IAccountService {
-    List<Account> getAccounts(Integer userID) throws InvalidParameterException, DatabaseException;
-    Account addAccount(GetRemoteAccountRequest request) throws InvalidParameterException, DatabaseException;
+    List<Account> getAccounts(Integer userID) throws InvalidParameterException;
+    Account addAccount(GetRemoteAccountRequest request) throws InvalidParameterException;
 }

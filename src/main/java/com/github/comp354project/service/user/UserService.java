@@ -16,8 +16,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User createUser(User user) throws InvalidParameterException, DatabaseException {
-        return null;
+    public void createUser(User user) throws InvalidParameterException, DatabaseException {
     }
 
     @Override

@@ -24,15 +24,15 @@ CREATE TABLE RemoteAccount (
     FOREIGN KEY(account_id) REFERENCES RemoteAccount(id));
 	
 CREATE TABLE User(
-	id INTEGER AUTO_INCREMENT PRIMARY KEY,
+	id INTEGER PRIMARY KEY,
 	first_name VARCHAR(255) NOT NULL,
 	last_name VARCHAR(255) NOT NULL,
-	username VARCHAR(255) NOT NULL,
+	username VARCHAR(255) UNIQUE NOT NULL,
 	password VARCHAR(255) NOT NULL
 );	
 	
 CREATE TABLE Account (
-  id INTEGER AUTO_INCREMENT PRIMARY KEY,
+  id INTEGER PRIMARY KEY,
   user_id INTEGER NOT NULL,
   bank_name VARCHAR(255) NOT NULL,
   type VARCHAR(255) NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE Account (
   );
   
 CREATE TABLE AccountTransaction(
- 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
+ 	id INTEGER PRIMARY KEY,
     account_id INTEGER NOT NULL,
     date INTEGER NOT NULL,
     amount REAL NOT NULL,
@@ -51,6 +51,50 @@ CREATE TABLE AccountTransaction(
     source_id INTEGER,
     destination_id INTEGER,
     FOREIGN KEY(account_id) REFERENCES Account(id));
+
+INSERT INTO Account(
+   id,
+   user_id,
+   bank_name,
+   type,
+   balance,
+   currency
+   )
+   VALUES(
+   1,
+   1,
+   "TD",
+   "Checking",
+   15823.12,
+   "CAD"
+   );
+
+INSERT INTO AccountTransaction(
+    account_id,
+    date,
+    amount,
+    currency,
+    type,
+    source_id,
+    destination_id
+    )
+    VALUES
+    	(
+    	1,
+    	1517091082,
+    	52.2,
+    	"CAD",
+    	"Transfer",
+    	NULL,
+    	2),
+    	(
+        1,
+        1517099082,
+        232,
+        "CAD",
+        "Transfer",
+        NULL,
+        3);
     
 INSERT INTO RemoteAccount (
    id,
@@ -116,12 +160,14 @@ INSERT INTO RemoteAccountTransaction (
 	);
 	
 INSERT INTO User(
+    id,
 	first_name,
 	last_name,
 	username,
 	password
 )
 	VALUES(
+	    1,
 		"Hrachya",
 		"Hakobyan",
 		"admin",
