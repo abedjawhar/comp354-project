@@ -71,6 +71,7 @@ INSERT INTO Account(
    );
 
 INSERT INTO AccountTransaction(
+    id,
     account_id,
     date,
     amount,
@@ -83,6 +84,7 @@ INSERT INTO AccountTransaction(
     VALUES
     	(
     	1,
+    	1,
     	1517091082,
     	52.2,
     	"CAD",
@@ -91,6 +93,7 @@ INSERT INTO AccountTransaction(
     	NULL,
     	2),
     	(
+    	2,
         1,
         1517099082,
         232,
@@ -128,6 +131,7 @@ INSERT INTO RemoteAccount (
     
 
 INSERT INTO RemoteAccountTransaction (
+    id,
 	account_id,
 	date,
 	amount,
@@ -139,6 +143,7 @@ INSERT INTO RemoteAccountTransaction (
 	VALUES
 	(
 	1,
+	1,
 	1517091082,
 	52.2,
 	"CAD",
@@ -146,6 +151,7 @@ INSERT INTO RemoteAccountTransaction (
 	NULL,
 	2),
 	(
+	2,
     1,
     1517099082,
     232,
@@ -154,6 +160,7 @@ INSERT INTO RemoteAccountTransaction (
     NULL,
     3),
 	(
+	3,
 	2,
 	1517095342,
 	142.12,

@@ -1,8 +1,8 @@
 package com.github.comp354project.service.user;
 
-import com.github.comp354project.service.exceptions.InvalidParameterException;
+import com.github.comp354project.service.exceptions.ValidationException;
 
 public interface IUserService {
-    void createUser(User user) throws InvalidParameterException;
-    User getUser(String username) throws InvalidParameterException;
+    User createUser(User user) throws ValidationException;
+    User getUser(String username) throws ValidationException;
 }

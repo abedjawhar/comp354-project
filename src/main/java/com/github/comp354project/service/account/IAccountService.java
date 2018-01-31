@@ -1,12 +1,11 @@
 package com.github.comp354project.service.account;
 
-import com.github.comp354project.service.exceptions.DatabaseException;
 import com.github.comp354project.service.account.remote.GetRemoteAccountRequest;
-import com.github.comp354project.service.exceptions.InvalidParameterException;
+import com.github.comp354project.service.exceptions.ValidationException;
 
 import java.util.List;
 
 public interface IAccountService {
-    List<Account> getAccounts(Integer userID) throws InvalidParameterException;
-    Account addAccount(GetRemoteAccountRequest request) throws InvalidParameterException;
+    List<Account> getAccounts(Integer userID) throws ValidationException;
+    Account addAccount(GetRemoteAccountRequest request) throws ValidationException;
 }

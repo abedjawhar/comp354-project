@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
@@ -14,13 +15,14 @@ public class SQLiteRemoteAccountDaoTest extends DaoTestBase{
     @InjectMocks private SQLiteRemoteAccountDao dao;
 
     @Test
-    public void getRemoteAccount_withNonexistentID_shouldReturnNull(){
+    public void getRemoteAccount_withNonexistentAccountID_shouldReturnNull(){
         assertNull(dao.getRemoteAccount(1234234));
     }
 
     @Test
-    public void getRemoteAccount_withValidID_shouldReturnObject(){
-        RemoteAccount acc = dao.getRemoteAccount(1);
-        assertNotNull(acc);
+    public void getRemoteAccount_withValidAccountID_shouldReturnValidAccount(){
+        RemoteAccount remoteAccount = dao.getRemoteAccount(testRemoteAccount.getID());
+
+        assertEquals(testRemoteAccount, remoteAccount);
     }
 }

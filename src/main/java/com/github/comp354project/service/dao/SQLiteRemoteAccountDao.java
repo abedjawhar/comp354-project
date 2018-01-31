@@ -3,7 +3,7 @@ package com.github.comp354project.service.dao;
 import com.github.comp354project.service.account.remote.RemoteTransaction;
 import com.github.comp354project.service.exceptions.DatabaseException;
 import com.github.comp354project.service.account.remote.RemoteAccount;
-import com.github.comp354project.service.exceptions.InvalidParameterException;
+import com.github.comp354project.service.exceptions.ValidationException;
 import com.github.comp354project.service.sqlite.IConnectionProvider;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.logging.log4j.LogManager;
@@ -24,13 +24,7 @@ public class SQLiteRemoteAccountDao implements IRemoteAccountDao {
     }
 
     @Override
-    public RemoteAccount getRemoteAccount(Integer ID) throws InvalidParameterException, DatabaseException {
-        if(ID == null){
-            InvalidParameterException e = InvalidParameterException.builder()
-                    .message("Invalid ID").build();
-            logger.error(e.toString());
-            throw e;
-        }
+    public RemoteAccount getRemoteAccount(Integer ID) throws ValidationException, DatabaseException {
         Connection conn = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -62,8 +56,8 @@ public class SQLiteRemoteAccountDao implements IRemoteAccountDao {
                 .amount(resultSet.getDouble("amount"))
                 .currency(resultSet.getString("currency"))
                 .type(resultSet.getString("type"))
-                .sourceID(getNullableInteger(resultSet, "source_id"))
-                .destinationID(getNullableInteger(resultSet, "destination_id")).build());
+                .sourceID(DaoUtils.getNullableInteger(resultSet, "source_id"))
+                .destinationID(DaoUtils.getNullableInteger(resultSet, "destination_id")).build());
             }
             return builder.build();
         } catch (SQLException e) {
@@ -74,10 +68,5 @@ public class SQLiteRemoteAccountDao implements IRemoteAccountDao {
             DbUtils.closeQuietly(statement);
             DbUtils.closeQuietly(conn);
         }
-    }
-
-    private Integer getNullableInteger(ResultSet rs, String strColName) throws SQLException {
-        int nValue = rs.getInt(strColName);
-        return rs.wasNull() ? null : nValue;
     }
 }

@@ -4,6 +4,6 @@ import com.github.comp354project.service.exceptions.DatabaseException;
 import com.github.comp354project.service.user.User;
 
 public interface IUserDao  {
-    void createUser(User user) throws DatabaseException;
+    User createUser(User user) throws DatabaseException;
     User getUser(String username) throws DatabaseException;
 }
