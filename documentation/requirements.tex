@@ -267,8 +267,56 @@ Project team              & To follow-up the status of the project against the r
     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
-\begin{usecase}{View Transactions by Category}
+\begin{usecase}{View Transaction by Type}
     \addrow{Case ID}{07}
+    \addrow{Summary}{User can view transactions by the following types: deposits, withdrawals, and transfers. }
+    \addrow{Scope}{money and budget management application}
+    \addrow{Level}{user-goal}
+    \addrow{Actors}{\textbf{User}}
+    \addmulrow{Stakeholders and Interests}{
+        \item User: Wants to view transaction by type, such as withdrawals, deposits, and transfers for convenient view of the movement of his/her money throughout the accounts and accurate records of spending.
+        \item Company: Wants user interests to be fulfilled. Wants to facilitate user?s ability to keep track of input and output of money between accounts.}
+    \addrow{Pre-Conditions}{User has created and logged in a user account, added at least one bank account, and has made at least one type of transaction.}
+    \addrow{Success Guarantee}{User is able to clearly view all deposits, withdrawals, and transfers that have been made.}
+    \addmulrow{Main Success Flow}{
+        \item User selects View All Transactions option or View By Specific Bank Account.
+        \item System shows all transactions associated with previous choice.
+        \item User selects view transactions by type 
+        \item System prompts user to choose which type of transaction he/she would like to view: deposits, withdrawals, transfers.
+        \item User selects one of the options
+        \item System shows all information regarding selected transaction such as date, amount, to which account, and from which account.}
+    \addrow{Exceptions}{}
+    \addrow{Post-Conditions}{}
+    \addrow{Priority}{}
+    \addrow{Traces to Test Cases}{}
+\end{usecase}
+
+\begin{usecase}{Categorize Transaction}
+    \addrow{Case ID}{08}
+    \addrow{Summary}{User can select a category to represent a transaction.}
+    \addrow{Scope}{money and budget management application}
+    \addrow{Level}{user-goal}
+    \addrow{Actors}{\textbf{User}}
+    \addmulrow{Stakeholders and Interests}{
+        \item User: Wants to label each transaction as a specific type of spending, such as rent, bills, leisure, etc., to better manage and track spending habits.
+        \item Company: Wants user interests to be fulfilled. Wants to facilitate user?s ability to budget and manage money through simple categorization of spending.}
+    \addrow{Pre-Conditions}{User has created and logged in a user account, added at least one bank account, and has made at least one type of transaction, and created categories to select from.}
+    \addrow{Success Guarantee}{User can quickly and efficiently categorize each transaction.}
+    \addmulrow{Main Success Flow}{
+        \item User selects desired transaction to categorize.
+        \item System shows all information about transaction.
+        \item User selects the + button.
+        \item System displays the saved categories in a drop down menu, or gives option to create new category.
+        \item User selects preferred category to represent the current transaction.
+        \item System saves transaction under chosen category.}
+        \addrow{Exceptions}{}
+    \addrow{Post-Conditions}{}
+    \addrow{Priority}{}
+    \addrow{Traces to Test Cases}{}
+\end{usecase}
+
+\begin{usecase}{View Transactions by Category}
+    \addrow{Case ID}{09}
     \addrow{Summary}{User can view transaction according to categories of spending.}
     \addrow{Scope}{money and budget management application}
     \addrow{Level}{user-goal}

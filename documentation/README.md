@@ -27,7 +27,7 @@ If you have any problems with installing LaTeX or with a particular package just
 
 + Each student must submit a diary (document done in LaTeX)
 + Use Cases left to do:
-    * add transaction to category (I imagine something like: select transaction -> add to category -> list of categories shows up, with a [+] button thing to add new category -> user can create new category or add a new one)
+  create categories should also be a use case.
 + Domain Modeling: include in document.
 + do model of SQL organisation.
 + use case diagram
