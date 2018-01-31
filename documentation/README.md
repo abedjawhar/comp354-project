@@ -26,7 +26,8 @@ If you have any problems with installing LaTeX or with a particular package just
 ## Iteration 1 checklist (*due: 23:59 Sunday 11 February 2018*):
 
 + Each student must submit a diary (document done in LaTeX)
-+ Use Cases: proper ordering in document. Quality control: verify vocabulary used, phrasing, spelling mistakes...
++ Use Cases left to do:
+    * add transaction to category (I imagine something like: select transaction -> add to category -> list of categories shows up, with a [+] button thing to add new category -> user can create new category or add a new one)
 + Domain Modeling: include in document.
 + do model of SQL organisation.
 + use case diagram

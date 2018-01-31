@@ -2,6 +2,7 @@
 \usepackage{color}
 \usepackage{enumitem}
 \usepackage{booktabs}
+\usepackage[pdftex]{graphicx}
 \pagestyle{empty}
 \setcounter{secnumdepth}{2}
 
@@ -105,6 +106,16 @@ Project team              & To follow-up the status of the project against the r
 
 \section{Domain Concepts}
 
+% DOMAIN MODEL HERE. SPLIT IT ACROSS multiple pages. 
+
+% \begin{figure}[htbp]
+% \includegraphics[width=\linewidth]{DomainDiagram.png}
+% \caption{Domain Diagram}
+% \label{fig:domain-diagram}
+% \end{figure}
+
+
+\clearpage
 \section{Actors}
 
 \section{Use Cases}
@@ -112,12 +123,12 @@ Project team              & To follow-up the status of the project against the r
 \subsection{Overview}
 
 \begin{figure}[htbp]
-%insert diagram here
+\includegraphics{UseCaseDiagram.png}
 \caption{Use Case Diagram}
 \label{fig:use-case-diagram}
 \end{figure}
 
-\begin{usecase}{Create user account}
+\begin{usecase}{Create User Account}
     \rule{0pt}{4ex}
     \addrow{Case ID}{02}
     \addrow{Summary}{User gives information about a new user account, system validates it and creates the account.}
@@ -135,12 +146,12 @@ Project team              & To follow-up the status of the project against the r
         \item System creates new account.
         \item System notifies the user of the successful account creation, then returns to home menu.}
     \addrow{Exceptions}{}
-    \addrow{PostConditions}{}
+    \addrow{Post-Conditions}{}
     \addrow{Priority}{}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
-\begin{usecase}{Delete user account}
+\begin{usecase}{Delete User Account}
     \addrow{Case ID}{02}
     \addrow{Summary}{User deletes a user account from the local accounts database, removing all bank accounts information associated with that account as well.}
     \addrow{Scope}{money and budget management application}
@@ -159,13 +170,13 @@ Project team              & To follow-up the status of the project against the r
         \item User confirms having read this notification.
         \item System brings the user back to the home menu.}
     \addrow{Exceptions}{}
-    \addrow{PostConditions}{}
+    \addrow{Post-Conditions}{}
     \addrow{Priority}{}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
 
-\begin{usecase}{Add bank account to a user account}
+\begin{usecase}{Add Bank Account to a User Account}
     \addrow{Case ID}{03}
     \addrow{Summary}{User gives information about a new bank account, system sends it to the bank for verification then creates necessary entries in the local database once the bank approves the information.}
     \addrow{Scope}{money and budget management application}
@@ -183,12 +194,12 @@ Project team              & To follow-up the status of the project against the r
         \item Bank validates bank account details.
         \item System records the valid bank account details securely in its database, and notifies the user of the successful addition of the bank account in the database.}
     \addrow{Exceptions}{}
-    \addrow{PostConditions}{}
+    \addrow{Post-Conditions}{}
     \addrow{Priority}{}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
-\begin{usecase}{Remove bank account from a user account}
+\begin{usecase}{Remove Bank Account from a User Account}
     \addrow{Case ID}{04}
     \addrow{Summary}{User deletes a bank account from the local database.}
     \addrow{Scope}{money and budget management application}
@@ -207,12 +218,12 @@ Project team              & To follow-up the status of the project against the r
         \item User confirms having read this notification.
         \item System brings the user back to the home account menu.}
     \addrow{Exceptions}{}
-    \addrow{PostConditions}{}
+    \addrow{Post-Conditions}{}
     \addrow{Priority}{}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
-\begin{usecase}{View Transaction for Specific Bank Account}
+\begin{usecase}{View Transactions for Specific Bank Account}
     \addrow{Case ID}{05}
     \addrow{Summary}{User selects specific bank account and views transactions associated with with selected bank account}
     \addrow{Scope}{money and budget management application}
@@ -221,7 +232,7 @@ Project team              & To follow-up the status of the project against the r
     \addmulrow{Stakeholders and Interests}{
         \item User: Wants quick and convenient viewing of previous transactions from one specific bank account
   \item Company: Wants to give user ability to micromanage every aspect of the application down to each bank account and transaction.}
-    \addrow{Pre-Conditions}{User has added one or more bank accounts to his myMoney account. }
+    \addrow{Pre-Conditions}{User has created and logged in a user account, and has added one or more bank accounts to his myMoney account. }
     \addrow{Success Guarantee}{User can view transaction by bank account.}
     \addmulrow{Main Success Flow}{
         \item User selects specific bank account from list of all accounts.
@@ -229,12 +240,12 @@ Project team              & To follow-up the status of the project against the r
         \item User selects desired transaction.
         \item System shows all information about desired transaction, such as date and amount withdrawn, deposited, or transferred.}
     \addrow{Exceptions}{}
-    \addrow{PostConditions}{}
+    \addrow{Post-Conditions}{}
     \addrow{Priority}{}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
-\begin{usecase}{View All Transactions}
+\begin{usecase}{View All Transactions from all Bank Accounts}
     \addrow{Case ID}{06}
     \addrow{Summary}{User can view all transactions that have been made from all bank accounts}
     \addrow{Scope}{money and budget management application}
@@ -243,7 +254,7 @@ Project team              & To follow-up the status of the project against the r
     \addmulrow{Stakeholders and Interests}{
         \item User: Wants easy and convenient viewing of all transactions among all bank accounts.
         \item Company: Wants user interests to be fulfilled.}
-    \addrow{Pre-Conditions}{Account has been created and one or more bank accounts have been added to the system.}
+    \addrow{Pre-Conditions}{User has created and logged in a user account, and one or more bank accounts have been added to the system.}
     \addrow{Success Guarantee}{User is able to conveniently view all transactions from all institutions in one display.}
     \addmulrow{Main Success Flow}{
         \item User selects View All Transactions option.
@@ -251,7 +262,7 @@ Project team              & To follow-up the status of the project against the r
         \item User can select desired transaction in the list.
         \item System shows all information regarding selected transaction such as date and amount.}
     \addrow{Exceptions}{}
-    \addrow{PostConditions}{}
+    \addrow{Post-Conditions}{}
     \addrow{Priority}{}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
@@ -265,7 +276,7 @@ Project team              & To follow-up the status of the project against the r
     \addmulrow{Stakeholders and Interests}{
         \item User: Wants to view transactions in different categories of spending such as rent, bills, leisure, etc., to view and monitor spending habits and allocate budget to each category of spending.
         \item Company: Wants to optimize the ease in which a user can allocate his/her budget, and track spending habits.}
-    \addrow{Pre-Conditions}{User has made transactions and labeled the transaction according to which category it belongs.}
+    \addrow{Pre-Conditions}{User has created and logged in a user account, has added on or more bank accounts, has made at least one transaction and labeled the transaction according to which category it belongs.}
     \addrow{Success Guarantee}{User can easily categorize and view transactions.}
     \addmulrow{Main Success Flow}{
         \item User selects View All Transactions .
@@ -274,12 +285,11 @@ Project team              & To follow-up the status of the project against the r
         \item System groups transactions by similar category.
         \item System displays transactions grouped by category.}
     \addrow{Exceptions}{}
-    \addrow{PostConditions}{}
+    \addrow{Post-Conditions}{}
     \addrow{Priority}{}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
-\subsubsection{Use Case 2} \label{uc:2}
 
 \section{Non-Functional Constraints}
 
@@ -298,4 +308,3 @@ Describe input file format.
 Describe output file format.
 
 \end{document}
-
