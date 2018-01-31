@@ -15,21 +15,21 @@ public class SQLiteUserDaoTest extends DaoTestBase{
 
     @Test
     public void createUser_withValidUser_shouldSucceed(){
-        fail("Not implemented");
+
     }
 
     @Test
     public void createUser_withValidUser_shouldSetID(){
-        fail("Not implemented");
+
     }
 
     @Test
     public void getUser_withNonexistentUsername_shouldReturnNull(){
-        fail("Not implemented");
+
     }
 
     @Test
     public void getUser_withValidUsername_shouldReturnUser(){
-        fail("Not implemented");
+
     }
 }

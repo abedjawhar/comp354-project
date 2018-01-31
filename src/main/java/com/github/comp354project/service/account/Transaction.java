@@ -11,6 +11,7 @@ public class Transaction {
     private Date date;
     private Double amount;
     private String type;
+    private String category;
     private Integer sourceID;
     private Integer destinationID;
 }

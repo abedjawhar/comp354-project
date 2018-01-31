@@ -48,6 +48,7 @@ CREATE TABLE AccountTransaction(
     amount REAL NOT NULL,
     currency VARCHAR(255) NOT NULL,
     type VARCHAR(255),
+    category VARCHAR(255),
     source_id INTEGER,
     destination_id INTEGER,
     FOREIGN KEY(account_id) REFERENCES Account(id));
@@ -75,6 +76,7 @@ INSERT INTO AccountTransaction(
     amount,
     currency,
     type,
+    category,
     source_id,
     destination_id
     )
@@ -85,6 +87,7 @@ INSERT INTO AccountTransaction(
     	52.2,
     	"CAD",
     	"Transfer",
+    	"Rent",
     	NULL,
     	2),
     	(
@@ -93,6 +96,7 @@ INSERT INTO AccountTransaction(
         232,
         "CAD",
         "Transfer",
+        "Leisure",
         NULL,
         3);
     
