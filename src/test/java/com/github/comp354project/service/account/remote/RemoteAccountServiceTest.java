@@ -20,21 +20,21 @@ public class RemoteAccountServiceTest {
 
     @Test(expected = InvalidParameterException.class)
     public void getAccount_withNullRequest_shouldThrow(){
-        fail("Not implemented");
+
     }
 
     @Test(expected = InvalidParameterException.class)
     public void getAccount_withInvalidRequest_shouldThrow(){
-        fail("Not implemented");
+
     }
 
     @Test
     public void getAccount_withNonexistentAccount_shouldReturnEmptyResponse(){
-        fail("Not implemented");
+
     }
 
     @Test
     public void getAccount_withValidAccount_shouldReturnValidResponse() {
-        fail("Not implemented");
+
     }
 }

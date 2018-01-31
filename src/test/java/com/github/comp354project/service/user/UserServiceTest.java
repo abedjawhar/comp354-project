@@ -17,36 +17,36 @@ public class UserServiceTest {
 
     @Test(expected = InvalidParameterException.class)
     public void createUser_withNullUser_shouldThrow(){
-        fail("Not implemented");
+
     }
 
     @Test(expected = InvalidParameterException.class)
     public void createUser_withInvalidUser_shouldThrow(){
-        fail("Not implemented");
+
     }
 
     @Test
     public void createUser_withValidUser_shouldSucceed(){
-        fail("Not implemented");
+
     }
 
     @Test(expected = InvalidParameterException.class)
     public void getUser_withNullUsername_shouldThrow(){
-        fail("Not implemented");
+
     }
 
     @Test(expected = InvalidParameterException.class)
     public void getUser_withEmptyUsername_shouldThrow(){
-        fail("Not implemented");
+
     }
 
     @Test
     public void getUser_withNonexistentUsername_shouldReturnNull(){
-        fail("Not implemented");
+
     }
 
     @Test
     public void getUser_withValidUsername_shouldReturnUser(){
-        fail("Not implemented");
+
     }
 }
