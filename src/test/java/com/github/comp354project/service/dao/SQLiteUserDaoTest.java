@@ -1,5 +1,6 @@
 package com.github.comp354project.service.dao;
 
+import com.github.comp354project.service.TestUtils;
 import com.github.comp354project.service.user.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,8 +39,8 @@ public class SQLiteUserDaoTest extends DaoTestBase{
 
     @Test
     public void getUser_withValidUsername_shouldReturnUser(){
-        User user = dao.getUser(testUser.getUsername());
+        User user = dao.getUser(TestUtils.testUser.getUsername());
 
-        assertEquals(testUser, user);
+        assertEquals(TestUtils.testUser, user);
     }
 }

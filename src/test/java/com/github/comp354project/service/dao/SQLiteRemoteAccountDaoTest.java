@@ -1,5 +1,6 @@
 package com.github.comp354project.service.dao;
 
+import com.github.comp354project.service.TestUtils;
 import com.github.comp354project.service.account.remote.RemoteAccount;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,8 +22,8 @@ public class SQLiteRemoteAccountDaoTest extends DaoTestBase{
 
     @Test
     public void getRemoteAccount_withValidAccountID_shouldReturnValidAccount(){
-        RemoteAccount remoteAccount = dao.getRemoteAccount(testRemoteAccount.getID());
+        RemoteAccount remoteAccount = dao.getRemoteAccount(TestUtils.testRemoteAccount.getID());
 
-        assertEquals(testRemoteAccount, remoteAccount);
+        assertEquals(TestUtils.testRemoteAccount, remoteAccount);
     }
 }
