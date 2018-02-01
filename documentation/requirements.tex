@@ -55,7 +55,7 @@
 \centerline{\bf\Large Team PA-PK}
 
 \vspace*{0.5in}
-\centerline{\bf\Large 17 January 2012}
+\centerline{\today}
 
 \vspace*{1.5in}
 \begin{table}[htbp]
@@ -110,7 +110,7 @@ Project team              & To follow-up the status of the project against the r
 
 \section{Domain Concepts}
 
-% DOMAIN MODEL HERE. SPLIT IT ACROSS multiple pages. 
+% DOMAIN MODEL HERE. SPLIT IT ACROSS multiple pages.
 
 % \begin{figure}[htbp]
 % \includegraphics[width=\linewidth]{DomainDiagram.png}
@@ -133,8 +133,7 @@ Project team              & To follow-up the status of the project against the r
 \end{figure}
 
 \begin{usecase}{Create User Account}
-    \rule{0pt}{4ex}
-    \addrow{Case ID}{02}
+    \addrow{Case ID}{01}
     \addrow{Summary}{User gives information about a new user account, system validates it and creates the account.}
     \addrow{Scope}{money and budget management application}
     \addrow{Level}{user-goal}
@@ -142,10 +141,10 @@ Project team              & To follow-up the status of the project against the r
     \addmulrow{Stakeholders and Interests}{
         \item User: Wants fast and easy account creation, clear and comprehensible display, proof of successful account creation.
         \item Company: Wants user interests to be fulfilled, wants to prevent erroneous input, wants fast communication with the local accountdatabase as well as fault tolerance in case of database conflicts, issues with editing authorisation, or other possible database problems.}
-    \addrow{Pre-Conditions}{User has opened the application and is in the startup menu.}
+    \addrow{Pre-Conditions}{User has opened the application and is in the signup menu.}
     \addrow{Success Guarantee}{Account successfully saved in local account database, with name and password as specified by the user.}
     \addmulrow{Main Success Flow}{
-        \item User enters a username and password.
+        \item User enters a username, first name, last name, and password.
         \item System validates username and password (format, whether username is already used, etc).
         \item System creates new account.
         \item System notifies the user of the successful account creation, then returns to home menu.}
@@ -191,11 +190,11 @@ Project team              & To follow-up the status of the project against the r
         \item Company: Wants user interests to be fulfilled, wants to prevent erroneous input, wants fast communication with the local account database as well as the bank, wants fault tolerance in case of database conflicts, issues with the bank, or other possible local database problems.
         \item Bank: Wants to satisfy its customer base, wants correctly formatted account information given to its API, inexpensive and non-redundant communication of bank account data to third-party applications.}
     \addrow{Pre-Conditions}{User has logged in a user account and is in the user home menu.}
-    \addrow{Success Guarantee}{Bank account successfully saved in local account database, with information corresponding the data validated by thebank.}
+    \addrow{Success Guarantee}{Bank account successfully saved in local account database, with information corresponding the data validated by the bank.}
     \addmulrow{Main Success Flow}{
-        \item User enters his bank name, bank account number, card expiry date, and card security code.
-        \item System validates input, and sends it to the bank to be verified and connected.
-        \item Bank validates bank account details.
+        \item User enters his/her bank account number.
+        \item System validates input, and sends it to the bank for verification and connection`.
+        \item Bank validates bank account number, and then responds with the bank account information.
         \item System records the valid bank account details securely in its database, and notifies the user of the successful addition of the bank account in the database.}
     \addrow{Exceptions}{}
     \addrow{Post-Conditions}{}
@@ -240,7 +239,7 @@ Project team              & To follow-up the status of the project against the r
     \addrow{Success Guarantee}{User can view transaction by bank account.}
     \addmulrow{Main Success Flow}{
         \item User selects specific bank account from list of all accounts.
-        \item System displays all previous transactions under under specified bank account.
+        \item System displays all previous transactions under specified bank account.
         \item User selects desired transaction.
         \item System shows all information about desired transaction, such as date and amount withdrawn, deposited, or transferred.}
     \addrow{Exceptions}{}
@@ -262,9 +261,7 @@ Project team              & To follow-up the status of the project against the r
     \addrow{Success Guarantee}{User is able to conveniently view all transactions from all institutions in one display.}
     \addmulrow{Main Success Flow}{
         \item User selects View All Transactions option.
-        \item System shows all transactions across all accounts on one display.
-        \item User can select desired transaction in the list.
-        \item System shows all information regarding selected transaction such as date and amount.}
+        \item System shows all transactions across all accounts on one display.}
     \addrow{Exceptions}{}
     \addrow{Post-Conditions}{}
     \addrow{Priority}{}
@@ -285,7 +282,7 @@ Project team              & To follow-up the status of the project against the r
     \addmulrow{Main Success Flow}{
         \item User selects View All Transactions option or View By Specific Bank Account.
         \item System shows all transactions associated with previous choice.
-        \item User selects view transactions by type 
+        \item User selects view transactions by type
         \item System prompts user to choose which type of transaction he/she would like to view: deposits, withdrawals, transfers.
         \item User selects one of the options
         \item System shows all information regarding selected transaction such as date, amount, to which account, and from which account.}
@@ -304,13 +301,12 @@ Project team              & To follow-up the status of the project against the r
     \addmulrow{Stakeholders and Interests}{
         \item User: Wants to label each transaction as a specific type of spending, such as rent, bills, leisure, etc., to better manage and track spending habits.
         \item Company: Wants user interests to be fulfilled. Wants to facilitate user?s ability to budget and manage money through simple categorization of spending.}
-    \addrow{Pre-Conditions}{User has created and logged in a user account, added at least one bank account, and has made at least one type of transaction, and created categories to select from.}
+    \addrow{Pre-Conditions}{User has created and logged in a user account, added at least one bank account, and has made at least one type of transaction.}
     \addrow{Success Guarantee}{User can quickly and efficiently categorize each transaction.}
     \addmulrow{Main Success Flow}{
         \item User selects desired transaction to categorize.
-        \item System shows all information about transaction.
         \item User selects the + button.
-        \item System displays the saved categories in a drop down menu, or gives option to create new category.
+        \item System displays the saved categories in a drop down menu.
         \item User selects preferred category to represent the current transaction.
         \item System saves transaction under chosen category.}
         \addrow{Exceptions}{}
