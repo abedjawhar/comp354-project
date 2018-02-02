@@ -84,30 +84,18 @@ Kadeem Caines & 26343600 \\
 \section{System}\subsection{Purpose}
 
 The purpose of this document is to define requirements for the  desktop application myMoney.
-There exists a plethora of software for money management, each greatly varying in design due to the complex and multifarious clientele. This document may thus be to orient the development of the application. It may be used by:
-
-\begin{table}[htbp]
-\caption{Document Users}
-\begin{center}
-\begin{tabular}{|c|p{10cm}|}
-\hline
-Users and customers       & To give feedback about the requirements. \\
-\hline
-System developers         & To understand what functions and properties the system must contain. \\
-\hline
-Testers                   & To test the system against the requirements. \\
-\hline
-Writers of user manuals   & To get material for user manuals. \\
-\hline
-Project team              & To follow-up the status of the project against the requirements. \\
-\hline
-\end{tabular}
-\end{center}
-\end{table}
-
+There exists a plethora of software for money management, each greatly varying in design due to the complex and multifarious clientele. This document may thus be to orient the development of the application. It seeks to describe the problem and understand the requirements, formulate the necessary functions and properties needed to answer this problem and its requirements, and then test these functions against these requirements. Hence, it may be used by our users to specify the problem and its requirements, by the developers to understand what functions their system must implement, and what to test their system against.
 
 \subsection{Business Goals}
 
+At the present time, users who have more than one bank account can quickly get overwhelmed with the differing methods of access and interfaces for each account. It becomes difficult to visualise how much money one has, and how one's budget changes, when it is difficult to even view each account balance side-to-side. Hence, our desktop application shall seek to answer these issues through a standarised, easily accessible interface.
+
+\subsubsection{key business goals}
+\begin{itemize}
+    \item \textbf{Meet current procedure performance:} The current procedure for users benefits from near constant \textit{reliability}, as its only constraints is the reliability of the bank servers. We want to guarantee this same level of reliability, that is, that our system's reliability is only constrained by the reliability of the banks. %For user convenience, we also want a degree of \textit{internationalisation}, that being in the number of banks and currencies supported.
+    \item \textbf{Improve quality of system:} The current procedure for users to view their bank transactions accross different accounts requires them to log in each individual bank account interface, then compare each distinct formats for the bank accounts manually. This is both needlessly time-consuming as well as difficult to navigate. Budgetting applications exists, however can quickly become overbearing, offering a vast quantity of complex and heavy features that are more designed for heavyweight users. Hence, we seek to design a system that easy-to-use and lightweight. We thus focus on \textit{ease-of-use} by carefully choosing to implement mainly minimal and intuitive features, such as sorting transactions by specific datee or category, or viewing transations for all accounts or separately for each account. We also focus on \textit{performance}, ensuring a lightweight design to reduce loadtimes, and hence encourage frequent, short-time bursts use. For these reasons, an easy installation of the application would also be key for the system.
+    \item \textbf{maintainability:} Due to the dependency of the system upon the banks' API, it is necessary that the system may be easy to alter and maintain, to adapt to possible necessary changes. Hence, maintainability is imperative for the system.
+\end{itemize}
 \section{Domain Concepts}
 
 % DOMAIN MODEL HERE. SPLIT IT ACROSS multiple pages.
@@ -121,10 +109,16 @@ Project team              & To follow-up the status of the project against the r
 
 \clearpage
 \section{Actors}
+\subsubsection{User}
+Our main actor is the user. All use cases are triggered by the user, as it is his requests that directly cause the bank system or our system to take action. All identification needed to access the bank system will be provided by the user. Using this information, the system will be able to answer queries made by the user as described in the use cases.
+\subsubsection{Bank}
+Our sole other actor is the bank systems. The bank system provides an API for accessing its bank account data. Our system will pull this data directly from the bank systems, using identification as given by the user for the bank's authentication system. In other words, our system will merely act as a middle man between the user demanding information in a specific format, and the bank holding that information in a inconvenient format.
+
+\section{Functional Requirements}
 
 \section{Use Cases}
-
 \subsection{Overview}
+Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 through 7 and 9 deal with the user viewing the data in different formats. Use case 8 deals with the user manipulating the transactions' formats.
 
 \begin{figure}[htbp]
 \includegraphics{UseCaseDiagram.png}
