@@ -3,6 +3,7 @@ package com.github.comp354project.service.user;
 import com.github.comp354project.service.exceptions.DatabaseException;
 import com.github.comp354project.service.exceptions.ValidationError;
 import com.github.comp354project.service.exceptions.ValidationException;
+import com.github.comp354project.service.user.exceptions.UserExistsException;
 import com.github.comp354project.service.validators.IUsernameValidator;
 import com.github.comp354project.service.validators.ValidatorFactory;
 import com.google.common.base.Strings;
@@ -27,7 +28,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User createUser(User user) throws ValidationException, DatabaseException {
+    public User createUser(User user) throws UserExistsException, ValidationException, DatabaseException {
         if(user == null){
             throw ValidationException.builder()
                     .message("Invalid user")
@@ -42,11 +43,20 @@ public class UserService implements IUserService {
                     .errors(errors).build();
         }
         try{
+            User existingUser = getUser(user.getUsername());
+            if (existingUser != null) {
+                throw UserExistsException.builder()
+                        .message("User already exists")
+                        .user(existingUser).build();
+            }
             userDao.create(user);
             return user;
         } catch(SQLException e){
             logger.error(e);
             throw new DatabaseException(e);
+        } catch (UserExistsException e){
+            logger.error(e);
+            throw e;
         }
     }
 
@@ -93,5 +103,9 @@ public class UserService implements IUserService {
                     .parameterValue(user.getLastName()).build());
         }
         return errors;
+    }
+
+    private void handleSQLException(SQLException e){
+
     }
 }

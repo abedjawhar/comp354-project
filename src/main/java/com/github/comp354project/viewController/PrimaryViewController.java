@@ -5,6 +5,7 @@ import com.github.comp354project.DaggerApplicationComponent;
 import com.github.comp354project.service.account.Account;
 import com.github.comp354project.service.account.IAccountService;
 import com.github.comp354project.service.account.Transaction;
+import com.github.comp354project.service.account.remote.GetRemoteAccountRequest;
 import com.github.comp354project.service.user.IUserService;
 import com.github.comp354project.service.user.User;
 import javafx.application.Application;
@@ -44,14 +45,5 @@ public class PrimaryViewController extends Application {
         primaryStage.setMaximized(true);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-
-        User user = this.userService.getUser("admin");
-        System.out.println(user);
-        for(Account account : user.getAccounts()){
-            System.out.println(account);
-            for(Transaction tr : account.getTransactions()){
-                System.out.println(tr);
-            }
-        }
     }
 }

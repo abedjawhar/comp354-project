@@ -5,6 +5,8 @@ import com.github.comp354project.service.account.Account;
 import com.github.comp354project.service.account.Transaction;
 import com.github.comp354project.service.exceptions.DatabaseException;
 import com.github.comp354project.service.exceptions.ValidationException;
+import com.github.comp354project.service.user.exceptions.UserExistsException;
+import com.google.common.collect.ImmutableList;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 
 import static junit.framework.TestCase.*;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -61,6 +64,17 @@ public class UserServiceTest {
         User actualUser = userService.createUser(expectedUser);
 
         assertEquals(expectedUser, actualUser);
+    }
+
+    @Test(expected = UserExistsException.class)
+    public void testCreateUser_withExistingUser_shouldThrow() throws Exception{
+        User existingUser = TestUtils.testUser;
+        when(userDao.queryForEq(eq("username"), eq(existingUser.getUsername())))
+                .thenReturn(ImmutableList.<User>builder()
+                     .add(existingUser).build());
+
+        User userToCreate = TestUtils.testUser;
+        userService.createUser(userToCreate);
     }
 
     @Test(expected = ValidationException.class)
