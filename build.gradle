@@ -34,7 +34,7 @@ dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '15.0'
     apt "org.projectlombok:lombok:1.16.20"
     apt 'com.google.dagger:dagger-compiler:2.14.1'
-
+    compile 'com.j256.ormlite:ormlite-jdbc:4.48'
     // Test dependencies
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile "org.mockito:mockito-core:1.+"
@@ -48,6 +48,7 @@ test {
     environment "env", "test"
     environment "db", "sqlite/test/mymoney.db"
     classpath += files("/config/test/log")
+    exclude '**/SQLite*'
 }
 
 run {

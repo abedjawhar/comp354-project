@@ -1,21 +1,25 @@
 package com.github.comp354project.service.user;
 
 import com.github.comp354project.service.exceptions.DatabaseException;
-import com.github.comp354project.service.dao.IUserDao;
 import com.github.comp354project.service.exceptions.ValidationError;
 import com.github.comp354project.service.exceptions.ValidationException;
 import com.google.common.base.Strings;
+import com.j256.ormlite.dao.Dao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
+import javax.xml.crypto.Data;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserService implements IUserService {
-
-    private IUserDao userDao;
+    private static final Logger logger = LogManager.getLogger(UserService.class);
+    private Dao<User, Integer> userDao;
 
     @Inject
-    public UserService(IUserDao userDao) {
+    public UserService(Dao<User, Integer> userDao) {
         this.userDao = userDao;
     }
 
@@ -34,7 +38,13 @@ public class UserService implements IUserService {
                     .message("Invalid user")
                     .errors(errors).build();
         }
-        return userDao.createUser(user);
+        try{
+            userDao.create(user);
+            return user;
+        } catch(SQLException e){
+            logger.error(e);
+            throw new DatabaseException(e);
+        }
     }
 
     @Override
@@ -48,7 +58,16 @@ public class UserService implements IUserService {
                             .build())
                     .build();
         }
-        return userDao.getUser(username);
+        try{
+            List<User> result =  userDao.queryForEq("username", username);
+            if(result.isEmpty()){
+                return null;
+            }
+            return result.get(0);
+        } catch(SQLException e){
+            logger.error(e);
+            throw new DatabaseException(e);
+        }
     }
 
     private List<ValidationError> validate(User user){

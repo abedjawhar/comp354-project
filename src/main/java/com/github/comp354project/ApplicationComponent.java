@@ -2,6 +2,7 @@ package com.github.comp354project;
 
 import com.github.comp354project.service.account.AccountServiceModule;
 import com.github.comp354project.service.account.remote.RemoteAccountModule;
+import com.github.comp354project.service.auth.AuthenticationModule;
 import com.github.comp354project.service.dao.DaoModule;
 import com.github.comp354project.service.sqlite.ConnectionModule;
 import com.github.comp354project.service.user.UserServiceModule;
@@ -22,7 +23,8 @@ import javax.inject.Singleton;
         UserServiceModule.class,
         ConnectionModule.class,
         RemoteAccountModule.class,
-        DaoModule.class
+        DaoModule.class,
+        AuthenticationModule.class
 })
 public interface ApplicationComponent {
 

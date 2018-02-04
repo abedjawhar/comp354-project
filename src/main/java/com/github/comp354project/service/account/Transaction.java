@@ -1,20 +1,40 @@
 package com.github.comp354project.service.account;
 
+import com.github.comp354project.service.account.Account;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.Date;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@DatabaseTable(tableName = "AccountTransaction")
 public class Transaction {
+    @DatabaseField(generatedId = true)
     private Integer ID;
-    private Integer accountID;
-    private Date date;
+
+    @DatabaseField(columnName = "date", canBeNull = false)
+    private Integer date;
+
+    @DatabaseField(columnName = "amount", canBeNull = false)
     private Double amount;
+
+    @DatabaseField(columnName = "type", canBeNull = false)
     private String type;
+
+    @DatabaseField(columnName = "category")
     private String category;
-    private String currency;
+
+    @DatabaseField(columnName = "source_id")
     private Integer sourceID;
+
+    @DatabaseField(columnName = "destination_id")
     private Integer destinationID;
+
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "account_id")
+    private Account account;
 }

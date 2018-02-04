@@ -1,20 +1,36 @@
 package com.github.comp354project.service.account;
 
+import com.github.comp354project.service.user.User;
+import com.j256.ormlite.dao.ForeignCollection;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
+import com.j256.ormlite.table.DatabaseTable;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Singular;
-
-import java.util.List;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@DatabaseTable(tableName = "Account")
 public class Account {
+    @DatabaseField(id = true, columnName = "id")
     private Integer ID;
-    private Integer userID;
+
+    @DatabaseField(columnName = "bank_name")
     private String bankName;
+
+    @DatabaseField(columnName = "type")
     private String type;
+
+    @DatabaseField(columnName = "balance")
     private Double balance;
-    private String currency;
-    @Singular
-    private List<Transaction> transactions;
-}
+
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "user_id")
+    private User user;
+
+    @ForeignCollectionField
+    private ForeignCollection<Transaction> transactions;
+};

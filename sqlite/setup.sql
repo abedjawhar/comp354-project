@@ -8,8 +8,7 @@ CREATE TABLE RemoteAccount (
   id INTEGER PRIMARY KEY,
   bank_name VARCHAR(255) NOT NULL,
   type VARCHAR(255) NOT NULL,
-  balance REAL NOT NULL,
-  currency VARCHAR(255) NOT NULL
+  balance REAL NOT NULL
   );
   
  CREATE TABLE RemoteAccountTransaction(
@@ -17,7 +16,6 @@ CREATE TABLE RemoteAccount (
     account_id INTEGER NOT NULL,
     date INTEGER NOT NULL,
     amount REAL NOT NULL,
-    currency VARCHAR(255) NOT NULL,
     type VARCHAR(255),
     source_id INTEGER,
     destination_id INTEGER,
@@ -37,7 +35,6 @@ CREATE TABLE Account (
   bank_name VARCHAR(255) NOT NULL,
   type VARCHAR(255) NOT NULL,
   balance REAL NOT NULL,
-  currency VARCHAR(255) NOT NULL,
   FOREIGN KEY(user_id) REFERENCES User(id)
   );
   
@@ -46,7 +43,6 @@ CREATE TABLE AccountTransaction(
     account_id INTEGER NOT NULL,
     date INTEGER NOT NULL,
     amount REAL NOT NULL,
-    currency VARCHAR(255) NOT NULL,
     type VARCHAR(255),
     category VARCHAR(255),
     source_id INTEGER,
@@ -58,16 +54,14 @@ INSERT INTO Account(
    user_id,
    bank_name,
    type,
-   balance,
-   currency
+   balance
    )
    VALUES(
    1,
    1,
    "TD",
    "Checking",
-   15823.12,
-   "CAD"
+   15823.12
    );
 
 INSERT INTO AccountTransaction(
@@ -75,7 +69,6 @@ INSERT INTO AccountTransaction(
     account_id,
     date,
     amount,
-    currency,
     type,
     category,
     source_id,
@@ -87,7 +80,6 @@ INSERT INTO AccountTransaction(
     	1,
     	1517091082,
     	52.2,
-    	"CAD",
     	"Transfer",
     	"Rent",
     	NULL,
@@ -97,7 +89,6 @@ INSERT INTO AccountTransaction(
         1,
         1517099082,
         232,
-        "CAD",
         "Transfer",
         "Leisure",
         NULL,
@@ -107,27 +98,23 @@ INSERT INTO RemoteAccount (
    id,
    bank_name,
    type,
-   balance,
-   currency)
+   balance)
   VALUES
   (
     1,
     "TD",
     "Checking",
-    15823.12,
-    "CAD"),
+    15823.12),
    (
      2,
      "BMO",
      "Savings",
-     55135.123,
-     "CAD"),
+     55135.123),
     (
       3,
       "Desjardins",
       "Checking",
-      1312.12,
-      "CAD");
+      1312.12);
     
 
 INSERT INTO RemoteAccountTransaction (
@@ -135,7 +122,6 @@ INSERT INTO RemoteAccountTransaction (
 	account_id,
 	date,
 	amount,
-	currency,
 	type,
 	source_id,
 	destination_id
@@ -146,7 +132,6 @@ INSERT INTO RemoteAccountTransaction (
 	1,
 	1517091082,
 	52.2,
-	"CAD",
 	"Transfer",
 	NULL,
 	2),
@@ -155,7 +140,6 @@ INSERT INTO RemoteAccountTransaction (
     1,
     1517099082,
     232,
-    "CAD",
     "Transfer",
     NULL,
     3),
@@ -164,7 +148,6 @@ INSERT INTO RemoteAccountTransaction (
 	2,
 	1517095342,
 	142.12,
-	"CAD",
 	"Deposit",
 	2,
 	NULL

@@ -1,19 +1,29 @@
 package com.github.comp354project.service.user;
 
-import com.github.comp354project.service.dao.IUserDao;
+import com.github.comp354project.service.TestUtils;
+import com.github.comp354project.service.account.Account;
+import com.github.comp354project.service.account.Transaction;
 import com.github.comp354project.service.exceptions.DatabaseException;
 import com.github.comp354project.service.exceptions.ValidationException;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.table.TableUtils;
+import com.sun.javafx.scene.control.TableColumnSortTypeWrapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import static junit.framework.TestCase.*;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -21,10 +31,10 @@ public class UserServiceTest {
     protected static final Logger logger = LogManager.getLogger(DatabaseException.class);
 
     @Mock
-    IUserDao userDao;
+    private Dao<User, Integer> userDao;
 
     @InjectMocks
-    UserService userService;
+    private UserService userService;
 
     @Test(expected = ValidationException.class)
     public void createUser_withNullUser_shouldThrow(){
@@ -32,7 +42,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void createUser_withInvalidUser_shouldThrow(){
+    public void testCreateUser_withInvalidUser_shouldThrow(){
         boolean didThrow = false;
         try{
             userService.createUser(User.builder().build());
@@ -45,40 +55,21 @@ public class UserServiceTest {
     }
 
     @Test
-    public void createUser_withValidUser_shouldReturnUser(){
-        User user = User.builder()
-                .firstName("FIRST")
-                .lastName("LAST")
-                .password("PASSWORD")
-                .username("USERNAME").build();
-        when(userDao.createUser(any(User.class))).thenReturn(user);
+    public void testCreateUser_withValidUser_shouldReturnUser(){
+        User expectedUser = TestUtils.testUser;
 
-        assertNotNull(userService.createUser(user));
+        User actualUser = userService.createUser(expectedUser);
+
+        assertEquals(expectedUser, actualUser);
     }
 
     @Test(expected = ValidationException.class)
-    public void getUser_withNullUsername_shouldThrow(){
+    public void testGetUser_withNullUsername_shouldThrow(){
         userService.getUser(null);
     }
 
     @Test(expected = ValidationException.class)
-    public void getUser_withEmptyUsername_shouldThrow(){
+    public void testGetUser_withEmptyUsername_shouldThrow(){
         userService.getUser("");
-    }
-
-    @Test
-    public void getUser_withNonexistentUsername_shouldReturnNull(){
-        String nonexistentUsername = "NONEXISTENT_USERNAME";
-        when(userDao.getUser(eq(nonexistentUsername))).thenReturn(null);
-
-        assertNull(userService.getUser(nonexistentUsername));
-    }
-
-    @Test
-    public void getUser_withValidUsername_shouldReturnUser(){
-        String validUsername = "USERNAME";
-        when(userDao.getUser(eq(validUsername))).thenReturn(User.builder().build());
-
-        assertNotNull(userService.getUser(validUsername));
     }
 }
