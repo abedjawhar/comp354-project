@@ -2,6 +2,8 @@ package com.github.comp354project.service.account;
 
 
 import com.github.comp354project.service.TestUtils;
+import com.github.comp354project.service.account.exceptions.AccountDoesNotExistException;
+import com.github.comp354project.service.account.exceptions.AccountExistsException;
 import com.github.comp354project.service.account.remote.GetRemoteAccountRequest;
 import com.github.comp354project.service.account.remote.GetRemoteAccountResponse;
 import com.github.comp354project.service.account.remote.IRemoteAccountService;
@@ -56,5 +58,17 @@ public class AccountServiceTest{
             assertEquals(2, e.getErrors().size());
         }
         assertTrue(didThrow);
+    }
+
+    @Test(expected = AccountDoesNotExistException.class)
+    public void testAddAccount_withNonexistentRemoteAccount_shouldThrow(){
+        GetRemoteAccountResponse sampleResponse = GetRemoteAccountResponse.builder().build();
+        GetRemoteAccountRequest sampleRequest = GetRemoteAccountRequest.builder()
+                .accountID(TestUtils.testRemoteAccount.getID()).build();
+
+        when(remoteAccountService.getAccount(any(GetRemoteAccountRequest.class)))
+                .thenReturn(sampleResponse);
+
+        accountService.addAccount(sampleRequest, TestUtils.testUser);
     }
 }

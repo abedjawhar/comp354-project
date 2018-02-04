@@ -55,7 +55,6 @@ public class UserService implements IUserService {
             logger.error(e);
             throw new DatabaseException(e);
         } catch (UserExistsException e){
-            logger.error(e);
             throw e;
         }
     }

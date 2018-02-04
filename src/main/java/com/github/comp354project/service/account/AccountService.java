@@ -1,5 +1,7 @@
 package com.github.comp354project.service.account;
 
+import com.github.comp354project.service.account.exceptions.AccountDoesNotExistException;
+import com.github.comp354project.service.account.exceptions.AccountExistsException;
 import com.github.comp354project.service.account.remote.*;
 import com.github.comp354project.service.exceptions.DatabaseException;
 import com.github.comp354project.service.exceptions.ValidationError;
@@ -57,11 +59,19 @@ public class AccountService implements IAccountService {
         }
         GetRemoteAccountResponse response = remoteAccountService.getAccount(request);
         if(response.getAccount() == null){
-            return null;
+            throw AccountDoesNotExistException.builder()
+                    .message("Account does not exist.")
+                    .request(request).build();
         }
         try{
             RemoteAccount remoteAccount = response.getAccount();
             Account account = transform(remoteAccount);
+            Account existingAccount = accountDao.queryForId(account.getID());
+            if(existingAccount != null){
+                throw AccountExistsException.builder()
+                        .message("Account already exists.")
+                        .account(existingAccount).build();
+            }
             account.setUser(user);
             accountDao.create(account);
             for(RemoteTransaction remoteTransaction : remoteAccount.getTransactions()){
@@ -69,10 +79,12 @@ public class AccountService implements IAccountService {
                 transaction.setAccount(account);
                 transactionDao.create(transaction);
             }
-            return account;
+            return accountDao.queryForId(account.getID());
         } catch(SQLException e){
             logger.error(e);
             throw new DatabaseException(e);
+        } catch(AccountExistsException e){
+            throw e;
         }
     }
 
