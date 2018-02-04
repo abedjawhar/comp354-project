@@ -55,7 +55,7 @@
 \centerline{\bf\Large Team PA-PK}
 
 \vspace*{0.5in}
-\centerline{\bf\Large 17 January 2012}
+\centerline{\today}
 
 \vspace*{1.5in}
 \begin{table}[htbp]
@@ -66,6 +66,10 @@
 Name & ID Number \\
 \hline\hline
 Anne-Laure Ehresmann & 27858906 \\
+\hline
+Marc-Antoine Dube & 40029307 \\
+\hline
+Kadeem Caines & 26343600 \\
 \hline
 \end{tabular}
 \end{center}
@@ -80,33 +84,21 @@ Anne-Laure Ehresmann & 27858906 \\
 \section{System}\subsection{Purpose}
 
 The purpose of this document is to define requirements for the  desktop application myMoney.
-There exists a plethora of software for money management, each greatly varying in design due to the complex and multifarious clientele. This document may thus be to orient the development of the application. It may be used by:
-
-\begin{table}[htbp]
-\caption{Document Users}
-\begin{center}
-\begin{tabular}{|c|p{10cm}|}
-\hline
-Users and customers       & To give feedback about the requirements. \\
-\hline
-System developers         & To understand what functions and properties the system must contain. \\
-\hline
-Testers                   & To test the system against the requirements. \\
-\hline
-Writers of user manuals   & To get material for user manuals. \\
-\hline
-Project team              & To follow-up the status of the project against the requirements. \\
-\hline
-\end{tabular}
-\end{center}
-\end{table}
-
+There exists a plethora of software for money management, each greatly varying in design due to the complex and multifarious clientele. This document may thus be to orient the development of the application. It seeks to describe the problem and understand the requirements, formulate the necessary functions and properties needed to answer this problem and its requirements, and then test these functions against these requirements. Hence, it may be used by our users to specify the problem and its requirements, by the developers to understand what functions their system must implement, and what to test their system against.
 
 \subsection{Business Goals}
 
+At the present time, users who have more than one bank account can quickly get overwhelmed with the differing methods of access and interfaces for each account. It becomes difficult to visualise how much money one has, and how one's budget changes, when it is difficult to even view each account balance side-to-side. Hence, our desktop application shall seek to answer these issues through a standarised, easily accessible interface.
+
+\subsubsection{key business goals}
+\begin{itemize}
+    \item \textbf{Meet current procedure performance:} The current procedure for users benefits from near constant \textit{reliability}, as its only constraints is the reliability of the bank servers. We want to guarantee this same level of reliability, that is, that our system's reliability is only constrained by the reliability of the banks. %For user convenience, we also want a degree of \textit{internationalisation}, that being in the number of banks and currencies supported.
+    \item \textbf{Improve quality of system:} The current procedure for users to view their bank transactions accross different accounts requires them to log in each individual bank account interface, then compare each distinct formats for the bank accounts manually. This is both needlessly time-consuming as well as difficult to navigate. Budgetting applications exists, however can quickly become overbearing, offering a vast quantity of complex and heavy features that are more designed for heavyweight users. Hence, we seek to design a system that easy-to-use and lightweight. We thus focus on \textit{ease-of-use} by carefully choosing to implement mainly minimal and intuitive features, such as sorting transactions by specific datee or category, or viewing transations for all accounts or separately for each account. We also focus on \textit{performance}, ensuring a lightweight design to reduce loadtimes, and hence encourage frequent, short-time bursts use. For these reasons, an easy installation of the application would also be key for the system.
+    \item \textbf{maintainability:} Due to the dependency of the system upon the banks' API, it is necessary that the system may be easy to alter and maintain, to adapt to possible necessary changes. Hence, maintainability is imperative for the system.
+\end{itemize}
 \section{Domain Concepts}
 
-% DOMAIN MODEL HERE. SPLIT IT ACROSS multiple pages. 
+% DOMAIN MODEL HERE. SPLIT IT ACROSS multiple pages.
 
 % \begin{figure}[htbp]
 % \includegraphics[width=\linewidth]{DomainDiagram.png}
@@ -117,10 +109,16 @@ Project team              & To follow-up the status of the project against the r
 
 \clearpage
 \section{Actors}
+\subsubsection{User}
+Our main actor is the user. All use cases are triggered by the user, as it is his requests that directly cause the bank system or our system to take action. All identification needed to access the bank system will be provided by the user. Using this information, the system will be able to answer queries made by the user as described in the use cases.
+\subsubsection{Bank}
+Our sole other actor is the bank systems. The bank system provides an API for accessing its bank account data. Our system will pull this data directly from the bank systems, using identification as given by the user for the bank's authentication system. In other words, our system will merely act as a middle man between the user demanding information in a specific format, and the bank holding that information in a inconvenient format.
+
+\section{Functional Requirements}
 
 \section{Use Cases}
-
 \subsection{Overview}
+Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 through 7 and 9 deal with the user viewing the data in different formats. Use case 8 deals with the user manipulating the transactions' formats.
 
 \begin{figure}[htbp]
 \includegraphics{UseCaseDiagram.png}
@@ -129,8 +127,7 @@ Project team              & To follow-up the status of the project against the r
 \end{figure}
 
 \begin{usecase}{Create User Account}
-    \rule{0pt}{4ex}
-    \addrow{Case ID}{02}
+    \addrow{Case ID}{01}
     \addrow{Summary}{User gives information about a new user account, system validates it and creates the account.}
     \addrow{Scope}{money and budget management application}
     \addrow{Level}{user-goal}
@@ -138,10 +135,10 @@ Project team              & To follow-up the status of the project against the r
     \addmulrow{Stakeholders and Interests}{
         \item User: Wants fast and easy account creation, clear and comprehensible display, proof of successful account creation.
         \item Company: Wants user interests to be fulfilled, wants to prevent erroneous input, wants fast communication with the local accountdatabase as well as fault tolerance in case of database conflicts, issues with editing authorisation, or other possible database problems.}
-    \addrow{Pre-Conditions}{User has opened the application and is in the startup menu.}
+    \addrow{Pre-Conditions}{User has opened the application and is in the signup menu.}
     \addrow{Success Guarantee}{Account successfully saved in local account database, with name and password as specified by the user.}
     \addmulrow{Main Success Flow}{
-        \item User enters a username and password.
+        \item User enters a username, first name, last name, and password.
         \item System validates username and password (format, whether username is already used, etc).
         \item System creates new account.
         \item System notifies the user of the successful account creation, then returns to home menu.}
@@ -187,11 +184,11 @@ Project team              & To follow-up the status of the project against the r
         \item Company: Wants user interests to be fulfilled, wants to prevent erroneous input, wants fast communication with the local account database as well as the bank, wants fault tolerance in case of database conflicts, issues with the bank, or other possible local database problems.
         \item Bank: Wants to satisfy its customer base, wants correctly formatted account information given to its API, inexpensive and non-redundant communication of bank account data to third-party applications.}
     \addrow{Pre-Conditions}{User has logged in a user account and is in the user home menu.}
-    \addrow{Success Guarantee}{Bank account successfully saved in local account database, with information corresponding the data validated by thebank.}
+    \addrow{Success Guarantee}{Bank account successfully saved in local account database, with information corresponding the data validated by the bank.}
     \addmulrow{Main Success Flow}{
-        \item User enters his bank name, bank account number, card expiry date, and card security code.
-        \item System validates input, and sends it to the bank to be verified and connected.
-        \item Bank validates bank account details.
+        \item User enters his/her bank account number.
+        \item System validates input, and sends it to the bank for verification and connection`.
+        \item Bank validates bank account number, and then responds with the bank account information.
         \item System records the valid bank account details securely in its database, and notifies the user of the successful addition of the bank account in the database.}
     \addrow{Exceptions}{}
     \addrow{Post-Conditions}{}
@@ -236,7 +233,7 @@ Project team              & To follow-up the status of the project against the r
     \addrow{Success Guarantee}{User can view transaction by bank account.}
     \addmulrow{Main Success Flow}{
         \item User selects specific bank account from list of all accounts.
-        \item System displays all previous transactions under under specified bank account.
+        \item System displays all previous transactions under specified bank account.
         \item User selects desired transaction.
         \item System shows all information about desired transaction, such as date and amount withdrawn, deposited, or transferred.}
     \addrow{Exceptions}{}
@@ -258,9 +255,7 @@ Project team              & To follow-up the status of the project against the r
     \addrow{Success Guarantee}{User is able to conveniently view all transactions from all institutions in one display.}
     \addmulrow{Main Success Flow}{
         \item User selects View All Transactions option.
-        \item System shows all transactions across all accounts on one display.
-        \item User can select desired transaction in the list.
-        \item System shows all information regarding selected transaction such as date and amount.}
+        \item System shows all transactions across all accounts on one display.}
     \addrow{Exceptions}{}
     \addrow{Post-Conditions}{}
     \addrow{Priority}{}
@@ -281,7 +276,7 @@ Project team              & To follow-up the status of the project against the r
     \addmulrow{Main Success Flow}{
         \item User selects View All Transactions option or View By Specific Bank Account.
         \item System shows all transactions associated with previous choice.
-        \item User selects view transactions by type 
+        \item User selects view transactions by type
         \item System prompts user to choose which type of transaction he/she would like to view: deposits, withdrawals, transfers.
         \item User selects one of the options
         \item System shows all information regarding selected transaction such as date, amount, to which account, and from which account.}
@@ -300,13 +295,12 @@ Project team              & To follow-up the status of the project against the r
     \addmulrow{Stakeholders and Interests}{
         \item User: Wants to label each transaction as a specific type of spending, such as rent, bills, leisure, etc., to better manage and track spending habits.
         \item Company: Wants user interests to be fulfilled. Wants to facilitate user?s ability to budget and manage money through simple categorization of spending.}
-    \addrow{Pre-Conditions}{User has created and logged in a user account, added at least one bank account, and has made at least one type of transaction, and created categories to select from.}
+    \addrow{Pre-Conditions}{User has created and logged in a user account, added at least one bank account, and has made at least one type of transaction.}
     \addrow{Success Guarantee}{User can quickly and efficiently categorize each transaction.}
     \addmulrow{Main Success Flow}{
         \item User selects desired transaction to categorize.
-        \item System shows all information about transaction.
         \item User selects the + button.
-        \item System displays the saved categories in a drop down menu, or gives option to create new category.
+        \item System displays the saved categories in a drop down menu.
         \item User selects preferred category to represent the current transaction.
         \item System saves transaction under chosen category.}
         \addrow{Exceptions}{}
