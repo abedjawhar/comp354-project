@@ -84,17 +84,41 @@ Kadeem Caines & 26343600 \\
 \section{System}\subsection{Purpose}
 
 The purpose of this document is to define requirements for the  desktop application myMoney.
-There exists a plethora of software for money management, each greatly varying in design due to the complex and multifarious clientele. This document may thus be to orient the development of the application. It seeks to describe the problem and understand the requirements, formulate the necessary functions and properties needed to answer this problem and its requirements, and then test these functions against these requirements. Hence, it may be used by our users to specify the problem and its requirements, by the developers to understand what functions their system must implement, and what to test their system against.
+There exists a plethora of software for money management, each greatly varying in design due to the complex and multifarious clientele. This document may thus be to orient the development of the application. It seeks to understand the requirements of the problem, formulate the necessary functions and properties needed to answer this problem and its requirements, and then test these functions against these requirements. Hence, it may be used by our users to specify the problem and its requirements, by the developers to understand what functions their system must implement, and what to test their system against.
 
 \subsection{Business Goals}
 
-At the present time, users who have more than one bank account can quickly get overwhelmed with the differing methods of access and interfaces for each account. It becomes difficult to visualise how much money one has, and how one's budget changes, when it is difficult to even view each account balance side-to-side. Hence, our desktop application shall seek to answer these issues through a standarised, easily accessible interface.
+%At the present time, users who have more than one bank account can quickly get overwhelmed with the differing methods of access and interfaces for each account. It becomes difficult to visualise how much money one has, and how one's budget changes, when it is difficult to even view each account balance side-to-side. Hence, our desktop application shall seek to answer these issues through a standarised, easily accessible interface.
 
-\subsubsection{key business goals}
 \begin{itemize}
     \item \textbf{Meet current procedure performance:} The current procedure for users benefits from near constant \textit{reliability}, as its only constraints is the reliability of the bank servers. We want to guarantee this same level of reliability, that is, that our system's reliability is only constrained by the reliability of the banks. %For user convenience, we also want a degree of \textit{internationalisation}, that being in the number of banks and currencies supported.
-    \item \textbf{Improve quality of system:} The current procedure for users to view their bank transactions accross different accounts requires them to log in each individual bank account interface, then compare each distinct formats for the bank accounts manually. This is both needlessly time-consuming as well as difficult to navigate. Budgetting applications exists, however can quickly become overbearing, offering a vast quantity of complex and heavy features that are more designed for heavyweight users. Hence, we seek to design a system that easy-to-use and lightweight. We thus focus on \textit{ease-of-use} by carefully choosing to implement mainly minimal and intuitive features, such as sorting transactions by specific datee or category, or viewing transations for all accounts or separately for each account. We also focus on \textit{performance}, ensuring a lightweight design to reduce loadtimes, and hence encourage frequent, short-time bursts use. For these reasons, an easy installation of the application would also be key for the system.
-    \item \textbf{maintainability:} Due to the dependency of the system upon the banks' API, it is necessary that the system may be easy to alter and maintain, to adapt to possible necessary changes. Hence, maintainability is imperative for the system.
+    \begin{itemize}
+        \item \textit{Quality attribute scenario:} System operates mostly offline, and can function even without access to the internet using past data.
+    \end{itemize}
+    \item \textbf{Ease-of-use:} The current procedure for users to view their bank transactions accross different accounts requires them to log in each individual bank account interface, then compare each distinct formats for the bank accounts manually. This is both needlessly time-consuming as well as difficult to navigate. Budgetting applications exists, however can quickly become overbearing, offering a vast quantity of complex and heavy features that are more designed for heavyweight users.
+        \begin{itemize}
+            \item \textit{Quality attribute scenario:} Installation of the system should be easy and require very little, if any, decisions from the user beyond choosing to install the system. With no training, a user should be able to intuitively learn and use the system in a short amount of time.
+        \end{itemize}
+    \item \textbf{Performance:} Ensured minimal load times to encourage frequent, short-time bursts use.
+        \begin{itemize}
+            \item \textit{Quality attribute scenario:} System files should be small, less than 100MB. When the system connects to the internet (with reasonable bandwitth) to fetch transactions, they are returned to the user in less than 2 seconds.
+        \end{itemize}
+    \item \textbf{Maintainability:} Due to the dependency of the system upon the banks' API, it is necessary that the system may be easy to alter and maintain, to adapt to possible necessary changes. Hence, maintainability is imperative for the system. We thus advocate for a reliable and easily usable \textit{testing suite} to reduce time spent hunting for bugs, and quickly run diagnostics on the state of the system.
+        \begin{itemize}
+            \item \textit{Quality attribute scenario:} New modifications to the system should be fully covered by unit tests before another modification is implemented.
+        \end{itemize}
+    \item \textbf{Security:} A user's bank information is incredibly sensitive, and any possible security flaw could cripple the entire system and destroy any sort of trusted relationship that users may have developed with it. It is thus imperative that any data coming from the banks are accessible solely with proper authentication.
+        \begin{itemize}
+            \item \textit{Quality attribute scenario:} Database should be encrypted, and testing suite should include verification of security measures on the system.
+        \end{itemize}
+    \item \textbf{Portability:} Since the system is fairly lightweight, it should be one that is independent of a user's hardware (within reason) and/or operating system.
+        \begin{itemize}
+            \item \textit{Quality attribute scenario:} System should be implemented in Java to benefit from the JVM's portability.
+        \end{itemize}
+    \item \textbf{Scalability:} The system should function even on a long-term basis, and hence be capable of handling a growing number of transactions. The scaling size of the database should be managed by the system so as not to overwhelm the hardware it is running on.
+        \begin{itemize}
+            \item \textit{Quality attribute scenario:} System should use SQLite to minimise database size, and take precautions not to load in entire database in memory should the number of transactions exceed a size that may be unmanageable by the hardware.
+        \end{itemize}
 \end{itemize}
 \section{Domain Concepts}
 
