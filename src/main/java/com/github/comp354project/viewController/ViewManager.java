@@ -44,6 +44,6 @@ public class ViewManager {
     }
 
     public static void switchSceneToSignUpView() throws IOException {
-        updateStage("Sign", "SignUp", 278,248);
+        updateStage("Sign Up", "SignUp", 278,248);
     }
 }
