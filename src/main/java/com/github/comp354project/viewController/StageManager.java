@@ -7,14 +7,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ViewManager {
+public class StageManager {
     private static Stage stage;
 
-    private static int defaultWindowWidth = 800;
-    private static int defaultWindowHeight = 500;
+    private static final int DEFAULT_WINDOW_WIDTH = 800;
+    private static final int DEFAULT_WINDOW_HEIGHT = 500;
 
     private static void updateScene(String view, int width, int height) throws IOException {
-        Parent root = FXMLLoader.load(ViewManager.class.getClassLoader().getResource("fxml/" + view + ".fxml"));
+        Parent root = FXMLLoader.load(StageManager.class.getClassLoader().getResource("fxml/" + view + ".fxml"));
         stage.setScene(new Scene(root, width, height));
     }
 
@@ -28,22 +28,22 @@ public class ViewManager {
     }
 
     public static void setStage(Stage stage){
-        ViewManager.stage = stage;
+        StageManager.stage = stage;
     }
 
-    public static void switchSceneToAccountView() throws IOException {
-        updateStage("Account View", "Account",  defaultWindowWidth, defaultWindowHeight);
+    public static void switchToAccount() throws IOException {
+        updateStage("Account View", "Account", DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
     }
 
-    public static void switchSceneToAccountListView() throws IOException {
-        updateStage("Account List", "AccountList", defaultWindowWidth, defaultWindowHeight);
+    public static void switchToAccountList() throws IOException {
+        updateStage("Account List", "AccountList", DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
     }
 
-    public static void switchSceneToLoginView() throws IOException {
+    public static void switchToLogin() throws IOException {
         updateStage("Login","Login",  278,124);
     }
 
-    public static void switchSceneToSignUpView() throws IOException {
+    public static void switchToSignUp() throws IOException {
         updateStage("Sign Up", "SignUp", 278,248);
     }
 }

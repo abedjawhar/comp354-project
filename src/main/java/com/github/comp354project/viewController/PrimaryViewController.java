@@ -5,9 +5,6 @@ import com.github.comp354project.DaggerApplicationComponent;
 import com.github.comp354project.service.account.IAccountService;
 import com.github.comp354project.service.user.IUserService;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import javax.inject.Inject;
@@ -36,8 +33,8 @@ public class PrimaryViewController extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        ViewManager.setStage(primaryStage);
-        ViewManager.switchSceneToLoginView();
+        StageManager.setStage(primaryStage);
+        StageManager.switchToLogin();
         primaryStage.show();
     }
 }

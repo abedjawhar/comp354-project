@@ -8,19 +8,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import com.github.comp354project.viewModel.AccountViewModel;
  
 
@@ -59,14 +53,14 @@ public class AccountListController implements Initializable {
 	    if (event.getClickCount() == 2) //Checking double click
 	    {
 	        System.out.println(accountsTable.getSelectionModel().getSelectedItem().getId());
-            ViewManager.switchSceneToAccountView();
+            StageManager.switchToAccount();
 	    }
 	}
 
 	@FXML
 	public void viewAllAccounts(ActionEvent event) throws IOException
 	{
-        ViewManager.switchSceneToAccountView();
+        StageManager.switchToAccount();
 	}
 	
 	@FXML
@@ -78,6 +72,6 @@ public class AccountListController implements Initializable {
 	@FXML
     public void logout(ActionEvent event) throws IOException
     {
-        ViewManager.switchSceneToLoginView();
+        StageManager.switchToLogin();
     }
 }
