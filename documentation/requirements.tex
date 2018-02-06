@@ -1,4 +1,3 @@
-
 \documentclass[11pt]{article}
 \usepackage{color}
 \usepackage{enumitem}
@@ -165,6 +164,33 @@ or to execute the use cases.
 \section{Use Cases}
 \subsection{Overview}
 Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 through 7 and 9 deal with the user viewing the data in different formats. Use case 8 deals with the user manipulating the transactions' formats.
+
+\section{Non-Functional Constraints}
+
+\begin{itemize}
+    \item The system will function mainly on Windows operating systems
+    \item The system will gather banking information from a database
+    \item The system shall respond to user clicks within no less than 10ms
+    \item The system shall allow the user to keep re logging if their information does not match the information on the database (after account has been created)
+    \item The system will not display password information upon log in entry
+    \item The system shall provide the user with a clear graphical user interface in order to navigate the app efficiently 
+    \item The system shall not fail to save any transaction modifications
+    
+\end{itemize}
+
+\section{Data Dictionary}
+
+\section{References}
+
+\appendix
+
+\section{Description of File Format: Tasks}
+
+Describe input file format.
+
+\section{Description of File Format: Persons}
+
+Describe output file format.
 
 \begin{figure}[htbp]
 \includegraphics{UseCaseDiagram.png}
@@ -379,35 +405,6 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
 \end{usecase}
 
 
-\section{Non-Functional Constraints}
 
-\begin{itemize}
-    \item The system will function mainly on Windows operating systems
-    \item The system will gather banking information from a database
-    \item The system shall respond to user clicks within no less than 10ms
-    \item The system shall allow the user to keep re logging if their information does not match the information on the database (after account has been created)
-    \item The system will not display password information upon log in entry
-    \item The system shall provide the user with a clear graphical user interface in order to navigate the app efficiently 
-    \item The system shall not fail to save any transaction modifications
-    
-\end{itemize}
-
-\begin{itemize}
-    \item 
-\end{itemize}
-
-\section{Data Dictionary}
-
-\section{References}
-
-\appendix
-
-\section{Description of File Format: Tasks}
-
-Describe input file format.
-
-\section{Description of File Format: Persons}
-
-Describe output file format.
 
 \end{document}
