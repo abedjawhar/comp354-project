@@ -1,3 +1,4 @@
+
 \documentclass[11pt]{article}
 \usepackage{color}
 \usepackage{enumitem}
@@ -143,6 +144,23 @@ Our main actor is the user. All use cases are triggered by the user, as it their
 Our sole other actor is the bank systems. The bank system provides an API for accessing its bank account data. Our system will pull this data directly from the bank systems, using identification as given by the user for the bank's authentication system. In other words, our system will merely act as a middle man between the user demanding information in a specific format, and the bank holding that information in a inconvenient format.
 
 \section{Functional Requirements}
+
+This section will cover the functional requirements associated with the myMoney app. These are the software
+capabilities that must be present in order for the user to carry out the services provided by the app
+or to execute the use cases. 
+
+\begin{itemize}
+   
+    \item The system shall allow the user to create a new account for log in purposes through a username and password
+    \item The system shall allow the user to log in with his information for Authentication once the account is created
+    \item The system shall notify the user if their login information is not correct
+    \item The system shall allow the user to delete his account information if needed
+    \item The system will allow the user to access his banking information through the API
+    \item The system will view his transactions 
+    \item The system shall display the user's transactions history, which will include the amount spent, time and date of transaction, and category
+    \item The system shall provide Transaction corrections, adjustments and cancellations
+    \item The system shall allow the user to manipulate their transaction formats. 
+\end{itemize}
 
 \section{Use Cases}
 \subsection{Overview}
@@ -362,6 +380,21 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
 
 
 \section{Non-Functional Constraints}
+
+\begin{itemize}
+    \item The system will function mainly on Windows operating systems
+    \item The system will gather banking information from a database
+    \item The system shall respond to user clicks within no less than 10ms
+    \item The system shall allow the user to keep re logging if their information does not match the information on the database (after account has been created)
+    \item The system will not display password information upon log in entry
+    \item The system shall provide the user with a clear graphical user interface in order to navigate the app efficiently 
+    \item The system shall not fail to save any transaction modifications
+    
+\end{itemize}
+
+\begin{itemize}
+    \item 
+\end{itemize}
 
 \section{Data Dictionary}
 
