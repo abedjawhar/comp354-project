@@ -29,15 +29,18 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
     protected static final Logger logger = LogManager.getLogger(DatabaseException.class);
 
-    @Mock
-    private Dao<User, Integer> userDao;
-
-    @InjectMocks
     private UserService userService;
+
+    @Before
+    public void setUp() throws Exception{
+        JdbcConnectionSource connectionSource = new JdbcConnectionSource("jdbc:sqlite::memory:");
+        Dao<User, Integer> userDao = DaoManager.createDao(connectionSource, User.class);
+        TableUtils.createTable(connectionSource, User.class);
+        userService = new UserService(userDao);
+    }
 
     @Test(expected = ValidationException.class)
     public void createUser_withNullUser_shouldThrow(){
@@ -59,22 +62,32 @@ public class UserServiceTest {
 
     @Test
     public void testCreateUser_withValidUser_shouldReturnUser(){
-        User expectedUser = TestUtils.testUser;
+        User expectedUser = User.builder()
+                .username("USERNAME")
+                .password("PASSWORD")
+                .firstName("FIRSTNAME")
+                .lastName("LASTNAME").build();
 
         User actualUser = userService.createUser(expectedUser);
 
+        assertNotNull(actualUser.getID());
+        expectedUser.setID(actualUser.getID());
         assertEquals(expectedUser, actualUser);
     }
 
     @Test(expected = UserExistsException.class)
-    public void testCreateUser_withExistingUser_shouldThrow() throws Exception{
-        User existingUser = TestUtils.testUser;
-        when(userDao.queryForEq(eq("username"), eq(existingUser.getUsername())))
-                .thenReturn(ImmutableList.<User>builder()
-                     .add(existingUser).build());
+    public void testCreateUser_withExistingUsername_shouldThrow() throws Exception{
+        User user = User.builder()
+                .username("USERNAME")
+                .password("PASSWORD")
+                .firstName("FIRSTNAME")
+                .lastName("LASTNAME").build();
 
-        User userToCreate = TestUtils.testUser;
-        userService.createUser(userToCreate);
+        userService.createUser(user);
+        assertNotNull(user.getID());
+        user.setID(null);
+
+        userService.createUser(user);
     }
 
     @Test(expected = ValidationException.class)
