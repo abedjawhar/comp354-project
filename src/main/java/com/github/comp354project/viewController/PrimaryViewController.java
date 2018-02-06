@@ -41,7 +41,7 @@ public class PrimaryViewController extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // The views are located in /src/main/resources/fxml
-        Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/primary-view.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/AccountList.fxml"));
         primaryStage.setMaximized(true);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
