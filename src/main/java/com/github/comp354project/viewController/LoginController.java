@@ -26,20 +26,12 @@ public class LoginController implements Initializable {
     @FXML
     public void login(ActionEvent event) throws IOException
     {
-        Parent signUp = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/AccountList.fxml"));
-        Scene scene = new Scene(signUp, 800, 500);
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setTitle("Account List");
-        stage.setScene(scene);
+        ViewManager.switchSceneToAccountListView();
     }
 
     @FXML
     public void signUp(ActionEvent event) throws IOException
     {
-        Parent signUp = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/SignUp.fxml"));
-        Scene scene = new Scene(signUp, 278, 248);
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setTitle("Sign Up");
-        stage.setScene(scene);
+        ViewManager.switchSceneToSignUpView();
     }
 }

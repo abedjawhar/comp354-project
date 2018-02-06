@@ -59,24 +59,14 @@ public class AccountListController implements Initializable {
 	    if (event.getClickCount() == 2) //Checking double click
 	    {
 	        System.out.println(accountsTable.getSelectionModel().getSelectedItem().getId());
-
-            Parent accountView = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/Account.fxml"));
-	        Scene scene = new Scene(accountView, 800, 500);
-	        
-	        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-	        stage.setTitle("Account View");
-	        stage.setScene(scene);
+            ViewManager.switchSceneToAccountView();
 	    }
 	}
 
 	@FXML
 	public void viewAllAccounts(ActionEvent event) throws IOException
 	{
-        Parent accountView = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/Account.fxml"));
-        Scene scene = new Scene(accountView, 800, 500);
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setTitle("Account View - All");
-        stage.setScene(scene);
+        ViewManager.switchSceneToAccountView();
 	}
 	
 	@FXML
@@ -88,10 +78,6 @@ public class AccountListController implements Initializable {
 	@FXML
     public void logout(ActionEvent event) throws IOException
     {
-        Parent login = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/Login.fxml"));
-        Scene scene = new Scene(login, 278, 124);
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setTitle("Account View - All");
-        stage.setScene(scene);
+        ViewManager.switchSceneToLoginView();
     }
 }

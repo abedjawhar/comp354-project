@@ -2,12 +2,8 @@ package com.github.comp354project.viewController;
 
 import com.github.comp354project.ApplicationComponent;
 import com.github.comp354project.DaggerApplicationComponent;
-import com.github.comp354project.service.account.Account;
 import com.github.comp354project.service.account.IAccountService;
-import com.github.comp354project.service.account.Transaction;
-import com.github.comp354project.service.account.remote.GetRemoteAccountRequest;
 import com.github.comp354project.service.user.IUserService;
-import com.github.comp354project.service.user.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -41,8 +37,9 @@ public class PrimaryViewController extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // The views are located in /src/main/resources/fxml
-        Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/Login.fxml"));
-        primaryStage.setScene(new Scene(root, 278, 124));
+
+        ViewManager.setStage(primaryStage);
+        ViewManager.switchSceneToLoginView();
         primaryStage.show();
     }
 }

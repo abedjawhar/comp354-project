@@ -49,11 +49,7 @@ public class AccountController implements Initializable {
 	@FXML
 	public void gotoAccountList(MouseEvent event) throws IOException
 	{
-		Parent accountList = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/AccountList.fxml"));
-        Scene scene = new Scene(accountList, 800, 500);
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setTitle("Accounts List");
-        stage.setScene(scene);
+		ViewManager.switchSceneToAccountListView();;
 	}
 
 }
