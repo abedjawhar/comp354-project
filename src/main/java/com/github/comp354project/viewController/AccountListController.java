@@ -84,4 +84,14 @@ public class AccountListController implements Initializable {
 	{
 		System.out.println(accountIdTxt.getText());
 	}
+
+	@FXML
+    public void logout(ActionEvent event) throws IOException
+    {
+        Parent login = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/Login.fxml"));
+        Scene scene = new Scene(login, 278, 124);
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("Account View - All");
+        stage.setScene(scene);
+    }
 }
