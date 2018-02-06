@@ -27,7 +27,6 @@ If you have any problems with installing LaTeX or with a particular package just
 
 + Each student must submit a diary (document done in LaTeX)
 + Use Cases left to do:
-  create categories should also be a use case.
 + Domain Modeling: include in document.
 + do model of SQL organisation.
 + use case diagram
