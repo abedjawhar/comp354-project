@@ -36,8 +36,6 @@ public class PrimaryViewController extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // The views are located in /src/main/resources/fxml
-
         ViewManager.setStage(primaryStage);
         ViewManager.switchSceneToLoginView();
         primaryStage.show();
