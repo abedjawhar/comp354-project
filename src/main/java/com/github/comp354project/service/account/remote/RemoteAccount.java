@@ -27,6 +27,6 @@ public class RemoteAccount {
     @DatabaseField(columnName = "balance")
     private Double balance;
 
-    @ForeignCollectionField
+    @ForeignCollectionField(eager = true)
     private ForeignCollection<RemoteTransaction> transactions;
 }

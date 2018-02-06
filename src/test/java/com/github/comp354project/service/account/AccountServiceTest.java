@@ -28,25 +28,30 @@ import java.util.List;
 import static junit.framework.TestCase.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AccountServiceTest{
-    @Mock
+
     private IRemoteAccountService remoteAccountService;
-
-    @Mock
-    private Dao<Transaction, Integer> transactionDao;
-
-    @Mock
+    private AccountService accountService;
+    private Dao<User, Integer> userDao;
     private Dao<Account, Integer> accountDao;
 
-    @Mock
-    private Dao<User, Integer> userDao;
-
-    @InjectMocks
-    private AccountService accountService;
+    @Before
+    public void setUp() throws Exception{
+        JdbcConnectionSource connectionSource = new JdbcConnectionSource("jdbc:sqlite::memory:");
+        userDao = DaoManager.createDao(connectionSource, User.class);
+        accountDao = DaoManager.createDao(connectionSource, Account.class);
+        Dao<Transaction, Integer> transactionDao = DaoManager.createDao(connectionSource, Transaction.class);
+        remoteAccountService = mock(IRemoteAccountService.class);
+        accountService = new AccountService(accountDao, userDao, transactionDao, remoteAccountService);
+        TableUtils.createTable(connectionSource, User.class);
+        TableUtils.createTable(connectionSource, Account.class);
+        TableUtils.createTable(connectionSource, Transaction.class);
+    }
 
     @Test
     public void testAddAccount_withInvalidParameters_shouldThrow(){
@@ -70,5 +75,22 @@ public class AccountServiceTest{
                 .thenReturn(sampleResponse);
 
         accountService.addAccount(sampleRequest, TestUtils.testUser);
+    }
+
+    @Test(expected = AccountExistsException.class)
+    public void testAddAccount_withExistingAccount_shouldThrow() throws Exception{
+        User accountOwner = TestUtils.testUser;
+        userDao.create(accountOwner);
+        Account existingAccount = TestUtils.testAccount;
+        existingAccount.setUser(accountOwner);
+        accountDao.create(existingAccount);
+        RemoteAccount remoteAccount = TestUtils.testRemoteAccount;
+        GetRemoteAccountRequest request = GetRemoteAccountRequest.builder()
+                .accountID(remoteAccount.getID()).build();
+        GetRemoteAccountResponse response = GetRemoteAccountResponse.builder()
+                .account(remoteAccount).build();
+        when(remoteAccountService.getAccount(eq(request))).thenReturn(response);
+
+        accountService.addAccount(request, accountOwner);
     }
 }

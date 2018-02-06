@@ -31,6 +31,6 @@ public class Account {
     @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "user_id")
     private User user;
 
-    @ForeignCollectionField
+    @ForeignCollectionField(eager = true)
     private ForeignCollection<Transaction> transactions;
 };
