@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import com.github.comp354project.MyMoneyApplication;
 import com.github.comp354project.service.account.Account;
+import com.github.comp354project.service.auth.ISessionManager;
 import com.github.comp354project.service.auth.SessionManager;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -40,6 +41,13 @@ public class AccountListController implements Initializable {
 
 	private List<Account> accounts = new ArrayList<>();
 	private ObservableList<AccountDisplayModel> tableData = FXCollections.observableArrayList();
+
+	@Inject
+	ISessionManager sessionManager;
+
+	public AccountListController() {
+		MyMoneyApplication.application.getComponent().inject(this);
+	}
 
 	public void initialize(URL url, ResourceBundle rb) {
 		idCol.setCellValueFactory(new PropertyValueFactory<AccountDisplayModel,Integer>("id"));

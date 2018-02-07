@@ -1,9 +1,8 @@
 package com.github.comp354project;
 
 import com.github.comp354project.service.account.Account;
-import com.github.comp354project.service.account.IAccountService;
+import com.github.comp354project.service.auth.ISessionManager;
 import com.github.comp354project.service.auth.SessionManager;
-import com.github.comp354project.service.user.IUserService;
 import com.github.comp354project.viewController.AccountDetailsController;
 import com.github.comp354project.viewController.AccountListController;
 import com.github.comp354project.viewController.StageManager;
@@ -21,8 +20,6 @@ import org.apache.logging.log4j.LogManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class MyMoneyApplication extends Application {
     private static final Logger logger = LogManager.getLogger(MyMoneyApplication.class);
@@ -30,7 +27,7 @@ public class MyMoneyApplication extends Application {
     public static MyMoneyApplication application;
 
     @Inject
-    SessionManager sessionManager;
+    ISessionManager sessionManager;
 
     @Getter
     private ApplicationComponent component;

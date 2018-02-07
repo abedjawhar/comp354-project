@@ -1,11 +1,10 @@
 package com.github.comp354project.viewController;
 
-import com.github.comp354project.DaggerApplicationComponent;
 import com.github.comp354project.MyMoneyApplication;
+import com.github.comp354project.service.auth.ISessionManager;
 import com.github.comp354project.service.auth.SessionManager;
 import com.github.comp354project.service.exceptions.ValidationException;
 import com.github.comp354project.service.user.IUserService;
-import com.github.comp354project.service.user.UserService;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -25,18 +24,17 @@ public class LoginController implements Initializable {
     @FXML private JFXPasswordField passwordField;
 
     @Inject
-    SessionManager sessionManager;
+    ISessionManager sessionManager;
 
     @Inject
     IUserService userService;
 
-    public LoginController(){
+    public LoginController() {
         MyMoneyApplication.application.getComponent().inject(this);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
     @FXML

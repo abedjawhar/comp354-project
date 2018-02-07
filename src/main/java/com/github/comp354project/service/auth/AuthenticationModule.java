@@ -13,4 +13,10 @@ public class AuthenticationModule {
     public static IAuthenticationService provideAuthenticationService(AuthenticationService authenticationService){
         return authenticationService;
     }
+
+    @Provides
+    @Singleton
+    public static ISessionManager provideSessionManager(SessionManager sessionManager){
+        return sessionManager;
+    }
 }
