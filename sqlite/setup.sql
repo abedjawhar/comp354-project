@@ -9,17 +9,18 @@ CREATE TABLE RemoteAccount (
   bank_name VARCHAR(255) NOT NULL,
   type VARCHAR(255) NOT NULL,
   balance REAL NOT NULL
-  );
+);
   
  CREATE TABLE RemoteAccountTransaction(
- 	id INTEGER PRIMARY KEY,
-    account_id INTEGER NOT NULL,
-    date INTEGER NOT NULL,
-    amount REAL NOT NULL,
-    type VARCHAR(255),
-    source_id INTEGER,
-    destination_id INTEGER,
-    FOREIGN KEY(account_id) REFERENCES RemoteAccount(id));
+  id INTEGER PRIMARY KEY,
+  account_id INTEGER NOT NULL,
+  date INTEGER NOT NULL,
+  amount REAL NOT NULL,
+  type VARCHAR(255),
+  source_id INTEGER,
+  destination_id INTEGER,
+  FOREIGN KEY(account_id) REFERENCES RemoteAccount(id)
+);
 	
 CREATE TABLE User(
 	id INTEGER PRIMARY KEY,
@@ -36,141 +37,183 @@ CREATE TABLE Account (
   type VARCHAR(255) NOT NULL,
   balance REAL NOT NULL,
   FOREIGN KEY(user_id) REFERENCES User(id)
-  );
+);
   
 CREATE TABLE AccountTransaction(
- 	id INTEGER PRIMARY KEY,
-    account_id INTEGER NOT NULL,
-    date INTEGER NOT NULL,
-    amount REAL NOT NULL,
-    type VARCHAR(255),
-    category VARCHAR(255),
-    source_id INTEGER,
-    destination_id INTEGER,
-    FOREIGN KEY(account_id) REFERENCES Account(id));
+  id INTEGER PRIMARY KEY,
+  account_id INTEGER NOT NULL,
+  date INTEGER NOT NULL,
+  amount REAL NOT NULL,
+  type VARCHAR(255),
+  category VARCHAR(255),
+  source_id INTEGER,
+  destination_id INTEGER,
+  FOREIGN KEY(account_id) REFERENCES Account(id)
+);
 
 INSERT INTO Account(
-   id,
-   user_id,
-   bank_name,
-   type,
-   balance
-   )
-   VALUES(
-   1,
-   1,
-   "TD",
-   "Checking",
-   15823.12
-   );
+  id,
+  user_id,
+  bank_name,
+  type,
+  balance
+)
+VALUES(
+    1,
+    1,
+    'TD',
+    'Checking',
+    15823.12
+  ),
+  (
+    20,
+    2,
+    'SocGen',
+    'Checking',
+    48572.95
+  ),
+  (
+    21,
+    2,
+    'Desjardins',
+    'Visa',
+    0.00
+  );
 
 INSERT INTO AccountTransaction(
+      id,
+      account_id,
+      date,
+      amount,
+      type,
+      category,
+      source_id,
+      destination_id
+    )
+    VALUES
+    (
+    	1,
+    	1,
+    	1517091082,
+    	52.2,
+    	'Transfer',
+    	'Rent',
+    	NULL,
+    	2
+    ),
+    (
+    	2,
+      1,
+      1517099082,
+      232,
+      'Transfer',
+      'Leisure',
+      NULL,
+      3
+    );
+    
+INSERT INTO RemoteAccount (
+    id,
+    bank_name,
+    type,
+    balance
+  )
+  VALUES
+  (
+    1,
+    'TD',
+    'Checking',
+    15823.12
+  ),
+  (
+    2,
+    'BMO',
+    'Savings',
+    55135.123
+  ),
+  (
+    3,
+    'Desjardins',
+    'Checking',
+    1312.12
+  ),
+  (
+    20,
+    'SocGen',
+    'Checking',
+    48572.95
+  ),
+  (
+    21,
+    'Desjardins',
+    'Visa',
+    0.00
+  ),
+  (
+    22,
+    'Capital One',
+    'Mastercard',
+    -800
+  );
+    
+
+INSERT INTO RemoteAccountTransaction (
     id,
     account_id,
     date,
     amount,
     type,
-    category,
     source_id,
     destination_id
-    )
-    VALUES
-    	(
-    	1,
-    	1,
-    	1517091082,
-    	52.2,
-    	"Transfer",
-    	"Rent",
-    	NULL,
-    	2),
-    	(
-    	2,
-        1,
-        1517099082,
-        232,
-        "Transfer",
-        "Leisure",
-        NULL,
-        3);
-    
-INSERT INTO RemoteAccount (
-   id,
-   bank_name,
-   type,
-   balance)
-  VALUES
-  (
-    1,
-    "TD",
-    "Checking",
-    15823.12),
-   (
-     2,
-     "BMO",
-     "Savings",
-     55135.123),
-    (
-      3,
-      "Desjardins",
-      "Checking",
-      1312.12);
-    
-
-INSERT INTO RemoteAccountTransaction (
-    id,
-	account_id,
-	date,
-	amount,
-	type,
-	source_id,
-	destination_id
-)
+  )
 	VALUES
 	(
-	1,
-	1,
-	1517091082,
-	52.2,
-	"Transfer",
-	NULL,
-	2),
+    1,
+    1,
+    1517091082,
+    52.2,
+    'Transfer',
+    NULL,
+    2
+  ),
 	(
-	2,
+	  2,
     1,
     1517099082,
     232,
-    "Transfer",
+    'Transfer',
     NULL,
-    3),
+    3
+  ),
 	(
-	3,
-	2,
-	1517095342,
-	142.12,
-	"Deposit",
-	2,
-	NULL
+    3,
+    2,
+    1517095342,
+    142.12,
+    'Deposit',
+    2,
+    NULL
 	);
 	
 INSERT INTO User(
     id,
-	first_name,
-	last_name,
-	username,
-	password
-)
-	VALUES (
-	    1,
-		"Hrachya",
-		"Hakobyan",
-		"admin",
-		"admin"
+    first_name,
+    last_name,
+    username,
+    password
+  )
+	VALUES 
+	(
+    1,
+		'Hrachya',
+		'Hakobyan',
+		'admin',
+		'admin'
 	),
 	(
 	  2,
-		"Marc",
-		"Dube",
-		"madube",
-		"admin"
+		'Marc',
+		'Dube',
+		'madube',
+		'admin'
 	);
