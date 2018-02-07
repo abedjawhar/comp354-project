@@ -12,7 +12,7 @@
       <TableView fx:id="accountsTable" layoutX="7.0" onMouseClicked="#selectAccount" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="49.0">
          <columns>
             <TableColumn fx:id="idCol" prefWidth="90.0" text="ID" />
-            <TableColumn fx:id="nameCol" prefWidth="307.0" text="Account Name" />
+            <TableColumn fx:id="bankNameCol" prefWidth="307.0" text="Account Name" />
             <TableColumn fx:id="typeCol" prefWidth="307.0" text="Type of Account" />
             <TableColumn fx:id="balanceCol" prefWidth="93.0" text="Balance" />
          </columns>

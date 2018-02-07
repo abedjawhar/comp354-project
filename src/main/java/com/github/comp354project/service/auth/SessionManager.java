@@ -1,23 +1,20 @@
 package com.github.comp354project.service.auth;
 
+import com.github.comp354project.service.auth.exceptions.UserLoggedInException;
 import com.github.comp354project.service.exceptions.ValidationException;
 import com.github.comp354project.service.user.User;
+import lombok.Getter;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-/**
- * Manages the user's session, whether he's connected or not.
- */
 @Singleton
 public class SessionManager {
 
     private IAuthenticationService authenticationService;
 
-    /**
-     * The user currently connected to the application
-     */
-    private User authenticatedUser;
+    @Getter
+    private User user;
 
     @Inject
     public SessionManager(IAuthenticationService authenticationService) {
@@ -25,24 +22,27 @@ public class SessionManager {
     }
 
     /**
-     * Authenticates a user
      * @param username
      * @param password
-     * @return
+     * @return The logged in User
+     * @throws ValidationException If the username and/or password is incorrect/invalid
+     * @throws UserLoggedInException If a user is already logged in
      */
-    public void login(String username, String password) throws ValidationException {
-        this.authenticatedUser = this.authenticationService.authenticate(username, password);
+    public synchronized User login(String username, String password) throws ValidationException, UserLoggedInException{
+        if(this.isLoggedIn()){
+            throw UserLoggedInException.builder()
+                    .message("Already logged in.")
+                    .user(this.user).build();
+        }
+        this.user = this.authenticationService.authenticate(username, password);
+        return this.user;
     }
 
-    /**
-     *
-     * @return
-     */
-    public User getUser() {
-        return this.authenticatedUser;
+    public synchronized void logout() {
+        this.user = null;
     }
 
-    public void logout() {
-        this.authenticatedUser = null;
+    public synchronized boolean isLoggedIn(){
+        return user != null;
     }
 }

@@ -9,6 +9,7 @@ import javax.inject.Singleton;
 public class AuthenticationModule {
 
     @Provides
+    @Singleton
     public static IAuthenticationService provideAuthenticationService(AuthenticationService authenticationService){
         return authenticationService;
     }

@@ -42,15 +42,30 @@ public class AccountService implements IAccountService {
         List<ValidationError> errors = new ArrayList<>();
         if(request == null){
             errors.add(ValidationError.builder()
+                    .message("Invalid request")
                     .parameterName("request").build());
         }
         else if(request.getAccountID() == null){
             errors.add(ValidationError.builder()
+                    .message("Invalid request account ID")
                     .parameterName("request.accountID").build());
         }
         if(user == null){
             errors.add(ValidationError.builder()
+                    .message("Invalid user")
                     .parameterName("user").build());
+        } else {
+            try{
+                if(userDao.queryForId(user.getID()) == null){
+                    errors.add(ValidationError.builder()
+                            .message("Invalid user")
+                            .parameterValue(user.toString())
+                            .parameterName("user").build());
+                }
+            } catch (SQLException e){
+                logger.error(e);
+                throw new DatabaseException(e);
+            }
         }
         if(!errors.isEmpty()){
             throw ValidationException.builder()
@@ -66,11 +81,13 @@ public class AccountService implements IAccountService {
         try{
             RemoteAccount remoteAccount = response.getAccount();
             Account account = transform(remoteAccount);
-            Account existingAccount = accountDao.queryForId(account.getID());
-            if(existingAccount != null){
-                throw AccountExistsException.builder()
-                        .message("Account already exists.")
-                        .account(existingAccount).build();
+            {
+                Account existingAccount = accountDao.queryForId(account.getID());
+                if (existingAccount != null) {
+                    throw AccountExistsException.builder()
+                            .message("Account already exists.")
+                            .account(existingAccount).build();
+                }
             }
             account.setUser(user);
             accountDao.create(account);
@@ -92,7 +109,7 @@ public class AccountService implements IAccountService {
         Account.AccountBuilder builder = Account.builder()
                 .ID(remoteAccount.getID())
                 .bankName(remoteAccount.getBankName())
-                .type(remoteAccount.toString())
+                .type(remoteAccount.getType())
                 .balance(remoteAccount.getBalance());
         return builder.build();
     }

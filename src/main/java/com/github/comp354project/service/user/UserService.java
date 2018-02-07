@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

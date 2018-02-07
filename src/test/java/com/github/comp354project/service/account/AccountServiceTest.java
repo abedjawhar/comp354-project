@@ -4,10 +4,7 @@ package com.github.comp354project.service.account;
 import com.github.comp354project.service.TestUtils;
 import com.github.comp354project.service.account.exceptions.AccountDoesNotExistException;
 import com.github.comp354project.service.account.exceptions.AccountExistsException;
-import com.github.comp354project.service.account.remote.GetRemoteAccountRequest;
-import com.github.comp354project.service.account.remote.GetRemoteAccountResponse;
-import com.github.comp354project.service.account.remote.IRemoteAccountService;
-import com.github.comp354project.service.account.remote.RemoteAccount;
+import com.github.comp354project.service.account.remote.*;
 import com.github.comp354project.service.exceptions.ValidationException;
 import com.github.comp354project.service.user.User;
 import com.github.comp354project.service.user.UserService;
@@ -22,6 +19,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,18 +37,22 @@ public class AccountServiceTest{
     private AccountService accountService;
     private Dao<User, Integer> userDao;
     private Dao<Account, Integer> accountDao;
+    private Dao<Transaction, Integer> transactionDao;
+    private JdbcConnectionSource connectionSource;
 
     @Before
     public void setUp() throws Exception{
-        JdbcConnectionSource connectionSource = new JdbcConnectionSource("jdbc:sqlite::memory:");
+        connectionSource = new JdbcConnectionSource("jdbc:sqlite::memory:");
         userDao = DaoManager.createDao(connectionSource, User.class);
         accountDao = DaoManager.createDao(connectionSource, Account.class);
-        Dao<Transaction, Integer> transactionDao = DaoManager.createDao(connectionSource, Transaction.class);
+        transactionDao = DaoManager.createDao(connectionSource, Transaction.class);
         remoteAccountService = mock(IRemoteAccountService.class);
         accountService = new AccountService(accountDao, userDao, transactionDao, remoteAccountService);
         TableUtils.createTable(connectionSource, User.class);
         TableUtils.createTable(connectionSource, Account.class);
         TableUtils.createTable(connectionSource, Transaction.class);
+        TableUtils.createTable(connectionSource, RemoteTransaction.class);
+        TableUtils.createTable(connectionSource, RemoteAccount.class);
     }
 
     @Test
@@ -66,7 +68,9 @@ public class AccountServiceTest{
     }
 
     @Test(expected = AccountDoesNotExistException.class)
-    public void testAddAccount_withNonexistentRemoteAccount_shouldThrow(){
+    public void testAddAccount_withNonexistentRemoteAccount_shouldThrow() throws Exception{
+        User accountOwner = TestUtils.testUser;
+        userDao.create(accountOwner);
         GetRemoteAccountResponse sampleResponse = GetRemoteAccountResponse.builder().build();
         GetRemoteAccountRequest sampleRequest = GetRemoteAccountRequest.builder()
                 .accountID(TestUtils.testRemoteAccount.getID()).build();
@@ -77,6 +81,15 @@ public class AccountServiceTest{
         accountService.addAccount(sampleRequest, TestUtils.testUser);
     }
 
+    @Test(expected = ValidationException.class)
+    public void testAddAccount_withInvalidUser_shouldThrow(){
+        User user = TestUtils.testUser;
+        GetRemoteAccountRequest sampleRequest = GetRemoteAccountRequest.builder()
+                .accountID(TestUtils.testRemoteAccount.getID()).build();
+
+        accountService.addAccount(sampleRequest, user);
+    }
+
     @Test(expected = AccountExistsException.class)
     public void testAddAccount_withExistingAccount_shouldThrow() throws Exception{
         User accountOwner = TestUtils.testUser;
@@ -84,7 +97,8 @@ public class AccountServiceTest{
         Account existingAccount = TestUtils.testAccount;
         existingAccount.setUser(accountOwner);
         accountDao.create(existingAccount);
-        RemoteAccount remoteAccount = TestUtils.testRemoteAccount;
+        RemoteAccount remoteAccount = createTestRemoteAccount();
+
         GetRemoteAccountRequest request = GetRemoteAccountRequest.builder()
                 .accountID(remoteAccount.getID()).build();
         GetRemoteAccountResponse response = GetRemoteAccountResponse.builder()
@@ -92,5 +106,38 @@ public class AccountServiceTest{
         when(remoteAccountService.getAccount(eq(request))).thenReturn(response);
 
         accountService.addAccount(request, accountOwner);
+    }
+
+    @Test
+    public void testAddAccount_withValidAccount_shouldReturnValidAccount() throws Exception{
+        User accountOwner = TestUtils.testUser;
+        userDao.create(accountOwner);
+
+        Account expectedAccount = TestUtils.testAccount;
+
+        RemoteAccount remoteAccount = createTestRemoteAccount();
+
+        GetRemoteAccountRequest request = GetRemoteAccountRequest.builder()
+                .accountID(TestUtils.testRemoteAccount.getID()).build();
+        GetRemoteAccountResponse response = GetRemoteAccountResponse.builder()
+                .account(remoteAccount).build();
+        when(remoteAccountService.getAccount(eq(request))).thenReturn(response);
+
+        Account actualAccount = accountService.addAccount(request, accountOwner);
+
+        assertEquals(expectedAccount, actualAccount);
+        assertEquals(1, actualAccount.getTransactions().size());
+    }
+
+    private RemoteAccount createTestRemoteAccount() throws SQLException{
+        Dao<RemoteAccount, Integer> remoteAccountDao = DaoManager.createDao(connectionSource, RemoteAccount.class);
+        Dao<RemoteTransaction, Integer> remoteTransactionDao = DaoManager.createDao(connectionSource, RemoteTransaction.class);
+
+        RemoteAccount remoteAccount = TestUtils.testRemoteAccount;
+        remoteAccountDao.create(remoteAccount);
+        RemoteTransaction remoteTransaction = TestUtils.testRemoteTransaction;
+        remoteTransactionDao.create(remoteTransaction);
+
+        return remoteAccountDao.queryForId(remoteAccount.getID());
     }
 }

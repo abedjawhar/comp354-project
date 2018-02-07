@@ -3,15 +3,13 @@ package com.github.comp354project.service.account;
 import com.github.comp354project.service.account.Account;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @DatabaseTable(tableName = "AccountTransaction")
 public class Transaction {
     @DatabaseField(generatedId = true)

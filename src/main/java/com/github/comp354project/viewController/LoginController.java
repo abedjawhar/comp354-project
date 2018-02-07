@@ -1,8 +1,11 @@
 package com.github.comp354project.viewController;
 
 import com.github.comp354project.DaggerApplicationComponent;
+import com.github.comp354project.MyMoneyApplication;
 import com.github.comp354project.service.auth.SessionManager;
 import com.github.comp354project.service.exceptions.ValidationException;
+import com.github.comp354project.service.user.IUserService;
+import com.github.comp354project.service.user.UserService;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -24,19 +27,23 @@ public class LoginController implements Initializable {
     @Inject
     SessionManager sessionManager;
 
-    public void initialize(URL url, ResourceBundle rb) {
-        DaggerApplicationComponent.builder()
-                .build()
-                .inject(this);
+    @Inject
+    IUserService userService;
+
+    public LoginController(){
+        MyMoneyApplication.application.getComponent().inject(this);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 
     @FXML
     public void login(ActionEvent event) throws IOException  {
         try {
-            System.out.println(this.sessionManager);
             this.sessionManager.login(this.usernameTxt.getText(), this.passwordField.getText());
-            System.out.println(this.sessionManager.getUser());
-            StageManager.switchToAccountList();
+            MyMoneyApplication.application.displayAccounts();
         }
         catch (ValidationException exception) {
             final String errorsStr = exception.getErrors()

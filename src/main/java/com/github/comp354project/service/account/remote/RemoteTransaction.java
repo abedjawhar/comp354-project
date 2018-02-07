@@ -3,15 +3,13 @@ package com.github.comp354project.service.account.remote;
 import com.github.comp354project.service.account.remote.RemoteAccount;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @DatabaseTable(tableName = "RemoteAccountTransaction")
 public class RemoteTransaction {
 

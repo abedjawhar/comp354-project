@@ -8,7 +8,6 @@ import com.github.comp354project.service.sqlite.ConnectionModule;
 import com.github.comp354project.service.user.UserServiceModule;
 import com.github.comp354project.viewController.AccountListController;
 import com.github.comp354project.viewController.LoginController;
-import com.github.comp354project.viewController.PrimaryViewController;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -34,9 +33,9 @@ public interface ApplicationComponent {
      * The view needs classes defined in the services. The inject method
      * lets us do this.
      * Create an inject method for every different classes (controllers) in the views that would need them
-     * @param primaryViewController
+     * @param myMoneyApplication
      */
-    void inject(PrimaryViewController primaryViewController);
+    void inject(MyMoneyApplication myMoneyApplication);
 
     void inject(LoginController loginController);
 

@@ -48,7 +48,6 @@ public class AuthenticationService implements IAuthenticationService {
                             .parameterValue(username).build())
                     .build();
         }
-
         if(!user.getPassword().equals(password)){
             throw ValidationException.builder()
                     .message("Failed to authenticate user. Incorrect password")

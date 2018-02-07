@@ -31,12 +31,12 @@ public class StageManager {
         StageManager.stage = stage;
     }
 
-    public static void switchToAccount() throws IOException {
-        updateStage("Account View", "Account", DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
+    public static void switchToAccount(String accountName) throws IOException {
+        updateStage(accountName, "Account", DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
     }
 
     public static void switchToAccountList() throws IOException {
-        updateStage("Account List", "AccountList", DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
+        updateStage("Accounts", "AccountList", DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
     }
 
     public static void switchToLogin() throws IOException {

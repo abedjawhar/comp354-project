@@ -31,7 +31,8 @@ public class TestUtils {
             .user(testUser)
             .bankName("TD")
             .type("Checking")
-            .balance(15823.12).build();
+            .balance(15823.12)
+            .build();
     public static final Transaction testTransaction = Transaction.builder()
             .ID(1)
             .account(testAccount)
