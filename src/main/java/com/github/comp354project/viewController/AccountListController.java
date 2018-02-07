@@ -64,10 +64,12 @@ public class AccountListController implements Initializable {
 		bankNameCol.setCellValueFactory(new PropertyValueFactory<AccountDisplayModel,String>("bankName"));
 		typeCol.setCellValueFactory(new PropertyValueFactory<AccountDisplayModel,String>("type"));
 		balanceCol.setCellValueFactory(new PropertyValueFactory<AccountDisplayModel,Double>("balance"));
+		accountsTable.setItems(tableData);
 	}
 
 	public void setAccounts(List<Account> accounts){
-		List<AccountDisplayModel> tableData = new ArrayList<>();
+		this.accounts = accounts;
+		tableData.clear();
 		for(Account account : accounts){
 			tableData.add(new AccountDisplayModel(account));
 		}
@@ -97,7 +99,9 @@ public class AccountListController implements Initializable {
 			GetRemoteAccountRequest remoteAccountRequest = GetRemoteAccountRequest.builder()
 					.accountID(this.accountIdFromString())
 					.build();
-			this.accountService.addAccount(remoteAccountRequest, this.sessionManager.getUser());
+			Account account = this.accountService.addAccount(remoteAccountRequest, this.sessionManager.getUser());
+			this.accounts.add(account);
+			this.tableData.add(new AccountDisplayModel(account));
 		} catch (ValidationException e) {
 			AlertHelper.generateErrorAlert("Creation error", "Error validating account", e)
 					.showAndWait();
@@ -107,8 +111,7 @@ public class AccountListController implements Initializable {
 		}
 	}
 
-    @Data
-	private static class AccountDisplayModel {
+	public static class AccountDisplayModel {
 		private final SimpleIntegerProperty id;
 		private final SimpleStringProperty bankName;
 		private final SimpleStringProperty type;
@@ -120,13 +123,45 @@ public class AccountListController implements Initializable {
 			this.type = new SimpleStringProperty(account.getType());
 			this.balance = new SimpleDoubleProperty(account.getBalance());
 		}
+
+		public void setId(Integer id){
+			this.id.set(id);
+		}
+
+		public Integer getId(){
+			return this.id.get();
+		}
+
+		public void setBankName(String bankName){
+			this.bankName.set(bankName);
+		}
+
+		public String getBankName(){
+			return this.bankName.get();
+		}
+
+		public void setType(String type){
+			this.type.set(type);
+		}
+
+		public String getType(){
+			return this.type.get();
+		}
+
+		public void setBalance(Double balance){
+			this.balance.set(balance);
+		}
+
+		public Double getBalance(){
+			return this.balance.get();
+		}
 	}
 
 	private Integer accountIdFromString() throws RuntimeException {
 		try {
 			return Integer.parseInt(this.accountIdTxt.getText());
 		} catch(NumberFormatException e) {
-			throw new RuntimeException("Account ID is not a number");
+			throw new RuntimeException("Invalid accountID");
 		}
 	}
 }

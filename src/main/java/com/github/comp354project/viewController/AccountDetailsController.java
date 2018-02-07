@@ -6,6 +6,7 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import com.github.comp354project.MyMoneyApplication;
 import com.github.comp354project.service.account.Account;
 import com.github.comp354project.service.account.Transaction;
 import com.github.comp354project.viewController.helper.StageManager;
@@ -44,7 +45,7 @@ public class AccountDetailsController implements Initializable {
 	
 	@FXML
 	public void gotoAccountList(MouseEvent event) throws IOException {
-		StageManager.switchToAccountList();
+		MyMoneyApplication.application.displayAccounts();
 	}
 
 	public void setAccount(Account account){
@@ -55,8 +56,7 @@ public class AccountDetailsController implements Initializable {
 		}
 	}
 
-	@Data
-	private static class TransactionDisplayModel {
+	public static class TransactionDisplayModel {
 		private SimpleStringProperty date;
 		private SimpleDoubleProperty amount;
 		private SimpleStringProperty category;
@@ -73,6 +73,39 @@ public class AccountDetailsController implements Initializable {
 			} else {
 				this.type = new SimpleStringProperty("Withdrawal");
 			}
+			this.category = new SimpleStringProperty(transaction.getCategory());
+		}
+
+		public void setDate(String date){
+			this.date.set(date);
+		}
+
+		public String getDate(){
+			return this.date.get();
+		}
+
+		public void setAmount(Double amount){
+			this.amount.set(amount);
+		}
+
+		public Double getAmount(){
+			return this.amount.get();
+		}
+
+		public void setCategory(String category){
+			this.category.set(category);
+		}
+
+		public String getCategory(){
+			return this.category.get();
+		}
+
+		public void setType(String type){
+			this.type.set(type);
+		}
+
+		public String getType(){
+			return this.type.get();
 		}
 	}
 

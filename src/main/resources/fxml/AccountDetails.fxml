@@ -18,8 +18,8 @@
          </padding>
       </Label>
       <Label layoutX="96.0" layoutY="18.0" text="\$0.00" AnchorPane.leftAnchor="93.0" AnchorPane.topAnchor="15.0" />
-      <Label layoutX="354.0" layoutY="10.0" text="Scotia Debit Card" AnchorPane.topAnchor="8.0" />
-      <Label layoutX="339.0" layoutY="27.0" text="Account ID: 280787046" AnchorPane.topAnchor="23.0" />
+      <Label layoutX="354.0" layoutY="10.0" AnchorPane.topAnchor="8.0" />
+      <Label layoutX="339.0" layoutY="27.0" AnchorPane.topAnchor="23.0" />
       <TableView fx:id="transactionTableView" layoutX="-4.0" layoutY="50.0" prefHeight="452.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
         <columns>
           <TableColumn fx:id="dateCol" prefWidth="160.0" text="Date" />
