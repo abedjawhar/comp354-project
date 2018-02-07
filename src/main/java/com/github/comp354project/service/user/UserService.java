@@ -85,21 +85,25 @@ public class UserService implements IUserService {
         if(Strings.isNullOrEmpty(user.getUsername())){
             errors.add(ValidationError.builder()
                         .parameterName("username")
+                        .message("Username required")
                         .parameterValue(user.getUsername()).build());
         }
         if(Strings.isNullOrEmpty(user.getPassword())){
             errors.add(ValidationError.builder()
                     .parameterName("password")
+                    .message("Password required")
                     .parameterValue(user.getPassword()).build());
         }
         if(Strings.isNullOrEmpty(user.getFirstName())){
             errors.add(ValidationError.builder()
                     .parameterName("firstName")
+                    .message("Firstname required")
                     .parameterValue(user.getFirstName()).build());
         }
         if(Strings.isNullOrEmpty(user.getLastName())){
             errors.add(ValidationError.builder()
                     .parameterName("lastName")
+                    .message("Lastname required")
                     .parameterValue(user.getLastName()).build());
         }
         return errors;

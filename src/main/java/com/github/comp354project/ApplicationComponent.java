@@ -8,6 +8,7 @@ import com.github.comp354project.service.sqlite.ConnectionModule;
 import com.github.comp354project.service.user.UserServiceModule;
 import com.github.comp354project.viewController.AccountListController;
 import com.github.comp354project.viewController.LoginController;
+import com.github.comp354project.viewController.SignUpController;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -40,4 +41,6 @@ public interface ApplicationComponent {
     void inject(LoginController loginController);
 
     void inject(AccountListController accountListController);
+
+    void inject(SignUpController signUpController);
 }

@@ -25,10 +25,24 @@ public class AlertHelper {
         return alert;
     }
 
+    /**
+     * Generates an error alert with a string
+     * @param title
+     * @param header
+     * @param content
+     * @return
+     */
     public static Alert generateErrorAlert(String title, String header, String content) {
         return generateAlert(Alert.AlertType.ERROR, title, header, content);
     }
 
+    /**
+     * Generates an error alert with a ValidationException
+     * @param title
+     * @param header
+     * @param exception
+     * @return
+     */
     public static Alert generateErrorAlert(String title, String header, ValidationException exception) {
         final String errorsStr = exception.getErrors()
                 .stream()
