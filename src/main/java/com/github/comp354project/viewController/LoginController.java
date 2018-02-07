@@ -1,7 +1,6 @@
 package com.github.comp354project.viewController;
 
 import com.github.comp354project.MyMoneyApplication;
-import com.github.comp354project.service.auth.ISessionManager;
 import com.github.comp354project.service.auth.SessionManager;
 import com.github.comp354project.service.exceptions.ValidationException;
 import com.github.comp354project.service.user.IUserService;
@@ -24,7 +23,7 @@ public class LoginController implements Initializable {
     @FXML private JFXPasswordField passwordField;
 
     @Inject
-    ISessionManager sessionManager;
+    SessionManager sessionManager;
 
     @Inject
     IUserService userService;

@@ -1,7 +1,6 @@
 package com.github.comp354project;
 
 import com.github.comp354project.service.account.Account;
-import com.github.comp354project.service.auth.ISessionManager;
 import com.github.comp354project.service.auth.SessionManager;
 import com.github.comp354project.viewController.AccountDetailsController;
 import com.github.comp354project.viewController.AccountListController;
@@ -27,7 +26,7 @@ public class MyMoneyApplication extends Application {
     public static MyMoneyApplication application;
 
     @Inject
-    ISessionManager sessionManager;
+    SessionManager sessionManager;
 
     @Getter
     private ApplicationComponent component;
