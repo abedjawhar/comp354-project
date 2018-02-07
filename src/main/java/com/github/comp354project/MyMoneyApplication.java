@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -61,6 +62,14 @@ public class MyMoneyApplication extends Application {
         Parent root = (Parent)loader.load();
         AccountDetailsController controller = loader.getController();
         controller.setAccount(account);
+        primaryStage.setScene(new Scene(root, 800, 500));
+    }
+
+    public void displayAllAccountDetails(List<Account> accounts) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AccountDetails.fxml"));
+        Parent root = (Parent)loader.load();
+        AccountDetailsController controller = loader.getController();
+        controller.setAccounts(accounts);
         primaryStage.setScene(new Scene(root, 800, 500));
     }
 }

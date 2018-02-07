@@ -84,7 +84,7 @@ public class AccountListController implements Initializable {
 
 	@FXML
 	public void viewAllAccounts(ActionEvent event) throws IOException {
-        StageManager.switchToAccount("Account");
+		MyMoneyApplication.application.displayAllAccountDetails(accounts);
 	}
 
 	@FXML
