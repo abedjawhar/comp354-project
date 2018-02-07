@@ -160,10 +160,17 @@ INSERT INTO User(
 	username,
 	password
 )
-	VALUES(
+	VALUES (
 	    1,
 		"Hrachya",
 		"Hakobyan",
 		"admin",
+		"admin"
+	),
+	(
+	  2,
+		"Marc",
+		"Dube",
+		"madube",
 		"admin"
 	);

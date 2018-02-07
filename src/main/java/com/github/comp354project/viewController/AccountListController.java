@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.github.comp354project.DaggerApplicationComponent;
+import com.github.comp354project.service.auth.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,7 +18,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import com.github.comp354project.viewModel.AccountViewModel;
- 
+
+import javax.inject.Inject;
+
 
 public class AccountListController implements Initializable {
 	
@@ -28,7 +32,15 @@ public class AccountListController implements Initializable {
 	@FXML private TableColumn<AccountViewModel, String>  typeCol;
 	@FXML private TableColumn<AccountViewModel, String>  balanceCol;
 
+	@Inject
+	SessionManager sessionManager;
+
 	public void initialize(URL url, ResourceBundle rb) {
+		DaggerApplicationComponent.builder()
+				.build()
+				.inject(this);
+		System.out.println(this.sessionManager);
+
 		final ObservableList<AccountViewModel> data = FXCollections.observableArrayList(
 		    new AccountViewModel("1", "Soctia", "Debt", "$1320.00"),
 		    new AccountViewModel("2", "Soctia", "Debt", "$1320.00"),
@@ -70,8 +82,8 @@ public class AccountListController implements Initializable {
 	}
 
 	@FXML
-    public void logout(ActionEvent event) throws IOException
-    {
+    public void logout(ActionEvent event) throws IOException {
+		this.sessionManager.logout();
         StageManager.switchToLogin();
     }
 }

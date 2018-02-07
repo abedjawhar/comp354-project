@@ -6,6 +6,8 @@ import com.github.comp354project.service.auth.AuthenticationModule;
 import com.github.comp354project.service.dao.DaoModule;
 import com.github.comp354project.service.sqlite.ConnectionModule;
 import com.github.comp354project.service.user.UserServiceModule;
+import com.github.comp354project.viewController.AccountListController;
+import com.github.comp354project.viewController.LoginController;
 import com.github.comp354project.viewController.PrimaryViewController;
 import dagger.Component;
 
@@ -35,4 +37,8 @@ public interface ApplicationComponent {
      * @param primaryViewController
      */
     void inject(PrimaryViewController primaryViewController);
+
+    void inject(LoginController loginController);
+
+    void inject(AccountListController accountListController);
 }
