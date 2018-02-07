@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import com.github.comp354project.service.account.Account;
 import com.github.comp354project.service.account.Transaction;
+import com.github.comp354project.viewController.helper.StageManager;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;

@@ -1,4 +1,4 @@
-package com.github.comp354project.viewController;
+package com.github.comp354project.viewController.helper;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

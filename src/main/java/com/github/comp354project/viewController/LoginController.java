@@ -4,6 +4,8 @@ import com.github.comp354project.MyMoneyApplication;
 import com.github.comp354project.service.auth.SessionManager;
 import com.github.comp354project.service.exceptions.ValidationException;
 import com.github.comp354project.service.user.IUserService;
+import com.github.comp354project.viewController.helper.AlertHelper;
+import com.github.comp354project.viewController.helper.StageManager;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -43,17 +45,8 @@ public class LoginController implements Initializable {
             MyMoneyApplication.application.displayAccounts();
         }
         catch (ValidationException exception) {
-            final String errorsStr = exception.getErrors()
-                    .stream()
-                    .map(e -> e.getMessage())
-                    .collect(Collectors.joining("\n"));
-
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Login error");
-            alert.setHeaderText("Error logging in");
-            alert.setContentText(errorsStr);
-
-            alert.showAndWait();
+            AlertHelper.generateErrorAlert("Login error", "Error loggin in", exception)
+                    .showAndWait();
         }
     }
 

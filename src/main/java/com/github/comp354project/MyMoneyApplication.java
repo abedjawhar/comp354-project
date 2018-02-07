@@ -4,7 +4,7 @@ import com.github.comp354project.service.account.Account;
 import com.github.comp354project.service.auth.SessionManager;
 import com.github.comp354project.viewController.AccountDetailsController;
 import com.github.comp354project.viewController.AccountListController;
-import com.github.comp354project.viewController.StageManager;
+import com.github.comp354project.viewController.helper.StageManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

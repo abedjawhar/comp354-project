@@ -8,7 +8,15 @@ import java.util.ResourceBundle;
 
 import com.github.comp354project.MyMoneyApplication;
 import com.github.comp354project.service.account.Account;
+import com.github.comp354project.service.account.IAccountService;
+import com.github.comp354project.service.account.exceptions.AccountDoesNotExistException;
+import com.github.comp354project.service.account.exceptions.AccountExistsException;
+import com.github.comp354project.service.account.remote.GetRemoteAccountRequest;
+import com.github.comp354project.service.account.remote.RemoteTransaction;
 import com.github.comp354project.service.auth.SessionManager;
+import com.github.comp354project.service.exceptions.ValidationException;
+import com.github.comp354project.viewController.helper.AlertHelper;
+import com.github.comp354project.viewController.helper.StageManager;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -44,6 +52,9 @@ public class AccountListController implements Initializable {
 	@Inject
 	SessionManager sessionManager;
 
+	@Inject
+	IAccountService accountService;
+
 	public AccountListController() {
 		MyMoneyApplication.application.getComponent().inject(this);
 	}
@@ -76,12 +87,24 @@ public class AccountListController implements Initializable {
 
 	@FXML
     public void logout(ActionEvent event) throws IOException {
+		this.sessionManager.logout();
         StageManager.switchToLogin();
     }
 
 	@FXML
 	public void addAccount() {
-		System.out.println(accountIdTxt.getText());
+		try {
+			GetRemoteAccountRequest remoteAccountRequest = GetRemoteAccountRequest.builder()
+					.accountID(this.accountIdFromString())
+					.build();
+			this.accountService.addAccount(remoteAccountRequest, this.sessionManager.getUser());
+		} catch (ValidationException e) {
+			AlertHelper.generateErrorAlert("Creation error", "Error validating account", e)
+					.showAndWait();
+		} catch(RuntimeException e) {
+			AlertHelper.generateErrorAlert("Creation error", "Error validating account", e.getMessage())
+					.showAndWait();
+		}
 	}
 
     @Data
@@ -96,6 +119,14 @@ public class AccountListController implements Initializable {
 			this.bankName = new SimpleStringProperty(account.getBankName());
 			this.type = new SimpleStringProperty(account.getType());
 			this.balance = new SimpleDoubleProperty(account.getBalance());
+		}
+	}
+
+	private Integer accountIdFromString() throws RuntimeException {
+		try {
+			return Integer.parseInt(this.accountIdTxt.getText());
+		} catch(NumberFormatException e) {
+			throw new RuntimeException("Account ID is not a number");
 		}
 	}
 }

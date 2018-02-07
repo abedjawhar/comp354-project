@@ -1,5 +1,6 @@
 package com.github.comp354project.viewController;
 
+import com.github.comp354project.viewController.helper.StageManager;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
