@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+documentclass[11pt]{article}
 \usepackage{color}
 \usepackage{enumitem}
 \usepackage{booktabs}
@@ -90,32 +90,45 @@ Keith Dion & 40036340 \\
 The purpose of this document is to define requirements for the  desktop application myMoney.
 There exists a plethora of software for money management, each greatly varying in design due to the complex and multifarious clientele. This document may thus be to orient the development of the application. It seeks to understand the requirements of the problem, formulate the necessary functions and properties needed to answer this problem and its requirements, and then test these functions against these requirements. Hence, it may be used by our users to specify the problem and its requirements, by the developers to understand what functions their system must implement, and what to test their system against.
 
+\subsubsection{Brief description of the problem}
+At the present time, users who have more than one bank account can quickly get overwhelmed with the differing methods of access and interfaces for each account. It becomes arduous to access every account, visualise how much money one has and how one's budget changes on a day-to-day basis. Numerous applications exist with extensive budgeting functionalities, but setting them up and learning to use them requires a time investiment that often seems more hassle than is worth, especially for casual users who aren't interested in complex accounting functionalities. This thus costs time and frustration for the common user, and discourages them from fully taking advantage of the services that are provided by their banks. Even simply connecting to their accounts becomes a daunting task, which negatively impacts both the users and the banks. We seek to design a desktop application to solve these issues in a simple and lightweight manner.
+
 \subsection{Business Goals}
 
-%At the present time, users who have more than one bank account can quickly get overwhelmed with the differing methods of access and interfaces for each account. It becomes difficult to visualise how much money one has, and how one's budget changes, when it is difficult to even view each account balance side-to-side. Hence, our desktop application shall seek to answer these issues through a standarised, easily accessible interface.
+\begin{itemize}
+    \item \textbf{Compete with existing solutions}
+    \item \textbf{Target market: wide user-base composed mainly of millenials, students, new professionals}
+    \item \textbf{Reduce total cost of ownership}
+    \item \textbf{Future-proof, long-term robustiness of the system}
+\end{itemize}
+
+
+\subsection{Non-Functional Requirements}
 
 \begin{itemize}
-    \item \textbf{Meet current procedure performance:} The current procedure for users benefits from near constant \textit{reliability}, as its only constraints is the reliability of the bank servers. We want to guarantee this same level of reliability, that is, that our system's reliability is only constrained by the reliability of the banks. %For user convenience, we also want a degree of \textit{internationalisation}, that being in the number of banks and currencies supported.
+     \item \textbf{reliability:} The current procedure which users employ benefits from near perfect uptime, as its only constraint is the reliability of the bank servers. We want to guarantee this same level of reliability, that is, that our system's reliability is only constrained by the reliability of the banks servers.
     \begin{itemize}
-        \item \textit{Quality attribute scenario:} System operates mostly offline, and can function even without access to the internet using past data.
-    \end{itemize}
-    \item \textbf{Ease-of-use:} The current procedure for users to view their bank transactions across different accounts requires them to log in each individual bank account interface, then compare each distinct format for the bank accounts manually. This is both needlessly time-consuming and difficult to navigate. Budgeting applications exist, however they can quickly become overbearing, offering a vast quantity of complex and heavy features that are designed primarly for heavyweight users.
+        \item \textit{Quality attribute scenario:} System operates mostly offline, and can function even without access to the internet using past data. System meets security and connectivity performance of current procedure.
+     \end{itemize}
+     %%%\item \textbf{accessibility:}%This procedure additionally benefits from some level of security, as this is of course a highly prioritised feature of their systems. We want to meet this security requirement, with additional security around our own system, detailed below.
+
+    \item \textbf{Simplicity and ease-of-use:} The current procedure for users to view their bank transactions across different accounts requires them to log in each individual bank account interface, then compare each distinct format for the bank accounts manually. This is both needlessly time-consuming and difficult to navigate. Budgeting applications exist, however they can quickly become overbearing, offering a vast quantity of complex and heavy features that are designed primarily for heavyweight users. Our business instead targets a more casual user-base which tend to favours a more simpler and more lightweight application.
         \begin{itemize}
             \item \textit{Quality attribute scenario:} Installation of the system should be easy and require very little, if any, decisions from the user beyond choosing to install the system. With no training, a user should be able to intuitively learn and use the system in a short amount of time.
         \end{itemize}
-    \item \textbf{Performance:} Ensured minimal load times to encourage frequent, short-time bursts use.
+    \item \textbf{Performance:} Ensured minimal load times to encourage frequent, short-time bursts use. These sorts of applications tends to be popular with millenial audiences. This also allows the system to be competitive, as being less performant than the current procedures would certainly lead to a dissatisfaction in our user-base.
         \begin{itemize}
-            \item \textit{Quality attribute scenario:} System files should be small, less than 100MB. When the system connects to the internet (with reasonable bandwith) to fetch transactions, they are returned to the user in less than 2 seconds.
+            \item \textit{Quality attribute scenario:} System files should be small, less than 100MB. When the system connects to the internet (with reasonable bandwidth) to fetch transactions, they are returned to the user in less than 2 seconds.
         \end{itemize}
-    \item \textbf{Maintainability:} Due to the dependency of the system upon the banks' API, it is necessary that the system should be easy to alter and maintain to adapt to possible necessary changes. Hence, maintainability is imperative for the system. We thus advocate for a reliable and easily usable \textit{testing suite} to reduce time spent hunting for bugs, and quickly run diagnostics on the state of the system.
+    \item \textbf{Maintainability:} Due to the dependency of the system upon the banks' API, it is necessary that the system should be easy to alter and maintain, and hence be capable of adapting to third-party changes. Hence, maintainability is imperative for the system. We thus advocate for a reliable and easily usable \textit{testing suite} to reduce time and cost of debugging, and quickly conduct system diagnostics.
         \begin{itemize}
             \item \textit{Quality attribute scenario:} New modifications to the system should be fully covered by unit tests before another modification is implemented.
         \end{itemize}
-    \item \textbf{Security:} A user's bank information is incredibly sensitive, and any possible security flaw could cripple the entire system and destroy any sort of trusted relationship that users may have developed with it. It is thus imperative that any data coming from the banks are accessible solely with proper authentication.
+    \item \textbf{Security:} A user's bank information is incredibly sensitive, and any possible security flaw could cripple the entire system and destroy any sort of trusted relationship that users may have developed with it. It is thus of upmost importance that any data coming from the banks are accessible solely with proper authentication. Improper security would certainly negatively impact user trust in our business.
         \begin{itemize}
             \item \textit{Quality attribute scenario:} Database should be encrypted, and testing suite should include verification of security measures on the system.
         \end{itemize}
-    \item \textbf{Portability:} Since the system is fairly lightweight, it should be one that is independent of a user's hardware (within reason) and/or operating system.
+    \item \textbf{Portability:} Since the system is fairly lightweight, it should be one that is independent of a user's hardware (within reason) and/or operating system, to encourage a wide user-base.
         \begin{itemize}
             \item \textit{Quality attribute scenario:} System should be implemented in Java to benefit from the JVM's portability.
         \end{itemize}
@@ -124,6 +137,7 @@ There exists a plethora of software for money management, each greatly varying i
             \item \textit{Quality attribute scenario:} System should use SQLite to minimize database size, and take precautions not to load an entire database in memory should the number of transactions exceed a size that may be unmanageable by the hardware.
         \end{itemize}
 \end{itemize}
+
 \section{Domain Concepts}
 
 % DOMAIN MODEL HERE. SPLIT IT ACROSS multiple pages.
@@ -134,32 +148,23 @@ There exists a plethora of software for money management, each greatly varying i
 % \label{fig:domain-diagram}
 % \end{figure}
 
-
-\clearpage
 \section{Actors}
 \subsubsection{User}
 Our main actor is the user. All use cases are triggered by the user, as it their requests that directly cause the bank system or our system to take action. All identification needed to access the bank system will be provided by the user. Using this information, the system will be able to answer queries made by the user as described in the use cases.
 \subsubsection{Bank}
-Our sole other actor is the bank systems. The bank system provides an API for accessing its bank account data. Our system will pull this data directly from the bank systems, using identification as given by the user for the bank's authentication system. In other words, our system will merely act as a middle man between the user demanding information in a specific format, and the bank holding that information in a inconvenient format.
+Our sole other actor is the bank(s) system. Each bank system provides an API for accessing its bank account data. Our system will pull this data directly from the bank systems, using identification as given by the user for the bank's authentication system. In other words, our system will merely act as a middle man between the user demanding information in a specific format, and the banks holding that information in a inconvenient format.
 
 \section{Functional Requirements}
 
-This section will cover the functional requirements associated with the myMoney app. These are the software
-capabilities that must be present in order for the user to carry out the services provided by the app
-or to execute the use cases. 
+This section will cover the functional requirements associated with the myMoney app. These are the software capabilities that must be present in order for the user to carry out the services provided by the app or to execute the use cases.
 
 \begin{itemize}
-   
-    \item The system shall allow the user to create a new account for log in purposes through a username and password
-    \item The system shall allow the user to log in with his information for Authentication once the account is created
-    \item The system shall notify the user if their login information is not correct
-    \item The system shall allow the user to delete his account information if needed
-    \item The system will allow the user to access his banking information through the API
-    \item The system will view his transactions 
-    \item The system shall display the user's transactions history, which will include the amount spent, time and date of transaction, and category
-    \item The system shall provide Transaction corrections, adjustments and cancellations
-    \item The system shall allow the user to manipulate their transaction formats. 
-\end{itemize}
+    \item  \textbf{User account creation:} The system allows the creation of user accounts, with information (username, password, first name, and last name) provided by the user.
+    \item \textbf{User account authentication:} The system shall grant a user access only to a properly authenticated user. If a user does not enter credentials, the system shall notify the user of the failure to authenticate.
+    \item \textbf{User account management:} The system shall require proper authentication to modify and/or delete a user account.
+    \item  \textbf{Bank account management:} The system permits a logged-in user to add, manipulate, or remove bank accounts that are connected to the user account.
+    \item  \textbf{Transaction management:} The system permits a logged-in user to access the details of transactions associated with all bank accounts that were added to the user account. The system obtains these transactions through the banking system's API. The system allows different display formats, such as 'sorted by date' or 'sorted by type' or 'sorted by bank account.
+    \end{itemize}
 
 \section{Use Cases}
 \subsection{Overview}
@@ -173,9 +178,8 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
     \item The system shall respond to user clicks within no less than 10ms
     \item The system shall allow the user to keep re logging if their information does not match the information on the database (after account has been created)
     \item The system will not display password information upon log in entry
-    \item The system shall provide the user with a clear graphical user interface in order to navigate the app efficiently 
+    \item The system shall provide the user with a clear graphical user interface in order to navigate the app efficiently
     \item The system shall not fail to save any transaction modifications
-    
 \end{itemize}
 
 \section{Data Dictionary}
