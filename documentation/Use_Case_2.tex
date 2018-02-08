@@ -1,0 +1,286 @@
+\documentclass{article}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage[pdftex]{graphicx}
+\pagestyle{empty}
+\setcounter{secnumdepth}{2}
+
+\topmargin=0cm
+\oddsidemargin=0cm
+\textheight=22.0cm
+\textwidth=17cm
+\parindent=0cm
+\parskip=0.15cm
+\topskip=0truecm
+\raggedbottom
+\abovedisplayskip=3mm
+\belowdisplayskip=3mm
+\abovedisplayshortskip=0mm
+\belowdisplayshortskip=2mm
+\normalbaselineskip=12pt
+\normalbaselines
+
+% use case stuff
+\newcounter{use case ID}
+
+% environment slightly edited from https://tex.stackexchange.com/questions/10293/latex-template-for-use-cases
+\newcommand\tabularhead[1]{
+\begin{table}[ht]
+    \addtocounter{use case ID}{1}
+    \caption{Use Case \arabic{use case ID} - #1}
+    \vspace{0.2cm}
+    \begin{tabular}{|p{0.2\linewidth}|p{0.70\linewidth}|}
+    \hline
+        \textbf{Action} & \textbf{#1} \\
+        \hline}
+
+    \newcommand\addrow[2]{#1 & #2\\ \hline}
+
+    \newcommand\addmulrow[2]{ \begin{minipage}[t][][t]{2.5cm}#1\end{minipage}
+        &\begin{minipage}[t][][t]{11cm}
+        \begin{enumerate}[itemsep=-1ex] #2   \end{enumerate}
+    \end{minipage}\vfill\\ \hline}
+
+    \newenvironment{usecase}{\tabularhead}
+{\hline\end{tabular}\end{table}}
+
+
+
+
+\title{Use Case For Bank Account}
+\author{Renny Xu }
+\date{31 January 2018}
+
+\begin{document}
+
+\maketitle
+
+%Create Bank Account
+\begin{usecase}{Use Case Add Bank Account}
+
+
+\rule{0pt}{4ex}
+\addrow{Use Case ID}{01}
+%Scope: System's scope: "vision statement, design scope drawing, in/out list, and actor-goal list".( From http://www.informit.com/articles/article.aspx?p=26061). Basically the System under design.
+\addrow{Scope:}{System-wide}
+
+%Summary: User can create bank accounts.
+\addrow{Summary:}{User create multiple bank accounts and the different type of bank accounts}
+
+%Level: The "subfunction"
+\addrow{Level:}{User-goal}
+
+%Primary Actor: Stakeholder that calls on the system to deliver one of its services.
+\addrow{Primary Actor:}{End-User, Bank}
+
+%Stakeholders and Interests: People who cares about this use case and their interest behind it
+\addmulrow{Stakeholders and Interests:}{
+	\item User: Able to create bank account without any issues.
+	\item Company: Able to satisfy the users' interests without any issues.
+}
+
+%Preconditions: Conditions that must be satisfied before using this use case
+%User must first log into their account
+\addmulrow{Preconditions:}{
+    \item [1.]User has logged into their account by entering their ID and password.
+%User wants to create a bank account, must be active with a legal association (Bank)
+    \item [2.]User must be active with a Bank, so user can create their bank account.} 
+
+%Post-conditions: Conditions that must be satisfied after this use case
+%None so far
+\addrow{Post-Conditions:}{}
+
+
+%Main Success Scenario: What happens when user was able to create their bank account 
+\addmulrow{Main Success Scenario:}{
+	%Step to create a bank account
+	\item User selects what type of bank account that he wants to create.
+	\item System brings user to another window where he can input his information.
+	\item User fills in the necessary information and affirms his confirmation to create bank account.
+	\item System will display the recently added account.
+	\item System will ask user if the new bank account is correct. If not, user can use the edit button to correct the account.
+	\item User leaves the creation window and return to main menu.
+}
+%Alternative scenarios used by user
+\addmulrow{Alternative Course}{
+    \item User logs in.
+    \item System provides a menu of approval list that is shown to user.
+    \item User performs an approval list action other than create bank account.
+    \item User returns to menu.
+    \item User decides to create bank account
+}
+%Extensions: Alternate scenarios for cases if there is failure or success.
+\addmulrow{Extensions:}{
+	\item Invalid Information input:
+		\begin{enumerate}
+		\item[1.] System shows incorrect input message
+		\item[2.] User returns to step 1 and corrects the wrong information
+		\end{enumerate}
+
+}
+%Extra rows for templates
+%\addrow{Exceptions}
+%\addrow{Includes}
+%\addrow{Priority}
+%\addrow{Frequency of Use}
+%\addrow{Special Requirements}
+%\addrow{Notes and Issues}
+
+\end{usecase}
+
+
+%Display Bank Account and its details
+\begin{usecase}{Use Case Display Bank Account}
+
+\addrow{Use Case ID}{02}
+%Scope: System's scope: "vision statement, design scope drawing, in/out list, and actor-goal list".( From http://www.informit.com/articles/article.aspx?p=26061). Basically the System under design.
+\addrow{Scope:}{System-wide}
+
+%Summary: User can display their bank accounts.
+\addrow{Summary:}{User display one or multiple bank accounts and their details}
+
+%Level: The "subfunction"
+\addrow{Level:}{User-goal}
+
+%Primary Actor: Stakeholder that calls on the system to deliver one of its services.
+\addrow{Primary Actor:}{End-User}
+
+%Stakeholders and Interests: People who cares about this use case and their interest behind it
+\addmulrow{Stakeholders and Interests:}{
+	\item User: Able to see their bank account(s) and its details without any issues.
+	\item Company: Able to satisfy the users' interests without any issues.
+}
+
+%Preconditions: Conditions that must be satisfied before using this use case
+%User must first log into their account
+\addrow{Preconditions:}{
+    \item [1.]User has logged into their account by entering their ID and password.
+%User must have at least one bank account to show
+    \item [2.]User must have already have at least one bank account to display.
+} 
+
+%Post-conditions: Conditions that must be satisfied after this use case
+%None so far
+\addrow{Post-Conditions:}{}
+
+
+%Main Success Scenario: What happens when user was able to create their bank account 
+\addmulrow{Main Success Scenario:}{
+	%Step to display bank accounts
+	\item User selects which bank account to display, user can select one or multiple.
+	\item User can select if he wishes to display the bank accounts' details.
+	\item System display the desired bank accounts and its information
+	\item User can edit if one of the bank accounts is incorrect, so user selects the desired account
+	\item System will bring the user to the edit window to fix the information
+}
+
+%Alternative scenarios used by user
+\addmulrow{Alternative Course}{
+    \item User logs in.
+    \item System provides a menu of approval list that is shown to user.
+    \item User performs an approval list action other than display bank accounts.
+    \item User returns to menu.
+    \item User decides to display at least one bank account.
+    
+}
+%Extensions: Alternate scenarios for cases if there is failure or success.
+\addmulrow{Extensions:}{
+	\item Display error:
+		\begin{enumerate}
+		\item[1.] System shows display failure message.
+		\item[2.] System will bring user back to the home menu.
+		\item[3.] System tries to reset the display function.
+		\end{enumerate}
+
+}
+
+%Extra rows for templates
+%\addrow{Exceptions}
+%\addrow{Includes}
+%\addrow{Priority}
+%\addrow{Frequency of Use}
+%\addrow{Special Requirements}
+%\addrow{Notes and Issues}
+
+\end{usecase}
+
+%Deletes Bank account
+\begin{usecase}{Use Case Delete Bank Account}
+
+\addrow{Use Case ID}{03}
+%Scope: System's scope: "vision statement, design scope drawing, in/out list, and actor-goal list".( From http://www.informit.com/articles/article.aspx?p=26061). Basically the System under design.
+\addrow{Scope:}{System-wide}
+
+%Summary: User can delete their bank accounts.
+\addrow{Summary:}{User can select one or multiple bank accounts to be deleted}
+
+%Level: The "subfunction"
+\addrow{Level:}{User-goal}
+
+%Primary Actor: Stakeholder that calls on the system to deliver one of its services.
+\addrow{Primary Actor:}{End-User}
+
+%Stakeholders and Interests: People who cares about this use case and their interest behind it
+\addrow{Stakeholders and Interests:}{
+	\item User: Able to delete their bank account(s) and its details without any issues.
+	\item Company: Able to satisfy the users' interests without any issues.
+}
+
+%Preconditions: Conditions that must be satisfied before using this use case
+%User must first log into their account
+\addrow{Preconditions:}{
+    \item [1.]User has logged into their account by entering their ID and password.
+%Selected bank account must be existing
+    \item [2.]The desired bank account must be existing to be deleted.
+} 
+
+%Post-conditions: Conditions that must be satisfied after this use case
+%None so far
+\addrow{Post-Conditions:}{}
+
+
+%Main Success Scenario: What happens when user was able to create their bank account 
+\addmulrow{Main Success Scenario:}{
+	%Step to delete bank accounts
+	\item User selects which bank account to delete, user can select one or multiple.
+	\item System brings a confirmation window to ensure if the user really wants to delete the selected account.
+	\item User confirms his choice.
+	\item System deletes the bank account and its related information from the local database, then system will notify user for the successful deletion.
+	\item System will bring the user back to the deletion window.
+	\item User can keep deleting or go back to menu window.
+}
+
+%Alternative scenarios used by user
+\addmulrow{Alternative Course}{
+    \item User logs in.
+    \item System provides a menu of approval list that is shown to user.
+    \item User performs an approval list action other than delete bank accounts.
+    \item User returns to menu.
+    \item User decides to delete at least one bank account.
+    
+}
+
+%Extensions: Alternate scenarios for cases if there is failure or success.
+\addmulrow{Extensions:}{
+	\item Deletion error:
+		\begin{enumerate}
+		\item[1.] System shows deletion failure message.
+		\item[2.] System resets its deletion function.
+		\item[3.] System retries to delete the desired bank account.
+		\item[4.] System bring user back to the menu window.
+		\end{enumerate}
+
+}
+
+%Extra rows for templates
+%\addrow{Exceptions}
+%\addrow{Includes}
+%\addrow{Priority}
+%\addrow{Frequency of Use}
+%\addrow{Special Requirements}
+%\addrow{Notes and Issues}
+
+\end{usecase}
+
+\end{document}

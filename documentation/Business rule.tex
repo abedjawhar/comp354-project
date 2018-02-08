@@ -1,0 +1,188 @@
+\documentclass{article}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage[pdftex]{graphicx}
+\pagestyle{empty}
+\setcounter{secnumdepth}{2}
+
+\topmargin=0cm
+\oddsidemargin=0cm
+\textheight=22.0cm
+\textwidth=17cm
+\parindent=0cm
+\parskip=0.15cm
+\topskip=0truecm
+\raggedbottom
+\abovedisplayskip=3mm
+\belowdisplayskip=3mm
+\abovedisplayshortskip=0mm
+\belowdisplayshortskip=2mm
+\normalbaselineskip=12pt
+\normalbaselines
+
+% Business Rule stuff
+\newcounter{Business Rule ID}
+
+% environment slightly edited from https://tex.stackexchange.com/questions/10293/latex-template-for-use-cases
+\newcommand\tabularhead[1]{
+\begin{table}[ht]
+    \addtocounter{Business Rule ID}{1}
+    \caption{Business Rule \arabic{Business Rule ID} - #1}
+    \vspace{0.2cm}
+    \begin{tabular}{|p{0.2\linewidth}|p{0.70\linewidth}|}
+    \hline
+        \textbf{Action} & \textbf{#1} \\
+        \hline}
+
+    \newcommand\addrow[2]{#1 & #2\\ \hline}
+
+    \newcommand\addmulrow[2]{ \begin{minipage}[t][][t]{2.5cm}#1\end{minipage}
+        &\begin{minipage}[t][][t]{11cm}
+        \begin{enumerate}[itemsep=-1ex] #2   \end{enumerate}
+    \end{minipage}\vfill\\ \hline}
+
+    \newenvironment{Business Rule}{\tabularhead}
+{\hline\end{tabular}\end{table}}
+
+\title{Business Rule}
+\author{Renny Xu }
+\date{06 February 2018}
+
+\begin{document}
+
+\maketitle
+%Business Rule 1
+\begin{Business Rule}{Functional Business Rule }
+\addrow{Name:}{Users sign up.}
+\rule{0pt}{4ex}
+\addrow{Identifier:}{BR1}
+\addrow{Description:}{Users should have an account in order to use the application.}
+\addrow{Reasoning:}{Users must sign up for an application account to log-in if he or she does not have one.}
+\end{Business Rule}
+
+
+%Business Rule 2
+\begin{Business Rule}{Functional Business Rule }
+\addrow{Name:}{Users access to account.}
+\addrow{Identifier:}{BR2}
+\addrow{Description:}{Users can only access their application account if they know their password.}
+\addrow{Reasoning:}{Tenured users should know the password to the application account.}
+\end{Business Rule}
+
+
+%Business Rule 3
+\begin{Business Rule}{Functional Business Rule }
+\addrow{Name:}{Tenured users may administer account information.}
+\addrow{Identifier:}{BR3}
+\addrow{Description:}{Only tenured users are granted the ability to initially input, modify, and delete bank accounts information.}
+\addrow{Reasoning:}{Since the user is the owner of the account, they have the authority to manage their account information.}
+\end{Business Rule}
+
+
+
+%Business Rule 4
+\begin{Business Rule}{Functional Business Rule }
+\addrow{Name:}{Tenured users must have valid bank account.}
+\addrow{Identifier:}{BR4}
+\addrow{Description:}{Only tenured users are granted the ability to add multiple banks accounts to calculate his total spending if their bank accounts are legal.}
+\addrow{Reasoning:}{If their bank accounts are non existent, then there is no need to add banks accounts.}
+\end{Business Rule}
+
+
+
+
+
+
+% Business Rule 5 and 6 are probably not needed so I just comment them out.
+%Business Rule 5  
+%\begin{Business Rule}{Functional Business Rule }
+%\addrow{Name:}{Tenured users may transfer credits/money between accounts.}
+%\addrow{Identifier:}{BR5}
+%\addrow{Description:}{Only tenured users are granted the ability to transfers credits or money between his accounts.}
+%\end{Business Rule}
+
+%Business Rule 6
+%\begin{Business Rule}{Functional Business Rule }
+%\addrow{Name:}{The amount that the user is trying to transfer should not exceed the account balance.}
+%\addrow{Identifier:}{BR6}
+%\addrow{Description:}{During any transaction, there should not be an amount that exceed the account balance of the giving bank account is being transferred to another account. }
+%\end{Business Rule}
+
+
+
+
+
+
+
+
+
+%Business Rule 7
+\begin{Business Rule}{Functional Business Rule }
+\addrow{Name:}{Display tenured users' bank account}
+\addrow{Identifier:}{BR7}
+\addrow{Description:}{Only tenured users are granted the ability to display their bank accounts information.}
+\addrow{Reasoning:}{The owner of the account can see their bank accounts once they have log-in.}
+\end{Business Rule}
+
+%Business Rule 8
+\begin{Business Rule}{Non Functional Business Rule }
+\addrow{Name:}{Response time should be fast.}
+\addrow{Identifier:}{BR8}
+\addrow{Description:}{During the use of the application, the response time of the app must be fast, so windows and pop-ups should respond quickly.}
+\addrow{Reasoning:}{ The user must be able to use the application without any delay.}
+\end{Business Rule}
+
+%Business Rule 9
+\begin{Business Rule}{Non Functional Business Rule }
+\addrow{Name:}{Usability of the application.}
+\addrow{Identifier:}{BR9}
+\addrow{Description:}{The application must be easy to use and learn for the user.}
+\addrow{Reasoning:}{Installation of the system should be easy and require very little, if any, decisions from the user beyond choosing to install the system. With no training, a user should be able to intuitively learn and use the system in a short amount of time.}
+\end{Business Rule}
+
+%Business Rule 10
+\begin{Business Rule}{Non Functional Business Rule }
+\addrow{Name:}{Reliability}
+\addrow{Identifier:}{BR10}
+\addrow{Description:}{At any given time, the application should be reliable, so it should not crash when the user is currently accessing it.}
+\addrow{Reasoning:}{We want to guarantee this same level of reliability, that is, that our system's reliability is only constrained by the reliability of the banks servers.}
+\end{Business Rule}
+
+%Business Rule 11
+\begin{Business Rule}{Non Functional Business Rule }
+\addrow{Name:}{Capacity}
+\addrow{Identifier:}{BR11}
+\addrow{Description:}{The application should be able to handle any amount of bank account being created.}
+\addrow{Reasoning:}{User may have a finite amount of bank accounts, so the application must be able to handle that exact same amount in order to satisfy the user's needs.}
+\end{Business Rule}
+
+%Business Rule 12
+\begin{Business Rule}{Non Functional Business Rule }
+\addrow{Name:}{Data Integrity}
+\addrow{Identifier:}{BR12}
+\addrow{Description:}{Bank account information displayed must the same as the data stored in the database.}
+\addrow{Reasoning:}{The displayed information must be the exact same data as the user has inputted.}
+\end{Business Rule}
+
+%Business Rule 13
+\begin{Business Rule}{Non Functional Business Rule }
+\addrow{Name:}{Modified Data}
+\addrow{Identifier:}{BR13}
+\addrow{Description:}{If user has modified or inputted a new data, the modified data should be updated within 2 seconds to the database.}
+\addrow{Reasoning:}{In order to display the correct information, the database must be quickly updated when there is a new modified data.}
+\end{Business Rule}
+
+
+%Business Rule 14
+\begin{Business Rule}{Non Functional Business Rule }
+\addrow{Name:}{Utilization}
+\addrow{Identifier:}{BR14}
+\addrow{Description:}{At any given time, the application can be accessed by the user except if there is maintenance.}
+\addrow{Reasoning:}{One of the business goals is that the software will be used by an user, so the application must be accessible at all time.}
+\end{Business Rule}
+
+
+
+
+\end{document}
