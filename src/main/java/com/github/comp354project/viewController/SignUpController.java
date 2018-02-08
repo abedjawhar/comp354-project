@@ -53,7 +53,6 @@ public class SignUpController implements Initializable {
 
             StageManager.switchToLogin();
         } catch(ValidationException e) {
-            System.out.println(e);
             AlertHelper.generateErrorAlert("Sign up error", "Error creating an account", e)
                     .showAndWait();
         } catch (RuntimeException e) {

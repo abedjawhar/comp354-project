@@ -26,6 +26,6 @@
           <TableColumn fx:id="categoryCol" prefWidth="198.0" text="Category" />
         </columns>
       </TableView>
-      <Button fx:id="deleteAccountBtn" layoutX="688.0" layoutY="12.0" mnemonicParsing="false" text="Delete Account" />
+      <!--<Button fx:id="deleteAccountBtn" layoutX="688.0" layoutY="12.0" mnemonicParsing="false" text="Delete Account" />-->
    </children>
 </AnchorPane>
