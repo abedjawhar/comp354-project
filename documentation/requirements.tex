@@ -1,4 +1,4 @@
-documentclass[11pt]{article}
+\documentclass[11pt]{article}
 \usepackage{color}
 \usepackage{enumitem}
 \usepackage{booktabs}
@@ -46,6 +46,23 @@ documentclass[11pt]{article}
 {\hline\end{tabular}\end{table}}
 
 
+
+% cheaty business rule env
+
+\newcounter{req ID}
+\newcommand\tabularheadfsd[1]{
+\begin{table}[ht]
+    \addtocounter{req ID}{1}
+    \caption{Non-Functional Requirement \arabic{req ID} - #1}
+    \vspace{0.2cm}
+    \begin{tabular}{|p{0.2\linewidth}|p{0.70\linewidth}|}
+    \hline
+        \textbf{Action} & \textbf{#1} \\
+        \hline}
+
+ \newenvironment{requirement}{\tabularheadfsd}
+{\hline\end{tabular}\end{table}}
+
 \begin{document}
 
 \vspace*{0.5in}
@@ -91,7 +108,7 @@ The purpose of this document is to define requirements for the  desktop applicat
 There exists a plethora of software for money management, each greatly varying in design due to the complex and multifarious clientele. This document may thus be to orient the development of the application. It seeks to understand the requirements of the problem, formulate the necessary functions and properties needed to answer this problem and its requirements, and then test these functions against these requirements. Hence, it may be used by our users to specify the problem and its requirements, by the developers to understand what functions their system must implement, and what to test their system against.
 
 \subsubsection{Brief description of the problem}
-At the present time, users who have more than one bank account can quickly get overwhelmed with the differing methods of access and interfaces for each account. It becomes arduous to access every account, visualise how much money one has and how one's budget changes on a day-to-day basis. Numerous applications exist with extensive budgeting functionalities, but setting them up and learning to use them requires a time investiment that often seems more hassle than is worth, especially for casual users who aren't interested in complex accounting functionalities. This thus costs time and frustration for the common user, and discourages them from fully taking advantage of the services that are provided by their banks. Even simply connecting to their accounts becomes a daunting task, which negatively impacts both the users and the banks. We seek to design a desktop application to solve these issues in a simple and lightweight manner.
+At the present time, users who have more than one bank account can quickly get overwhelmed with the differing methods of access and interfaces for each account. It becomes arduous to access every account and difficult to visualise how much money one has and how one's budget changes on a day-to-day basis. Numerous applications exist with extensive budgeting functionalities, but setting them up and learning to use them requires investing some number of hours that often seems more hassle than is worth, especially for casual users who aren't interested in complex accounting functionalities. This thus costs time and frustration for the common user, and discourages them from fully taking advantage of the services that are provided by their banks. Even simply connecting to their accounts becomes a daunting task, which negatively impacts both the users and the banks. We seek to design a desktop application to solve these issues in a simple and lightweight manner.
 
 \subsection{Business Goals}
 
@@ -104,6 +121,14 @@ At the present time, users who have more than one bank account can quickly get o
 
 
 \subsection{Non-Functional Requirements}
+% type: quality, quality goals, quality of service, constraint
+
+\begin{requirement}{Reliability}
+\addrow{Requirement ID:}{01}
+\addrow{Type: Quality}
+\addrow{Description:}{We want to guarantee that our system's reliability is only constrained by the reliability of the banks servers.}
+\addrow{Reasoning:}{The current procedure which users employ benefits from near perfect uptime, as its only constraint is the reliability of the bank servers. In order to be competitive with this current solution, we must match this level of reliability}
+\end{requirement}
 
 \begin{itemize}
      \item \textbf{reliability:} The current procedure which users employ benefits from near perfect uptime, as its only constraint is the reliability of the bank servers. We want to guarantee this same level of reliability, that is, that our system's reliability is only constrained by the reliability of the banks servers.
@@ -112,23 +137,23 @@ At the present time, users who have more than one bank account can quickly get o
      \end{itemize}
      %%%\item \textbf{accessibility:}%This procedure additionally benefits from some level of security, as this is of course a highly prioritised feature of their systems. We want to meet this security requirement, with additional security around our own system, detailed below.
 
-    \item \textbf{Simplicity and ease-of-use:} The current procedure for users to view their bank transactions across different accounts requires them to log in each individual bank account interface, then compare each distinct format for the bank accounts manually. This is both needlessly time-consuming and difficult to navigate. Budgeting applications exist, however they can quickly become overbearing, offering a vast quantity of complex and heavy features that are designed primarily for heavyweight users. Our business instead targets a more casual user-base which tend to favours a more simpler and more lightweight application.
+    \item \textbf{Simplicity and ease-of-use:} The current procedure for users to view their bank transactions across different accounts requires them to log in each individual bank account interface, then compare each distinct format for the bank accounts manually. This is both needlessly time-consuming and difficult to navigate. Our business targets a more casual user-base which tend to favours a more simpler and more lightweight application.
         \begin{itemize}
             \item \textit{Quality attribute scenario:} Installation of the system should be easy and require very little, if any, decisions from the user beyond choosing to install the system. With no training, a user should be able to intuitively learn and use the system in a short amount of time.
         \end{itemize}
     \item \textbf{Performance:} Ensured minimal load times to encourage frequent, short-time bursts use. These sorts of applications tends to be popular with millenial audiences. This also allows the system to be competitive, as being less performant than the current procedures would certainly lead to a dissatisfaction in our user-base.
         \begin{itemize}
-            \item \textit{Quality attribute scenario:} System files should be small, less than 100MB. When the system connects to the internet (with reasonable bandwidth) to fetch transactions, they are returned to the user in less than 2 seconds.
+            \item \textit{Quality attribute scenario:} System files should be small, less than 50MB. When the system connects to the internet (with reasonable bandwidth) to fetch transactions, they are returned to the user in less than 2 seconds.
         \end{itemize}
-    \item \textbf{Maintainability:} Due to the dependency of the system upon the banks' API, it is necessary that the system should be easy to alter and maintain, and hence be capable of adapting to third-party changes. Hence, maintainability is imperative for the system. We thus advocate for a reliable and easily usable \textit{testing suite} to reduce time and cost of debugging, and quickly conduct system diagnostics.
+    \item \textbf{Maintainability:} Due to the dependency of the system upon the banks' API, it is necessary that the system should be easy to alter and maintain, and hence be capable of adapting to third-party changes. We also foresee a long-term use of the application, in which case the user requirements may change as our target audience change their demands. Hence, maintainability is imperative for the system. We thus advocate for a reliable and easily usable \textit{testing suite} to reduce time and cost of debugging, and quickly conduct system diagnostics.
         \begin{itemize}
             \item \textit{Quality attribute scenario:} New modifications to the system should be fully covered by unit tests before another modification is implemented.
         \end{itemize}
-    \item \textbf{Security:} A user's bank information is incredibly sensitive, and any possible security flaw could cripple the entire system and destroy any sort of trusted relationship that users may have developed with it. It is thus of upmost importance that any data coming from the banks are accessible solely with proper authentication. Improper security would certainly negatively impact user trust in our business.
+    \item \textbf{Security:} A user's bank information is incredibly sensitive, and any possible security flaw could cripple the entire system and destroy any sort of trusted relationship that users may have developed with our business. It is thus of upmost importance that any data coming from the banks are accessible solely with proper authentication. Improper security would certainly negatively impact user trust in our business.
         \begin{itemize}
             \item \textit{Quality attribute scenario:} Database should be encrypted, and testing suite should include verification of security measures on the system.
         \end{itemize}
-    \item \textbf{Portability:} Since the system is fairly lightweight, it should be one that is independent of a user's hardware (within reason) and/or operating system, to encourage a wide user-base.
+    \item \textbf{Portability:} Since the system is fairly lightweight, it should also focus on compatibility with older hardware (within reason) and support numerous operating systems, to encourage a wide user-base.
         \begin{itemize}
             \item \textit{Quality attribute scenario:} System should be implemented in Java to benefit from the JVM's portability.
         \end{itemize}
@@ -148,12 +173,6 @@ At the present time, users who have more than one bank account can quickly get o
 % \label{fig:domain-diagram}
 % \end{figure}
 
-\section{Actors}
-\subsubsection{User}
-Our main actor is the user. All use cases are triggered by the user, as it their requests that directly cause the bank system or our system to take action. All identification needed to access the bank system will be provided by the user. Using this information, the system will be able to answer queries made by the user as described in the use cases.
-\subsubsection{Bank}
-Our sole other actor is the bank(s) system. Each bank system provides an API for accessing its bank account data. Our system will pull this data directly from the bank systems, using identification as given by the user for the bank's authentication system. In other words, our system will merely act as a middle man between the user demanding information in a specific format, and the banks holding that information in a inconvenient format.
-
 \section{Functional Requirements}
 
 This section will cover the functional requirements associated with the myMoney app. These are the software capabilities that must be present in order for the user to carry out the services provided by the app or to execute the use cases.
@@ -166,21 +185,12 @@ This section will cover the functional requirements associated with the myMoney 
     \item  \textbf{Transaction management:} The system permits a logged-in user to access the details of transactions associated with all bank accounts that were added to the user account. The system obtains these transactions through the banking system's API. The system allows different display formats, such as 'sorted by date' or 'sorted by type' or 'sorted by bank account.
     \end{itemize}
 
-\section{Use Cases}
-\subsection{Overview}
-Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 through 7 and 9 deal with the user viewing the data in different formats. Use case 8 deals with the user manipulating the transactions' formats.
+\section{Actors}
+\subsubsection{User}
+Our main actor is the user. All use cases are triggered by the user, as it their requests that directly cause the bank system or our system to take action. All identification needed to access the bank system will be provided by the user. Using this information, the system will be able to answer queries made by the user as described in the use cases.
+\subsubsection{Bank}
+Our sole other actor is the bank(s) system. Each bank system provides an API for accessing its bank account data. Our system will pull this data directly from the bank systems (who act as secondary actors), using identification as given by the user for the bank's authentication system. In other words, our system will merely act as a middle man between the user demanding information in a specific format, and the banks holding that information in a inconvenient format.
 
-\section{Non-Functional Constraints}
-
-\begin{itemize}
-    \item The system will function mainly on Windows operating systems
-    \item The system will gather banking information from a database
-    \item The system shall respond to user clicks within no less than 10ms
-    \item The system shall allow the user to keep re logging if their information does not match the information on the database (after account has been created)
-    \item The system will not display password information upon log in entry
-    \item The system shall provide the user with a clear graphical user interface in order to navigate the app efficiently
-    \item The system shall not fail to save any transaction modifications
-\end{itemize}
 
 \section{Data Dictionary}
 
@@ -195,6 +205,10 @@ Describe input file format.
 \section{Description of File Format: Persons}
 
 Describe output file format.
+
+\section{Use Cases}
+\subsection{Overview}
+Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 through 7 and 9 deal with the user viewing the data in different formats. Use case 8 deals with the user manipulating the transactions' formats. For iteration 1, we have only included use case 1, 3, 5, and 6, as those are the ones we have fully implemented.
 
 \begin{figure}[htbp]
 \includegraphics{UseCaseDiagram.png}
@@ -227,25 +241,25 @@ Describe output file format.
 \begin{usecase}{Delete User Account}
     \addrow{Case ID}{02}
     \addrow{Summary}{User deletes a user account from the local accounts database, removing all bank accounts and information associated with that account.}
-    \addrow{Scope}{money and budget management application}
-    \addrow{Level}{user-goal}
-    \addrow{Actors}{\textbf{User}}
-    \addmulrow{Stakeholders and Interests}{
-        \item User: Wants easy navigation and secure account deletion, no risk of accidental deletion, proof of successful account deletion.
-        \item Company: Wants user interests to be fulfilled, wants to ensure clean deletion from the database. }
-    \addrow{Pre-Conditions}{User has logged in the user account he wants to delete.}
-    \addrow{Success Guarantee}{user account is successfully deleted, all associated bank information is deleted, and user is returned to the home menu.}
-    \addmulrow{Main Success Flow}{
-        \item User enters the account settings, then selects 'delete account'.
-        \item System brings up a confirmation menu to ensure that this selection was not accidentally entered.
-        \item User confirms his choice.
-        \item System successfully deletes all relevant entries in the local database, then notifies the user of this successful deletion.
-        \item User confirms having read this notification.
-        \item System brings the user back to the home menu.}
-    \addrow{Exceptions}{}
-    \addrow{Post-Conditions}{}
-    \addrow{Priority}{}
-    \addrow{Traces to Test Cases}{}
+    % \addrow{Scope}{money and budget management application}
+    % \addrow{Level}{user-goal}
+    % \addrow{Actors}{\textbf{User}}
+    % \addmulrow{Stakeholders and Interests}{
+    %     \item User: Wants easy navigation and secure account deletion, no risk of accidental deletion, proof of successful account deletion.
+    %     \item Company: Wants user interests to be fulfilled, wants to ensure clean deletion from the database. }
+    % \addrow{Pre-Conditions}{User has logged in the user account he wants to delete.}
+    % \addrow{Success Guarantee}{user account is successfully deleted, all associated bank information is deleted, and user is returned to the home menu.}
+    % \addmulrow{Main Success Flow}{
+    %     \item User enters the account settings, then selects 'delete account'.
+    %     \item System brings up a confirmation menu to ensure that this selection was not accidentally entered.
+    %     \item User confirms his choice.
+    %     \item System successfully deletes all relevant entries in the local database, then notifies the user of this successful deletion.
+    %     \item User confirms having read this notification.
+    %     \item System brings the user back to the home menu.}
+    % \addrow{Exceptions}{}
+    % \addrow{Post-Conditions}{}
+    % \addrow{Priority}{}
+    % \addrow{Traces to Test Cases}{}
 \end{usecase}
 
 
@@ -275,25 +289,25 @@ Describe output file format.
 \begin{usecase}{Remove Bank Account from a User Account}
     \addrow{Case ID}{04}
     \addrow{Summary}{User deletes a bank account from the local database.}
-    \addrow{Scope}{money and budget management application}
-    \addrow{Level}{user-goal}
-    \addrow{Actors}{\textbf{User}}
-    \addmulrow{Stakeholders and Interests}{
-        \item User: Wants easy navigation and secure account deletion, no risk of accidental deletion, proof of successful account deletion.
-        \item Company: Wants user interests to be fulfilled, wants to ensure clean deletion from the database. }
-    \addrow{Pre-Conditions}{User has logged in the user account whose active association with a bank account is the one the user wants to delete.}
-    \addrow{Success Guarantee}{Bank account is successfully removed from that user account, all associated bank information is deleted from the local database, and user is returned to the account home menu.}
-    \addmulrow{Main Success Flow}{
-        \item User selects the account he wants to remove, then selects 'remove account'.
-        \item System brings up a confirmation menu to ensure that this selection was not accidentally entered.
-        \item User confirms his choice.
-        \item System successfully deletes all relevant entries in the local database, then notifies the user of this successful deletion.
-        \item User confirms having read this notification.
-        \item System brings the user back to the home account menu.}
-    \addrow{Exceptions}{}
-    \addrow{Post-Conditions}{}
-    \addrow{Priority}{}
-    \addrow{Traces to Test Cases}{}
+    % \addrow{Scope}{money and budget management application}
+    % \addrow{Level}{user-goal}
+    % \addrow{Actors}{\textbf{User}}
+    % \addmulrow{Stakeholders and Interests}{
+    %     \item User: Wants easy navigation and secure account deletion, no risk of accidental deletion, proof of successful account deletion.
+    %     \item Company: Wants user interests to be fulfilled, wants to ensure clean deletion from the database. }
+    % \addrow{Pre-Conditions}{User has logged in the user account whose active association with a bank account is the one the user wants to delete.}
+    % \addrow{Success Guarantee}{Bank account is successfully removed from that user account, all associated bank information is deleted from the local database, and user is returned to the account home menu.}
+    % \addmulrow{Main Success Flow}{
+    %     \item User selects the account he wants to remove, then selects 'remove account'.
+    %     \item System brings up a confirmation menu to ensure that this selection was not accidentally entered.
+    %     \item User confirms his choice.
+    %     \item System successfully deletes all relevant entries in the local database, then notifies the user of this successful deletion.
+    %     \item User confirms having read this notification.
+    %     \item System brings the user back to the home account menu.}
+    % \addrow{Exceptions}{}
+    % \addrow{Post-Conditions}{}
+    % \addrow{Priority}{}
+    % \addrow{Traces to Test Cases}{}
 \end{usecase}
 
 \begin{usecase}{View Transactions for Specific Bank Account}
@@ -341,74 +355,71 @@ Describe output file format.
 \begin{usecase}{View Transaction by Type}
     \addrow{Case ID}{07}
     \addrow{Summary}{User can view transactions by the following types: deposits, withdrawals, and transfers. }
-    \addrow{Scope}{money and budget management application}
-    \addrow{Level}{user-goal}
-    \addrow{Actors}{\textbf{User}}
-    \addmulrow{Stakeholders and Interests}{
-        \item User: Wants to view transaction by type, such as withdrawals, deposits, and transfers for convenient view of the movement of his/her money throughout the accounts and accurate records of spending.
-        \item Company: Wants user interests to be fulfilled. Wants to facilitate user's ability to keep track of input and output of money between accounts.}
-    \addrow{Pre-Conditions}{User has created and logged in a user account, added at least one bank account, and has made at least one type of transaction.}
-    \addrow{Success Guarantee}{User is able to clearly view all deposits, withdrawals, and transfers that have been made.}
-    \addmulrow{Main Success Flow}{
-        \item User selects View All Transactions option or View By Specific Bank Account.
-        \item System shows all transactions associated with previous choice.
-        \item User selects view transactions by type
-        \item System prompts user to choose which type of transaction he/she would like to view: deposits, withdrawals, transfers.
-        \item User selects one of the options
-        \item System shows all information regarding selected transaction such as date, amount, to which account, and from which account.}
-    \addrow{Exceptions}{}
-    \addrow{Post-Conditions}{}
-    \addrow{Priority}{}
-    \addrow{Traces to Test Cases}{}
+    % \addrow{Scope}{money and budget management application}
+    % \addrow{Level}{user-goal}
+    % \addrow{Actors}{\textbf{User}}
+    % \addmulrow{Stakeholders and Interests}{
+    %     \item User: Wants to view transaction by type, such as withdrawals, deposits, and transfers for convenient view of the movement of his/her money throughout the accounts and accurate records of spending.
+    %     \item Company: Wants user interests to be fulfilled. Wants to facilitate user's ability to keep track of input and output of money between accounts.}
+    % \addrow{Pre-Conditions}{User has created and logged in a user account, added at least one bank account, and has made at least one type of transaction.}
+    % \addrow{Success Guarantee}{User is able to clearly view all deposits, withdrawals, and transfers that have been made.}
+    % \addmulrow{Main Success Flow}{
+    %     \item User selects View All Transactions option or View By Specific Bank Account.
+    %     \item System shows all transactions associated with previous choice.
+    %     \item User selects view transactions by type
+    %     \item System prompts user to choose which type of transaction he/she would like to view: deposits, withdrawals, transfers.
+    %     \item User selects one of the options
+    %     \item System shows all information regarding selected transaction such as date, amount, to which account, and from which account.}
+    % \addrow{Exceptions}{}
+    % \addrow{Post-Conditions}{}
+    % \addrow{Priority}{}
+    % \addrow{Traces to Test Cases}{}
 \end{usecase}
 
 \begin{usecase}{Categorize Transaction}
     \addrow{Case ID}{08}
     \addrow{Summary}{User can select a category to represent a transaction.}
-    \addrow{Scope}{money and budget management application}
-    \addrow{Level}{user-goal}
-    \addrow{Actors}{\textbf{User}}
-    \addmulrow{Stakeholders and Interests}{
-        \item User: Wants to label each transaction as a specific type of spending, such as rent, bills, leisure, etc., to better manage and track spending habits.
-        \item Company: Wants user interests to be fulfilled. Wants to facilitate user's ability to budget and manage money through simple categorization of spending.}
-    \addrow{Pre-Conditions}{User has created and logged in a user account, added at least one bank account, and has made at least one type of transaction.}
-    \addrow{Success Guarantee}{User can quickly and efficiently categorize each transaction.}
-    \addmulrow{Main Success Flow}{
-        \item User selects desired transaction to categorize.
-        \item User selects the categorize option.
-        \item System displays the categories in a drop down menu.
-        \item User selects preferred category to represent the current transaction.
-        \item System saves transaction under chosen category.}
-        \addrow{Exceptions}{}
-    \addrow{Post-Conditions}{}
-    \addrow{Priority}{}
-    \addrow{Traces to Test Cases}{}
+    % \addrow{Scope}{money and budget management application}
+    % \addrow{Level}{user-goal}
+    % \addrow{Actors}{\textbf{User}}
+    % \addmulrow{Stakeholders and Interests}{
+    %     \item User: Wants to label each transaction as a specific type of spending, such as rent, bills, leisure, etc., to better manage and track spending habits.
+    %     \item Company: Wants user interests to be fulfilled. Wants to facilitate user's ability to budget and manage money through simple categorization of spending.}
+    % \addrow{Pre-Conditions}{User has created and logged in a user account, added at least one bank account, and has made at least one type of transaction.}
+    % \addrow{Success Guarantee}{User can quickly and efficiently categorize each transaction.}
+    % \addmulrow{Main Success Flow}{
+    %     \item User selects desired transaction to categorize.
+    %     \item User selects the categorize option.
+    %     \item System displays the categories in a drop down menu.
+    %     \item User selects preferred category to represent the current transaction.
+    %     \item System saves transaction under chosen category.}
+    %     \addrow{Exceptions}{}
+    % \addrow{Post-Conditions}{}
+    % \addrow{Priority}{}
+    % \addrow{Traces to Test Cases}{}
 \end{usecase}
 
 \begin{usecase}{View Transactions by Category}
     \addrow{Case ID}{09}
     \addrow{Summary}{User can view transaction according to categories of spending.}
-    \addrow{Scope}{money and budget management application}
-    \addrow{Level}{user-goal}
-    \addrow{Actors}{\textbf{User}}
-    \addmulrow{Stakeholders and Interests}{
-        \item User: Wants to view transactions in different categories of spending such as rent, bills, leisure, etc., to view and monitor spending habits and allocate budget to each category of spending.
-        \item Company: Wants to optimize the ease in which a user can allocate his/her budget, and track spending habits.}
-    \addrow{Pre-Conditions}{User has created and logged in a user account, has added at least one bank account, and has made at least one transaction.}
-    \addrow{Success Guarantee}{User can easily categorize and view transactions.}
-    \addmulrow{Main Success Flow}{
-        \item User selects View All Transactions.
-        \item System shows all transactions from all accounts on one display.
-       \item User selects to view transaction by categories.
-        \item System groups transactions by similar category.
-        \item System displays transactions grouped by category.}
-    \addrow{Exceptions}{}
-    \addrow{Post-Conditions}{}
-    \addrow{Priority}{}
-    \addrow{Traces to Test Cases}{}
+    % \addrow{Scope}{money and budget management application}
+    % \addrow{Level}{user-goal}
+    % \addrow{Actors}{\textbf{User}}
+    % \addmulrow{Stakeholders and Interests}{
+    %     \item User: Wants to view transactions in different categories of spending such as rent, bills, leisure, etc., to view and monitor spending habits and allocate budget to each category of spending.
+    %     \item Company: Wants to optimize the ease in which a user can allocate his/her budget, and track spending habits.}
+    % \addrow{Pre-Conditions}{User has created and logged in a user account, has added at least one bank account, and has made at least one transaction.}
+    % \addrow{Success Guarantee}{User can easily categorize and view transactions.}
+    % \addmulrow{Main Success Flow}{
+    %     \item User selects View All Transactions.
+    %     \item System shows all transactions from all accounts on one display.
+    %   \item User selects to view transaction by categories.
+    %     \item System groups transactions by similar category.
+    %     \item System displays transactions grouped by category.}
+    % \addrow{Exceptions}{}
+    % \addrow{Post-Conditions}{}
+    % \addrow{Priority}{}
+    % \addrow{Traces to Test Cases}{}
 \end{usecase}
-
-
-
 
 \end{document}
