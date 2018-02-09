@@ -3,54 +3,38 @@ package com.github.comp354project.viewController;
 import com.github.comp354project.MyMoneyApplication;
 import com.github.comp354project.service.account.Account;
 import com.github.comp354project.service.account.Transaction;
-import com.github.comp354project.viewController.model.TransactionDisplayModel;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.github.comp354project.viewController.view.TransactionTable;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class AllTransactionsController implements Initializable {
 
-    @FXML private TableView<TransactionDisplayModel> transactionTableView;
-    @FXML private TableColumn<TransactionDisplayModel, String> dateCol;
-    @FXML private TableColumn<TransactionDisplayModel, String> amountCol;
-    @FXML private TableColumn<TransactionDisplayModel, String> categoryCol;
-    @FXML private TableColumn<TransactionDisplayModel, String> typeCol;
-
     @FXML private Label totalBalanceLabel;
     @FXML private Label descriptionLabel;
 
-    private ObservableList<TransactionDisplayModel> tableData = FXCollections.observableArrayList();
+    @FXML private TransactionTable transactionTable;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.dateCol.setCellValueFactory(new PropertyValueFactory<TransactionDisplayModel,String>("date"));
-        this.amountCol.setCellValueFactory(new PropertyValueFactory<TransactionDisplayModel,String>("amount"));
-        this.categoryCol.setCellValueFactory(new PropertyValueFactory<TransactionDisplayModel,String>("category"));
-        this.typeCol.setCellValueFactory(new PropertyValueFactory<TransactionDisplayModel,String>("type"));
-        this.transactionTableView.setItems(this.tableData);
     }
 
     public void setAccounts(List<Account> accounts){
         Double balance = 0.0;
+        List<Transaction> transactions = new ArrayList<>();
         for(Account a : accounts){
             balance += a.getBalance();
-            for(Transaction t : a.getTransactions()){
-                this.tableData.add(new TransactionDisplayModel((t)));
-            }
+            transactions.addAll(a.getTransactions());
         }
-        
+        this.transactionTable.addTransactions(transactions);
         this.totalBalanceLabel.setText("$" + balance);
         this.descriptionLabel.setText("All Transactions");
         AnchorPane.setTopAnchor(descriptionLabel, 15.0);
