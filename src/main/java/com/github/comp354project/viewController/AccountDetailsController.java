@@ -10,7 +10,6 @@ import java.util.List;
 import com.github.comp354project.MyMoneyApplication;
 import com.github.comp354project.service.account.Account;
 import com.github.comp354project.service.account.Transaction;
-import com.github.comp354project.viewController.helper.StageManager;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -81,7 +80,6 @@ public class AccountDetailsController implements Initializable {
 		accountDescription.setText("All Transaction");
 		AnchorPane.setTopAnchor(accountDescription, 15.0);
 		accountType.setText("");
-		deleteAccountBtn.setVisible(false);
 	}
 
 	public static class TransactionDisplayModel {

@@ -4,7 +4,6 @@ import com.github.comp354project.service.account.Account;
 import com.github.comp354project.service.auth.SessionManager;
 import com.github.comp354project.viewController.AccountDetailsController;
 import com.github.comp354project.viewController.AccountListController;
-import com.github.comp354project.viewController.helper.StageManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -44,9 +43,26 @@ public class MyMoneyApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
-        StageManager.setStage(primaryStage);
-        StageManager.switchToLogin();
+        MyMoneyApplication.application.displayLogin();
         primaryStage.show();
+    }
+
+    private void setStageTitle(String title){
+        primaryStage.setTitle(title + " - My Money");
+    }
+
+    public void displayLogin() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
+        Parent root = loader.load();
+        primaryStage.setScene(new Scene(root, 278, 124));
+        setStageTitle("Login");
+    }
+
+    public void displaySignUp() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SignUp.fxml"));
+        Parent root = loader.load();
+        primaryStage.setScene(new Scene(root, 278, 248));
+        setStageTitle("Sign Up");
     }
 
     public void displayAccounts() throws IOException{
@@ -55,6 +71,7 @@ public class MyMoneyApplication extends Application {
         AccountListController controller = loader.getController();
         controller.setAccounts(new ArrayList<>(sessionManager.getUser().getAccounts()));
         primaryStage.setScene(new Scene(root, 800, 500));
+        setStageTitle("Accounts");
     }
 
     public void displayAccountDetails(Account account) throws IOException{
@@ -63,6 +80,7 @@ public class MyMoneyApplication extends Application {
         AccountDetailsController controller = loader.getController();
         controller.setAccount(account);
         primaryStage.setScene(new Scene(root, 800, 500));
+        setStageTitle("Account Details");
     }
 
     public void displayAllAccountDetails(List<Account> accounts) throws IOException{
@@ -71,5 +89,6 @@ public class MyMoneyApplication extends Application {
         AccountDetailsController controller = loader.getController();
         controller.setAccounts(accounts);
         primaryStage.setScene(new Scene(root, 800, 500));
+        setStageTitle("All Transactions");
     }
 }
