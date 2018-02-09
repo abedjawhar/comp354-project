@@ -4,6 +4,7 @@ import com.github.comp354project.service.account.Account;
 import com.github.comp354project.service.auth.SessionManager;
 import com.github.comp354project.viewController.AccountDetailsController;
 import com.github.comp354project.viewController.AccountListController;
+import com.github.comp354project.viewController.AllTransactionsController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -80,8 +81,8 @@ public class MyMoneyApplication extends Application {
     }
 
     public void displayAllAccountDetails(List<Account> accounts) throws IOException{
-        AccountDetailsController controller =
-                updateStage("/fxml/AccountDetails.fxml", "All Transactions", 800, 500);
+        AllTransactionsController controller =
+                updateStage("/fxml/AllTransactions.fxml", "All Transactions", 800, 500);
         controller.setAccounts(accounts);
     }
 }

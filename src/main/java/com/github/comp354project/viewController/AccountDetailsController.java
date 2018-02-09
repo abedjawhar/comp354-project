@@ -10,6 +10,7 @@ import java.util.List;
 import com.github.comp354project.MyMoneyApplication;
 import com.github.comp354project.service.account.Account;
 import com.github.comp354project.service.account.Transaction;
+import com.github.comp354project.viewController.model.TransactionDisplayModel;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -67,73 +68,4 @@ public class AccountDetailsController implements Initializable {
 		accountDescription.setText(account.getID() + ": " + account.getBankName());
 		accountType.setText(account.getType());
 	}
-
-	public void setAccounts(List<Account> accounts){
-		Double balance = 0.0;
-		for(Account a : accounts){
-			balance += a.getBalance();
-			for(Transaction t : a.getTransactions()){
-				tableData.add(new TransactionDisplayModel((t)));
-			}
-		}
-		accountBalance.setText("$" + balance);
-		accountDescription.setText("All Transaction");
-		AnchorPane.setTopAnchor(accountDescription, 15.0);
-		accountType.setText("");
-	}
-
-	public static class TransactionDisplayModel {
-		private SimpleStringProperty date;
-		private SimpleDoubleProperty amount;
-		private SimpleStringProperty category;
-		private SimpleStringProperty type;
-
-		TransactionDisplayModel(Transaction transaction) {
-			Date date = Date.from(Instant.ofEpochMilli(transaction.getDate()));
-			this.date = new SimpleStringProperty(date.toString());
-			this.amount = new SimpleDoubleProperty(transaction.getAmount());
-			if(transaction.getType().equals("Transfer")){
-				this.type = new SimpleStringProperty("Transfer to " + transaction.getDestinationID().toString());
-			} else if (transaction.getType().equals("Deposit")){
-				this.type = new SimpleStringProperty("Deposit from " + transaction.getSourceID().toString());
-			} else {
-				this.type = new SimpleStringProperty("Withdrawal");
-			}
-			this.category = new SimpleStringProperty(transaction.getCategory());
-		}
-
-		public void setDate(String date){
-			this.date.set(date);
-		}
-
-		public String getDate(){
-			return this.date.get();
-		}
-
-		public void setAmount(Double amount){
-			this.amount.set(amount);
-		}
-
-		public Double getAmount(){
-			return this.amount.get();
-		}
-
-		public void setCategory(String category){
-			this.category.set(category);
-		}
-
-		public String getCategory(){
-			return this.category.get();
-		}
-
-		public void setType(String type){
-			this.type.set(type);
-		}
-
-		public String getType(){
-			return this.type.get();
-		}
-	}
-
-
 }
