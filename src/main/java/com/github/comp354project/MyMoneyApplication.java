@@ -44,7 +44,7 @@ public class MyMoneyApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
-        MyMoneyApplication.application.displayLogin();
+        displayLogin();
         primaryStage.show();
     }
 
@@ -56,7 +56,7 @@ public class MyMoneyApplication extends Application {
         return loader.getController();
     }
 
-    private void setStageTitle(String title) throws IOException {
+    private void setStageTitle(String title) {
         primaryStage.setTitle(title + " - My Money");
     }
 
