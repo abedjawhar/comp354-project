@@ -7,7 +7,6 @@ import com.github.comp354project.service.exceptions.ValidationException;
 import com.github.comp354project.service.user.IUserService;
 import com.github.comp354project.service.user.User;
 import com.github.comp354project.viewController.helper.AlertHelper;
-import com.github.comp354project.viewController.helper.StageManager;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -51,7 +50,7 @@ public class SignUpController implements Initializable {
 
             this.userService.createUser(user);
 
-            StageManager.switchToLogin();
+            MyMoneyApplication.application.displayLogin();
         } catch(ValidationException e) {
             AlertHelper.generateErrorAlert("Sign up error", "Error creating an account", e)
                     .showAndWait();
@@ -63,7 +62,7 @@ public class SignUpController implements Initializable {
 
     @FXML
     public void goBack(ActionEvent event) throws IOException {
-        StageManager.switchToLogin();
+        MyMoneyApplication.application.displayLogin();
     }
 
     /**

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import com.github.comp354project.viewController.view.* ?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.github.comp354project.viewController.AllTransactionsController">
+    <children>
+        <Button layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#gotoAccountList" text="&lt;"
+                AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="12.0"/>
+        <Label layoutX="39.0" layoutY="18.0" text="Balance: " AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="15.0">
+            <padding>
+                <Insets left="10.0"/>
+            </padding>
+        </Label>
+        <Label fx:id="totalBalanceLabel" layoutX="96.0" layoutY="18.0" text="\$0.00" AnchorPane.leftAnchor="93.0"
+               AnchorPane.topAnchor="15.0"/>
+        <Label fx:id="descriptionLabel" alignment="CENTER" layoutX="378.0" layoutY="7.0" prefHeight="17.0"
+               prefWidth="200.0" textAlignment="CENTER" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0"
+               AnchorPane.topAnchor="7.0"/>
+
+       <TransactionTable fx:id="transactionTable"
+                         layoutX="-4.0" layoutY="50.0" prefHeight="452.0" prefWidth="800.0"
+                         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                         AnchorPane.topAnchor="48.0">
+       </TransactionTable>
+    </children>
+</AnchorPane>

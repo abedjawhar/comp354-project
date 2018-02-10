@@ -4,7 +4,7 @@ import com.github.comp354project.service.account.Account;
 import com.github.comp354project.service.auth.SessionManager;
 import com.github.comp354project.viewController.AccountDetailsController;
 import com.github.comp354project.viewController.AccountListController;
-import com.github.comp354project.viewController.helper.StageManager;
+import com.github.comp354project.viewController.AllTransactionsController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -44,32 +44,45 @@ public class MyMoneyApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
-        StageManager.setStage(primaryStage);
-        StageManager.switchToLogin();
+        displayLogin();
         primaryStage.show();
     }
 
-    public void displayAccounts() throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AccountList.fxml"));
+    private <T> T updateStage(String fxml, String title, int width, int height) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
         Parent root = loader.load();
-        AccountListController controller = loader.getController();
+        primaryStage.setScene(new Scene(root, width, height));
+        setStageTitle(title);
+        return loader.getController();
+    }
+
+    private void setStageTitle(String title) {
+        primaryStage.setTitle(title + " - My Money");
+    }
+
+    public void displayLogin() throws IOException {
+        updateStage("/fxml/Login.fxml", "Login", 278, 124);
+    }
+
+    public void displaySignUp() throws IOException {
+        updateStage("/fxml/SignUp.fxml", "Sign Up", 278, 248);
+    }
+
+    public void displayAccounts() throws IOException {
+        AccountListController controller =
+                updateStage("/fxml/AccountList.fxml", "Account List", 800, 500);
         controller.setAccounts(new ArrayList<>(sessionManager.getUser().getAccounts()));
-        primaryStage.setScene(new Scene(root, 800, 500));
     }
 
     public void displayAccountDetails(Account account) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AccountDetails.fxml"));
-        Parent root = (Parent)loader.load();
-        AccountDetailsController controller = loader.getController();
+        AccountDetailsController controller =
+                updateStage("/fxml/AccountDetails.fxml", "Account Details", 800, 500);
         controller.setAccount(account);
-        primaryStage.setScene(new Scene(root, 800, 500));
     }
 
     public void displayAllAccountDetails(List<Account> accounts) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AccountDetails.fxml"));
-        Parent root = (Parent)loader.load();
-        AccountDetailsController controller = loader.getController();
+        AllTransactionsController controller =
+                updateStage("/fxml/AllTransactions.fxml", "All Transactions", 800, 500);
         controller.setAccounts(accounts);
-        primaryStage.setScene(new Scene(root, 800, 500));
     }
 }

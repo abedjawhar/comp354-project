@@ -16,7 +16,6 @@ import com.github.comp354project.service.account.remote.RemoteTransaction;
 import com.github.comp354project.service.auth.SessionManager;
 import com.github.comp354project.service.exceptions.ValidationException;
 import com.github.comp354project.viewController.helper.AlertHelper;
-import com.github.comp354project.viewController.helper.StageManager;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -90,7 +89,7 @@ public class AccountListController implements Initializable {
 	@FXML
     public void logout(ActionEvent event) throws IOException {
 		this.sessionManager.logout();
-        StageManager.switchToLogin();
+		MyMoneyApplication.application.displayLogin();
     }
 
 	@FXML
