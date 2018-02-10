@@ -35,6 +35,14 @@ IDEA > preferences > build, execution, deployment > compiler > annotation proces
     5. repeat this process for `run`, the myMoney application should then start
 11.	To login use the default username `admin` and password `admin`
 
+### Windows
+The steps for installation on Windows are pretty much the same ones for Mac, with
+the following exceptions.
+
+7-8. Same steps, except plugins can be found in File->Settings->Plugins
+
+9. Look in File->Settings->build, execution, deployment > compiler > annotation processing
+
 #### What to do if you do not see the gradle toolbar in IntelliJ
 1. Create a new gradle project  file > new > gradle > next.
 2. Write a group id / artifact id
