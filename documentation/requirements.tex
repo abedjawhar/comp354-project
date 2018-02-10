@@ -47,7 +47,7 @@
 
 
 
-% cheaty business rule env
+% cheaty non-functional requirement env
 
 \newcounter{req ID}
 \newcommand\tabularheadfsd[1]{
@@ -128,31 +128,61 @@ At the present time, users who have more than one bank account can quickly get o
 \addrow{Type: Quality}
 \addrow{Description:}{We want to guarantee that our system's reliability is only constrained by the reliability of the banks servers.}
 \addrow{Reasoning:}{The current procedure which users employ benefits from near perfect uptime, as its only constraint is the reliability of the bank servers. In order to be competitive with this current solution, we must match this level of reliability}
+    \addrow{Quality attribute scenario:}{System operates mostly offline, and can function even without access to the internet using past data. System meets security and connectivity performance of current procedure.}
 \end{requirement}
 
-\begin{itemize}
-     \item \textbf{reliability:} The current procedure which users employ benefits from near perfect uptime, as its only constraint is the reliability of the bank servers. We want to guarantee this same level of reliability, that is, that our system's reliability is only constrained by the reliability of the banks servers.
-    \begin{itemize}
-        \item \textit{Quality attribute scenario:} System operates mostly offline, and can function even without access to the internet using past data. System meets security and connectivity performance of current procedure.
-     \end{itemize}
-     %%%\item \textbf{accessibility:}%This procedure additionally benefits from some level of security, as this is of course a highly prioritised feature of their systems. We want to meet this security requirement, with additional security around our own system, detailed below.
 
-    \item \textbf{Simplicity and ease-of-use:} The current procedure for users to view their bank transactions across different accounts requires them to log in each individual bank account interface, then compare each distinct format for the bank accounts manually. This is both needlessly time-consuming and difficult to navigate. Our business targets a more casual user-base which tend to favours a more simpler and more lightweight application.
-        \begin{itemize}
-            \item \textit{Quality attribute scenario:} Installation of the system should be easy and require very little, if any, decisions from the user beyond choosing to install the system. With no training, a user should be able to intuitively learn and use the system in a short amount of time.
-        \end{itemize}
-    \item \textbf{Performance:} Ensured minimal load times to encourage frequent, short-time bursts use. These sorts of applications tends to be popular with millenial audiences. This also allows the system to be competitive, as being less performant than the current procedures would certainly lead to a dissatisfaction in our user-base.
-        \begin{itemize}
-            \item \textit{Quality attribute scenario:} System files should be small, less than 50MB. When the system connects to the internet (with reasonable bandwidth) to fetch transactions, they are returned to the user in less than 2 seconds.
-        \end{itemize}
-    \item \textbf{Maintainability:} Due to the dependency of the system upon the banks' API, it is necessary that the system should be easy to alter and maintain, and hence be capable of adapting to third-party changes. We also foresee a long-term use of the application, in which case the user requirements may change as our target audience change their demands. Hence, maintainability is imperative for the system. We thus advocate for a reliable and easily usable \textit{testing suite} to reduce time and cost of debugging, and quickly conduct system diagnostics.
-        \begin{itemize}
-            \item \textit{Quality attribute scenario:} New modifications to the system should be fully covered by unit tests before another modification is implemented.
-        \end{itemize}
-    \item \textbf{Security:} A user's bank information is incredibly sensitive, and any possible security flaw could cripple the entire system and destroy any sort of trusted relationship that users may have developed with our business. It is thus of upmost importance that any data coming from the banks are accessible solely with proper authentication. Improper security would certainly negatively impact user trust in our business.
-        \begin{itemize}
-            \item \textit{Quality attribute scenario:} Database should be encrypted, and testing suite should include verification of security measures on the system.
-        \end{itemize}
+\begin{requirement}{Simplicity and ease-of-use}
+\addrow{Requirement ID:}{02}
+\addrow{Type: Quality}
+\addrow{Description:}{The system should be easy to understand and not overburdened by unused features, allowing for clear display of relevant information.}
+\addrow{Reasoning:}{The current procedure for users to view their bank transactions across different accounts requires them to log in each individual bank account interface, then compare each distinct format for the bank accounts manually. This is tedious for most users, and hence easy to outperform and become competitive with the current procedures. It is also in our interest to pursue this, as our business targets a more casual user-base which tend to favours a more simpler and more lightweight application.}
+    \addrow{Quality attribute scenario:}{Installation of the system should be easy and require very little, if any, decisions from the user beyond choosing to install the system. With no training, a user should be able to intuitively learn and use the system in a short amount of time.}
+\end{requirement}
+
+\begin{requirement}{Performance}
+\addrow{Requirement ID:}{02}
+\addrow{Type:Quality}
+    \addrow{Description:}{The system should ensure minimal load times, notably when connecting to the bank and the local database.}
+    \addrow{Reasoning:}{With our target audience in mind, we ant to be able to provide adequate performance when the system is used in frequent, short-time bursts. These sorts of applications tends to be popular with millenial audiences. This also allows the system to be competitive, as being less performant than the current procedures would certainly lead to a dissatisfaction in our user-base.}
+\addrow{Quality attribute scenario:}{System files should be small, less than 50MB. When the system connects to the internet (with reasonable bandwidth) to fetch transactions, they are returned to the user in less than 2 seconds.}
+\end{requirement}
+
+%and hence to the shifting the user requirements which may change as our target audience change their demands over time.
+
+\begin{requirement}{Maintainability and testability:}
+\addrow{Requirement ID:}{03}
+\addrow{Type: Quality}
+    \addrow{Description:}{The system should be maintainable on a long-term basis,  A testing suite is imperative for adaptative development, as it aids in reducing time and cost of debugging, and lets us quickly conduct system diagnostics.}
+\addrow{Reasoning:}{Due to the dependency of the system upon the banks' API, it is necessary that the system should be easy to alter and maintain, and hence be capable of adapting to third-party changes. This both reduce costs of ownership and favours long-term use of the application.}
+\addrow{Quality attribute scenario:}{New modifications to the system should be fully covered by unit tests before another modification is implemented.}
+\end{requirement}
+
+\begin{requirement}{Security}
+\addrow{Requirement ID:}{04}
+\addrow{Type:Quality}
+\addrow{Description:}{}
+\addrow{Reasoning:}{A user's bank information is incredibly sensitive, and any possible security flaw could cripple the entire system and destroy any sort of trusted relationship that users may have developed with our business. It is thus of upmost importance that any data coming from the banks are accessible solely with proper authentication. Improper security would certainly negatively impact user trust in our business.}
+\addrow{Quality attribute scenario:}{Database should be encrypted, and testing suite should include verification of security measures on the system.}
+\end{requirement}
+
+\begin{requirement}{Name}
+\addrow{Requirement ID:}{00}
+\addrow{Type:}
+\addrow{Description:}{}
+\addrow{Reasoning:}{}
+\addrow{Quality attribute scenario:}{}
+\end{requirement}
+
+\begin{requirement}{Name}
+\addrow{Requirement ID:}{00}
+\addrow{Type:}
+\addrow{Description:}{}
+\addrow{Reasoning:}{}
+\addrow{Quality attribute scenario:}{}
+\end{requirement}
+
+
     \item \textbf{Portability:} Since the system is fairly lightweight, it should also focus on compatibility with older hardware (within reason) and support numerous operating systems, to encourage a wide user-base.
         \begin{itemize}
             \item \textit{Quality attribute scenario:} System should be implemented in Java to benefit from the JVM's portability.
