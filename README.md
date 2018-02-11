@@ -28,7 +28,7 @@ There is currently no setup guide for windows, however the setup process should 
 IDEA > preferences > build, execution, deployment > compiler > annotation processes > enable annotation processing.
 10.	Start the application
     1. Go to view > tool windows > gradle 
-       * If you do not see the gradle option see the guild below
+       * If you do not see the gradle option see the guide below
     2. You should see a tool bar allowing you to execute gradle task (green icon).
     3. A small window should pop up and say Gradle Project (comp-354 project should be in the first textbox) and command line.
     4. In the 'command line' field type `build` and select okay
