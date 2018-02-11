@@ -3,6 +3,7 @@
 \usepackage{nth}
 \usepackage{enumitem}
 \usepackage{booktabs}
+\usepackage{tabularx}
 \usepackage[pdftex]{graphicx}
 \pagestyle{empty}
 \setcounter{secnumdepth}{2}
@@ -135,11 +136,11 @@ The purpose of this document is to define requirements for the  desktop applicat
 \section{Project description}
 
 \subsection{Introduction}
-At the present time, users who have more than one bank account can quickly get overwhelmed with the differing methods of access and interfaces for each account. It becomes arduous to access every account and difficult to visualize how much money one has and how one's budget changes on a day-to-day basis. There exists a plethora of software for money management, each greatly varying in design due to the complex and multifarious clientele. Existing applications of quality also tend to have extensive budgeting functionalities, and setting them up then learning to use them requires investing some number of hours that often scares off casual users who aren't interested in complex accounting functionalities. This lack of appropriate software for centralized, simple money management costs time and frustration for the common user, and discourages them from fully taking advantage of services that are provided by their banks, for fear of the complexity that make come with such services. Even simply keeping track of their finances becomes a daunting task, which negatively impacts both the users and the banks. We seek to design a desktop application to solve the most common issues in a simple and lightweight manner.
+At the present time, users who have more than one bank account can quickly get overwhelmed with the differing methods of access and interfaces for each account. It becomes arduous to access every account and difficult to visualise how much money one has and how one's budget changes on a day-to-day basis. There exists a plethora of software for money management, each greatly varying in design due to the complex and multifarious clientele. Existing applications of quality also tend to have extensive budgeting capabilities, and setting them up then learning to use them requires investing some number of hours that often scares off casual users who aren't interested in complex accounting functions. This lack of appropriate software for centralised, simple money management costs time and frustration for the common user, and discourages them from fully taking advantage of services that are provided by their banks, for fear of the complexity that make come with such services. Even simply keeping track of their finances becomes a daunting task, which negatively impacts both the users and the banks. We seek to design a desktop application to solve the most common issues in a simple and lightweight manner. a more in-depth discussion of the user profile is available in section \ref{actors}.
 
 \subsection{System Context}
 
-Our system will mainly involve the user interacting with a desktop application interface. The user shall provide information about his bank accounts to the interface, which the system will store it in a local database. The system then establish a connection to the banks, passing along the user information. It will then receive the data associated with the bank account(s) of the user, which it will then display to the user.
+Our system will mainly involve the user interacting with a desktop application interface. The user shall provide information about his bank accounts to the interface, which the system will store it in a local database. The system then establish a connection to the banks, passing along the user information. It will then receive the data associated with the bank account(s) of the user, which it will then display to the user. Section \ref{func req} gives a more detailed view of all of the functions that the system will be able to perform.
 
 \begin{figure}[htbp]
 \includegraphics[width=\linewidth]{context.png}
@@ -147,24 +148,33 @@ Our system will mainly involve the user interacting with a desktop application i
 \label{fig:system-context}
 \end{figure}
 
-%Our customer group user group, and development team happen to involve the same people: young professionals and students with little to no expected background in financing. As customers, this group has no interest in complex budgetting functions (if they do, they are not the target audience aimed by this system), but instead seeks some way of organising tracking their total assets. This group favours quickly accessed applications for frequent yet momentary usage. They want to quickly monitor their cash spending, and make long-term financial decisions based on clear, understandable data that they can access nearly immediately.
-
 \subsection{Scope}
-myMoney aims to be a small, simple tool which provides an easy method of viewing accounts across multiple banks, their transactions, and categorization tools for grouping transactions across multiple accounts. One may create a user account and link their bank accounts to easily access them through myMoney. They may check the transactions of a specific account or all of accounts at once, sort the transactions by date, type, or any other property of the transaction, and categorize certain transactions for better organization and minimal budgeting. myMoney is intended to work alongside banking institutions: it relies on the data provided by banks to create a transaction history for the users. In short, it seeks to be an application for managing expenses so as to quickly make judgment calls on financial decisions, in a way that is accessible to even the most financially inexperienced user.
+myMoney aims to be a small, simple tool which provides an easy method of viewing accounts across multiple banks, their transactions, and categorisation tools for grouping transactions across multiple accounts. One may create a user account and link their bank accounts to easily access them through myMoney. They may check the transactions of a specific account or all of accounts at once, sort the transactions by date, type, or any other property of the transaction, and categorise certain transactions for better organisation and minimal budgeting. myMoney is intended to work alongside banking institutions: it relies on the data provided by banks to create a transaction history for the users. In short, it seeks to be an application for managing expenses so as to quickly make judgment calls on financial decisions, in a way that is accessible to even the most financially inexperienced user.
 
 \subsection{Business Goals}
 
 \begin{itemize}
     \item \textbf{Compete with existing solutions}
+    
+    We are not the sole developers of budgeting applications by far. Not just that, but users already have a procedure for accessing their bank accounts directly through interfaces provided by banks. As such, if we want to attract users to our product, we must be able to compete on the same playing field as these current applications/procedures. We must, at the very least, meet their level of performance, ease of use, security, and other qualities described in \ref{nonfunc req} for our system.
+    
     \item \textbf{Target market: wide user-base composed mainly of millennials, students, new professionals}
+    
+    Our customer group user group, and development team happen to involve the same people: young professionals and students with little to no expected background in financing. As customers, this group has no interest in complex budgeting functions (if they do, they are not the target audience aimed by this system), but instead seeks some way of organising tracking their total assets. This group favours quickly accessed applications for frequent yet momentary usage. They want to quickly monitor their cash spending, and make long-term financial decisions based on clear, understandable data that they can access nearly immediately.
+    
+    \item \textbf{Future-proof, long-term robustness of the system} We wish to be able to support this system on a long-term basis. We also want to support users who might have a rather long transactional history, or might, over the years of using our application, gain such a transactional history, and these should be accomodated by the system to guarantee long-term success.
+    
     \item \textbf{Reduce total cost of ownership}
-    \item \textbf{Future-proof, long-term robustness of the system}
+    
+    For the above business goal, it is imperative for our application to be relatively cheap to maintain and support after development, as it would lengthen the lifetime of our system.
+    
 \end{itemize}
 
+\subsection{Domain Concepts}
 
-\subsection{Domain Model}
+\subsubsection{Domain Model}
 
-% DOMAIN MODEL HERE. SPLIT IT ACROSS multiple pages.
+We herewith provide the domain model of our system, useful for users and documenters seeking to understand the general setup of our system. Useful to understanding this model is the the context of this system, provided in figure \ref{fig:system-context}, to see the connections between the system and the actors. For a more in-depth diagram of the system, see figure \ref{fig:class-diagram} below.
 
 \begin{figure}[H]
 \includegraphics[scale = 1]{DomainModel.png}
@@ -173,33 +183,11 @@ myMoney aims to be a small, simple tool which provides an easy method of viewing
 \label{fig:domain-model}
 \end{figure}
 
-\subsection{Domain Concepts}
+\clearpage 
 
+\subsubsection{Class Diagram}
 
-\begin{table}[H]
-\caption{Glossary of Domain Concepts}
-\begin{center}
-\begin{tabular}{|l|p{0.8\linewidth}|}
-\hline
-Expression &  Definition \\
-\hline
-User & The person that is using the application.\\
-\hline
-Account & An account that is linked to a certain bank institution. One user could have more than one bank accounts.\\
-\hline
-Transaction & Any kind of money exchange.\\
-\hline
-Transfer & A type of transactions that occurs between two parties.\\
-\hline
-Deposit & A type of transaction where an individual puts money in his own bank account.\\
-\hline
-Withdrawal & A type of transaction where the owner of the bank account removes money from his balance.\\
-\hline
-\end{tabular}
-\end{center}
-\end{table}
-
-\subsection{Class Diagram}
+We herewith provide the class diagram of our system, useful for the system developers and testers. If a term is unclear, view section \ref{glossary} for the glossary.
 
 \begin{figure}[H]
 \includegraphics[width=\linewidth]{ClassDiagram1.png}
@@ -223,29 +211,75 @@ Withdrawal & A type of transaction where the owner of the bank account removes m
 \label{fig:class-diagram}
 \end{figure}
 
-\subsection{Actors}
+\clearpage
+
+
+\subsubsection{Glossary of Domain Concepts} label{glossary}
+\begin{table}[H]
+\caption{Glossary of Domain Concepts} 
+\begin{center}
+\scalebox{0.7}{
+\begin{tabular}{|l|p{0.8\linewidth}|}
+\hline
+Expression &  Definition \\
+\hline
+User & The person that is using the application and the main provider of requests to the system. \\
+\hline
+User Account & A data object containing user information. It also contains the various bank accounts that a user may have linked to the system. \\
+\hline
+Bank Account & A data object containing transactions linked with a specific bank account in a bank institution. One user account may have more than one bank accounts.\\
+\hline
+Transaction & Any kind of money exchange associated with a bank account.\\
+\hline
+Transfer & A type of transaction that occurs between two parties.\\
+\hline
+Deposit & A type of transaction where the owner puts money in his own bank account.\\
+\hline
+Withdrawal & A type of transaction where the owner of the bank account removes money from his balance.\\
+\hline
+database & A local or online container which holds data in an organised, efficient manner. \\
+\hline
+server & a computer that is accessible on a network, on which a database and/or system may be hosted. The bank institutions' databases will be hosted on here. \\
+\hline
+Object-Oriented Programming & A programming paradigm which separates entities into objects, and uses the concept of inheritance of properties, polymorphism of objects, encapsulation of objects. We use this paradigm for its maintainability and structural benefits.\\
+\hline
+MVC - Model-View-Controller Architecture & An architectural pattern which strictly separates components into the model (manages the data and logic), the view (output of the model), and the controller (handling input and passing it to the model or view).\\
+\hline
+interface & A component of a system by which other entities (be it humans or other systems) may engage in an exchange of data with the system in question. \\
+\hline
+API - Application Programming Interface & A protocol or set of functions which serve as a method of communication to a software system. It is a type of interface, and the one by which our system will communicate with the banking institutions' databases. \\
+\hline
+DAO - Data access object & An object that provides an abstract interface to some type of database or other persistence mechanism.\\
+\hline
+
+\end{tabular}}
+\end{center}
+\end{table}
+
+
+\subsection{Actors} \label{actors}
 \subsubsection{User}
 Our main actor is the user. All use cases are triggered by the user, as it their requests that directly cause the bank system or our system to take action. All identification needed to access the bank system will be provided by the user. Using this information, the system will be able to answer queries made by the user as described in the use cases.
 \subsubsection{Bank}
 Our sole other actor is the bank(s) system. Each bank system provides an API for accessing its bank account data. Our system will pull this data directly from the bank systems (who act as secondary actors), using identification as given by the user for the bank's authentication system. In other words, our system will merely act as a middle man between the user demanding information in a specific format, and the banks holding that information in a inconvenient format.
 
 
-\section{Functional Requirements and Business Rules}
+\section{Functional Requirements and Business Rules} \label{nonfunc req}
 % type: quality, quality goals, quality of service, constraint
 \subsection{Non-Functional Requirements}
 \begin{requirement}{Reliability and usability}
     \addrow{Requirement ID:}{01}
     \addrow{Type:}{Quality of service}
     \addrow{Description:}{We want to guarantee that our system's reliability is only constrained by the reliability of the banks servers. We also to ensure the application is always usable, except during maintenance or communication with the database.}
-    \addrow{Reasoning:}{The current procedure which users employ benefits from near perfect uptime, as its only constraint is the reliability of the bank servers. In order to be competitive with this current solution, we must match this level of reliability.}
-    \addrow{Quality attribute scenario:}{System operates mostly offline, and can function even without access to the Internet using past data. System meets security and connectivity performance of current procedure.}
+    \addrow{Reasoning:}{The current procedure which users employ benefits from near perfect up-time, as its only constraint is the reliability of the bank servers. In order to be competitive with this current solution, we must match this level of reliability.}
+    \addrow{Quality attribute scenario:}{System operates mostly offline, and can function even without access to the internet using past data. System meets security and connectivity performance of current procedure.}
 \end{requirement}
 
 \begin{requirement}{Simplicity and ease-of-use}
     \addrow{Requirement ID:}{02}
     \addrow{Type:}{Quality of service}
     \addrow{Description:}{The system should be easy to understand and not overburdened by unused features, allowing for clear display of relevant information.}
-    \addrow{Reasoning:}{The current procedure for users to view their bank transactions across different accounts requires them to log in each individual bank account interface, then compare each distinct format for the bank accounts manually. This is tedious for most users, and hence easy to outperform and become competitive with the current procedures. It is also in our interest to pursue this, as our business targets a more casual user-base which tend to favors a more simpler and more lightweight application.}
+    \addrow{Reasoning:}{The current procedure for users to view their bank transactions across different accounts requires them to log in each individual bank account interface, then compare each distinct format for the bank accounts manually. This is tedious for most users, and hence easy to outperform and become competitive with the current procedures. It is also in our interest to pursue this, as our business targets a more casual user-base which tend to favours a more simpler and more lightweight application.}
     \addrow{Quality attribute scenario:}{Installation of the system should be easy and require very little, if any, decisions from the user beyond choosing to install the system. With no training, a user should be able to intuitively learn and use the system in a short amount of time.}
 \end{requirement}
 
@@ -253,8 +287,8 @@ Our sole other actor is the bank(s) system. Each bank system provides an API for
     \addrow{Requirement ID:}{02}
     \addrow{Type:}{Quality of service}
     \addrow{Description:}{The system should ensure minimal load times, notably when connecting to the bank and the local database.}
-    \addrow{Reasoning:}{With our target audience in mind, we want to be able to provide adequate performance when the system is used in frequent, short-time bursts. These sorts of applications tends to be popular with millennial audiences. This also allows the system to be competitive, as being less performant than the current procedures would certainly lead to a dissatisfaction in our user-base.}
-    \addrow{Quality attribute scenario:}{System files should be small, less than 50MB. When the system connects to the Internet (with reasonable bandwidth) to fetch transactions, they are returned to the user in less than 2 seconds.}
+    \addrow{Reasoning:}{With our target audience in mind, we want to be able to provide adequate performance when the system is used in frequent, short-time bursts. These sorts of applications tend to be popular with millennial audiences. Focusing on performance also renders our system more competitive, as our target audience highly favours quick interactions with the interface.}
+    \addrow{Quality attribute scenario:}{System files should be small, less than 50MB. When the system connects to the internet (with reasonable bandwidth) to fetch transactions, they are returned to the user in less than 2 seconds.}
 \end{requirement}
 
 %and hence to the shifting the user requirements which may change as our target audience change their demands over time.
@@ -263,7 +297,7 @@ Our sole other actor is the bank(s) system. Each bank system provides an API for
     \addrow{Requirement ID:}{03}
     \addrow{Type:}{Quality}
     \addrow{Description:}{The system should be maintainable on a long-term basis,  A testing suite is imperative for adaptive development, as it aids in reducing time and cost of debugging, and lets us quickly conduct system diagnostics.}
-    \addrow{Reasoning:}{Due to the dependency of the system upon the banks' API, it is necessary that the system should be easy to alter and maintain, and hence be capable of adapting to third-party changes. This both reduce costs of ownership and favors long-term use of the application.}
+    \addrow{Reasoning:}{Due to the dependency of the system upon the banks' API, it is necessary that the system should be easy to alter and maintain, and hence be capable of adapting to third-party changes. This both reduce costs of ownership and favours long-term use of the application.}
     \addrow{Quality attribute scenario:}{New modifications to the system should be fully covered by unit tests before another modification is implemented.}
 \end{requirement}
 
@@ -298,6 +332,7 @@ Our sole other actor is the bank(s) system. Each bank system provides an API for
     \addrow{Reasoning:}{For obvious reasons, we want to guarantee data integrity. Not meeting this requirement would harm the reputation of the business, and render the system rather useless.}
     \addrow{Quality attribute scenario:}{system should verify data validity, and tests should include verification of matching data between the local database and the banks' database}
 \end{requirement}
+
 \begin{requirement}{Java}
     \addrow{Requirement ID:}{08}
     \addrow{Type:}{Design Constraint}
@@ -323,29 +358,28 @@ Our sole other actor is the bank(s) system. Each bank system provides an API for
     \addrow{Requirement ID:}{11}
     \addrow{Type:}{Design Constraint}
     \addrow{Description:}{The system should use SQLite}
-    \addrow{Reasoning:}{As our system is fairly simple and favors a lightweight design, using a more complex database would be a waste of resources.}
+    \addrow{Reasoning:}{As our system is fairly simple and favours a lightweight design, using a more complex database would be a waste of resources.}
     \end{requirement}
 
 \clearpage
 
-\section{Functional Requirements}
+\section{Functional Requirements} \label{func req}
 
 This section will cover the functional requirements associated with the myMoney app. These are the software capabilities that must be present in order for the user to carry out the services provided by the app or to execute the use cases.
 
 \begin{itemize}
-    \item  \textbf{User account creation:} The system allows the creation of user accounts, with information (username, password, first name, and last name) provided by the user.
+    \item  \textbf{User account creation:} The system allows the creation of user accounts, with information (user-name, password, first name, and last name) provided by the user.
     \item \textbf{User account authentication:} The system shall grant a user access only to a properly authenticated user. If a user does not enter credentials, the system shall notify the user of the failure to authenticate.
     \item \textbf{User account management:} The system shall require proper authentication to modify and/or delete a user account.
     \item  \textbf{Bank account management:} The system permits a logged-in user to add, manipulate, or remove bank accounts that are connected to the user account.
     \item  \textbf{Transaction management:} The system permits a logged-in user to access the details of transactions associated with all bank accounts that were added to the user account. The system obtains these transactions through the banking system's API. The system allows different display formats, such as 'sorted by date' or 'sorted by type' or 'sorted by bank account.
-    \item \textbf{Categorisation:} The system permits the categorization of transactions, a property by which the transactions may be sorted.
+    \item \textbf{Categorisation:} The system permits the categorisation of transactions, a property by which the transactions may be sorted.
     \end{itemize}
 
-\section{Data Dictionary}
+\subsection{Glossary} \label{glossary}
 
-\appendix
 
-\section{Description of File Format: Input}
+\subsection{Description of File Format: Input}
 
 The user enters plain text through the interface of the system. The banking systems provide bank account data by passing a copy of their account, in binary form.
 
@@ -372,11 +406,11 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
     \addmulrow{Stakeholders and Interests}{
         \item User: Wants fast and easy account creation, clear and comprehensible display, proof of successful account creation.
         \item Company: Wants user interests to be fulfilled, wants to prevent erroneous input, wants fast communication with the local account database as well as fault tolerance in case of database conflicts, issues with editing authorization, or other possible database problems.}
-    \addrow{Pre-Conditions}{User has opened the application and is in the signup menu.}
+    \addrow{Pre-Conditions}{User has opened the application and is in the sign-up menu.}
     \addrow{Success Guarantee}{Account successfully saved in local account database, with name and password as specified by the user.}
     \addmulrow{Main Success Flow}{
-        \item User enters a username, first name, last name, and password.
-        \item System validates username and password (format, whether username is already used, etc).
+        \item User enters a user-name, first name, last name, and password.
+        \item System validates user-name and password (format, whether user-name is already used, etc).
         \item System creates new account.
         \item System notifies the user of the successful account creation, then returns to home menu.}
     \addrow{Exceptions}{}
@@ -572,12 +606,12 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
 \section{Reference}
 User information: As our user and use-cases was based on feedback provided by our developers, our references lie mainly within our own team.
 
-Requirements specification template:\newline
-* Lahman \newline
-* Greg Butler\newline
-* MIT http://web.mit.edu/ssit/cis/CISRequirements.html\newline
-* Carnegie Mellon Business Goals: https://resources.sei.cmu.edu/asset\_files/TechnicalReport/2005\_005\_001\_14621.pdf\newline
-* Use-Case: Oracle http://www.oracle.com/technetwork/testcontent/gettingstartedwithusecasemodeling-133857.pdf
+%Requirements specification template:
+%* Lahman
+%* Greg Butler
+%* MIT http://web.mit.edu/ssit/cis/CISRequirements.html
+%* Carnegie Mellon Business Goals: %https://resources.sei.cmu.edu/asset_files/TechnicalReport/2005_005_001_14621.pdf
+%* Use-Case: Oracle http://www.oracle.com/technetwork/testcontent/gettingstartedwithusecasemodeling-133857.pdf
 
 
 \end{document}
