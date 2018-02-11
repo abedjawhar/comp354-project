@@ -51,3 +51,20 @@ the following exceptions.
 5. Wait until everything loads, and then close IntelliJ.
 6. Relaunch IntelliJ.
 7. Reimported the comp-354 project.
+
+### Command line with Gradle
+#### Gradlew/Gradlew
+*Gradle* is used as our dependency manager. You can [install it on your computer](https://gradle.org/install/)
+or download it locally by executing `./gradlew` on OSX/Linux or `gradlew.bat` in a command line at the project's root.
+
+#### Run
+* Gradle installed: `gradle run`
+* With Gradle wrapper:
+  * Windows: `gradlew run`
+  * OSX/Linux: `./gradlew run`
+  
+#### Build
+* Gradle installed: `gradle build`
+* With Gradle wrapper:
+  * Windows: `gradlew build`
+  * OSX/Linux: `./gradlew build`
