@@ -6,6 +6,7 @@
 \usepackage[pdftex]{graphicx}
 \pagestyle{empty}
 \setcounter{secnumdepth}{2}
+\usepackage{float}
 
 \topmargin=0cm
 \oddsidemargin=0cm
@@ -158,15 +159,67 @@ myMoney aims to be a small, simple tool which provides an easy method of viewing
     \item \textbf{Future-proof, long-term robustiness of the system}
 \end{itemize}
 
-\subsection{Domain Concepts}
+
+\subsection{Domain Model}
 
 % DOMAIN MODEL HERE. SPLIT IT ACROSS multiple pages.
 
-% \begin{figure}[htbp]
-% \includegraphics[width=\linewidth]{DomainDiagram.png}
-% \caption{Domain Diagram}
-% \label{fig:domain-diagram}
-% \end{figure}
+\begin{figure}[H]
+\includegraphics[scale = 1]{DomainModel.png}
+\centering
+\caption{Domain Model}
+\label{fig:domain-model}
+\end{figure}
+
+\subsection{Domain Concepts}
+
+
+\begin{table}[H]
+\caption{Glossary of Domain Concepts}
+\begin{center}
+\begin{tabular}{|l|p{0.8\linewidth}|}
+\hline
+Expression &  Definition \\
+\hline
+User & The person that is using the application.\\
+\hline
+Account & An account that is linked to a certain bank institution. One user could have more than one bank accounts.\\
+\hline
+Transaction & Any kind of money exchange.\\
+\hline
+Transfer & A type of transactions that occurs between two parties.\\
+\hline
+Deposit & A type of transaction where an individual puts money in his own bank account.\\
+\hline
+Withdrawal & A type of transaction where the owner of the bank account removes money from his balance.\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection{Class Diagram}
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{ClassDiagram1.png}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{ClassDiagram2.png}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{ClassDiagram3.png}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{ClassDiagram4.png}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{ClassDiagram5.png}
+\caption{Class Diagram}
+\label{fig:class-diagram}
+\end{figure}
 
 \subsection{Actors}
 \subsubsection{User}
@@ -242,7 +295,7 @@ Our sole other actor is the bank(s) system. Each bank system provides an API for
     \addrow{Description:}{Bank accounts data (description as well as transactions) must match the data provided by the banks.}
     \addrow{Reasoning:}{For obvious reasons, we want to guarantee data integrity. Not meeting this requirement would harm the reputation of the business, and render the system rather useless.}
     \addrow{Quality attribute scenario:}{system should verify data validity, and tests should include verification of matching data between the local database and the banks' database}
-
+\end{requirement}
 \begin{requirement}{Java}
     \addrow{Requirement ID:}{08}
     \addrow{Type:}{Design Constraint}
@@ -517,11 +570,11 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
 \section{Reference}
 User information: As our user and use-cases was based on feedback provided by our developers, our references lie mainly within our own team.
 
-Requirements specification template:
-* Lahman
-* Greg Butler
-* MIT http://web.mit.edu/ssit/cis/CISRequirements.html
-* Carnegie Mellon Business Goals: https://resources.sei.cmu.edu/asset_files/TechnicalReport/2005_005_001_14621.pdf
+Requirements specification template:\newline
+* Lahman \newline
+* Greg Butler\newline
+* MIT http://web.mit.edu/ssit/cis/CISRequirements.html\newline
+* Carnegie Mellon Business Goals: https://resources.sei.cmu.edu/asset\_files/TechnicalReport/2005\_005\_001\_14621.pdf\newline
 * Use-Case: Oracle http://www.oracle.com/technetwork/testcontent/gettingstartedwithusecasemodeling-133857.pdf
 
 
