@@ -1,5 +1,6 @@
 \documentclass[11pt]{article}
 \usepackage{color}
+\usepackage{nth}
 \usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage[pdftex]{graphicx}
@@ -47,7 +48,7 @@
 
 
 
-% cheaty business rule env
+% cheaty non-functional requirement env
 
 \newcounter{req ID}
 \newcommand\tabularheadfsd[1]{
@@ -66,7 +67,8 @@
 \begin{document}
 
 \vspace*{0.5in}
-\centerline{\bf\Large Requirements Document}
+\centerline{\bf\Large COMP 354}
+\centerline{\bf\Large Requirements for the project myMoney}
 
 \vspace*{0.5in}
 \centerline{\bf\Large Team PA-PK}
@@ -98,19 +100,50 @@ Hrachya Hakobyan & 40041555 \\
 \end{center}
 \end{table}
 
+\begin{table}[htbp]
+\caption{Revision history}
+\begin{center}
+\begin{tabular}{|r | c|}
+\hline
+Version & Date \\
+\hline
+1.0 & \nth{10} February 2018 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
 \tableofcontents
 \listoffigures
 \listoftables
 
 \clearpage
 
-\section{System}\subsection{Purpose}
 
-The purpose of this document is to define requirements for the  desktop application myMoney.
-There exists a plethora of software for money management, each greatly varying in design due to the complex and multifarious clientele. This document may thus be to orient the development of the application. It seeks to understand the requirements of the problem, formulate the necessary functions and properties needed to answer this problem and its requirements, and then test these functions against these requirements. Hence, it may be used by our users to specify the problem and its requirements, by the developers to understand what functions their system must implement, and what to test their system against.
+\section{Document Purpose}
 
-\subsubsection{Brief description of the problem}
-At the present time, users who have more than one bank account can quickly get overwhelmed with the differing methods of access and interfaces for each account. It becomes arduous to access every account and difficult to visualise how much money one has and how one's budget changes on a day-to-day basis. Numerous applications exist with extensive budgeting functionalities, but setting them up and learning to use them requires investing some number of hours that often seems more hassle than is worth, especially for casual users who aren't interested in complex accounting functionalities. This thus costs time and frustration for the common user, and discourages them from fully taking advantage of the services that are provided by their banks. Even simply connecting to their accounts becomes a daunting task, which negatively impacts both the users and the banks. We seek to design a desktop application to solve these issues in a simple and lightweight manner.
+The purpose of this document is to define requirements for the  desktop application myMoney. This document may thus be to orient the development of the application. It seeks to understand the requirements of the problem, formulate the necessary functions and properties needed to answer this problem and its requirements, and then test these functions against these requirements. Hence, it may be used by our users to specify the problem and its requirements, by the developers to understand what functions their system must implement, and what to test their system against. The primary audience is the development team of the system, and the project testers for fine-tuning their testing strategy. It may also be read by users of the end product to find out the functionality of the system.
+
+\section{Project description}
+
+\subsection{Introduction}
+At the present time, users who have more than one bank account can quickly get overwhelmed with the differing methods of access and interfaces for each account. It becomes arduous to access every account and difficult to visualise how much money one has and how one's budget changes on a day-to-day basis. There exists a plethora of software for money management, each greatly varying in design due to the complex and multifarious clientele. Existing applications of quality also tend to have extensive budgeting functionalities, and setting them up then learning to use them requires investing some number of hours that often scares off casual users who aren't interested in complex accounting functionalities. This lack of appropriate software for centralised, simple money management costs time and frustration for the common user, and discourages them from fully taking advantage of services that are provided by their banks, for fear of the complexity that make come with such services. Even simply keeping track of their finances becomes a daunting task, which negatively impacts both the users and the banks. We seek to design a desktop application to solve the most common issues in a simple and lightweight manner.
+
+\subsection{System Context}
+
+Our system will mainly involve the user interacting with a desktop application interface. The user shall provide information about his bank accounts to the interface, which the system will store it in a local database. The system then establish a connection to the banks, passing along the user information. It will then receive the data associated with the bank account(s) of the user, which it will then display to the user.
+
+\begin{figure}[htbp]
+\includegraphics[width=\linewidth]{context.png}
+\caption{System Context}
+\label{fig:system-context}
+\end{figure}
+
+%Our customer group user group, and development team happen to involve the same people: young professionals and students with little to no expected background in financing. As customers, this group has no interest in complex budgetting functions (if they do, they are not the target audience aimed by this system), but instead seeks some way of organising tracking their total assets. This group favours quickly accessed applications for frequent yet momentary usage. They want to quickly monitor their cash spending, and make long-term financial decisions based on clear, understandable data that they can access nearly immediately.
+
+\subsection{Scope}
+myMoney aims to be a small, simple tool which provides an easy method of viewing accounts across multiple banks, their transactions, and categorisation tools for grouping transactions across multiple accounts. One may create a user account and link their bank accounts to easily access them through myMoney. They may check the transactions of a specific account or all of accounts at once, sort the transactions by date, type, or any other property of the transaction, and categorise certain transactions for better organisation and minimal budgetting. myMoney is intended to work alongside banking institutions: it relies on the data provided by banks to create a transaction history for the users. In short, it seeks to be an application for managing expenses so as to quickly make judgement calls on financial decisions, in a way that is accessible to even the most financially inexperienced user.
 
 \subsection{Business Goals}
 
@@ -121,51 +154,7 @@ At the present time, users who have more than one bank account can quickly get o
     \item \textbf{Future-proof, long-term robustiness of the system}
 \end{itemize}
 
-
-\subsection{Non-Functional Requirements}
-% type: quality, quality goals, quality of service, constraint
-
-\begin{requirement}{Reliability}
-\addrow{Requirement ID:}{01}
-\addrow{Type: Quality}
-\addrow{Description:}{We want to guarantee that our system's reliability is only constrained by the reliability of the banks servers.}
-\addrow{Reasoning:}{The current procedure which users employ benefits from near perfect uptime, as its only constraint is the reliability of the bank servers. In order to be competitive with this current solution, we must match this level of reliability}
-\end{requirement}
-
-\begin{itemize}
-     \item \textbf{reliability:} The current procedure which users employ benefits from near perfect uptime, as its only constraint is the reliability of the bank servers. We want to guarantee this same level of reliability, that is, that our system's reliability is only constrained by the reliability of the banks servers.
-    \begin{itemize}
-        \item \textit{Quality attribute scenario:} System operates mostly offline, and can function even without access to the internet using past data. System meets security and connectivity performance of current procedure.
-     \end{itemize}
-     %%%\item \textbf{accessibility:}%This procedure additionally benefits from some level of security, as this is of course a highly prioritised feature of their systems. We want to meet this security requirement, with additional security around our own system, detailed below.
-
-    \item \textbf{Simplicity and ease-of-use:} The current procedure for users to view their bank transactions across different accounts requires them to log in each individual bank account interface, then compare each distinct format for the bank accounts manually. This is both needlessly time-consuming and difficult to navigate. Our business targets a more casual user-base which tend to favours a more simpler and more lightweight application.
-        \begin{itemize}
-            \item \textit{Quality attribute scenario:} Installation of the system should be easy and require very little, if any, decisions from the user beyond choosing to install the system. With no training, a user should be able to intuitively learn and use the system in a short amount of time.
-        \end{itemize}
-    \item \textbf{Performance:} Ensured minimal load times to encourage frequent, short-time bursts use. These sorts of applications tends to be popular with millenial audiences. This also allows the system to be competitive, as being less performant than the current procedures would certainly lead to a dissatisfaction in our user-base.
-        \begin{itemize}
-            \item \textit{Quality attribute scenario:} System files should be small, less than 50MB. When the system connects to the internet (with reasonable bandwidth) to fetch transactions, they are returned to the user in less than 2 seconds.
-        \end{itemize}
-    \item \textbf{Maintainability:} Due to the dependency of the system upon the banks' API, it is necessary that the system should be easy to alter and maintain, and hence be capable of adapting to third-party changes. We also foresee a long-term use of the application, in which case the user requirements may change as our target audience change their demands. Hence, maintainability is imperative for the system. We thus advocate for a reliable and easily usable \textit{testing suite} to reduce time and cost of debugging, and quickly conduct system diagnostics.
-        \begin{itemize}
-            \item \textit{Quality attribute scenario:} New modifications to the system should be fully covered by unit tests before another modification is implemented.
-        \end{itemize}
-    \item \textbf{Security:} A user's bank information is incredibly sensitive, and any possible security flaw could cripple the entire system and destroy any sort of trusted relationship that users may have developed with our business. It is thus of upmost importance that any data coming from the banks are accessible solely with proper authentication. Improper security would certainly negatively impact user trust in our business.
-        \begin{itemize}
-            \item \textit{Quality attribute scenario:} Database should be encrypted, and testing suite should include verification of security measures on the system.
-        \end{itemize}
-    \item \textbf{Portability:} Since the system is fairly lightweight, it should also focus on compatibility with older hardware (within reason) and support numerous operating systems, to encourage a wide user-base.
-        \begin{itemize}
-            \item \textit{Quality attribute scenario:} System should be implemented in Java to benefit from the JVM's portability.
-        \end{itemize}
-    \item \textbf{Scalability:} The system should function even on a long-term basis, and hence be capable of handling a growing number of transactions. The scaling size of the database should be managed by the system so as not to overwhelm the hardware it is running on.
-        \begin{itemize}
-            \item \textit{Quality attribute scenario:} System should use SQLite to minimize database size, and take precautions not to load an entire database in memory should the number of transactions exceed a size that may be unmanageable by the hardware.
-        \end{itemize}
-\end{itemize}
-
-\section{Domain Concepts}
+\subsection{Domain Concepts}
 
 % DOMAIN MODEL HERE. SPLIT IT ACROSS multiple pages.
 
@@ -174,6 +163,111 @@ At the present time, users who have more than one bank account can quickly get o
 % \caption{Domain Diagram}
 % \label{fig:domain-diagram}
 % \end{figure}
+
+\subsection{Actors}
+\subsubsection{User}
+Our main actor is the user. All use cases are triggered by the user, as it their requests that directly cause the bank system or our system to take action. All identification needed to access the bank system will be provided by the user. Using this information, the system will be able to answer queries made by the user as described in the use cases.
+\subsubsection{Bank}
+Our sole other actor is the bank(s) system. Each bank system provides an API for accessing its bank account data. Our system will pull this data directly from the bank systems (who act as secondary actors), using identification as given by the user for the bank's authentication system. In other words, our system will merely act as a middle man between the user demanding information in a specific format, and the banks holding that information in a inconvenient format.
+
+
+\section{Functional Requirements and Business Rules}
+% type: quality, quality goals, quality of service, constraint
+\subsection{Non-Functional Requirements}
+\begin{requirement}{Reliability and usability}
+    \addrow{Requirement ID:}{01}
+    \addrow{Type:}{Quality of service}
+    \addrow{Description:}{We want to guarantee that our system's reliability is only constrained by the reliability of the banks servers. We also to ensure the application is always usable, except during maintenance or communication with the database.}
+    \addrow{Reasoning:}{The current procedure which users employ benefits from near perfect uptime, as its only constraint is the reliability of the bank servers. In order to be competitive with this current solution, we must match this level of reliability.}
+    \addrow{Quality attribute scenario:}{System operates mostly offline, and can function even without access to the internet using past data. System meets security and connectivity performance of current procedure.}
+\end{requirement}
+
+\begin{requirement}{Simplicity and ease-of-use}
+    \addrow{Requirement ID:}{02}
+    \addrow{Type:}{Quality of service}
+    \addrow{Description:}{The system should be easy to understand and not overburdened by unused features, allowing for clear display of relevant information.}
+    \addrow{Reasoning:}{The current procedure for users to view their bank transactions across different accounts requires them to log in each individual bank account interface, then compare each distinct format for the bank accounts manually. This is tedious for most users, and hence easy to outperform and become competitive with the current procedures. It is also in our interest to pursue this, as our business targets a more casual user-base which tend to favours a more simpler and more lightweight application.}
+    \addrow{Quality attribute scenario:}{Installation of the system should be easy and require very little, if any, decisions from the user beyond choosing to install the system. With no training, a user should be able to intuitively learn and use the system in a short amount of time.}
+\end{requirement}
+
+\begin{requirement}{Performance}
+    \addrow{Requirement ID:}{02}
+    \addrow{Type:}{Quality of service}
+    \addrow{Description:}{The system should ensure minimal load times, notably when connecting to the bank and the local database.}
+    \addrow{Reasoning:}{With our target audience in mind, we want to be able to provide adequate performance when the system is used in frequent, short-time bursts. These sorts of applications tends to be popular with millenial audiences. This also allows the system to be competitive, as being less performant than the current procedures would certainly lead to a dissatisfaction in our user-base.}
+    \addrow{Quality attribute scenario:}{System files should be small, less than 50MB. When the system connects to the internet (with reasonable bandwidth) to fetch transactions, they are returned to the user in less than 2 seconds.}
+\end{requirement}
+
+%and hence to the shifting the user requirements which may change as our target audience change their demands over time.
+
+\begin{requirement}{Maintainability and testability}
+    \addrow{Requirement ID:}{03}
+    \addrow{Type:}{Quality}
+    \addrow{Description:}{The system should be maintainable on a long-term basis,  A testing suite is imperative for adaptative development, as it aids in reducing time and cost of debugging, and lets us quickly conduct system diagnostics.}
+    \addrow{Reasoning:}{Due to the dependency of the system upon the banks' API, it is necessary that the system should be easy to alter and maintain, and hence be capable of adapting to third-party changes. This both reduce costs of ownership and favours long-term use of the application.}
+    \addrow{Quality attribute scenario:}{New modifications to the system should be fully covered by unit tests before another modification is implemented.}
+\end{requirement}
+
+\begin{requirement}{Security}
+    \addrow{Requirement ID:}{04}
+    \addrow{Type:}{Quality}
+    \addrow{Description:}{The system should guarantee a level of security, requiring valid credentials in order to access any sensitive information and denying access otherwise.}
+    \addrow{Reasoning:}{A user's bank information is incredibly sensitive, and any possible security flaw could cripple the entire system and destroy any sort of trusted relationship that users may have developed with our business. It is thus of upmost importance that any data coming from the banks are accessible solely with proper authentication. Improper security would certainly negatively impact user trust in our business.}
+    \addrow{Quality attribute scenario:}{Database should be encrypted, and testing suite should include verification of security measures on the system.}
+\end{requirement}
+
+\begin{requirement}{Portability}
+    \addrow{Requirement ID:}{05}
+    \addrow{Type:}{Quality}
+    \addrow{Description:}{Since the system is fairly lightweight, it should also focus on compatibility with older hardware (within reason) and support numerous operating systems, to encourage a wide user-base.}
+    \addrow{Reasoning:}{We want to cater to a wide and somewhat casual audience, who may not be technologically adept and still rely on old (but familiar) hardware. The lightweight quality of our application means that it would easily be run on older hardware, provided we also ensure compatibility with said hardware.}
+    \addrow{Quality attribute scenario:}{System should support older versions of popular OS's, such as windows 7/windows vista.}
+\end{requirement}
+
+\begin{requirement}{Scalability}
+    \addrow{Requirement ID:}{06}
+    \addrow{Type:}{Quality}
+    \addrow{Description:}{The system should function even on a long-term basis, and hence be capable of handling a growing number of transactions. The scaling size of the database should be managed by the system so as not to overwhelm the hardware it is running on.}
+    \addrow{Reasoning:}{As we foresee our system being used on a long period of time, we should also acknowledge the possibility of users acquiring a large history of transactions over time. We should thus plan accordingly and put measures of precautions so as not to overwhelm their machines when loading in a large database. Crippling their machine could result in a negative perception of business and system.}
+    \addrow{Quality attribute scenario:}{System should use SQLite to minimize database size, and take precautions not to load an entire database in memory should the number of transactions exceed a size that may be unmanageable by the hardware.}
+\end{requirement}
+
+\begin{requirement}{Data integrity}
+    \addrow{Requirement ID:}{07}
+    \addrow{Type:}{Quality}
+    \addrow{Description:}{Bank accounts data (description as well as transactions) must match the data provided by the banks.}
+    \addrow{Reasoning:}{For obvious reasons, we want to guarantee data integrity. Not meeting this requirement would harm the reputation of the business, and render the system rather useless.}
+    \addrow{Quality attribute scenario:}{system should verify data validity, and tests should include verification of matching data between the local database and the banks' database}
+
+\begin{requirement}{Java}
+    \addrow{Requirement ID:}{08}
+    \addrow{Type:}{Design Constraint}
+    \addrow{Description:}{The system should be programmed in Java.}
+    \addrow{Reasoning:}{To take advantage of the JVM's portability, we would be able to develop for numerous platforms whilst having to maintain a single version of the system.}
+    \end{requirement}
+
+\begin{requirement}{Object-oriented design}
+    \addrow{Requirement ID:}{09}
+    \addrow{Type:}{Design Constraint}
+    \addrow{Description:}{The design of the system should be object-oriented.}
+    \addrow{Reasoning:}{As we will be using java, we should embrace the style of the language and use object-oriented programming. This will also ease maintainability and portability.}
+    \end{requirement}
+
+    \begin{requirement}{Model-view-controller architecture}
+    \addrow{Requirement ID:}{10}
+    \addrow{Type:}{Design Constraint}
+    \addrow{Description:}{The design of the system should use a MVC architecture.}
+    \addrow{Reasoning:}{As our main development time for creating a prototype is fairly short, using MVC will allow us to properly segment each part of our code, and thus give it a strict structure, as well as make it more easily maintainable and testable.}
+    \end{requirement}
+
+    \begin{requirement}{SQLite database}
+    \addrow{Requirement ID:}{11}
+    \addrow{Type:}{Design Constraint}
+    \addrow{Description:}{The system should use SQLite}
+    \addrow{Reasoning:}{As our system is fairly simple and favours a lightweight design, using a more complex database would be a waste of resources.}
+    \end{requirement}
+
+\clearpage
 
 \section{Functional Requirements}
 
@@ -185,28 +279,20 @@ This section will cover the functional requirements associated with the myMoney 
     \item \textbf{User account management:} The system shall require proper authentication to modify and/or delete a user account.
     \item  \textbf{Bank account management:} The system permits a logged-in user to add, manipulate, or remove bank accounts that are connected to the user account.
     \item  \textbf{Transaction management:} The system permits a logged-in user to access the details of transactions associated with all bank accounts that were added to the user account. The system obtains these transactions through the banking system's API. The system allows different display formats, such as 'sorted by date' or 'sorted by type' or 'sorted by bank account.
+    \item \textbf{Categorisation:} The system permits the categorisation of transactions, a property by which the transactions may be sorted.
     \end{itemize}
-
-\section{Actors}
-\subsubsection{User}
-Our main actor is the user. All use cases are triggered by the user, as it their requests that directly cause the bank system or our system to take action. All identification needed to access the bank system will be provided by the user. Using this information, the system will be able to answer queries made by the user as described in the use cases.
-\subsubsection{Bank}
-Our sole other actor is the bank(s) system. Each bank system provides an API for accessing its bank account data. Our system will pull this data directly from the bank systems (who act as secondary actors), using identification as given by the user for the bank's authentication system. In other words, our system will merely act as a middle man between the user demanding information in a specific format, and the banks holding that information in a inconvenient format.
-
 
 \section{Data Dictionary}
 
-\section{References}
-
 \appendix
 
-\section{Description of File Format: Tasks}
+\section{Description of File Format: Input}
 
-Describe input file format.
+The user enters plain text through the interface of the system. The banking systems provide bank account data by passing a copy of their account, in binary form.
 
-\section{Description of File Format: Persons}
+\section{Description of File Format: Output}
 
-Describe output file format.
+The system outputs its database data in plain text form, displayed through its interface.
 
 \section{Use Cases}
 \subsection{Overview}
@@ -423,5 +509,16 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
     % \addrow{Priority}{}
     % \addrow{Traces to Test Cases}{}
 \end{usecase}
+
+\section{Reference}
+User information: As our user and use-cases was based on feedback provided by our developers, our references lie mainly within our own team.
+
+Requirements specification template:
+* Lahman
+* Greg Butler
+* MIT http://web.mit.edu/ssit/cis/CISRequirements.html
+* Carnegie Mellon Business Goals: https://resources.sei.cmu.edu/asset_files/TechnicalReport/2005_005_001_14621.pdf
+* Use-Case: Oracle http://www.oracle.com/technetwork/testcontent/gettingstartedwithusecasemodeling-133857.pdf
+
 
 \end{document}
