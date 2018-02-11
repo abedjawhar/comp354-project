@@ -1,0 +1,66 @@
+\title{COMP 354: Diary - Iteration 1}
+\author{
+        Hrachya Hakobyan \\
+        ID: 40041555
+}
+\date{\today}
+\setlength{\parindent}{0pt}
+\documentclass[12pt]{article}
+\begin{document}
+\maketitle
+
+\subsection*{Week 2}
+Set-up github repo and slack workspace, assembled the team. Role assignment for iteration 1, discussed technologies to be used, discussed use-cases for iteration 1.
+
+\subsection*{Week 3}
+\begin{itemize}
+\item Configured the development environment: added project lombok, logging framework log4j, integrated SQLite. 
+
+\item Designed and implemented an abstraction layer over the database access. 
+
+\item Created database schemes for the business entities, wrote an SQL initialization script and created test databases. 
+
+\item Designed Java models for the business entities, DAO and service interfaces. 
+
+\item Added configuration for test and prod environments, created new DAO-s, set up a base class for DAO unit testing with an in-memory database. 
+\end{itemize}
+
+\subsection*{Week 4}
+\begin{itemize}
+
+\item Added a mocking library to the project, changes to the SQL tables of the business entities and java models. Added custom exception classes and modified services and DAO-s accordingly. Added tests and implementation for a DAO class. 
+
+\item Removed business entitiy validations from the DAO layer and added them to the service layer. Updated SQL schemas and test database. Updated UserSercvice interface methods, added test cases for User DAO and UserService.
+
+\item Updated the Transaction SQL schema and java model.
+
+\item Modified interface methods for UserService. Added tests for UserService, UserDao, RemoteAccountService. Implemented UserService, RemoteAccountService interfaces. 
+
+\item Added create methods to AccountDao and AccountService, implemented tests for AccountService and AccountDao. 
+
+\item Breaking change as I introduced an ORM library. Changes to the SQL schemas and java models. Removed custom DAO interfaces, implementations and tests. Modified service layer to work with library provided DAO-s. 
+
+\item Added an AuthenticationService tests and implementation. Added validator interfaces and implementation, modified service layer accordingly. 
+
+\item Added a test case to handle duplicate user creation, designed new custom exceptions. 
+
+\item Modified AccountService to handle non-existent remote accounts and duplicate accounts, added tests. 
+
+\item Assisted Wei in fixing problems with the GUI. Designed and distributed tasks to the members of the coding team. 
+
+\end{itemize}
+\subsection*{Week 5}
+
+\begin{itemize}
+\item Changes to the java models making the foreign collections eager instead of lazy, modified brittle service tests to work with in memory database DAO-s instead of mocking them. 
+
+\item Created a SessionManager class and implementation. 
+
+\item Bug fixes in Controller classes. 
+
+\item Finalized the tasks till the end of the iteration during the lab. Distributed roles for the next iteration. Discusses use cases for the next iteration.
+
+\item Does anyone even going to read this
+
+\end{itemize}
+\end{document}
