@@ -408,6 +408,7 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
         \item Company: Wants user interests to be fulfilled, wants to prevent erroneous input, wants fast communication with the local account database as well as fault tolerance in case of database conflicts, issues with editing authorization, or other possible database problems.}
     \addrow{Pre-Conditions}{User has opened the application and is in the sign-up menu.}
     \addrow{Success Guarantee}{Account successfully saved in local account database, with name and password as specified by the user.}
+    \addrow{User Story} {"As a user,I want to be able create an account because i want to start using myMoney as fast as possible so that i cant start budgeting myself"}
     \addmulrow{Main Success Flow}{
         \item User enters a user-name, first name, last name, and password.
         \item System validates user-name and password (format, whether user-name is already used, etc).
@@ -422,6 +423,7 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
 \begin{usecase}{Delete User Account}
     \addrow{Case ID}{02}
     \addrow{Summary}{User deletes a user account from the local accounts database, removing all bank accounts and information associated with that account.}
+    \addrow{User Story} {"As a user, I want to be able to delete my account because i might not want to use this app anymore later in the future "}
     % \addrow{Scope}{money and budget management application}
     % \addrow{Level}{user-goal}
     % \addrow{Actors}{\textbf{User}}
@@ -456,6 +458,7 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
         \item Bank: Wants to satisfy its customer base, wants correctly formatted account information given to its API, inexpensive and non-redundant communication of bank account data to third-party applications.}
     \addrow{Pre-Conditions}{User has logged in a user account and is in the user home menu.}
     \addrow{Success Guarantee}{Bank account successfully saved in local account database, with information corresponding the data validated by the bank.}
+    \addrow{User Story} {"As a user,I want to be able to add my bank account because i want to see my transactions with my favorite banks"}
     \addmulrow{Main Success Flow}{
         \item User enters his/her bank account number.
         \item System validates input, and sends it to the bank for verification and connection.
@@ -470,6 +473,7 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
 \begin{usecase}{Remove Bank Account from a User Account}
     \addrow{Case ID}{04}
     \addrow{Summary}{User deletes a bank account from the local database.}
+    \addrow{User Story} {"As a user,I want to be able to remove a bank account because if i'm no longer registered with them then there is no point in still keeping their info"}
     % \addrow{Scope}{money and budget management application}
     % \addrow{Level}{user-goal}
     % \addrow{Actors}{\textbf{User}}
@@ -502,6 +506,7 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
   \item Company: Wants to give user ability to micromanage every aspect of the application down to each bank account and transaction.}
     \addrow{Pre-Conditions}{User has created and logged into a user account, and has added at least one bank account to his/her myMoney account. }
     \addrow{Success Guarantee}{User can view transaction by bank account.}
+    \addrow{User Story} {"As a user,I want to be able view certain transactions because i want to budget more efficiently "}
     \addmulrow{Main Success Flow}{
         \item User selects specific bank account from list of all accounts.
         \item System displays all previous transactions under specified bank account.
@@ -524,6 +529,7 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
         \item Company: Wants user interests to be fulfilled.}
     \addrow{Pre-Conditions}{User has created and logged into a user account, and at least one bank account has been added to his/her myMoney account.}
     \addrow{Success Guarantee}{User is able to conveniently view all transactions from all institutions in one display.}
+    \addrow{User Story} {"As a user,I want to be able view all transactions because i want to budget more efficiently "}
     \addmulrow{Main Success Flow}{
         \item User selects View All Transactions option.
         \item System shows all transactions across all accounts on one display.}
@@ -536,6 +542,7 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
 \begin{usecase}{View Transaction by Type}
     \addrow{Case ID}{07}
     \addrow{Summary}{User can view transactions by the following types: deposits, withdrawals, and transfers. }
+    \addrow{User Story}{"As a user, i want to be able to view where my money is going because i can pinpoint which type of transactions i make the most"}
     % \addrow{Scope}{money and budget management application}
     % \addrow{Level}{user-goal}
     % \addrow{Actors}{\textbf{User}}
@@ -560,6 +567,7 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
 \begin{usecase}{Categorize Transaction}
     \addrow{Case ID}{08}
     \addrow{Summary}{User can select a category to represent a transaction.}
+    \addrow{User Story}{"As a user, i want to be able to sort my transactions based on types because it would be easier for me to see them all"}
     % \addrow{Scope}{money and budget management application}
     % \addrow{Level}{user-goal}
     % \addrow{Actors}{\textbf{User}}
@@ -583,6 +591,7 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
 \begin{usecase}{View Transactions by Category}
     \addrow{Case ID}{09}
     \addrow{Summary}{User can view transaction according to categories of spending.}
+     \addrow{User Story} {"As a user, i want to be able to view where most of money because i want to budget more efficiently "}
     % \addrow{Scope}{money and budget management application}
     % \addrow{Level}{user-goal}
     % \addrow{Actors}{\textbf{User}}
