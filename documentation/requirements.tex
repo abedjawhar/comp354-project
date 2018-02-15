@@ -167,7 +167,7 @@ myMoney aims to be a small, simple tool which provides an easy method of viewing
 
     Our customer group user group and development team happen to involve the same people: young professionals and students with little to no expected background in financing. As customers, this group has no interest in complex budgeting functions (if they do, they are not the target audience aimed by this system), but instead seeks some way of organising tracking their total assets. This group favours quickly accessed applications for frequent yet momentary usage. They want to quickly monitor their cash spending, and make long-term financial decisions based on clear, understandable data that they can access nearly immediately.
 
-    \item \textbf{Future-proof, long-term robustness of the system} We wish to be able to support this system on a long-term basis. We also want to support users who might have a rather long transactional history, or might, over the years of using our application, gain such a transactional history, and these should be accomodated by the system to guarantee long-term success.
+    \item \textbf{Future-proof, long-term robustness of the system} We wish to be able to support this system on a long-term basis. We also want to support users who might have a rather long transactional history, or might, over the years of using our application, gain such a transactional history, and these should be accommodated by the system to guarantee long-term success.
 
     \item \textbf{Reduce total cost of ownership}
 
@@ -467,25 +467,25 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
 \begin{usecase}{Delete User Account}
     \addrow{Case ID}{02}
     \addrow{Summary}{User deletes a user account from the local accounts database, removing all bank accounts and information associated with that account.}
-    % \addrow{Scope}{money and budget management application}
-    % \addrow{Level}{user-goal}
-    % \addrow{Actors}{\textbf{User}}
-    % \addmulrow{Stakeholders and Interests}{
-    %     \item User: Wants easy navigation and secure account deletion, no risk of accidental deletion, proof of successful account deletion.
-    %     \item Company: Wants user interests to be fulfilled, wants to ensure clean deletion from the database. }
-    % \addrow{Pre-Conditions}{User has logged in the user account he wants to delete.}
-    % \addrow{Success Guarantee}{user account is successfully deleted, all associated bank information is deleted, and user is returned to the home menu.}
-    % \addmulrow{Main Success Flow}{
-    %     \item User enters the account settings, then selects 'delete account'.
-    %     \item System brings up a confirmation menu to ensure that this selection was not accidentally entered.
-    %     \item User confirms his choice.
-    %     \item System successfully deletes all relevant entries in the local database, then notifies the user of this successful deletion.
-    %     \item User confirms having read this notification.
-    %     \item System brings the user back to the home menu.}
-    % \addrow{Exceptions}{}
-    % \addrow{Post-Conditions}{}
-    % \addrow{Priority}{}
-    % \addrow{Traces to Test Cases}{}
+     \addrow{Scope}{money and budget management application}
+     \addrow{Level}{user-goal}
+     \addrow{Actors}{\textbf{User}}
+     \addmulrow{Stakeholders and Interests}{
+         \item User: Wants easy navigation and secure account deletion, no risk of accidental deletion, proof of successful account deletion.
+         \item Company: Wants user interests to be fulfilled, wants to ensure clean deletion from the database. }
+     \addrow{Pre-Conditions}{User has logged in the user account he wants to delete.}
+     \addrow{Success Guarantee}{user account is successfully deleted, all associated bank information is deleted, and user is returned to the home menu.}
+     \addmulrow{Main Success Flow}{
+         \item User enters the account settings, then selects 'delete account'.
+         \item System brings up a confirmation menu to ensure that this selection was not accidentally entered.
+         \item User confirms his choice.
+         \item System successfully deletes all relevant entries in the local database, then notifies the user of this successful deletion.
+         \item User confirms having read this notification.
+         \item System brings the user back to the home menu.}
+     \addrow{Exceptions}{}
+     \addrow{Post-Conditions}{}
+     \addrow{Priority}{}
+     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
 
@@ -515,25 +515,25 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
 \begin{usecase}{Remove Bank Account from a User Account}
     \addrow{Case ID}{04}
     \addrow{Summary}{User deletes a bank account from the local database.}
-    % \addrow{Scope}{money and budget management application}
-    % \addrow{Level}{user-goal}
-    % \addrow{Actors}{\textbf{User}}
-    % \addmulrow{Stakeholders and Interests}{
-    %     \item User: Wants easy navigation and secure account deletion, no risk of accidental deletion, proof of successful account deletion.
-    %     \item Company: Wants user interests to be fulfilled, wants to ensure clean deletion from the database. }
-    % \addrow{Pre-Conditions}{User has logged in the user account whose active association with a bank account is the one the user wants to delete.}
-    % \addrow{Success Guarantee}{Bank account is successfully removed from that user account, all associated bank information is deleted from the local database, and user is returned to the account home menu.}
-    % \addmulrow{Main Success Flow}{
-    %     \item User selects the account he wants to remove, then selects 'remove account'.
-    %     \item System brings up a confirmation menu to ensure that this selection was not accidentally entered.
-    %     \item User confirms his choice.
-    %     \item System successfully deletes all relevant entries in the local database, then notifies the user of this successful deletion.
-    %     \item User confirms having read this notification.
-    %     \item System brings the user back to the home account menu.}
-    % \addrow{Exceptions}{}
-    % \addrow{Post-Conditions}{}
-    % \addrow{Priority}{}
-    % \addrow{Traces to Test Cases}{}
+     \addrow{Scope}{money and budget management application}
+     \addrow{Level}{user-goal}
+     \addrow{Actors}{\textbf{User}}
+     \addmulrow{Stakeholders and Interests}{
+         \item User: Wants easy navigation and secure account deletion, no risk of accidental deletion, proof of successful account deletion.
+         \item Company: Wants user interests to be fulfilled, wants to ensure clean deletion from the database. }
+     \addrow{Pre-Conditions}{User has logged in the user account whose active association with a bank account is the one the user wants to delete.}
+     \addrow{Success Guarantee}{Bank account is successfully removed from that user account, all associated bank information is deleted from the local database, and user is returned to the account home menu.}
+     \addmulrow{Main Success Flow}{
+         \item User selects the account he wants to remove, then selects 'remove account'.
+         \item System brings up a confirmation menu to ensure that this selection was not accidentally entered.
+         \item User confirms his choice.
+         \item System successfully deletes all relevant entries in the local database, then notifies the user of this successful deletion.
+         \item User confirms having read this notification.
+         \item System brings the user back to the home account menu.}
+     \addrow{Exceptions}{}
+     \addrow{Post-Conditions}{}
+     \addrow{Priority}{}
+     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
 \begin{usecase}{View Transactions for Specific Bank Account}
@@ -578,74 +578,74 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
-\begin{usecase}{View Transaction by Type}
+\begin{usecase}{Update User Account}
     \addrow{Case ID}{07}
-    \addrow{Summary}{User can view transactions by the following types: deposits, withdrawals, and transfers. }
-    % \addrow{Scope}{money and budget management application}
-    % \addrow{Level}{user-goal}
-    % \addrow{Actors}{\textbf{User}}
-    % \addmulrow{Stakeholders and Interests}{
-    %     \item User: Wants to view transaction by type, such as withdrawals, deposits, and transfers for convenient view of the movement of his/her money throughout the accounts and accurate records of spending.
-    %     \item Company: Wants user interests to be fulfilled. Wants to facilitate user's ability to keep track of input and output of money between accounts.}
-    % \addrow{Pre-Conditions}{User has created and logged in a user account, added at least one bank account, and has made at least one type of transaction.}
-    % \addrow{Success Guarantee}{User is able to clearly view all deposits, withdrawals, and transfers that have been made.}
-    % \addmulrow{Main Success Flow}{
-    %     \item User selects View All Transactions option or View By Specific Bank Account.
-    %     \item System shows all transactions associated with previous choice.
-    %     \item User selects view transactions by type
-    %     \item System prompts user to choose which type of transaction he/she would like to view: deposits, withdrawals, transfers.
-    %     \item User selects one of the options
-    %     \item System shows all information regarding selected transaction such as date, amount, to which account, and from which account.}
-    % \addrow{Exceptions}{}
-    % \addrow{Post-Conditions}{}
-    % \addrow{Priority}{}
-    % \addrow{Traces to Test Cases}{}
+    \addrow{Summary}{User can make changes and update personal information}
+    \addrow{Scope}{money and budget management application}
+    \addrow{Level}{user-goal}
+    \addrow{Actors}{\textbf{User}}
+    \addmulrow{Stakeholders and Interests}{
+        \item User:  Wants to change personal information to keep up-to-date records on information such as address and email as well as changing user account password.
+        \item Company: Wants user interests to be fulfilled. }
+    \addrow{Pre-Conditions}{User has created and logged in a user account.}
+    \addrow{Success Guarantee}{User can easily update changes in personal information to guarantee accurate personal records }
+    \addmulrow{Main Success Flow}{
+        \item User selects update user account information.
+        \item System shows current user account information.
+        \item User selects the piece of information that requires updating.
+        \item User enters new information.
+        \item System updates and saves the new information.
+    }
+    \addrow{Exceptions}{}
+    \addrow{Post-Conditions}{}
+    \addrow{Priority}{}
+    \addrow{Traces to Test Cases}{}
 \end{usecase}
 
 \begin{usecase}{Categorize Transaction}
     \addrow{Case ID}{08}
     \addrow{Summary}{User can select a category to represent a transaction.}
-    % \addrow{Scope}{money and budget management application}
-    % \addrow{Level}{user-goal}
-    % \addrow{Actors}{\textbf{User}}
-    % \addmulrow{Stakeholders and Interests}{
-    %     \item User: Wants to label each transaction as a specific type of spending, such as rent, bills, leisure, etc., to better manage and track spending habits.
-    %     \item Company: Wants user interests to be fulfilled. Wants to facilitate user's ability to budget and manage money through simple categorization of spending.}
-    % \addrow{Pre-Conditions}{User has created and logged in a user account, added at least one bank account, and has made at least one type of transaction.}
-    % \addrow{Success Guarantee}{User can quickly and efficiently categorize each transaction.}
-    % \addmulrow{Main Success Flow}{
-    %     \item User selects desired transaction to categorize.
-    %     \item User selects the categorize option.
-    %     \item System displays the categories in a drop down menu.
-    %     \item User selects preferred category to represent the current transaction.
-    %     \item System saves transaction under chosen category.}
-    %     \addrow{Exceptions}{}
-    % \addrow{Post-Conditions}{}
-    % \addrow{Priority}{}
-    % \addrow{Traces to Test Cases}{}
+     \addrow{Scope}{money and budget management application}
+     \addrow{Level}{user-goal}
+     \addrow{Actors}{\textbf{User}}
+     \addmulrow{Stakeholders and Interests}{
+         \item User: Wants to label each transaction as a specific type of spending, such as rent, bills, leisure, etc., to better manage and track spending habits.
+         \item Company: Wants user interests to be fulfilled. Wants to facilitate user's ability to budget and manage money through simple categorization of spending.}
+     \addrow{Pre-Conditions}{User has created and logged in a user account, added at least one bank account, and has made at least one type of transaction.}
+     \addrow{Success Guarantee}{User can quickly and efficiently categorize each transaction.}
+     \addmulrow{Main Success Flow}{
+         \item User selects desired transaction to categorize.
+         \item User selects the categorize option.
+         \item System displays the categories in a drop down menu.
+         \item User selects preferred category to represent the current transaction.
+         \item System saves transaction under chosen category.}
+         \addrow{Exceptions}{}
+     \addrow{Post-Conditions}{}
+     \addrow{Priority}{}
+     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
-\begin{usecase}{View Transactions by Category}
+\begin{usecase}{View Transactions by Any Attribute}
     \addrow{Case ID}{09}
-    \addrow{Summary}{User can view transaction according to categories of spending.}
-    % \addrow{Scope}{money and budget management application}
-    % \addrow{Level}{user-goal}
-    % \addrow{Actors}{\textbf{User}}
-    % \addmulrow{Stakeholders and Interests}{
-    %     \item User: Wants to view transactions in different categories of spending such as rent, bills, leisure, etc., to view and monitor spending habits and allocate budget to each category of spending.
-    %     \item Company: Wants to optimize the ease in which a user can allocate his/her budget, and track spending habits.}
-    % \addrow{Pre-Conditions}{User has created and logged in a user account, has added at least one bank account, and has made at least one transaction.}
-    % \addrow{Success Guarantee}{User can easily categorize and view transactions.}
-    % \addmulrow{Main Success Flow}{
-    %     \item User selects View All Transactions.
-    %     \item System shows all transactions from all accounts on one display.
-    %   \item User selects to view transaction by categories.
-    %     \item System groups transactions by similar category.
-    %     \item System displays transactions grouped by category.}
-    % \addrow{Exceptions}{}
-    % \addrow{Post-Conditions}{}
-    % \addrow{Priority}{}
-    % \addrow{Traces to Test Cases}{}
+    \addrow{Summary}{User can view transaction by any attribute, from date of purchase or amount of purchase to category of purchase or type.}
+    \addrow{Scope}{money and budget management application}
+    \addrow{Level}{user-goal}
+    \addrow{Actors}{\textbf{User}}
+    \addmulrow{Stakeholders and Interests}{
+        \item User: Wants to view transactions by any possible attribute to see
+        \item Company: Wants to optimize the ease in which a user can allocate his/her budget, and track spending habits.}
+    \addrow{Pre-Conditions}{User has created and logged in a user account, has added at least one bank account, and has made at least one transaction.}
+    \addrow{Success Guarantee}{User can easily categorize and view transactions.}
+    \addmulrow{Main Success Flow}{
+        \item User selects View All Transactions.
+        \item System shows all transactions from all accounts on one display.
+        \item User selects to view transaction by categories.
+        \item System groups transactions by similar category.
+        \item System displays transactions grouped by category.}
+    \addrow{Exceptions}{}
+    \addrow{Post-Conditions}{}
+    \addrow{Priority}{}
+    \addrow{Traces to Test Cases}{}
 \end{usecase}
 
 \clearpage 
