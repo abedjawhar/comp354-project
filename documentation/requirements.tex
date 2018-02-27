@@ -619,9 +619,10 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
          \item System displays the categories in a drop down menu.
          \item User selects preferred category to represent the current transaction.
          \item System saves transaction under chosen category.}
-         \addrow{Exceptions}{}
-     \addrow{Post-Conditions}{}
-     \addrow{Priority}{}
+         \addmulrow{Exceptions} {
+         \item User has not added a bank account and cannot categorize any transactions within until one is added \item User does not have any transactions within his bank account and cannot categorize anything}
+     \addrow{Post-Conditions}{User will have organized his transactions into specific categories of his choosing for easier viewing. The application will save these new categorized transactions.}
+     \addrow{Priority}{High}
      \addrow{Traces to Test Cases}{}
 \end{usecase}
 
