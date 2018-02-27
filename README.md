@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/hrachyahakobyan/comp354-project.svg?branch=master)](https://travis-ci.org/hrachyahakobyan/comp354-project)
+
 # COMP354 PA-PK
 
 ## Setup
