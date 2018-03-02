@@ -5,6 +5,11 @@ import com.github.comp354project.service.account.Transaction;
 import com.github.comp354project.service.account.remote.RemoteAccount;
 import com.github.comp354project.service.account.remote.RemoteTransaction;
 import com.github.comp354project.service.user.User;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.jdbc.JdbcConnectionSource;
+
+import java.sql.SQLException;
 
 public class TestUtils {
     public static final User testUser = User.builder()
@@ -42,4 +47,16 @@ public class TestUtils {
             .category("Rent")
             .sourceID(null)
             .destinationID(2).build();
+
+    public static RemoteAccount createTestRemoteAccount(JdbcConnectionSource connectionSource) throws SQLException {
+        Dao<RemoteAccount, Integer> remoteAccountDao = DaoManager.createDao(connectionSource, RemoteAccount.class);
+        Dao<RemoteTransaction, Integer> remoteTransactionDao = DaoManager.createDao(connectionSource, RemoteTransaction.class);
+
+        RemoteAccount remoteAccount = TestUtils.testRemoteAccount;
+        remoteAccountDao.create(remoteAccount);
+        RemoteTransaction remoteTransaction = TestUtils.testRemoteTransaction;
+        remoteTransactionDao.create(remoteTransaction);
+
+        return remoteAccountDao.queryForId(remoteAccount.getID());
+    }
 }

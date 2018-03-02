@@ -97,7 +97,7 @@ public class AccountServiceTest{
         Account existingAccount = TestUtils.testAccount;
         existingAccount.setUser(accountOwner);
         accountDao.create(existingAccount);
-        RemoteAccount remoteAccount = createTestRemoteAccount();
+        RemoteAccount remoteAccount = TestUtils.createTestRemoteAccount(connectionSource);
 
         GetRemoteAccountRequest request = GetRemoteAccountRequest.builder()
                 .accountID(remoteAccount.getID()).build();
@@ -115,7 +115,7 @@ public class AccountServiceTest{
 
         Account expectedAccount = TestUtils.testAccount;
 
-        RemoteAccount remoteAccount = createTestRemoteAccount();
+        RemoteAccount remoteAccount = TestUtils.createTestRemoteAccount(connectionSource);
 
         GetRemoteAccountRequest request = GetRemoteAccountRequest.builder()
                 .accountID(TestUtils.testRemoteAccount.getID()).build();
@@ -127,17 +127,5 @@ public class AccountServiceTest{
 
         assertEquals(expectedAccount, actualAccount);
         assertEquals(1, actualAccount.getTransactions().size());
-    }
-
-    private RemoteAccount createTestRemoteAccount() throws SQLException{
-        Dao<RemoteAccount, Integer> remoteAccountDao = DaoManager.createDao(connectionSource, RemoteAccount.class);
-        Dao<RemoteTransaction, Integer> remoteTransactionDao = DaoManager.createDao(connectionSource, RemoteTransaction.class);
-
-        RemoteAccount remoteAccount = TestUtils.testRemoteAccount;
-        remoteAccountDao.create(remoteAccount);
-        RemoteTransaction remoteTransaction = TestUtils.testRemoteTransaction;
-        remoteTransactionDao.create(remoteTransaction);
-
-        return remoteAccountDao.queryForId(remoteAccount.getID());
     }
 }
