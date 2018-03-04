@@ -48,12 +48,12 @@ task wrapper(type: Wrapper) {
 test {
     environment "env", "test"
     environment "db", "sqlite/test/mymoney.db"
-    classpath += files("/config/test/log")
+    classpath += files("config/test/log")
     exclude '**/SQLite*'
 }
 
 run {
     environment "env", "run"
     environment "db", "sqlite/run/mymoney.db"
-    classpath += files('/config/run/log')
+    classpath += files('config/run/log')
 }
