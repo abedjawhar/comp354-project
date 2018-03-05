@@ -8,4 +8,5 @@ import com.github.comp354project.service.user.User;
 
 public interface IAccountService {
     Account addAccount(GetRemoteAccountRequest request, User user) throws AccountExistsException, AccountDoesNotExistException, ValidationException;
+    void deleteAccount(Account account) throws ValidationException;
 }

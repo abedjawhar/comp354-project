@@ -105,6 +105,27 @@ public class AccountService implements IAccountService {
         }
     }
 
+    @Override
+    public void deleteAccount(Account account) throws ValidationException, DatabaseException {
+        if(account == null || account.getID() == null) {
+            throw ValidationException.builder().message("Null value given in place of Account or Account ID.").build();
+        }
+        try {
+            Account accountInDB = accountDao.queryForId(account.getID());
+            if(accountInDB == null) { throw ValidationException.builder().message("Non existent account given to delete! ID: "
+                    + account.getID().toString() ).build();}
+            List<Transaction> transactionsToDelete = transactionDao.queryForEq("account_id", account);
+            for(Transaction t : transactionsToDelete){
+                transactionDao.delete(t);
+            }
+            accountDao.delete(account);
+        }
+        catch(SQLException e){
+            logger.error(e);
+            throw new DatabaseException(e);
+        }
+    }
+
     private Account transform(RemoteAccount remoteAccount){
         Account.AccountBuilder builder = Account.builder()
                 .ID(remoteAccount.getID())

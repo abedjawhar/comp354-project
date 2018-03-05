@@ -128,4 +128,48 @@ public class AccountServiceTest{
         assertEquals(expectedAccount, actualAccount);
         assertEquals(1, actualAccount.getTransactions().size());
     }
+
+    // deleteAccount() tests
+    @Test(expected = ValidationException.class)
+    public void testDeleteAccount_withNullAccount_shouldThrow() {
+        accountService.deleteAccount(null);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void testDeleteAccount_withAccountWithNullID_shouldThrow() {
+        accountService.deleteAccount(Account.builder().build());
+    }
+
+   @Test(expected = ValidationException.class)
+    public void testDeleteAccount_withNonExistentAccount_shouldThrow() {
+       accountService.deleteAccount(TestUtils.testAccount);
+    }
+
+   @Test
+    public void testDeleteAccount_withValidAccount_shouldSucceed() throws Exception{
+        User accountOwner = TestUtils.testUser;
+        userDao.create(accountOwner);
+        Account existingAccount = TestUtils.testAccount;
+        accountDao.create(existingAccount);
+
+        accountService.deleteAccount(existingAccount);
+        Account actualAccount = accountDao.queryForId(existingAccount.getID());
+
+        assertNull(actualAccount);
+    }
+
+   @Test
+    public void testDeleteAccount_withValidAccount_shouldDeleteAllAssociatedTransactionsAndAccount() throws Exception{
+        User accountOwner = TestUtils.testUser;
+        userDao.create(accountOwner);
+        Account existingAccount = TestUtils.testAccount;
+        accountDao.create(existingAccount);
+        transactionDao.create(TestUtils.testTransaction);
+
+        accountService.deleteAccount(existingAccount);
+        List<Transaction> leftoverTransactions = transactionDao.queryForEq("account_id", existingAccount);
+        Account actualAccount = accountDao.queryForId(existingAccount.getID());
+
+        assertTrue(leftoverTransactions.isEmpty());
+    }
 }
