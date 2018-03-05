@@ -1,5 +1,16 @@
 \documentclass[12pt]{article}
 
+\usepackage{color}
+\usepackage{nth}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage[pdftex]{graphicx}
+\pagestyle{empty}
+\setcounter{secnumdepth}{2}
+\usepackage{float}
+
 \pagestyle{empty}
 \setcounter{secnumdepth}{2}
 
@@ -21,10 +32,13 @@
 \begin{document}
 
 \vspace*{0.5in}
-\centerline{\bf\Large Design Document}
+\centerline{\bf\Large COMP 354}
+\centerline{\bf\Large Desgin Document for myMoney}
 
 \vspace*{0.5in}
 \centerline{\bf\Large Team PA-PK}
+
+
 
 \vspace*{0.5in}
 \centerline{\today}
@@ -37,19 +51,42 @@
 \hline
 Name & ID Number \\
 \hline\hline
-Kadeem Caines & 26343600\\
+Anne-Laure Ehresmann & 27858906 \\
+\hline
+Marc-Antoine Dube & 40029307 \\
+\hline
+Kadeem Caines & 26343600 \\
+\hline
+Abdel Rahman Jawhar & 27192142 \\
+\hline
+Keith Dion & 40036340 \\
+\hline
+Hrachya Hakobyan & 40041555 \\
+\hline
+Andrew-Smith & 40034936 \\
+\hline
+Dongyu Chen & 27241909 \\
+\hline
+Yauheni Karaniuk & 40005680 \\
+\hline
+Renny Xu & 40005262\\
+\hline
+Wei Wang & 40041116 \\
 \hline
 \end{tabular}
 \end{center}
 \end{table}
 
-
 \clearpage
 
 \tableofcontents
+\listoffigures
+\listoftables
 
 \clearpage
-\section{Introduction}
+
+
+\section{Introduction and Purpose}
 
 The primary goal of this project is to develop the myMoney windows application. The goal of this design document is to provide all the details of the Architectural Design (AD), Detailed design (DD) and the Dynamic Design Scenarios (DDS) for the application.The AD section
 focuses on the high-level project decomposition, the DD describes the overall system design including the UML design divided into subsections 
@@ -60,7 +97,9 @@ and the DDS will display how the subsystems interact with one another in order t
 \section{Architectural Design} \label{sec:arch}
 
 This section must give a high-level description of the system in terms of its modules
-and their respective purpose and exact interfaces.
+and their respective purpose and exact interfaces. 
+
+*Note: The above is a description of what to provide. Need to edit into our own
 
 \subsection{Architectural Diagram}
 
@@ -68,6 +107,8 @@ A UML class diagram or package diagram depicting the high-level structure of the
 accompanied by a one-paragraph text describing the rationale of this design.
 It is mandatory that the system be divided into at least two subsystems,
 and that the purpose of each of these subsystems be exposed here.
+
+*Note: The above is a description of what to provide. Need to edit into our own
 
 \subsection{Subsystem Interface Specifications}
 
@@ -78,13 +119,88 @@ Description of the parameters to be passed into these function calls in order to
 including valid and invalid ranges of values.
 Each subsystem interface must be presented in a separate subsection.
 
-\subsection{Definitions and Abbreviations}
+*Note: The above is a description of what to provide. Need to edit into our own
 
 
 \section{Detailed Design} \label{sec:detail}
 
 Complete description of the system design, describing one subsystem separately in respective subsection.
 UML class diagrams are to be used, as well as a short textual description describing the purpose of each class.
+
+*Note: The above is a description of what to provide. Need to edit into our own
+
+\subsection{Class Diagram}
+
+In this section we provide the class diagram of our system, useful for the system developers and testers.This is an in depth look at all of the classes within our system see figure \ref{fig:class-diagram} below If a term is unclear, view section \ref{glossary} for the glossary.
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{ClassDiagram1.png}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{ClassDiagram2.png}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{ClassDiagram3.png}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{ClassDiagram4.png}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{ClassDiagram5.png}
+\caption{Class Diagram}
+\label{fig:class-diagram}
+\end{figure}
+
+
+\clearpage
+
+\subsection{Glossary of Domain Concepts} \label{glossary}
+\begin{table}[H]
+\caption{Glossary of Domain Concepts}
+\begin{center}
+\scalebox{0.7}{
+\begin{tabular}{|l|p{0.8\linewidth}|}
+\hline
+Expression &  Definition \\
+\hline
+User & The person that is using the application and the main provider of requests to the system. \\
+\hline
+User Account & A data object containing user information. It also contains the various bank accounts that a user may have linked to the system. \\
+\hline
+Bank Account & A data object containing transactions linked with a specific bank account in a bank institution. One user account may have more than one bank accounts.\\
+\hline
+Transaction & Any kind of money exchange associated with a bank account.\\
+\hline
+Transfer & A type of transaction that occurs between two parties.\\
+\hline
+Deposit & A type of transaction where the owner puts money in his own bank account.\\
+\hline
+Withdrawal & A type of transaction where the owner of the bank account removes money from his balance.\\
+\hline
+database & A local or online container which holds data in an organised, efficient manner. \\
+\hline
+server & a computer that is accessible on a network, on which a database and/or system may be hosted. The bank institutions' databases will be hosted on here. \\
+\hline
+Object-Oriented Programming & A programming paradigm which separates entities into objects, and uses the concept of inheritance of properties, polymorphism of objects, encapsulation of objects. We use this paradigm for its maintainability and structural benefits.\\
+\hline
+MVC - Model-View-Controller Architecture & An architectural pattern which strictly separates components into the model (manages the data and logic), the view (output of the model), and the controller (handling input and passing it to the model or view).\\
+\hline
+interface & A component of a system by which other entities (be it humans or other systems) may engage in an exchange of data with the system in question. \\
+\hline
+API - Application Programming Interface & A protocol or set of functions which serve as a method of communication to a software system. It is a type of interface, and the one by which our system will communicate with the banking institutions' databases. \\
+\hline
+DAO - Data access object & An object that provides an abstract interface to some type of database or other persistence mechanism.\\
+\hline
+
+\end{tabular}}
+\end{center}
+\end{table}
+
+\clearpage
 
 \subsection{Subsystem X}
 
@@ -93,11 +209,18 @@ UML class diagrams are to be used, as well as a short textual description descri
 UML class diagram depicting the internal structure of the subsystem,
 accompanied by a paragraph of text describing the rationale of this design.
 
+*Note: The above is a description of what to provide. Need to edit into our own
+
+
+
+
 \subsubsection{Units Description}
 
 List each class in this subsystem and write a short description of its purpose,
 as well as notes or reminders useful for the programmers who will implement them.
 List all attributes and functions of the class.
+
+*Note: The above is a description of what to provide. Need to edit into our own
 
 \section{Dynamic Design Scenarios}
 
@@ -105,5 +228,35 @@ Describe some (at least two) important execution scenarios of the system using U
 These scenarios must demonstrate how the various subsystems and units are interacting to achieve a system-level service.
 Units and subsystems depicted here must be compatible with the descriptions provided in
 section \ref{sec:arch} and \ref{sec:detail}.
+
+*Note: The above is a description of what to provide. Need to edit into our own
+
+
+\subsection{Dynamic Models of System Interface}
+
+We have chosen 3 major functionalities of the system (also known as use cases) in order to portray the interactions between the classes of the system. By using a sequence diagram, this will display the dynamics visually by showcasing the sequences of method calls when a particular use case begins functioning. 
+
+\subsubsection{Use Case 1: Create User Account}
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{case1SequenceDiagram.png}
+\caption{Use case 1 Sequence Diagram}
+\label{fig:use-case-1-sequence-diagram}
+\end{figure}
+
+\clearpage
+
+\section{Reference}
+
+\begin{itemize}
+\item User information: As our user and use-cases was based on feedback provided by our developers, our references lie mainly within our own team.
+\item Craig Larman - Applying UML and Patterns
+\item Greg Butler's course COMP 354 content
+\item \href{http://web.mit.edu/ssit/cis/CISRequirements.html}{\textcolor{blue}{MIT Curricular Information System
+Software Requirements Document}}
+\item \href{https://resources.sei.cmu.edu/asset_files/TechnicalReport/2005_005_001_14621.pdf}{\textcolor{blue}{Carnegie Mellon Business Goals}}
+\item \href{http://www.oracle.com/technetwork/testcontent/gettingstartedwithusecasemodeling-133857.pdf}{\textcolor{blue}{Use-Case: Oracle }}
+
+\end{itemize}
 
 \end{document}
