@@ -18,7 +18,6 @@ public class TransactionTable extends Control {
     private TransactionTableController controller;
 
     public TransactionTable() {
-        System.out.println("TransactionTable");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/view/TransactionTable.fxml"));
         fxmlLoader.setControllerFactory(new Callback<Class<?>, Object>() {
             @Override
@@ -55,6 +54,6 @@ public class TransactionTable extends Control {
     }
 
     public void addTransactions(List<Transaction> transactions) {
-        this.controller.addTransactions(transactions);
+        this.controller.setTransactions(transactions);
     }
 }

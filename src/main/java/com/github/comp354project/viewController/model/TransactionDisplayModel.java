@@ -4,7 +4,11 @@ import com.github.comp354project.service.account.Transaction;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import javax.swing.text.DateFormatter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class TransactionDisplayModel {
@@ -12,10 +16,11 @@ public class TransactionDisplayModel {
     private SimpleDoubleProperty amount;
     private SimpleStringProperty category;
     private SimpleStringProperty type;
+    private final static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
 
     public TransactionDisplayModel(Transaction transaction) {
         Date date = Date.from(Instant.ofEpochMilli(transaction.getDate()));
-        this.date = new SimpleStringProperty(date.toString());
+        this.date = new SimpleStringProperty(formatter.format(date));
         this.amount = new SimpleDoubleProperty(transaction.getAmount());
         if (transaction.getType().equals("Transfer")) {
             this.type = new SimpleStringProperty("Transfer to " + transaction.getDestinationID().toString());

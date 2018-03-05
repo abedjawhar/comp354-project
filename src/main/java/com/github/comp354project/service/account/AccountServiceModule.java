@@ -5,8 +5,8 @@ import dagger.Provides;
 
 @Module
 public class AccountServiceModule {
-
     @Provides static IAccountService provideAccountService(AccountService accountService) {
         return accountService;
     }
+    @Provides static ITransactionService provideTransactionService(TransactionService transactionService){return transactionService;}
 }

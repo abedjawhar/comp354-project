@@ -1,7 +1,11 @@
 package com.github.comp354project.viewController.view;
 
+import com.github.comp354project.MyMoneyApplication;
+import com.github.comp354project.service.account.ITransactionService;
 import com.github.comp354project.service.account.Transaction;
+import com.github.comp354project.service.exceptions.ValidationException;
 import com.github.comp354project.viewController.model.TransactionDisplayModel;
+import com.google.common.collect.ImmutableList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,13 +13,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import javax.inject.Inject;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class TransactionTableController implements Initializable {
+    private static final Logger logger = LogManager.getLogger(TransactionTableController.class);
 
     @FXML
     private TableView<TransactionDisplayModel> transactionTableView;
@@ -30,13 +41,25 @@ public class TransactionTableController implements Initializable {
 
     private ObservableList<TransactionDisplayModel> tableData = FXCollections.observableArrayList();
 
+    private List<Transaction> transactions;
+
+    @Inject
+    ITransactionService transactionService;
+
+    private static final List<String> defaultCategories = ImmutableList.<String>builder()
+            .add("Leisure")
+            .add("Groceries")
+            .add("Payments")
+            .add("Rent").build();
+
     public TransactionTableController() {
-        System.out.println("TransactionTableController");
     }
 
-    public void addTransactions(List<Transaction> transactions) {
-        System.out.println("add transactions");
+    public void setTransactions(List<Transaction> transactions) {
+        this.tableData.clear();
+        this.transactions = transactions;
         transactions.forEach(t -> this.tableData.add(new TransactionDisplayModel(t)));
+        MyMoneyApplication.application.getComponent().inject(this);
     }
 
     @Override
@@ -46,6 +69,29 @@ public class TransactionTableController implements Initializable {
         this.categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
         this.typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         this.transactionTableView.setItems(this.tableData);
-        System.out.println(this.dateCol);
+        this.transactionTableView.setEditable(true);
+
+        categoryCol.setCellFactory(tableCol -> {
+            ComboBoxTableCell<TransactionDisplayModel, String> ct = new ComboBoxTableCell<>();
+            ct.getItems().addAll(defaultCategories);
+            ct.setComboBoxEditable(true);
+            return ct;
+        });
+        categoryCol.setOnEditCommit(event -> {
+        String category = event.getNewValue() != null ? event.getNewValue() :
+                event.getOldValue();
+        category = category.trim();
+
+        Integer transactionIndex = event.getTablePosition().getRow();
+        Transaction transactionToUpdate = this.transactions.get(transactionIndex);
+        try {
+            Transaction updatedTransaction = transactionService.updateTransactionCategory(transactionToUpdate.getID(), category);
+            this.transactions.set(transactionIndex, updatedTransaction);
+            event.getTableView().getItems().set(transactionIndex, new TransactionDisplayModel(updatedTransaction));
+        } catch (ValidationException e){
+            event.getTableView().getItems().set(transactionIndex, new TransactionDisplayModel(transactionToUpdate));
+            logger.error(e);
+        }
+        });
     }
 }

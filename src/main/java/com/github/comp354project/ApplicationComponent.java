@@ -9,6 +9,7 @@ import com.github.comp354project.service.user.UserServiceModule;
 import com.github.comp354project.viewController.AccountListController;
 import com.github.comp354project.viewController.LoginController;
 import com.github.comp354project.viewController.SignUpController;
+import com.github.comp354project.viewController.view.TransactionTableController;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -43,4 +44,6 @@ public interface ApplicationComponent {
     void inject(AccountListController accountListController);
 
     void inject(SignUpController signUpController);
+
+    void inject(TransactionTableController tableController);
 }

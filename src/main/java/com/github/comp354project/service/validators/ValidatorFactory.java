@@ -1,11 +1,15 @@
 package com.github.comp354project.service.validators;
 
+import com.github.comp354project.BusinessRulesConstants;
+
 public class ValidatorFactory {
     public static IUsernameValidator usernameValidator(){
-        return new EmptyStringValidator();
+        return new StringLengthValidator(BusinessRulesConstants.USERNAME_MIN_LENGTH, BusinessRulesConstants.USERNAME_MAX_LENGTH);
     }
 
     public static IPasswordValidator passwordValidator(){
-        return new EmptyStringValidator();
+        return new StringLengthValidator(BusinessRulesConstants.PASSWORD_MIN_LENGTH, BusinessRulesConstants.PASSWORD_MAX_LENGTH);
     }
+
+    public static ICategoryNameValidator categoryNameValidator() {return new StringLengthValidator(BusinessRulesConstants.CATEGORY_MIN_LENGTH, BusinessRulesConstants.CATEGORY_MAX_LENGTH);}
 }
