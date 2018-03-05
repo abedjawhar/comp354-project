@@ -129,6 +129,7 @@ Version & Date \\
 
 \tableofcontents
 \listoffigures
+\clearpage
 \listoftables
 
 \clearpage
@@ -147,6 +148,8 @@ At the present time, users who have more than one bank account can quickly get o
 
 Our system will mainly involve the user interacting with a desktop application interface. The user shall provide information about his bank accounts to the interface, which the system will store it in a local database. The system then establishes a connection to the banks, passing along the user information. It will then receive the data associated with the bank account(s) of the user, which it will then display to the user. Section \ref{func req} gives a more detailed view of all of the functions that the system will be able to perform.
 
+\clearpage
+
 \begin{figure}[htbp]
 \includegraphics[width=\linewidth]{context.png}
 \caption{System Context}
@@ -155,6 +158,8 @@ Our system will mainly involve the user interacting with a desktop application i
 
 \subsection{Scope}
 myMoney aims to be a small, simple tool which provides an easy method of viewing accounts across multiple banks, their transactions, and categorisation tools for grouping transactions across multiple accounts. One may create a user account and link their bank accounts to easily access them through myMoney. They may check the transactions of a specific account or all of the accounts at once, sort the transactions by date, type, or any other property of the transaction, and categorise certain transactions for better organisation and minimal budgeting. myMoney is intended to work alongside banking institutions: it relies on the data provided by banks to create a transaction history for the users. In short, it seeks to be an application for managing expenses so as to quickly make judgment calls on financial decisions, in a way that is accessible to even the most financially inexperienced user.
+
+\clearpage
 
 \subsection{Business Goals}
 
@@ -179,7 +184,7 @@ myMoney aims to be a small, simple tool which provides an easy method of viewing
 
 \subsubsection{Domain Model}
 
-We herewith provide the domain model of our system, useful for users and documenters seeking to understand the general setup of our system. Useful to understanding this model is the the context of this system, provided in figure \ref{fig:system-context}, to see the connections between the system and the actors. For a more in-depth diagram of the system, see figure \ref{fig:class-diagram} below.
+In this section we provide the domain model of our system, useful for users and documenters seeking to understand the general setup of our system. Useful to understanding this model is the the context of this system, provided in figure \ref{fig:system-context}, to see the connections between the system and the actors. 
 
 \begin{figure}[H]
 \includegraphics[scale = 1]{DomainModel.png}
@@ -189,77 +194,6 @@ We herewith provide the domain model of our system, useful for users and documen
 \end{figure}
 
 \clearpage
-
-\subsubsection{Class Diagram}
-
-We herewith provide the class diagram of our system, useful for the system developers and testers. If a term is unclear, view section \ref{glossary} for the glossary.
-
-\begin{figure}[H]
-\includegraphics[width=\linewidth]{ClassDiagram1.png}
-\end{figure}
-
-\begin{figure}[H]
-\includegraphics[width=\linewidth]{ClassDiagram2.png}
-\end{figure}
-
-\begin{figure}[H]
-\includegraphics[width=\linewidth]{ClassDiagram3.png}
-\end{figure}
-
-\begin{figure}[H]
-\includegraphics[width=\linewidth]{ClassDiagram4.png}
-\end{figure}
-
-\begin{figure}[H]
-\includegraphics[width=\linewidth]{ClassDiagram5.png}
-\caption{Class Diagram}
-\label{fig:class-diagram}
-\end{figure}
-
-\clearpage
-
-
-\subsubsection{Glossary of Domain Concepts} \label{glossary}
-\begin{table}[H]
-\caption{Glossary of Domain Concepts}
-\begin{center}
-\scalebox{0.7}{
-\begin{tabular}{|l|p{0.8\linewidth}|}
-\hline
-Expression &  Definition \\
-\hline
-User & The person that is using the application and the main provider of requests to the system. \\
-\hline
-User Account & A data object containing user information. It also contains the various bank accounts that a user may have linked to the system. \\
-\hline
-Bank Account & A data object containing transactions linked with a specific bank account in a bank institution. One user account may have more than one bank accounts.\\
-\hline
-Transaction & Any kind of money exchange associated with a bank account.\\
-\hline
-Transfer & A type of transaction that occurs between two parties.\\
-\hline
-Deposit & A type of transaction where the owner puts money in his own bank account.\\
-\hline
-Withdrawal & A type of transaction where the owner of the bank account removes money from his balance.\\
-\hline
-database & A local or online container which holds data in an organised, efficient manner. \\
-\hline
-server & a computer that is accessible on a network, on which a database and/or system may be hosted. The bank institutions' databases will be hosted on here. \\
-\hline
-Object-Oriented Programming & A programming paradigm which separates entities into objects, and uses the concept of inheritance of properties, polymorphism of objects, encapsulation of objects. We use this paradigm for its maintainability and structural benefits.\\
-\hline
-MVC - Model-View-Controller Architecture & An architectural pattern which strictly separates components into the model (manages the data and logic), the view (output of the model), and the controller (handling input and passing it to the model or view).\\
-\hline
-interface & A component of a system by which other entities (be it humans or other systems) may engage in an exchange of data with the system in question. \\
-\hline
-API - Application Programming Interface & A protocol or set of functions which serve as a method of communication to a software system. It is a type of interface, and the one by which our system will communicate with the banking institutions' databases. \\
-\hline
-DAO - Data access object & An object that provides an abstract interface to some type of database or other persistence mechanism.\\
-\hline
-
-\end{tabular}}
-\end{center}
-\end{table}
 
 
 \subsection{Actors} \label{actors}
@@ -394,6 +328,8 @@ As a user, I should be able to create, manage and delete my user account. I shou
     \item The application should provide quality user experience when accessing and updating account information
 \end{itemize}
 
+\clearpage
+
 \textbf{User-Story 2}
 
 As a user, I should have ability to manage my bank account information. The application should allow me to connect my bank accounts, remove bank accounts and view all the information associated with the bank account.
@@ -434,7 +370,7 @@ The system outputs its database data in plain text form, displayed through its i
 
 \section{Use Cases}
 \subsection{Overview}
-Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 through 7 and 9 deal with the user viewing the data in different formats. Use case 8 deals with the user manipulating the transactions' formats. For iteration 1, we have only included use case 1, 3, 5, and 6, as those are the ones we have fully implemented.
+Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 through 7 and 9 deal with the user viewing the data in different formats. Use case 8 deals with the user manipulating the transactions' formats. For iteration 1, we have only included use case 1, 3, 5, and 6, as those are the ones we have fully implemented. Below is figure \ref{fig:use-case-diagram} which represents our use case diagram. Following this diagram, we list our uses cases
 
 \begin{figure}[htbp]
 \includegraphics{UseCaseDiagram.png}
@@ -445,6 +381,7 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
 \begin{usecase}{Create User Account}
     \addrow{Case ID}{01}
     \addrow{Summary}{User gives information about a new user account, system validates it and creates the account.}
+    \addrow{Description} {This use case describes how a user can create their own account for the myMoney application in order to use the application, add bank accounts and view and categorize their transactions}
     \addrow{Scope}{money and budget management application}
     \addrow{Level}{user-goal}
     \addrow{Actors}{\textbf{User}}
@@ -455,12 +392,14 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
     \addrow{Success Guarantee}{Account successfully saved in local account database, with name and password as specified by the user.}
     \addmulrow{Main Success Flow}{
         \item User enters a user-name, first name, last name, and password.
-        \item System validates user-name and password (format, whether user-name is already used, etc).
+        \item System validates user-name and password
         \item System creates new account.
-        \item System notifies the user of the successful account creation, then returns to home menu.}
-    \addrow{Exceptions}{}
-    \addrow{Post-Conditions}{}
-    \addrow{Priority}{}
+        \item System notifies the user of the successful account creation}
+    \addmulrow{Exceptions}{
+    \item User account is not created if there is an existing user name 
+    \item Account is not created if password does not match specified format}
+    \addrow{Post-Conditions}{The application will return the user to the home menu after a successful account creation. User can then log into the system  }
+    \addrow{Priority}{High}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
