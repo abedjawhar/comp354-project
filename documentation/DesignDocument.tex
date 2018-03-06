@@ -236,7 +236,11 @@ section \ref{sec:arch} and \ref{sec:detail}.
 
 We have chosen 3 major functionalities of the system (also known as use cases) in order to portray the interactions between the classes of the system. By using a sequence diagram, this will display the dynamics visually by showcasing the sequences of method calls when a particular use case begins functioning. 
 
+\clearpage
+
 \subsubsection{Use Case 1: Create User Account}
+
+The following scenario depicts the actions that occur when a user clicks the sign up button in order to create their account. Firstly , the SignUpController (which represents the controller part of the MVC architecture) is called to handle the sign up event. The SignUpController then calls the validatePassword() method in order to check if the password chosen fits the required format. Next, the signupcontroller sends a message to the User class in order to start its builder method. The builder method is filled out with the info needed to sign up. The user class then sends a message to the IUserService class in order to finally create a user within the database using the information entered. Finally, the IUserService class calls the MyMoneyApplication's displayLogin() method in order to show the user the success of creating an account (The View)
 
 \begin{figure}[H]
 \includegraphics[width=\linewidth]{case1SequenceDiagram.png}
