@@ -88,27 +88,29 @@ Wei Wang & 40041116 \\
 
 \section{Introduction and Purpose}
 
-The primary goal of this project is to develop the myMoney windows application. The goal of this design document is to provide all the details of the Architectural Design (AD), Detailed design (DD) and the Dynamic Design Scenarios (DDS) for the application.The AD section
-focuses on the high-level project decomposition, the DD describes the overall system design including the UML design divided into subsections 
-and the DDS will display how the subsystems interact with one another in order to produce system-level services 
+The primary goal of this project is to develop the myMoney application. The goal of this design document is to provide all the details of the Architectural Design (AD), Detailed design (DD) and the Dynamic Design Scenarios (DDS) for the application.The AD section
+focuses on the high-level project decomposition, the DD describes the overall system design including the UML design divided into subsections
+and the DDS will display how the subsystems interact with one another in order to produce system-level services.
 
 %need to review this area
 
 \section{Architectural Design} \label{sec:arch}
 
-This section must give a high-level description of the system in terms of its modules
-and their respective purpose and exact interfaces. 
+The myMoney application uses the Model-View-Controller (MVC) pattern to read, validate and modify the objects. The front-end, which is the view interacts with view controllers when events are triggered. These events trigger functions in the services package where the model is then modified.
 
-*Note: The above is a description of what to provide. Need to edit into our own
+In the service packages, there is a package named remote which is used to represent an external system via an API to connect to bank accounts from different companies.
 
 \subsection{Architectural Diagram}
 
-A UML class diagram or package diagram depicting the high-level structure of the system,
-accompanied by a one-paragraph text describing the rationale of this design.
-It is mandatory that the system be divided into at least two subsystems,
-and that the purpose of each of these subsystems be exposed here.
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{package-diagram.png}
+\end{figure}
 
-*Note: The above is a description of what to provide. Need to edit into our own
+This design represents the MVC pattern discussed previously. The big advantage of this design is that everything is separated with interfaces which makes it easier to use different implementations, modify the features and create or mock tests.
+
+The com.github.comp354project.service package is the main subsystem where most of the logic happens. The data validation and processing is done there. It connects to an SQLite database to persist the data. The com.github.comp354project.viewController calls this package to update the view and the model.
+
+The com.github.comp354project.service package.account.remote package is a subsystem to our services which is meant to mock an API call to systems outside of ours like banks or credit card companies. Because we don't have access to these APIs for real, obviously, the data is persisted in the same SQLite database as the rest of the system.
 
 \subsection{Subsystem Interface Specifications}
 
@@ -181,15 +183,15 @@ Deposit & A type of transaction where the owner puts money in his own bank accou
 \hline
 Withdrawal & A type of transaction where the owner of the bank account removes money from his balance.\\
 \hline
-database & A local or online container which holds data in an organised, efficient manner. \\
+Database & A local or online container which holds data in an organised, efficient manner. \\
 \hline
-server & a computer that is accessible on a network, on which a database and/or system may be hosted. The bank institutions' databases will be hosted on here. \\
+Server & a computer that is accessible on a network, on which a database and/or system may be hosted. The bank institutions' databases will be hosted on here. \\
 \hline
 Object-Oriented Programming & A programming paradigm which separates entities into objects, and uses the concept of inheritance of properties, polymorphism of objects, encapsulation of objects. We use this paradigm for its maintainability and structural benefits.\\
 \hline
 MVC - Model-View-Controller Architecture & An architectural pattern which strictly separates components into the model (manages the data and logic), the view (output of the model), and the controller (handling input and passing it to the model or view).\\
 \hline
-interface & A component of a system by which other entities (be it humans or other systems) may engage in an exchange of data with the system in question. \\
+Interface & A component of a system by which other entities (be it humans or other systems) may engage in an exchange of data with the system in question. \\
 \hline
 API - Application Programming Interface & A protocol or set of functions which serve as a method of communication to a software system. It is a type of interface, and the one by which our system will communicate with the banking institutions' databases. \\
 \hline
