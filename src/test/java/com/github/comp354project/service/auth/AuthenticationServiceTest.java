@@ -2,13 +2,17 @@ package com.github.comp354project.service.auth;
 
 import com.github.comp354project.service.TestUtils;
 import com.github.comp354project.service.exceptions.ValidationException;
-import com.github.comp354project.service.user.IUserService;
 import com.github.comp354project.service.user.User;
+import com.google.common.collect.ImmutableList;
+import com.j256.ormlite.dao.Dao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -20,7 +24,7 @@ import static org.mockito.Mockito.when;
 public class AuthenticationServiceTest {
 
     @Mock
-    private IUserService userService;
+    private Dao<User, Integer> userDao;
 
     @InjectMocks
     private AuthenticationService authenticationService;
@@ -38,27 +42,27 @@ public class AuthenticationServiceTest {
     }
 
     @Test(expected = ValidationException.class)
-    public void testAuthenticate_withNonexistentUsername_shouldThrow(){
+    public void testAuthenticate_withNonexistentUsername_shouldThrow() throws SQLException{
         String username = "username";
-        when(userService.getUser(eq(username))).thenReturn(null);
+        when(userDao.queryForEq(eq("username"),eq(username))).thenReturn(new ArrayList<>());
 
         authenticationService.authenticate(username, "password");
     }
 
     @Test(expected = ValidationException.class)
-    public void testAuthenticate_withIncorrectPassword_shouldThrow(){
+    public void testAuthenticate_withIncorrectPassword_shouldThrow() throws SQLException{
         User user = TestUtils.testUser;
         String incorrectPassword = "INCORRECT_PASSOWORD";
         assertNotEquals(user.getPassword(), incorrectPassword);
-        when(userService.getUser(eq(user.getUsername()))).thenReturn(user);
+        when(userDao.queryForEq(eq("username"),eq(user.getUsername()))).thenReturn(ImmutableList.<User>builder().add(user).build());
 
         authenticationService.authenticate(user.getUsername(), incorrectPassword);
     }
 
     @Test
-    public void testAuthenticate_withCorrectCredentials_shouldReturnUser(){
+    public void testAuthenticate_withCorrectCredentials_shouldReturnUser() throws SQLException{
         User user = TestUtils.testUser;
-        when(userService.getUser(eq(user.getUsername()))).thenReturn(user);
+        when(userDao.queryForEq(eq("username"),eq(user.getUsername()))).thenReturn(ImmutableList.<User>builder().add(user).build());
 
         User authenticatedUser = authenticationService.authenticate(user.getUsername(), user.getPassword());
         assertEquals(user, authenticatedUser);
