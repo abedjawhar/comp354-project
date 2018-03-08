@@ -28,6 +28,9 @@ Write a justification for each of the use cases on why they were chosen
 ##### Use case #3
 *Assignee:* Andrew
 
+#### Use case #5
+*Assignee:* Evgeni
+
 ##### Use case #8
 *Assignee:* Kadeem
 
@@ -38,8 +41,23 @@ Write a justification for each of the use cases on why they were chosen
 #### Use case #3
 *Assignee:* Andrew
 
+#### Use case #5
+*Assignee:* Evgeni
+
 #### Use case #8
 *Assignee:* Kadeem
 
 #### Use case #9
 *Assignee:* Wei
+
+### Subsystem interface diagram
+#### SignUpController
+Marc
+#### LoginController
+Andrew
+#### AllTransactionsDetails
+Evgeni
+#### AccountListController
+Wei
+#### AccountDetailsController
+Kadeem
