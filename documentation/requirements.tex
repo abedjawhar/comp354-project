@@ -511,9 +511,11 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
     \addmulrow{Main Success Flow}{
         \item User selects View All Transactions option.
         \item System shows all transactions across all accounts on one display.}
-    \addrow{Exceptions}{}
+    \addmulrow{Exceptions}{
+	\item User has not added any account.
+	\item User has no any transaction record.}
     \addrow{Post-Conditions}{}
-    \addrow{Priority}{}
+    \addrow{Priority}{High}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
@@ -574,19 +576,19 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
     \addrow{Level}{user-goal}
     \addrow{Actors}{\textbf{User}}
     \addmulrow{Stakeholders and Interests}{
-        \item User: Wants to view transactions by any one attribute or combination conditions of attributes.
+        \item User: Wants to view transactions sorted by any one attribute.
         \item Company: Wants to optimize the ease in which a user can allocate his/her budget, and track spending habits.}
     \addrow{Pre-Conditions}{User has created and logged in a user account, has added at least one bank account, and has made at least one transaction.}
-    \addrow{Success Guarantee}{User can view categorized transactions by selecting attribute(s) or default.}
+    \addrow{Success Guarantee}{User can view categorized transactions by selecting one attribute. Default sorting is ascending order by alphabet or value of number. Click the same attribute twice will sort in descending order.}
     \addmulrow{Main Success Flow}{
-        \item User selects View All Transactions.
-        \item System shows all transactions from all accounts on one display by transaction date in ascending order.
-        \item User selects to view transaction by clicking one attribute or several attributes in order.
-        \item System groups transactions by the attribute in ascending order(Date, Alphabet) or iterating sorting attributing in clicking order.
-        \item System displays final grouped transaction.}
+        \item User clicks the button<View All Transactions>.
+        \item System shows all transactions from all accounts on one display.
+        \item User selects to view sorted transaction by clicking any one attribute.
+        \item System sorts transactions by the selected attribute in ascending order.}
     \addmulrow{Exceptions}{
-    	\item Different combination of attributes may have internal conflicts in sorting. The priority of attributes follows the sequence: bank name, source ID/destination ID, date/amount, category/type.}
-    \addrow{Post-Conditions}{User can save categorized transactions list or reset the view to default. }
+	\item User has not added any account.
+	\item User has no any transaction record.}
+    \addrow{Post-Conditions}{}
     \addrow{Priority}{High}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
