@@ -31,10 +31,10 @@ Write a justification for each of the use cases on why they were chosen
 #### Use case #5
 *Assignee:* Evgeni
 
-##### Use case #8
+##### Use case #1
 *Assignee:* Kadeem
 
-##### Use case #9
+##### Use case #6
 *Assignee:* Wei
 
 ### Use cases to be described in more details in requirements document
@@ -44,10 +44,10 @@ Write a justification for each of the use cases on why they were chosen
 #### Use case #5
 *Assignee:* Evgeni
 
-#### Use case #8
+#### Use case #1
 *Assignee:* Kadeem
 
-#### Use case #9
+#### Use case #6
 *Assignee:* Wei
 
 ### Subsystem interface diagram
