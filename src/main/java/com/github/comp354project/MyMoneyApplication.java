@@ -2,13 +2,14 @@ package com.github.comp354project;
 
 import com.github.comp354project.service.account.Account;
 import com.github.comp354project.service.auth.SessionManager;
-import com.github.comp354project.viewController.AccountDetailsController;
-import com.github.comp354project.viewController.AccountListController;
-import com.github.comp354project.viewController.AllTransactionsController;
+import com.github.comp354project.viewController.*;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import java.util.List;
 
@@ -41,16 +42,25 @@ public class MyMoneyApplication extends Application {
         application = this;
     }
 
+    public Scene getScene(){
+        return primaryStage.getScene();
+    }
+
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         displayLogin();
         primaryStage.show();
     }
 
-    private <T> T updateStage(String fxml, String title, int width, int height) throws IOException {
+    private <T> T updateStage(String fxml, String title, int width, int height) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-        Parent root = loader.load();
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            logger.error(e);
+        }
         primaryStage.setScene(new Scene(root, width, height));
         setStageTitle(title);
         return loader.getController();
@@ -60,27 +70,29 @@ public class MyMoneyApplication extends Application {
         primaryStage.setTitle(title + " - My Money");
     }
 
-    public void displayLogin() throws IOException {
-        updateStage("/fxml/Login.fxml", "Login", 278, 124);
+    public void displayLogin() {
+        LoginController controller = updateStage("/fxml/Login.fxml", "Login", 278, 124);
+        primaryStage.getScene().setOnKeyPressed(controller);
     }
 
-    public void displaySignUp() throws IOException {
-        updateStage("/fxml/SignUp.fxml", "Sign Up", 278, 248);
+    public void displaySignUp()  {
+        SignUpController controller = updateStage("/fxml/SignUp.fxml", "Sign Up", 278, 248);
+        primaryStage.getScene().setOnKeyPressed(controller);
     }
 
-    public void displayAccounts() throws IOException {
+    public void displayAccounts() {
         AccountListController controller =
                 updateStage("/fxml/AccountList.fxml", "Account List", 800, 500);
         controller.setAccounts(new ArrayList<>(sessionManager.getUser().getAccounts()));
     }
 
-    public void displayAccountDetails(Account account) throws IOException{
+    public void displayAccountDetails(Account account) {
         AccountDetailsController controller =
                 updateStage("/fxml/AccountDetails.fxml", "Account Details", 800, 500);
         controller.setAccount(account);
     }
 
-    public void displayAllAccountDetails(List<Account> accounts) throws IOException{
+    public void displayAllAccountDetails(List<Account> accounts) {
         AllTransactionsController controller =
                 updateStage("/fxml/AllTransactions.fxml", "All Transactions", 800, 500);
         controller.setAccounts(accounts);

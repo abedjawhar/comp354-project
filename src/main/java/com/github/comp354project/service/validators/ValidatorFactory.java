@@ -12,4 +12,6 @@ public class ValidatorFactory {
     }
 
     public static ICategoryNameValidator categoryNameValidator() {return new StringLengthValidator(BusinessRulesConstants.CATEGORY_MIN_LENGTH, BusinessRulesConstants.CATEGORY_MAX_LENGTH);}
+
+    public static IUserValidator userValidator() { return new UserValidator(usernameValidator(), passwordValidator(), new StringLengthValidator(1, 16));}
 }

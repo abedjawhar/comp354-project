@@ -1,12 +1,14 @@
-package com.github.comp354project.service.account.exceptions;
+package com.github.comp354project.service.auth.exceptions;
 
 import lombok.Getter;
 import lombok.Builder;
 
-public class AuthenticationException extends RuntimeException{
+public class AuthenticationException extends Exception{
 
    @Getter
    private String username;
+
+   @Getter
    private String password;
 
    @Builder

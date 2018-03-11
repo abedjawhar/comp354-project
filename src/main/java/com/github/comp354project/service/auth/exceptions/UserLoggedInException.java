@@ -4,7 +4,7 @@ import com.github.comp354project.service.user.User;
 import lombok.Builder;
 import lombok.Getter;
 
-public class UserLoggedInException extends RuntimeException {
+public class UserLoggedInException extends Exception {
     @Getter
     private User user;
 

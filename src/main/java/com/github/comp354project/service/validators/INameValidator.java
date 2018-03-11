@@ -4,6 +4,6 @@ import com.github.comp354project.service.exceptions.ValidationError;
 
 import java.util.List;
 
-public interface ICategoryNameValidator {
-    List<ValidationError> validateCategory(String category, String message);
+public interface INameValidator {
+    List<ValidationError> validateName(String name, String message);
 }

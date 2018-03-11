@@ -3,36 +3,19 @@ package com.github.comp354project.service.user;
 import com.github.comp354project.service.TestUtils;
 import com.github.comp354project.service.account.Account;
 import com.github.comp354project.service.account.AccountService;
-import com.github.comp354project.service.account.Transaction;
-import com.github.comp354project.service.account.exceptions.AuthenticationException;
-import com.github.comp354project.service.account.exceptions.AuthorisationException;
-import com.github.comp354project.service.account.remote.IRemoteAccountService;
-import com.github.comp354project.service.account.remote.RemoteAccount;
-import com.github.comp354project.service.account.remote.RemoteTransaction;
-import com.github.comp354project.service.auth.AuthenticationService;
-import com.github.comp354project.service.auth.IAuthenticationService;
+import com.github.comp354project.service.auth.exceptions.AuthenticationException;
+import com.github.comp354project.service.auth.exceptions.AuthorisationException;
 import com.github.comp354project.service.auth.SessionManager;
 import com.github.comp354project.service.exceptions.DatabaseException;
 import com.github.comp354project.service.exceptions.ValidationException;
-import com.github.comp354project.service.user.exceptions.UserExistsException;
-import com.google.common.collect.ImmutableList;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import com.sun.javafx.scene.control.TableColumnSortTypeWrapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static junit.framework.TestCase.*;
 import static org.mockito.Matchers.any;
@@ -57,13 +40,12 @@ public class UserServiceTest {
         userService = new UserService(userDao, sessionManager, accountService);
         connectionSource = new JdbcConnectionSource("jdbc:sqlite::memory:");
         accountDao = DaoManager.createDao(connectionSource, Account.class);
-        userDao = DaoManager.createDao(connectionSource, User.class);
         TableUtils.createTable(connectionSource, User.class);
         TableUtils.createTable(connectionSource, Account.class);
     }
 
     @Test(expected = ValidationException.class)
-    public void createUser_withNullUser_shouldThrow(){
+    public void createUser_withNullUser_shouldThrow() throws Exception{
         userService.createUser(null);
     }
 
@@ -81,7 +63,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testCreateUser_withValidUser_shouldReturnUser(){
+    public void testCreateUser_withValidUser_shouldReturnUser() throws Exception{
         User expectedUser = User.builder()
                 .username("USERNAME")
                 .password("PASSWORD")
@@ -95,7 +77,7 @@ public class UserServiceTest {
         assertEquals(expectedUser, actualUser);
     }
 
-    @Test(expected = UserExistsException.class)
+    @Test(expected = ValidationException.class)
     public void testCreateUser_withExistingUsername_shouldThrow() throws Exception{
         User user = User.builder()
                 .username("USERNAME")
@@ -110,23 +92,13 @@ public class UserServiceTest {
         userService.createUser(user);
     }
 
-    @Test(expected = ValidationException.class)
-    public void testGetUser_withNullUsername_shouldThrow(){
-        userService.getUser(null);
-    }
-
-    @Test(expected = ValidationException.class)
-    public void testGetUser_withEmptyUsername_shouldThrow(){
-        userService.getUser("");
-    }
-
     @Test(expected =  ValidationException.class)
-    public void testDeleteBankAccount_withNullAccount_ShouldThrow(){
+    public void testDeleteBankAccount_withNullAccount_ShouldThrow() throws Exception{
         userService.deleteBankAccount(null);
     }
 
     @Test(expected = AuthenticationException.class)
-    public void testDeleteBankAccount_withoutBeingLoggedIn_ShouldThrow() throws SQLException{
+    public void testDeleteBankAccount_withoutBeingLoggedIn_ShouldThrow() throws Exception{
         Account account = TestUtils.testAccount;
         accountDao.create(account);
         userService.deleteBankAccount(account);
@@ -148,7 +120,6 @@ public class UserServiceTest {
        accountDao.create(account);
        when(sessionManager.isLoggedIn()).thenReturn(true);
        when(sessionManager.getUser()).thenReturn(user2);
-       sessionManager.login(user2.getUsername(), user2.getPassword());
 
        userService.deleteBankAccount(account);
     }
@@ -164,6 +135,5 @@ public class UserServiceTest {
         when(sessionManager.getUser()).thenReturn(user);
         userService.deleteBankAccount(account);
         verify(accountService, times(1)).deleteAccount(account);
-
     }
 }

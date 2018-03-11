@@ -9,10 +9,7 @@ import java.util.ResourceBundle;
 import com.github.comp354project.MyMoneyApplication;
 import com.github.comp354project.service.account.Account;
 import com.github.comp354project.service.account.IAccountService;
-import com.github.comp354project.service.account.exceptions.AccountDoesNotExistException;
-import com.github.comp354project.service.account.exceptions.AccountExistsException;
 import com.github.comp354project.service.account.remote.GetRemoteAccountRequest;
-import com.github.comp354project.service.account.remote.RemoteTransaction;
 import com.github.comp354project.service.auth.SessionManager;
 import com.github.comp354project.service.exceptions.ValidationException;
 import com.github.comp354project.viewController.helper.AlertHelper;
@@ -75,19 +72,19 @@ public class AccountListController implements Initializable {
 	}
 
 	@FXML
-	public void selectAccount(MouseEvent event) throws IOException {
+	public void selectAccount(MouseEvent event)  {
 	    if (event.getClickCount() == 2) {
             MyMoneyApplication.application.displayAccountDetails(accounts.get(accountsTable.getSelectionModel().getSelectedIndex()));
 	    }
 	}
 
 	@FXML
-	public void viewAllAccounts(ActionEvent event) throws IOException {
+	public void viewAllAccounts(ActionEvent event)  {
 		MyMoneyApplication.application.displayAllAccountDetails(accounts);
 	}
 
 	@FXML
-    public void logout(ActionEvent event) throws IOException {
+    public void logout(ActionEvent event)  {
 		this.sessionManager.logout();
 		MyMoneyApplication.application.displayLogin();
     }

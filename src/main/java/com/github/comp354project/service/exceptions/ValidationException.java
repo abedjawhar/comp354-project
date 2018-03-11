@@ -6,7 +6,7 @@ import lombok.Singular;
 
 import java.util.List;
 
-public class ValidationException extends RuntimeException {
+public class ValidationException extends Exception {
     @Getter
     private List<ValidationError> errors;
 

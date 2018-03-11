@@ -2,23 +2,24 @@ package com.github.comp354project.viewController;
 
 import com.github.comp354project.MyMoneyApplication;
 import com.github.comp354project.service.auth.SessionManager;
+import com.github.comp354project.service.auth.exceptions.UserLoggedInException;
 import com.github.comp354project.service.exceptions.ValidationException;
 import com.github.comp354project.service.user.IUserService;
 import com.github.comp354project.viewController.helper.AlertHelper;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import javax.inject.Inject;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
-public class LoginController implements Initializable {
+public class LoginController implements Initializable, EventHandler<KeyEvent> {
 
     @FXML private JFXTextField usernameTxt;
     @FXML private JFXPasswordField passwordField;
@@ -38,19 +39,32 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    public void login(ActionEvent event) throws IOException  {
+    public void login(ActionEvent event){
+        this.login();
+    }
+
+    @FXML
+    public void signUp(ActionEvent event)  {
+        MyMoneyApplication.application.displaySignUp();
+    }
+
+    private void login(){
         try {
             this.sessionManager.login(this.usernameTxt.getText(), this.passwordField.getText());
             MyMoneyApplication.application.displayAccounts();
         }
         catch (ValidationException exception) {
-            AlertHelper.generateErrorAlert("Login error", "Error loggin in", exception)
+            AlertHelper.generateErrorAlert("Login error", "Error logging in", exception)
                     .showAndWait();
+        } catch (UserLoggedInException e) {
+            AlertHelper.generateErrorAlert("Login error", "Error logging in", "Already logged in").showAndWait();
         }
     }
 
-    @FXML
-    public void signUp(ActionEvent event) throws IOException {
-        MyMoneyApplication.application.displaySignUp();
+    @Override
+    public void handle(KeyEvent event) {
+        if(event.getCode().equals(KeyCode.ENTER)){
+            login();
+        }
     }
 }

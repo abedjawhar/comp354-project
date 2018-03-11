@@ -26,7 +26,7 @@ public class SessionManagerTest {
     private SessionManager sessionManager;
 
     @Test(expected = ValidationException.class)
-    public void testLogin_withInvalidCredentials_shouldThrow(){
+    public void testLogin_withInvalidCredentials_shouldThrow() throws Exception{
         when(authenticationService.authenticate(any(String.class), any(String.class))).thenThrow(ValidationException.builder().build());
 
         sessionManager.login("", "");
@@ -34,7 +34,7 @@ public class SessionManagerTest {
     }
 
     @Test
-    public void testLogin_withValidCredentials_shouldReturnUser(){
+    public void testLogin_withValidCredentials_shouldReturnUser() throws Exception{
         User user = TestUtils.testUser;
         when(authenticationService.authenticate(any(String.class), any(String.class))).thenReturn(user);
 
@@ -46,7 +46,7 @@ public class SessionManagerTest {
     }
 
     @Test(expected = UserLoggedInException.class)
-    public void testLogin_withLoggedInUser_shouldThrow(){
+    public void testLogin_withLoggedInUser_shouldThrow() throws Exception{
         when(authenticationService.authenticate(any(String.class), any(String.class))).thenReturn(TestUtils.testUser);
         sessionManager.login("", "");
         assertTrue(sessionManager.isLoggedIn());
@@ -55,7 +55,7 @@ public class SessionManagerTest {
     }
 
     @Test
-    public void testLogout_withLoggedInUser_shouldSucceed(){
+    public void testLogout_withLoggedInUser_shouldSucceed() throws Exception{
         when(authenticationService.authenticate(any(String.class), any(String.class))).thenReturn(TestUtils.testUser);
         sessionManager.login("", "");
         assertTrue(sessionManager.isLoggedIn());

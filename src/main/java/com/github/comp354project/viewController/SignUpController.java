@@ -10,15 +10,17 @@ import com.github.comp354project.viewController.helper.AlertHelper;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import javax.inject.Inject;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SignUpController implements Initializable {
+public class SignUpController implements Initializable, EventHandler<KeyEvent>{
 
     @FXML private JFXTextField usernameTxt;
     @FXML private JFXTextField firstnameTxt;
@@ -37,7 +39,23 @@ public class SignUpController implements Initializable {
     }
 
     @FXML
-    public void signUp(ActionEvent event) throws IOException {
+    public void signUp(ActionEvent event) {
+        signUp();
+    }
+
+    @FXML
+    public void goBack(ActionEvent event)  {
+        MyMoneyApplication.application.displayLogin();
+    }
+
+    @Override
+    public void handle(KeyEvent event) {
+        if(event.getCode().equals(KeyCode.ENTER)){
+            signUp();
+        }
+    }
+
+    private void signUp(){
         try {
             validatePasswords();
 
@@ -54,15 +72,7 @@ public class SignUpController implements Initializable {
         } catch(ValidationException e) {
             AlertHelper.generateErrorAlert("Sign up error", "Error creating an account", e)
                     .showAndWait();
-        } catch (RuntimeException e) {
-            AlertHelper.generateErrorAlert("Sign up error", "Error creating an account", e.getMessage())
-                    .showAndWait();
         }
-    }
-
-    @FXML
-    public void goBack(ActionEvent event) throws IOException {
-        MyMoneyApplication.application.displayLogin();
     }
 
     /**

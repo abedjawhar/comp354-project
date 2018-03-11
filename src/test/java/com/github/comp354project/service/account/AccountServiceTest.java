@@ -82,7 +82,7 @@ public class AccountServiceTest{
     }
 
     @Test(expected = ValidationException.class)
-    public void testAddAccount_withInvalidUser_shouldThrow(){
+    public void testAddAccount_withInvalidUser_shouldThrow() throws ValidationException{
         User user = TestUtils.testUser;
         GetRemoteAccountRequest sampleRequest = GetRemoteAccountRequest.builder()
                 .accountID(TestUtils.testRemoteAccount.getID()).build();
@@ -131,17 +131,17 @@ public class AccountServiceTest{
 
     // deleteAccount() tests
     @Test(expected = ValidationException.class)
-    public void testDeleteAccount_withNullAccount_shouldThrow() {
+    public void testDeleteAccount_withNullAccount_shouldThrow() throws ValidationException {
         accountService.deleteAccount(null);
     }
 
     @Test(expected = ValidationException.class)
-    public void testDeleteAccount_withAccountWithNullID_shouldThrow() {
+    public void testDeleteAccount_withAccountWithNullID_shouldThrow() throws ValidationException{
         accountService.deleteAccount(Account.builder().build());
     }
 
    @Test(expected = ValidationException.class)
-    public void testDeleteAccount_withNonExistentAccount_shouldThrow() {
+    public void testDeleteAccount_withNonExistentAccount_shouldThrow() throws ValidationException {
        accountService.deleteAccount(TestUtils.testAccount);
     }
 

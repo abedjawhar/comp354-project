@@ -6,7 +6,7 @@ import com.google.common.base.Strings;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringLengthValidator implements ICategoryNameValidator, IUsernameValidator, IPasswordValidator{
+public class StringLengthValidator implements ICategoryNameValidator, IUsernameValidator, IPasswordValidator, INameValidator{
     private final int minLength;
     private final int maxLength;
 
@@ -16,7 +16,12 @@ public class StringLengthValidator implements ICategoryNameValidator, IUsernameV
     }
 
     @Override
-    public List<ValidationError> validate(String category, String message) {
+    public List<ValidationError> validateName(String name, String message) {
+        return validate(name, "name", message);
+    }
+
+    @Override
+    public List<ValidationError> validateCategory(String category, String message) {
         return validate(category, "category", message);
     }
 

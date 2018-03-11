@@ -1,10 +1,8 @@
 package com.github.comp354project.service.account;
 
-import com.github.comp354project.service.account.remote.IRemoteAccountService;
 import com.github.comp354project.service.exceptions.DatabaseException;
 import com.github.comp354project.service.exceptions.ValidationError;
 import com.github.comp354project.service.exceptions.ValidationException;
-import com.github.comp354project.service.user.User;
 import com.github.comp354project.service.validators.ICategoryNameValidator;
 import com.github.comp354project.service.validators.ValidatorFactory;
 import com.j256.ormlite.dao.Dao;
@@ -37,7 +35,7 @@ public class TransactionService implements ITransactionService {
                         .parameterValue("transaction").build());
         }
         if(category != null)
-            errors.addAll(categoryValidator.validate(category, "Invalid category"));
+            errors.addAll(categoryValidator.validateCategory(category, "Invalid category"));
         if(!errors.isEmpty()){
             throw ValidationException.builder()
                     .message("Failed to update category")

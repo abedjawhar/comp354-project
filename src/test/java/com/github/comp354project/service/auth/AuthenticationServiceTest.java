@@ -42,7 +42,7 @@ public class AuthenticationServiceTest {
     }
 
     @Test(expected = ValidationException.class)
-    public void testAuthenticate_withNonexistentUsername_shouldThrow() throws SQLException{
+    public void testAuthenticate_withNonexistentUsername_shouldThrow() throws Exception{
         String username = "username";
         when(userDao.queryForEq(eq("username"),eq(username))).thenReturn(new ArrayList<>());
 
@@ -50,7 +50,7 @@ public class AuthenticationServiceTest {
     }
 
     @Test(expected = ValidationException.class)
-    public void testAuthenticate_withIncorrectPassword_shouldThrow() throws SQLException{
+    public void testAuthenticate_withIncorrectPassword_shouldThrow() throws Exception{
         User user = TestUtils.testUser;
         String incorrectPassword = "INCORRECT_PASSOWORD";
         assertNotEquals(user.getPassword(), incorrectPassword);
@@ -60,7 +60,7 @@ public class AuthenticationServiceTest {
     }
 
     @Test
-    public void testAuthenticate_withCorrectCredentials_shouldReturnUser() throws SQLException{
+    public void testAuthenticate_withCorrectCredentials_shouldReturnUser() throws Exception{
         User user = TestUtils.testUser;
         when(userDao.queryForEq(eq("username"),eq(user.getUsername()))).thenReturn(ImmutableList.<User>builder().add(user).build());
 

@@ -39,12 +39,12 @@ public class RemoteAccountServiceTest {
     }
 
     @Test(expected = ValidationException.class)
-    public void testGetAccount_withNullRequest_shouldThrow(){
+    public void testGetAccount_withNullRequest_shouldThrow() throws ValidationException{
         remoteAccountService.getAccount(null);
     }
 
     @Test(expected = ValidationException.class)
-    public void testGetAccount_withInvalidRequest_shouldThrow(){
+    public void testGetAccount_withInvalidRequest_shouldThrow() throws ValidationException{
         remoteAccountService.getAccount(GetRemoteAccountRequest.builder().build());
     }
 
