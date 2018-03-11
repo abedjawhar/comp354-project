@@ -126,10 +126,11 @@ Each subsystem interface must be presented in a separate subsection.
 
 \section{Detailed Design} \label{sec:detail}
 
-Complete description of the system design, describing one subsystem separately in respective subsection.
-UML class diagrams are to be used, as well as a short textual description describing the purpose of each class.
+The myMoney system architecture is designed to be easily modified because of the low coupling between the modules. This was done with interfaces and auto injection of dependencies in classes. Each service package has a Module class designed to bind and provide an implementation to an interface. This way, classes are never instantiated directly into each other, but injected. This design pattern is useful because a change in implementation is as simple as creating a new class and change the module binding. The classes that use it and the tests should in no way be changed. Mocking classes for test purposes is also much easier.
 
-*Note: The above is a description of what to provide. Need to edit into our own
+As a side note, we noticed that merge conflicts using git were much less likely to happen because we can each work on different parts of the system without modifying another module.
+
+The tool used for this purpose is Dagger version 2.
 
 \subsection{Class Diagram}
 
@@ -290,6 +291,7 @@ The follwoing scenario describes the actions occur when user click the button<vi
 Software Requirements Document}}
 \item \href{https://resources.sei.cmu.edu/asset_files/TechnicalReport/2005_005_001_14621.pdf}{\textcolor{blue}{Carnegie Mellon Business Goals}}
 \item \href{http://www.oracle.com/technetwork/testcontent/gettingstartedwithusecasemodeling-133857.pdf}{\textcolor{blue}{Use-Case: Oracle }}
+\item \href{https://github.com/google/dagger}{\textcolor{blue}{Google Dagger Github}}
 
 \end{itemize}
 
