@@ -368,6 +368,51 @@ The user enters plain text through the interface of the system. The banking syst
 
 The system outputs its database data in plain text form, displayed through its interface.
 
+\section{Glossary of Domain Concepts} \label{glossary}
+\begin{table}[H]
+\caption{Glossary of Domain Concepts}
+\begin{center}
+\scalebox{0.7}{
+\begin{tabular}{|l|p{0.8\linewidth}|}
+\hline
+Expression &  Definition \\
+\hline
+User & The person that is using the application and the main provider of requests to the system. \\
+\hline
+User Account & A data object containing user information. It also contains the various bank accounts that a user may have linked to the system. \\
+\hline
+Bank Account & A data object containing transactions linked with a specific bank account in a bank institution. One user account may have more than one bank accounts.\\
+\hline
+Transaction & Any kind of money exchange associated with a bank account.\\
+\hline
+Transfer & A type of transaction that occurs between two parties.\\
+\hline
+Deposit & A type of transaction where the owner puts money in his own bank account.\\
+\hline
+Withdrawal & A type of transaction where the owner of the bank account removes money from his balance.\\
+\hline
+Database & A local or online container which holds data in an organised, efficient manner. \\
+\hline
+Server & a computer that is accessible on a network, on which a database and/or system may be hosted. The bank institutions' databases will be hosted on here. \\
+\hline
+Object-Oriented Programming & A programming paradigm which separates entities into objects, and uses the concept of inheritance of properties, polymorphism of objects, encapsulation of objects. We use this paradigm for its maintainability and structural benefits.\\
+\hline
+MVC - Model-View-Controller Architecture & An architectural pattern which strictly separates components into the model (manages the data and logic), the view (output of the model), and the controller (handling input and passing it to the model or view).\\
+\hline
+Interface & A component of a system by which other entities (be it humans or other systems) may engage in an exchange of data with the system in question. \\
+\hline
+API - Application Programming Interface & A protocol or set of functions which serve as a method of communication to a software system. It is a type of interface, and the one by which our system will communicate with the banking institutions' databases. \\
+\hline
+DAO - Data access object & An object that provides an abstract interface to some type of database or other persistence mechanism.\\
+\hline
+
+\end{tabular}}
+\end{center}
+\end{table}
+
+\clearpage
+
+
 \section{Use Cases}
 \subsection{Overview}
 Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 through 7 and 9 deal with the user viewing the data in different formats. Use case 8 deals with the user manipulating the transactions' formats. For iteration 1, we have only included use case 1, 3, 5, and 6, as those are the ones we have fully implemented. Below is figure \ref{fig:use-case-diagram} which represents our use case diagram. Following this diagram, we list our uses cases
