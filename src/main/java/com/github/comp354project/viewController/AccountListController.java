@@ -11,7 +11,10 @@ import com.github.comp354project.service.account.Account;
 import com.github.comp354project.service.account.IAccountService;
 import com.github.comp354project.service.account.remote.GetRemoteAccountRequest;
 import com.github.comp354project.service.auth.SessionManager;
+import com.github.comp354project.service.auth.exceptions.AuthenticationException;
+import com.github.comp354project.service.auth.exceptions.AuthorisationException;
 import com.github.comp354project.service.exceptions.ValidationException;
+import com.github.comp354project.service.user.IUserService;
 import com.github.comp354project.viewController.helper.AlertHelper;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -50,6 +53,9 @@ public class AccountListController implements Initializable {
 
 	@Inject
 	IAccountService accountService;
+
+	@Inject
+	IUserService userService;
 
 	public AccountListController() {
 		MyMoneyApplication.application.getComponent().inject(this);
@@ -107,6 +113,25 @@ public class AccountListController implements Initializable {
 		}
 	}
 
+	@FXML
+	public void removeAccount() {
+		try {
+			int index = accountsTable.getSelectionModel().getSelectedIndex();
+			if (index == -1) return; // no account selected
+			userService.deleteBankAccount(accounts.get(index));
+			this.tableData.remove(accountsTable.getSelectionModel().getSelectedItem());
+		}
+		catch (ValidationException e) {
+			AlertHelper.generateErrorAlert("removeAccount error", "Error validating account", e).showAndWait();
+		}
+		catch (AuthenticationException e) {
+			AlertHelper.generateErrorAlert("removeAccount error", "Error authenticating user", e.getMessage());
+		}
+		catch (AuthorisationException e) {
+			AlertHelper.generateErrorAlert("removeAccount error",
+					"Error, user does not have the authority to delete the account", e.getMessage());
+		}
+	}
 	public static class AccountDisplayModel {
 		private final SimpleIntegerProperty id;
 		private final SimpleStringProperty bankName;

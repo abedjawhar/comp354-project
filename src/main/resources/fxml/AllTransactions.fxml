@@ -16,7 +16,7 @@
                 <Insets left="10.0"/>
             </padding>
         </Label>
-        <Label fx:id="totalBalanceLabel" layoutX="96.0" layoutY="18.0" text="\$0.00" AnchorPane.leftAnchor="93.0"
+        <Label fx:id="totalBalanceLabel" layoutX="96.0" layoutY="18.0" text="\$0.00" AnchorPane.leftAnchor="103.0"
                AnchorPane.topAnchor="15.0"/>
         <Label fx:id="descriptionLabel" alignment="CENTER" layoutX="378.0" layoutY="7.0" prefHeight="17.0"
                prefWidth="200.0" textAlignment="CENTER" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0"
