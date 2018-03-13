@@ -119,7 +119,8 @@ public class AccountListController implements Initializable {
 			int index = accountsTable.getSelectionModel().getSelectedIndex();
 			if (index == -1) return; // no account selected
 			userService.deleteBankAccount(accounts.get(index));
-			this.tableData.remove(accountsTable.getSelectionModel().getSelectedItem());
+			accounts.remove(index);
+			setAccounts(accounts);
 		}
 		catch (ValidationException e) {
 			AlertHelper.generateErrorAlert("removeAccount error", "Error validating account", e).showAndWait();
@@ -132,6 +133,7 @@ public class AccountListController implements Initializable {
 					"Error, user does not have the authority to delete the account", e.getMessage());
 		}
 	}
+
 	public static class AccountDisplayModel {
 		private final SimpleIntegerProperty id;
 		private final SimpleStringProperty bankName;
