@@ -23,7 +23,6 @@ import org.junit.Test;
 import java.sql.SQLException;
 
 import static junit.framework.TestCase.*;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 public class UserServiceTest {
@@ -145,18 +144,19 @@ public class UserServiceTest {
         userService.deleteBankAccount(account);
         verify(accountService, times(1)).deleteAccount(account);
     }
+
     @Test (expected = ValidationException.class)
-    public void testDeleteUser_withNullUser_shouldThrow() throws AuthenticationException, AuthorisationException, ValidationException {
+    public void testDeleteUser_withNullUser_shouldThrow() throws ValidationException {
         userService.deleteUser(null);
     }
 
     @Test (expected = ValidationException.class)
-    public void testDeleteUser_withNonexistantUser_shouldThrow() throws AuthenticationException, AuthorisationException, ValidationException {
+    public void testDeleteUser_withNonexistantUser_shouldThrow() throws  ValidationException {
 
         userService.deleteUser(TestUtils.testUser);
     }
     @Test
-    public void testDeleteUser_withExistingtUser_shouldSucceed() throws SQLException, ValidationException, UserLoggedInException, AuthorisationException, AuthenticationException {
+    public void testDeleteUser_withExistingtUser_shouldSucceed() throws SQLException, ValidationException, UserLoggedInException {
         User user = TestUtils.testUser;
         userDao.create(user);
         sessionManager.login(user.getUsername(), user.getPassword());
@@ -168,7 +168,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testDeleteUser_withExistingtUser_shouldDeleteAssociatedAccounts() throws SQLException, ValidationException, UserLoggedInException, AuthorisationException, AuthenticationException {
+    public void testDeleteUser_withExistingtUser_shouldDeleteAssociatedAccounts() throws SQLException, ValidationException, UserLoggedInException {
         User user = TestUtils.testUser;
         userDao.create(user);
         Account account = TestUtils.testAccount;
@@ -182,26 +182,28 @@ public class UserServiceTest {
 
     }
 
+
+
     @Test (expected = ValidationException.class)
-    public void testUpdateUser_withNullUser_shouldThrow() throws SQLException, AuthenticationException, AuthorisationException, ValidationException {
+    public void testUpdateUser_withNullUser_shouldThrow() throws ValidationException {
         userService.updateUser(null);
     }
 
     @Test (expected = ValidationException.class)
-    public void testUpdateUser_withNonexistenttUser_shouldThrow() throws SQLException, AuthenticationException, AuthorisationException, ValidationException {
+    public void testUpdateUser_withNonexistenttUser_shouldThrow() throws ValidationException {
         userService.updateUser(TestUtils.testUser);
     }
 
 
     @Test
-    public void testUpdateUser_withValidUser_shouldSucceed() throws SQLException, ValidationException, UserLoggedInException, AuthorisationException, AuthenticationException {
+    public void testUpdateUser_withValidUser_shouldSucceed() throws SQLException, ValidationException, UserLoggedInException {
         User user = TestUtils.testUser;
         userDao.create(user);
         sessionManager.login(user.getUsername(), user.getPassword());
         when(sessionManager.isLoggedIn()).thenReturn(true);
         when(sessionManager.getUser()).thenReturn(user);
         user.setFirstName("Abed");
-        user.setLastName("jawh ar");
+        user.setLastName("jawhar");
         user.setPassword("admin2");
         userService.updateUser(user);
         assertEquals(true,userDao.queryForId(1).getFirstName().equals(user.getFirstName()));
