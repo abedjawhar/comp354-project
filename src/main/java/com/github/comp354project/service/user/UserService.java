@@ -76,7 +76,7 @@ public class UserService implements IUserService {
 
 
     @Override
-    public User updateUser(User user) throws ValidationException, SQLException, AuthorisationException, AuthenticationException {
+    public User updateUser(User user) throws ValidationException {
         if(user == null || user.getID() == null) {
             throw ValidationException.builder().message("Null value given in place of User or User ID.").build();
         }
@@ -94,8 +94,13 @@ public class UserService implements IUserService {
                 throw ValidationException.builder().message("Non existent user given to update! ID: "
                         + user.getID().toString()).build();
             }
-            if (!sessionManager.isLoggedIn()) throw AuthenticationException.builder().build();
-            if (sessionManager.getUser().getID() != user.getID()) throw AuthorisationException.builder().build();
+            if (!sessionManager.isLoggedIn()) throw AuthenticationException.builder()
+                    .message("Tried to update user while not logged in!")
+                    .build();
+            if (sessionManager.getUser().getID() != user.getID()) throw AuthorisationException.builder()
+                    .message("Tried to update user that is not owned by the logged in user!")
+                    .build();
+
             userDao.update(user);
             return user;
         }
@@ -105,22 +110,15 @@ public class UserService implements IUserService {
 
         }
 
-        catch(AuthorisationException e){
+        catch(AuthorisationException | AuthenticationException e){
             logger.error(e);
-            throw AuthorisationException.builder()
-                    .message("Tried to update user that is not owned by the logged in user!")
-                    .build();
+
         }
-        catch(AuthenticationException e){
-            logger.error(e);
-            throw AuthenticationException.builder()
-                    .message("Tried to update user while not logged in!")
-                    .build();
-        }
+        return user;
     }
 
     @Override
-    public void deleteUser(User user) throws ValidationException, AuthorisationException, AuthenticationException {
+    public void deleteUser(User user) throws ValidationException{
         if(user == null || user.getID() == null) {
             throw ValidationException.builder().message("Null value given in place of User or User ID.").build();
         }
@@ -131,8 +129,12 @@ public class UserService implements IUserService {
             User userInDB = userDao.queryForId(user.getID());
             if(userInDB == null) { throw ValidationException.builder().message("Non existent account given to delete! ID: "
                     + user.getID().toString() ).build();}
-            if(!sessionManager.isLoggedIn()) throw AuthenticationException.builder().build();
-            if(sessionManager.getUser().getID() != user.getID()) throw AuthorisationException.builder().build();
+            if(!sessionManager.isLoggedIn()) throw AuthenticationException.builder()
+                    .message("Tried to update user while not logged in!")
+                    .build();
+            if(sessionManager.getUser().getID() != user.getID()) throw AuthorisationException.builder()
+                    .message("Tried to update user that is not owned by the logged in user!")
+                    .build();
             List<Account> accountsToDelete = accountDao.queryForEq("user_id", user);
             for(Account a : accountsToDelete){
                 accountService.deleteAccount(a);
@@ -143,16 +145,9 @@ public class UserService implements IUserService {
             logger.error(e);
             throw new DatabaseException(e);
 
-        }  catch(AuthorisationException e){
+        }  catch(AuthorisationException | AuthenticationException e){
             logger.error(e);
-            throw AuthorisationException.builder()
-                    .message("Tried to delete user that is not owned by the logged in user!")
-                    .build();
-        } catch(AuthenticationException e){
-            logger.error(e);
-            throw AuthenticationException.builder()
-                    .message("Tried to delete user while not logged in!")
-                    .build();
+
         }
     }
 
