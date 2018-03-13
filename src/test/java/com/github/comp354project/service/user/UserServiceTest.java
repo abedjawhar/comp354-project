@@ -3,9 +3,12 @@ package com.github.comp354project.service.user;
 import com.github.comp354project.service.TestUtils;
 import com.github.comp354project.service.account.Account;
 import com.github.comp354project.service.account.AccountService;
+import com.github.comp354project.service.account.Transaction;
+import com.github.comp354project.service.account.remote.IRemoteAccountService;
 import com.github.comp354project.service.auth.exceptions.AuthenticationException;
 import com.github.comp354project.service.auth.exceptions.AuthorisationException;
 import com.github.comp354project.service.auth.SessionManager;
+import com.github.comp354project.service.auth.exceptions.UserLoggedInException;
 import com.github.comp354project.service.exceptions.DatabaseException;
 import com.github.comp354project.service.exceptions.ValidationException;
 import com.j256.ormlite.dao.Dao;
@@ -16,6 +19,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.sql.SQLException;
 
 import static junit.framework.TestCase.*;
 import static org.mockito.Matchers.any;
@@ -29,19 +34,23 @@ public class UserServiceTest {
     private AccountService accountService;
     private Dao<Account, Integer> accountDao;
     private Dao<User, Integer> userDao;
+    private Dao<Transaction, Integer> transactionDao;
+    private IRemoteAccountService remoteAccountService;
 
     @Before
     public void setUp() throws Exception{
         JdbcConnectionSource connectionSource = new JdbcConnectionSource("jdbc:sqlite::memory:");
+        remoteAccountService = mock(IRemoteAccountService.class);
         userDao = DaoManager.createDao(connectionSource, User.class);
-        TableUtils.createTable(connectionSource, User.class);
         sessionManager = mock(SessionManager.class);
         accountService = mock(AccountService.class);
-        userService = new UserService(userDao, sessionManager, accountService);
-        connectionSource = new JdbcConnectionSource("jdbc:sqlite::memory:");
         accountDao = DaoManager.createDao(connectionSource, Account.class);
+        transactionDao = DaoManager.createDao(connectionSource, Transaction.class);
+        userService = new UserService(userDao, accountDao, sessionManager, accountService);
         TableUtils.createTable(connectionSource, User.class);
         TableUtils.createTable(connectionSource, Account.class);
+        TableUtils.createTable(connectionSource, Transaction.class);
+
     }
 
     @Test(expected = ValidationException.class)
@@ -136,4 +145,69 @@ public class UserServiceTest {
         userService.deleteBankAccount(account);
         verify(accountService, times(1)).deleteAccount(account);
     }
+    @Test (expected = ValidationException.class)
+    public void testDeleteUser_withNullUser_shouldThrow() throws AuthenticationException, AuthorisationException, ValidationException {
+        userService.deleteUser(null);
+    }
+
+    @Test (expected = ValidationException.class)
+    public void testDeleteUser_withNonexistantUser_shouldThrow() throws AuthenticationException, AuthorisationException, ValidationException {
+
+        userService.deleteUser(TestUtils.testUser);
+    }
+    @Test
+    public void testDeleteUser_withExistingtUser_shouldSucceed() throws SQLException, ValidationException, UserLoggedInException, AuthorisationException, AuthenticationException {
+        User user = TestUtils.testUser;
+        userDao.create(user);
+        sessionManager.login(user.getUsername(), user.getPassword());
+        when(sessionManager.isLoggedIn()).thenReturn(true);
+        when(sessionManager.getUser()).thenReturn(user);
+        userService.deleteUser(user);
+
+        assertEquals(0, userDao.queryForEq("id", user.getID()).size());
+    }
+
+    @Test
+    public void testDeleteUser_withExistingtUser_shouldDeleteAssociatedAccounts() throws SQLException, ValidationException, UserLoggedInException, AuthorisationException, AuthenticationException {
+        User user = TestUtils.testUser;
+        userDao.create(user);
+        Account account = TestUtils.testAccount;
+        accountDao.create(account);
+        sessionManager.login(user.getUsername(), user.getPassword());
+        when(sessionManager.isLoggedIn()).thenReturn(true);
+        when(sessionManager.getUser()).thenReturn(user);
+        userService.deleteUser(user);
+        assertEquals(0, userDao.queryForEq("id", user.getID()).size());
+        verify(accountService, times(1)).deleteAccount(account);
+
+    }
+
+    @Test (expected = ValidationException.class)
+    public void testUpdateUser_withNullUser_shouldThrow() throws SQLException, AuthenticationException, AuthorisationException, ValidationException {
+        userService.updateUser(null);
+    }
+
+    @Test (expected = ValidationException.class)
+    public void testUpdateUser_withNonexistenttUser_shouldThrow() throws SQLException, AuthenticationException, AuthorisationException, ValidationException {
+        userService.updateUser(TestUtils.testUser);
+    }
+
+
+    @Test
+    public void testUpdateUser_withValidUser_shouldSucceed() throws SQLException, ValidationException, UserLoggedInException, AuthorisationException, AuthenticationException {
+        User user = TestUtils.testUser;
+        userDao.create(user);
+        sessionManager.login(user.getUsername(), user.getPassword());
+        when(sessionManager.isLoggedIn()).thenReturn(true);
+        when(sessionManager.getUser()).thenReturn(user);
+        user.setFirstName("Abed");
+        user.setLastName("jawh ar");
+        user.setPassword("admin2");
+        userService.updateUser(user);
+        assertEquals(true,userDao.queryForId(1).getFirstName().equals(user.getFirstName()));
+        assertEquals(true,userDao.queryForId(1).getLastName().equals(user.getLastName()));
+        assertEquals(true,userDao.queryForId(1).getPassword().equals(user.getPassword()));
+
+    }
+
 }
