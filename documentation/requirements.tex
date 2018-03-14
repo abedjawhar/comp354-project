@@ -533,9 +533,14 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
     \item System validates input, and sends it to the bank for verification and connection.
     \item Bank validates bank account number, and then responds with the bank account information.
     \item System records the valid bank account details securely in its database, and notifies the user of the successful addition of the bank account in the database.}
-    \addrow{Exceptions}{}
-    \addrow{Post-Conditions}{}
-    \addrow{Priority}{}
+    \addmulrow{Exceptions}{
+        \item Account is not added if an invalid account ID was provided
+        \item Account is not added if the account has already been added
+        \item Account is not added if an account could not be found by the bank}
+    \addmulrow{Post-Conditions}{
+        \item The account has been added. Account displayed in account list.
+        \item The account has not been added. An error will be displayed describing what went wrong}
+    \addrow{Priority}{High}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
