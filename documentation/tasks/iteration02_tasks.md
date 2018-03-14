@@ -61,3 +61,30 @@ Evgeni
 Wei
 #### AccountDetailsController
 Kadeem
+
+### Class description
+Describe all the classes in the system.
+* Short description of what the class does (1 liner)
+* Attributes
+* Methods
+Try to have everything alphabetically ordered and package ordered :-)
+#### com.github.comp354
+Marc
+#### com.github.comp354.viewController (and sub packages)
+Evgeni
+#### com.github.comp354.account
+Kadeem
+#### com.github.comp354.account.remote
+Renee
+#### com.github.comp354.account.exception
+Wei
+#### com.github.comp354.dao
+Marc
+#### com.github.comp354.exceptions
+Wei
+#### com.github.comp354.sqlite
+Marc
+#### com.github.comp354.user
+Andrew
+#### com.github.comp354.validators
+Andrew
