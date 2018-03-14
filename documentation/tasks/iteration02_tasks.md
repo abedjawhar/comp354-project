@@ -22,37 +22,37 @@
 #### Detailed class diagram / User class diagram ?
 *Assignee:* Anne is checking how to modify the detailed class diagram
 #### Explanations on the framework choices and design choices
-*Assignee:* Marc
+~~*Assignee:* Marc~~
 #### Sequence design diagram
 Write a justification for each of the use cases on why they were chosen
 ##### Use case #3
 *Assignee:* Andrew
 
 #### Use case #5
-*Assignee:* Evgeni
+~~*Assignee:* Evgeni~~
 
 ##### Use case #1
-*Assignee:* Kadeem
+~~*Assignee:* Kadeem~~
 
 ##### Use case #6
-*Assignee:* Wei
+~~*Assignee:* Wei~~
 
 ### Use cases to be described in more details in requirements document
 #### Use case #3
-*Assignee:* Andrew
+~~*Assignee:* Andrew~~
 
 #### Use case #5
-*Assignee:* Evgeni
+~~*Assignee:* Evgeni~~
 
 #### Use case #1
-*Assignee:* Kadeem
+~~*Assignee:* Kadeem~~
 
 #### Use case #6
-*Assignee:* Wei
+~~*Assignee:* Wei~~
 
 ### Subsystem interface diagram
 #### SignUpController
-Marc
+~~Marc~~
 #### LoginController
 Andrew
 #### AllTransactionsDetails
@@ -60,7 +60,7 @@ Evgeni
 #### AccountListController
 Wei
 #### AccountDetailsController
-Kadeem
+~~Kadeem~~
 
 ### Class description
 Describe all the classes in the system.
