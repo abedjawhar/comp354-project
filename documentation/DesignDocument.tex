@@ -33,12 +33,10 @@
 
 \vspace*{0.5in}
 \centerline{\bf\Large COMP 354}
-\centerline{\bf\Large Desgin Document for myMoney}
+\centerline{\bf\Large Design Document for myMoney}
 
 \vspace*{0.5in}
 \centerline{\bf\Large Team PA-PK}
-
-
 
 \vspace*{0.5in}
 \centerline{\today}
@@ -88,17 +86,19 @@ Wei Wang & 40041116 \\
 
 \section{Introduction and Purpose}
 
-The primary goal of this project is to develop the myMoney application. The goal of this design document is to provide all the details of the Architectural Design (AD), Detailed design (DD) and the Dynamic Design Scenarios (DDS) for the application.The AD section
-focuses on the high-level project decomposition, the DD describes the overall system design including the UML design divided into subsections
-and the DDS will display how the subsystems interact with one another in order to produce system-level services.
+The goal of this document is to define the design for the desktop application myMoney. The majority of the design decisions have been taken     with the Requirements document in mind, one may thus want to look at this document first to have a clear picture of the problem in mind as well as the requirements demanded for the solution. This document presents an implementation of a possible solution to answer this problem. Its design is is outlined through an Architectural Design (AD), a Detailed design (DD) and Dynamic Design Scenarios (DDS) for the application. The AD focuses on high-level project decomposition, the DD describes the overarching system design (which includes the UML design, divided into multiple subsections), and the DDS displays how the subsystems interact with one another in order to produce system-level services. This document may thus be used to plan, coordinate, and guide the development of the software, estimate and allocate necessary resources for proper execution, and  then actually implement the software for the system. It seeks, above all, to serve as a precise and stable reference throughout the development.
 
-%need to review this area
+\section{Scope}
+
+This document contains everything to do with the development decisions and design of the system, all of which are derived from the requirements, which are not described in this document. Also not included in here is any testing of the system, which verifies that the requirements are met. It is merely a blueprint for a system that should, in theory, successfully pass any tests that would be done in correspondence with the requirements.
 
 \section{Architectural Design} \label{sec:arch}
 
-The myMoney application uses the Model-View-Controller (MVC) pattern to read, validate and modify the objects. The front-end, which is the view interacts with view controllers when events are triggered. These events trigger functions in the services package where the model is then modified.
+The myMoney application uses the Model-View-Controller (MVC) pattern to read, validate and modify the objects. The view is implemented through a JAVAFX front-end interface. This view then reports any events triggered by the user to the view controllers, which access the back-end and SQLite database to modify the model. Once updated, the model then passes its changes back to the view, to update the information displayed to the user. A more in-depth view of the interaction between the user and the view can be seen in the dynamic models, in section \ref{Dynamic Models}.
 
-In the service packages, there is a package named remote which is used to represent an external system via an API to connect to bank accounts from different companies.
+The controllers are implemented through a series of function calls to services which handle different layers of the application. All services perform their own validation, whether it is for implementing the business rules, or simply ensuring expected application behaviour (no null objects, caught exceptions...). Once this validation has been verified, the controllers passes the actually requested model change to the model. Examples of such services, their intercommunication, and their validation, is explained more in-depth in section \ref{subsystem interface}.
+
+The model, which includes the back-end connection to the database, is the more complex part of the system. Lower layer services use the data access objects (DAO) to apply edits to the database, after the upper layers have verified the validity of the calls. Our system actually employs two databases; The first, a local database holding user info, bank account info, and transaction info, and the second, a "remote" database (also local, but acts as if it were remote) used to simulate the bank institutions' servers. When the user first adds a bank account, our view receives his input, passes it to the controls, which then makes requests for information to the "remote" database through the use of the services handling remote communication. These services receive a serialisation of the "remote" account, which it then translates into usable data for the local database. Once this has been successfully executed, the model triggers a view update, wherein the user can see his newly requested additions. All other events triggered by the user have no need of the remote database, and simply employ a series of communications between the controllers and the services handling local database. See section \ref{subsystem interface} for more details on these services and the databases.
 
 \subsection{Architectural Diagram}
 
@@ -112,7 +112,7 @@ The com.github.comp354project.service package is the main subsystem where most o
 
 The com.github.comp354project.service package.account.remote package is a subsystem to our services which is meant to mock an API call to systems outside of ours like banks or credit card companies. Because we don't have access to these APIs for real, obviously, the data is persisted in the same SQLite database as the rest of the system.
 
-\subsection{Subsystem Interface Specifications}
+\subsection{Subsystem Interface Specifications} \label{subsystem interface}
 
 Specification of the software interfaces between the subsystems,
 i.e. specific messages (or function calls) that are exchanged by the subsystems.
@@ -244,7 +244,7 @@ List all attributes and functions of the class.
 
 *Note: The above is a description of what to provide. Need to edit into our own
 
-\section{Dynamic Design Scenarios}
+\section{Dynamic Design Scenarios} \label{Dynamic Models}
 
 Describe some (at least two) important execution scenarios of the system using UML sequence diagrams.
 These scenarios must demonstrate how the various subsystems and units are interacting to achieve a system-level service.
@@ -256,7 +256,7 @@ section \ref{sec:arch} and \ref{sec:detail}.
 
 \subsection{Dynamic Models of System Interface}
 
-We have chosen 3 major functionalities of the system (also known as use cases) in order to portray the interactions between the classes of the system. By using a sequence diagram, this will display the dynamics visually by showcasing the sequences of method calls when a particular use case begins functioning. 
+We have chosen 3 major functionalities of the system (also known as use cases) in order to portray the interactions between the classes of the system. By using a sequence diagram, this will display the dynamics visually by showcasing the sequences of method calls when a particular use case begins functioning.
 
 \clearpage
 
