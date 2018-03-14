@@ -153,6 +153,16 @@ Below are the different models and services used in the AccountDetailsController
 
 \clearpage
 
+\subsubsection{AccountListController Interfaces}
+
+Below are the different models and services used in the AccountListController view.
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{subsystem-interface-AccountListController.jpg}
+\end{figure}
+
+\clearpage
+
 \section{Detailed Design} \label{sec:detail}
 
 The myMoney system architecture is designed to be easily modified because of the low coupling between the modules. This was done with interfaces and auto injection of dependencies in classes. Each service package has a Module class designed to bind and provide an implementation to an interface. This way, classes are never instantiated directly into each other, but injected. This design pattern is useful because a change in implementation is as simple as creating a new class and change the module binding. The classes that use it and the tests should in no way be changed. Mocking classes for test purposes is also much easier.
@@ -310,7 +320,7 @@ The following scenario describes the actions occur when user click the button<vi
 
 \subsubsection{Use Case 6: View All Transactions from all Bank Accounts}
 
-The follwoing scenario describes the actions occur when user click the button<view all transactions> for viewsing all transactions from all bank accounts.
+The follwoing scenario describes the actions occur when user click the button "view all transactions" for viewsing all transactions from all bank accounts.
 
 \begin{figure}[H]
 \includegraphics[width=\linewidth]{usecase6.jpg}
