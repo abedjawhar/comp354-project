@@ -14,6 +14,11 @@ import java.util.Date;
 
 public class TransactionDisplayModel {
 
+    public void setAccountID(int accountID) {
+        this.accountID.set(accountID);
+    }
+
+    private SimpleIntegerProperty accountID;
     private SimpleStringProperty date;
     private SimpleDoubleProperty amount;
     private SimpleStringProperty category;
@@ -21,6 +26,7 @@ public class TransactionDisplayModel {
     private final static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
 
     public TransactionDisplayModel(Transaction transaction) {
+        this.accountID = new SimpleIntegerProperty(transaction.getAccount().getID());
         Date date = Date.from(Instant.ofEpochMilli(transaction.getDate()));
         this.date = new SimpleStringProperty(formatter.format(date));
         this.amount = new SimpleDoubleProperty(transaction.getAmount());
@@ -33,6 +39,11 @@ public class TransactionDisplayModel {
         }
         this.category = new SimpleStringProperty(transaction.getCategory());
     }
+
+
+    public Integer getAccountID() { return this.accountID.get(); }
+
+    public void setAccountID(Integer accountID) { this.accountID.set(accountID); }
 
     public String getDate() {
         return this.date.get();

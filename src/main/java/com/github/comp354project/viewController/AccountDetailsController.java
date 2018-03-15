@@ -51,9 +51,11 @@ public class AccountDetailsController implements Initializable {
         List<Transaction> transactions = new ArrayList<>();
         transactions.addAll(account.getTransactions());
         this.transactionTable.addTransactions(transactions);
+        this.transactionTable.hideAccountIDColumn();
 
         accountBalance.setText("$" + account.getBalance());
         accountDescription.setText(account.getID() + ": " + account.getBankName());
         accountType.setText(account.getType());
     }
+
 }
