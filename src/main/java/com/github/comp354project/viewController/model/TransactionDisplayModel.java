@@ -2,6 +2,7 @@ package com.github.comp354project.viewController.model;
 
 import com.github.comp354project.service.account.Transaction;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import javax.swing.text.DateFormatter;
@@ -12,6 +13,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class TransactionDisplayModel {
+    public int getIdCol() {
+        return idCol.get();
+    }
+
+    private SimpleIntegerProperty idCol;
     private SimpleStringProperty date;
     private SimpleDoubleProperty amount;
     private SimpleStringProperty category;
@@ -30,6 +36,14 @@ public class TransactionDisplayModel {
             this.type = new SimpleStringProperty("Withdrawal");
         }
         this.category = new SimpleStringProperty(transaction.getCategory());
+    }
+
+    public Integer idColProperty() {
+        return this.idCol.get();
+    }
+
+    public void setIdCol(int idCol) {
+        this.idCol.set(idCol);
     }
 
     public String getDate() {

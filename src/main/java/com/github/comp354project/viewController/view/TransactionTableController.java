@@ -29,6 +29,9 @@ public class TransactionTableController implements Initializable {
     private static final Logger logger = LogManager.getLogger(TransactionTableController.class);
 
     @FXML
+    private TableColumn<TransactionDisplayModel, Integer> idCol;
+
+    @FXML
     private TableView<TransactionDisplayModel> transactionTableView;
     @FXML
     private TableColumn<TransactionDisplayModel, String> dateCol;
@@ -64,6 +67,7 @@ public class TransactionTableController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
         this.dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
         this.amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
         this.categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
