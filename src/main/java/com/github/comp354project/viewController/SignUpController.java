@@ -44,7 +44,7 @@ public class SignUpController implements Initializable, EventHandler<KeyEvent>{
     }
 
     @FXML
-    public void goBack(ActionEvent event)  {
+    public void goBackToLogin(ActionEvent event)  {
         MyMoneyApplication.application.displayLogin();
     }
 

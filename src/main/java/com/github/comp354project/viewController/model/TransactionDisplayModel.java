@@ -2,6 +2,7 @@ package com.github.comp354project.viewController.model;
 
 import com.github.comp354project.service.account.Transaction;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import javax.swing.text.DateFormatter;
@@ -12,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class TransactionDisplayModel {
+
     private SimpleStringProperty date;
     private SimpleDoubleProperty amount;
     private SimpleStringProperty category;

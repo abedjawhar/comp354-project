@@ -12,7 +12,7 @@
       <JFXTextField fx:id="lastnameTxt" layoutX="34.0" layoutY="34.0" prefWidth="250.0" promptText="Last Name" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="92.0" />
       <JFXPasswordField fx:id="passwordField" layoutX="14.0" layoutY="124.0" promptText="Password" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="131.0" />
       <JFXPasswordField fx:id="passwordRepeatField" layoutX="24.0" layoutY="134.0" promptText="Repeat Password" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="170.0" />
-      <Button layoutX="14.0" layoutY="200.0" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="118.0" text="Go Back" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="209.0" />
+      <Button layoutX="14.0" layoutY="200.0" mnemonicParsing="false" onAction="#goBackToLogin" prefHeight="25.0" prefWidth="118.0" text="Go Back" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="209.0" />
       <Button layoutX="139.0" layoutY="209.0" mnemonicParsing="false" onAction="#signUp" prefHeight="25.0" prefWidth="118.0" text="Sign Up" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="209.0" />
 </children>
 </AnchorPane>
