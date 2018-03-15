@@ -30,6 +30,15 @@ public class User {
     @DatabaseField(columnName = "last_name", canBeNull = false)
     private String lastName;
 
+    @DatabaseField(columnName = "email")
+    private String email;
+
+    @DatabaseField(columnName = "address")
+    private String address;
+
+    @DatabaseField(columnName = "phone")
+    private String phone;
+
     @ForeignCollectionField
     private ForeignCollection<Account> accounts;
 }

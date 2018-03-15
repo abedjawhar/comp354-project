@@ -1,7 +1,7 @@
 package com.github.comp354project;
-
 import com.github.comp354project.service.account.Account;
 import com.github.comp354project.service.auth.SessionManager;
+import com.github.comp354project.service.user.User;
 import com.github.comp354project.viewController.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -84,6 +84,11 @@ public class MyMoneyApplication extends Application {
         AccountListController controller =
                 updateStage("/fxml/AccountList.fxml", "Account List", 800, 500);
         controller.setAccounts(new ArrayList<>(sessionManager.getUser().getAccounts()));
+    }
+
+    public void displayUpdateUser() throws IOException {
+        UpdateUserAccountController controller =
+                updateStage("/fxml/UpdateUserAccount.fxml", "Update Account", 800, 500);
     }
 
     public void displayAccountDetails(Account account) {

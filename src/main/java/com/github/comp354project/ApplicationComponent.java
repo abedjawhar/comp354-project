@@ -9,6 +9,7 @@ import com.github.comp354project.service.user.UserServiceModule;
 import com.github.comp354project.viewController.AccountListController;
 import com.github.comp354project.viewController.LoginController;
 import com.github.comp354project.viewController.SignUpController;
+import com.github.comp354project.viewController.UpdateUserAccountController;
 import com.github.comp354project.viewController.view.TransactionTableController;
 import dagger.Component;
 
@@ -46,4 +47,6 @@ public interface ApplicationComponent {
     void inject(SignUpController signUpController);
 
     void inject(TransactionTableController tableController);
+
+    void inject(UpdateUserAccountController updateUserAccountController);
 }

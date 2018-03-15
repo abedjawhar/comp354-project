@@ -27,9 +27,12 @@ CREATE TABLE User(
 	first_name VARCHAR(255) NOT NULL,
 	last_name VARCHAR(255) NOT NULL,
 	username VARCHAR(255) UNIQUE NOT NULL,
-	password VARCHAR(255) NOT NULL
-);	
-	
+	password VARCHAR(255) NOT NULL,
+    email VARCHAR(255),
+    address VARCHAR(255),
+    phone VARCHAR(255)
+);
+
 CREATE TABLE Account (
   id INTEGER PRIMARY KEY,
   user_id INTEGER NOT NULL,
@@ -38,7 +41,7 @@ CREATE TABLE Account (
   balance REAL NOT NULL,
   FOREIGN KEY(user_id) REFERENCES User(id)
 );
-  
+
 CREATE TABLE AccountTransaction(
   id INTEGER PRIMARY KEY,
   account_id INTEGER NOT NULL,
@@ -111,7 +114,7 @@ INSERT INTO AccountTransaction(
       NULL,
       3
     );
-    
+
 INSERT INTO RemoteAccount (
     id,
     bank_name,
@@ -155,7 +158,7 @@ INSERT INTO RemoteAccount (
     'Mastercard',
     -800
   );
-    
+
 
 INSERT INTO RemoteAccountTransaction (
     id,
@@ -194,26 +197,35 @@ INSERT INTO RemoteAccountTransaction (
     2,
     NULL
 	);
-	
+
 INSERT INTO User(
     id,
     first_name,
     last_name,
     username,
-    password
+    password,
+    email,
+    address,
+    phone
   )
-	VALUES 
+	VALUES
 	(
     1,
 		'Hrachya',
 		'Hakobyan',
 		'admin',
-		'admin'
+		'admin',
+        'sample@email.com',
+        'address',
+        '111111'
 	),
 	(
 	  2,
 		'Marc',
 		'Dube',
 		'madube',
-		'admin'
+		'admin',
+        'sample@email.com',
+        'address',
+        '222222'
 	);
