@@ -97,7 +97,7 @@ public class UserService implements IUserService {
             if (!sessionManager.isLoggedIn()) throw AuthenticationException.builder()
                     .message("Tried to update user while not logged in!")
                     .build();
-            if (sessionManager.getUser().getID() != user.getID()) throw AuthorisationException.builder()
+            if (!sessionManager.getUser().getID().equals(user.getID())) throw AuthorisationException.builder()
                     .message("Tried to update user that is not owned by the logged in user!")
                     .build();
 
@@ -132,7 +132,7 @@ public class UserService implements IUserService {
             if(!sessionManager.isLoggedIn()) throw AuthenticationException.builder()
                     .message("Tried to update user while not logged in!")
                     .build();
-            if(sessionManager.getUser().getID() != user.getID()) throw AuthorisationException.builder()
+            if(!sessionManager.getUser().getID().equals(user.getID())) throw AuthorisationException.builder()
                     .message("Tried to update user that is not owned by the logged in user!")
                     .build();
             List<Account> accountsToDelete = accountDao.queryForEq("user_id", user);
@@ -151,34 +151,6 @@ public class UserService implements IUserService {
         }
     }
 
-    private List<ValidationError> validate(User user){
-        List<ValidationError> errors = new ArrayList<>();
-        if (Strings.isNullOrEmpty(user.getUsername())) {
-            errors.add(ValidationError.builder()
-                    .parameterName("username")
-                    .message("Username required")
-                    .parameterValue(user.getUsername()).build());
-        }
-        if (Strings.isNullOrEmpty(user.getPassword())) {
-            errors.add(ValidationError.builder()
-                    .parameterName("password")
-                    .message("Password required")
-                    .parameterValue(user.getPassword()).build());
-        }
-        if (Strings.isNullOrEmpty(user.getFirstName())) {
-            errors.add(ValidationError.builder()
-                    .parameterName("firstName")
-                    .message("Firstname required")
-                    .parameterValue(user.getFirstName()).build());
-        }
-        if (Strings.isNullOrEmpty(user.getLastName())) {
-            errors.add(ValidationError.builder()
-                    .parameterName("lastName")
-                    .message("Lastname required")
-                    .parameterValue(user.getLastName()).build());
-        }
-        return errors;
-    }
 
 
     @Override

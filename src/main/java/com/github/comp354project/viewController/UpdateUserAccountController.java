@@ -12,11 +12,13 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextInputDialog;
 import lombok.Getter;
 import lombok.Setter;
 import javafx.scene.control.Label;
 import javax.inject.Inject;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -103,8 +105,38 @@ public class UpdateUserAccountController implements Initializable {
         AlertHelper.generateErrorAlert("removeAccount error",
                 "Error, user does not have the authority to delete the account", e.getMessage());
     }
-
-
 }
+
+    @FXML
+    public void deleteUser(ActionEvent event){
+
+        try {
+            TextInputDialog dialog = new TextInputDialog("Password");
+            dialog.setTitle("User Authentication");
+            dialog.setContentText("Please enter your password:");
+            Optional<String> result = dialog.showAndWait();
+            if (result.isPresent()){
+                if(result.get().equals(sessionManager.getUser().getPassword())){
+                    userService.deleteUser(sessionManager.getUser());
+                    this.sessionManager.logout();
+                    MyMoneyApplication.application.displayLogin();
+                } else {
+                    throw AuthenticationException.builder()
+                            .message("Wrong password entered")
+                            .build();
+                }
+            }
+        }
+        catch (ValidationException e) {
+            AlertHelper.generateErrorAlert("deleteUser error", "Error validating user", e).showAndWait();
+        }
+        catch (AuthenticationException e) {
+            AlertHelper.generateErrorAlert("deleteUser error", "Error authenticating user", e.getMessage()).showAndWait();
+        }
+        catch (AuthorisationException e) {
+            AlertHelper.generateErrorAlert("deleteUser error",
+                    "Error, user does not have the authority to delete this user", e.getMessage());
+        }
+    }
 
 }
