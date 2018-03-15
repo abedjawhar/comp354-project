@@ -56,4 +56,8 @@ public class TransactionTable extends Control {
     public void addTransactions(List<Transaction> transactions) {
         this.controller.setTransactions(transactions);
     }
+
+    public void hideAccountIDColumn() {
+        this.controller.hideAccountIDColumn();
+    }
 }

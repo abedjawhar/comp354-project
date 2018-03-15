@@ -67,7 +67,7 @@ public class TransactionTableController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        this.idCol.setCellValueFactory(new PropertyValueFactory<>("accountID"));
         this.dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
         this.amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
         this.categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
@@ -97,5 +97,9 @@ public class TransactionTableController implements Initializable {
             logger.error(e);
         }
         });
+    }
+
+    public void hideAccountIDColumn() {
+        this.idCol.setVisible(false);
     }
 }

@@ -5,19 +5,14 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-import javax.swing.text.DateFormatter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class TransactionDisplayModel {
-    public int getIdCol() {
-        return idCol.get();
-    }
 
-    private SimpleIntegerProperty idCol;
+    private SimpleIntegerProperty accountID;
     private SimpleStringProperty date;
     private SimpleDoubleProperty amount;
     private SimpleStringProperty category;
@@ -28,6 +23,7 @@ public class TransactionDisplayModel {
         Date date = Date.from(Instant.ofEpochMilli(transaction.getDate()));
         this.date = new SimpleStringProperty(formatter.format(date));
         this.amount = new SimpleDoubleProperty(transaction.getAmount());
+        this.accountID = new SimpleIntegerProperty(transaction.getAccount().getID());
         if (transaction.getType().equals("Transfer")) {
             this.type = new SimpleStringProperty("Transfer to " + transaction.getDestinationID().toString());
         } else if (transaction.getType().equals("Deposit")) {
@@ -38,12 +34,12 @@ public class TransactionDisplayModel {
         this.category = new SimpleStringProperty(transaction.getCategory());
     }
 
-    public Integer idColProperty() {
-        return this.idCol.get();
+    public Integer getAccountID() {
+        return this.accountID.get();
     }
 
-    public void setIdCol(int idCol) {
-        this.idCol.set(idCol);
+    public void setAccountID(int ID) {
+        this.accountID.set(ID);
     }
 
     public String getDate() {
