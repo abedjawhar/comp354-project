@@ -96,6 +96,11 @@ public class AccountListController implements Initializable {
     }
 
 	@FXML
+	public void updateUserInfo(ActionEvent event) throws IOException {
+		MyMoneyApplication.application.displayUpdateUser();
+	}
+
+	@FXML
 	public void addAccount() {
 		try {
 			GetRemoteAccountRequest remoteAccountRequest = GetRemoteAccountRequest.builder()

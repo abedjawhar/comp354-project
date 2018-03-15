@@ -5,12 +5,18 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import javax.swing.text.DateFormatter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class TransactionDisplayModel {
+
+    public void setAccountID(int accountID) {
+        this.accountID.set(accountID);
+    }
 
     private SimpleIntegerProperty accountID;
     private SimpleStringProperty date;
@@ -20,10 +26,10 @@ public class TransactionDisplayModel {
     private final static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
 
     public TransactionDisplayModel(Transaction transaction) {
+        this.accountID = new SimpleIntegerProperty(transaction.getAccount().getID());
         Date date = Date.from(Instant.ofEpochMilli(transaction.getDate()));
         this.date = new SimpleStringProperty(formatter.format(date));
         this.amount = new SimpleDoubleProperty(transaction.getAmount());
-        this.accountID = new SimpleIntegerProperty(transaction.getAccount().getID());
         if (transaction.getType().equals("Transfer")) {
             this.type = new SimpleStringProperty("Transfer to " + transaction.getDestinationID().toString());
         } else if (transaction.getType().equals("Deposit")) {
@@ -34,13 +40,10 @@ public class TransactionDisplayModel {
         this.category = new SimpleStringProperty(transaction.getCategory());
     }
 
-    public Integer getAccountID() {
-        return this.accountID.get();
-    }
 
-    public void setAccountID(int ID) {
-        this.accountID.set(ID);
-    }
+    public Integer getAccountID() { return this.accountID.get(); }
+
+    public void setAccountID(Integer accountID) { this.accountID.set(accountID); }
 
     public String getDate() {
         return this.date.get();

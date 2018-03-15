@@ -17,7 +17,10 @@ public class TestUtils {
             .firstName("Hrachya")
             .lastName("Hakobyan")
             .username("admin")
-            .password("admin").build();
+            .password("admin")
+            .email("sample@email.com")
+            .address("address")
+            .phone("111111").build();
     public static final RemoteAccount testRemoteAccount = RemoteAccount.builder()
             .ID(1)
             .bankName("TD")

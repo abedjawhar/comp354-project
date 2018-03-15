@@ -16,6 +16,14 @@ public class SessionManager {
     @Getter
     private User user;
 
+    public void setUser(User user){
+        if(user == null)
+            return;
+        if(isLoggedIn() && this.user.getID().equals(user.getID())){
+            this.user = user;
+        }
+    }
+
     @Inject
     public SessionManager(IAuthenticationService authenticationService) {
         this.authenticationService = authenticationService;

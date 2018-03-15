@@ -81,7 +81,7 @@ public class UserService implements IUserService {
             throw ValidationException.builder().message("Null value given in place of User or User ID.").build();
         }
 
-        List<ValidationError> errors = validate(user);
+        List<ValidationError> errors = userValidator.validateUser(user);
         if (!errors.isEmpty()) {
             throw ValidationException.builder()
                     .message("Invalid user")
@@ -102,7 +102,7 @@ public class UserService implements IUserService {
                     .build();
 
             userDao.update(user);
-            return user;
+            return userDao.queryForId(user.getID());
         }
         catch(SQLException e){
             logger.error(e);
