@@ -55,11 +55,11 @@ Write a justification for each of the use cases on why they were chosen
 #### SignUpController
 ~~Marc~~
 #### LoginController
-Andrew
+~~Andrew~~
 #### AllTransactionsDetails
 Evgeni
 #### AccountListController
-Wei
+~~Wei~~
 #### AccountDetailsController
 ~~Kadeem~~
 
