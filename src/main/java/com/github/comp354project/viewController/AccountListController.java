@@ -21,23 +21,19 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import lombok.Data;
 
 import javax.inject.Inject;
 
 
 public class AccountListController implements Initializable {
 
-	@FXML private Label usernameLbl;
 	@FXML private TextField accountIdTxt;
 	@FXML private TableView<AccountDisplayModel> accountsTable;
 	@FXML private TableColumn<AccountDisplayModel, Integer>  idCol;
@@ -62,10 +58,10 @@ public class AccountListController implements Initializable {
 	}
 
 	public void initialize(URL url, ResourceBundle rb) {
-		idCol.setCellValueFactory(new PropertyValueFactory<AccountDisplayModel,Integer>("id"));
-		bankNameCol.setCellValueFactory(new PropertyValueFactory<AccountDisplayModel,String>("bankName"));
-		typeCol.setCellValueFactory(new PropertyValueFactory<AccountDisplayModel,String>("type"));
-		balanceCol.setCellValueFactory(new PropertyValueFactory<AccountDisplayModel,Double>("balance"));
+		idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+		bankNameCol.setCellValueFactory(new PropertyValueFactory<>("bankName"));
+		typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+		balanceCol.setCellValueFactory(new PropertyValueFactory<>("balance"));
 		accountsTable.setItems(tableData);
 	}
 
@@ -85,18 +81,18 @@ public class AccountListController implements Initializable {
 	}
 
 	@FXML
-	public void viewAllAccounts(ActionEvent event)  {
+	public void viewAllAccounts()  {
 		MyMoneyApplication.application.displayAllAccountDetails(accounts);
 	}
 
 	@FXML
-    public void logout(ActionEvent event)  {
+    public void logout()  {
 		this.sessionManager.logout();
 		MyMoneyApplication.application.displayLogin();
     }
 
 	@FXML
-	public void updateUserInfo(ActionEvent event) throws IOException {
+	public void updateUserInfo() throws IOException {
 		MyMoneyApplication.application.displayUpdateUser();
 	}
 
