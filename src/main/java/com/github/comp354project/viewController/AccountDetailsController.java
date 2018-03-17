@@ -6,9 +6,13 @@ import com.github.comp354project.service.account.Transaction;
 import com.github.comp354project.viewController.view.TransactionTable;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import lombok.Getter;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +28,11 @@ public class AccountDetailsController implements Initializable {
     private Label accountDescription;
     @FXML
     private Label accountType;
+    @FXML
+    private Button deleteAccountBtn;
+    @FXML
+    private AnchorPane anchorPane;
+
 
     @Getter
     private Account account;
@@ -32,14 +41,15 @@ public class AccountDetailsController implements Initializable {
     }
 
     @FXML
-    public void gotoAccountList() {
+    public void gotoAccountList(MouseEvent event) throws IOException {
         MyMoneyApplication.application.displayAccounts();
     }
 
     public void setAccount(Account account) {
         this.account = account;
 
-        List<Transaction> transactions = new ArrayList<>(account.getTransactions());
+        List<Transaction> transactions = new ArrayList<>();
+        transactions.addAll(account.getTransactions());
         this.transactionTable.addTransactions(transactions);
         this.transactionTable.hideAccountIDColumn();
 
