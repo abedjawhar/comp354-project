@@ -79,7 +79,6 @@ public class UpdateUserAccountController implements Initializable {
 
     @FXML
     public void updateUser(ActionEvent event)  {
-    System.out.println("SHIT");
     try{
         if (passwordField.getText().equals(passwordRepeatField.getText())) {
              sessionManager.setUser(userService.updateUser((User.builder()
