@@ -218,12 +218,12 @@ In this section we provide the class diagram of our system, useful for the syste
 \textbf{Attributes}               & \textbf{Visibility}   & \textbf{Data Type}                                                & \textbf{Name}      & \textbf{Description}                          \\ \hline
 None                              &                       &                                                                   &                    &                                               \\ \hline
 \multirow{7}{*}{\textbf{Methods}} & \textbf{Visibility}   & \textbf{Name}                                                     & \textbf{Returns}   & \textbf{Description}                          \\ \cline{2-5}
-                                  & public                & inject(MyMoneyApplication myMoneyApplication)                     & void               & Injector for MyMoneyApplication class         \\ \cline{2-5}
-                                  & public                & inject(LoginController loginController)                           & void               & Injector for the LoginController class        \\ \cline{2-5}
-                                  & public                & inject(AccountListController accountListController)               & void               & Injector for the AccountListController class  \\ \cline{2-5}
-                                  & public                & inject(SignUpController signUpController)                         & void               & Injector for the SignUpController             \\ \cline{2-5}
-                                  & public                & inject(TransactionTableController tableController)                & void               & Injector for the TransactionTableController   \\ \cline{2-5}
-                                  & public                & inject(UpdateUserAccountController updateUserAccountController)   & void               & Injector for the UpdateUserAccountController  \\ \hline
+                                  & public                & inject(MyMoneyApplication myMoneyApplication)                     & void               & \begin{tabular}[c]{@{}l@{}}Injector for \\ MyMoneyApplication class \end{tabular}        \\ \cline{2-5}
+                                  & public                & inject(LoginController loginController)                           & void               & \begin{tabular}[c]{@{}l@{}}Injector for \\ the LoginController class\end{tabular}        \\ \cline{2-5}
+                                  & public                & inject(AccountListController accountListController)               & void               & \begin{tabular}[c]{@{}l@{}}Injector for \\ the AccountListController class\end{tabular}  \\ \cline{2-5}
+                                  & public                & inject(SignUpController signUpController)                         & void               & \begin{tabular}[c]{@{}l@{}}Injector for \\ the SignUpController class\end{tabular}             \\ \cline{2-5}
+                                  & public                & inject(TransactionTableController tableController)                & void               & \begin{tabular}[c]{@{}l@{}}Injector for \\ the TransactionTableController \\ class\end{tabular}   \\ \cline{2-5}
+                                  & public                & inject(UpdateUserAccountController updateUserAccountController)   & void               & \begin{tabular}[c]{@{}l@{}}Injector for \\ the UpdateUserAccountController \\ class\end{tabular}  \\ \hline
 \end{tabular}
 }
 \end{table}
@@ -296,12 +296,12 @@ None                 &                     &                         &          
                      & public              & start(Stage primaryStage)                                     & void               & \begin{tabular}[c]{@{}l@{}}Displays the first GUI\\ when the application\\ launches\end{tabular}                               \\ \hline
                      & private             & updateStage(String fxml, String title, int width, int height) & T                  & Updates the current view                                                                                                       \\ \hline
                      & private             & setStageTitle(String title)                                   & void               & Sets the view's title                                                                                                          \\ \hline
-                     & public              & displayLogin()                                                & void               & Displays the login view                                                                                                        \\ \hline
-                     & public              & displaySignUp()                                               & void               & Displays the sign up view                                                                                                      \\ \hline
-                     & public              & displayAccounts()                                             & void               & Displays the user accounts view                                                                                                \\ \hline
-                     & public              & displayUpdateUser()                                           & void               & Displays the update user view                                                                                                  \\ \hline
-                     & public              & displayAccountDetails(Account account)                        & void               & Displays the account details view                                                                                              \\ \hline
-                     & public              & displayAllAccountDetails(List accounts)                       & void               & Displays all accounts details view                                                                                             \\ \hline
+                     & public              & displayLogin()                                                & void               & \begin{tabular}[c]{@{}l@{}}Displays the login view\end{tabular}                                                                                            \\ \hline
+                     & public              & displaySignUp()                                               & void               & \begin{tabular}[c]{@{}l@{}}Displays the sign up view \end{tabular}                                                                                            \\ \hline
+                     & public              & displayAccounts()                                             & void               & \begin{tabular}[c]{@{}l@{}}Displays the user accounts view \end{tabular}                                                                                            \\ \hline
+                     & public              & displayUpdateUser()                                           & void               & \begin{tabular}[c]{@{}l@{}}Displays the update user view \end{tabular}                                                                                            \\ \hline
+                     & public              & displayAccountDetails(Account account)                        & void               & \begin{tabular}[c]{@{}l@{}}Displays the account details view \end{tabular}                                                                                            \\ \hline
+                     & public              & displayAllAccountDetails(List accounts)                       & void               & \begin{tabular}[c]{@{}l@{}}Displays all accounts details view \end{tabular}                                                                                            \\ \hline
 \end{tabular}%
 }
 \end{table}
@@ -345,17 +345,17 @@ None                 &                     &                         &          
 \textbf{Type}                        & \multicolumn{4}{l|}{Class}                                                                                                                                                                                     \\ \hline
 \textbf{Inherits}                    & \multicolumn{4}{l|}{N/A}                                                                                                                                                                                        \\ \hline
 \textbf{Implements}                  & \multicolumn{4}{l|}{IAccountService}                                                                                                                                                                            \\ \hline
-\textbf{Description}                 & \multicolumn{4}{l|}{Class used to request information from the bank database in order to add or delete an account to myMoney application}                                                                       \\ \hline
+\textbf{Description}                 & \multicolumn{4}{l|}{\begin{tabular}[c]{@{}l@{}}Class used to request information from the bank\\ database in order to add or delete an account to myMoney application\end{tabular}}                                                                       \\ \hline
 \multirow{5}{*}{\textbf{Attributes}} & \textbf{Visibility} & \textbf{Data Type}                          & \textbf{Name}        & \textbf{Description}                                                                                                 \\ \cline{2-5}
-                                     & private             & Logger                                      & logger               & logger object attribute used to keep track of errors                                                                 \\ \cline{2-5}
-                                     & private             & Dao\textlessTransaction,Integer\textgreater & transactionDao       & Dao object used to query the database                                                                                \\ \cline{2-5}
-                                     & private             & Dao\textlessUser,Integer\textgreater        & userDao              & Dao object used for quering the database                                                                             \\ \cline{2-5}
-                                     & private             & IRemoteAccountService                       & remoteAccountService & attribute used to access database                                                                                    \\ \hline
+                                     & private             & Logger                                      & logger               & \begin{tabular}[c]{@{}l@{}}logger object attribute used\\ to keep track of events\end{tabular}                                                                 \\ \cline{2-5}
+                                     & private             & Dao\textlessTransaction,Integer\textgreater & transactionDao       & \begin{tabular}[c]{@{}l@{}}Dao object used to \\query transactions\end{tabular}                                                                                \\ \cline{2-5}
+                                     & private             & Dao\textlessUser,Integer\textgreater        & userDao              & \begin{tabular}[c]{@{}l@{}}Dao object used to \\query users\end{tabular}                                                                             \\ \cline{2-5}
+                                     & private             & IRemoteAccountService                       & remoteAccountService & \begin{tabular}[c]{@{}l@{}}Dao object used to \\query remote accounts\end{tabular}                                                                                    \\ \hline
 \multirow{5}{*}{\textbf{Methods}}    & \textbf{Visibility} & \textbf{Name}                               & \textbf{Returns}     & \textbf{Description}                                                                                                 \\ \cline{2-5}
-                                     & public              & addAccount                                  & Account              & method to request bank information from the database                                                                 \\ \cline{2-5}
-                                     & public              & deleteAccount                               & void                 & method to delete a particular account from myMoney application                                                       \\ \cline{2-5}
-                                     & public              & transform                                   & Account              & method to create the appropriate banking info to display for the myMoney app based on the retrieved banking info     \\ \cline{2-5}
-                                     & public              & Transaction                                 & transform            & method to create the appropriate transaction info to display for the myMoney app based on the retrieved banking info \\ \hline
+                                     & public              & addAccount                                  & Account              & \begin{tabular}[c]{@{}l@{}}method to request bank \\information from the database\end{tabular}                                                                 \\ \cline{2-5}
+                                     & public              & deleteAccount                               & void                 & \begin{tabular}[c]{@{}l@{}}method to delete a particular \\account from myMoney application\end{tabular}                                                       \\ \cline{2-5}
+                                     & public              & transform                                   & Account              & \begin{tabular}[c]{@{}l@{}}method to create the appropriate \\banking info to display for the myMoney app \\based on the retrieved banking info\end{tabular}     \\ \cline{2-5}
+                                     & public              & Transaction                                 & transform            & \begin{tabular}[c]{@{}l@{}}method to create the appropriate \\transaction info to display for the myMoney \\app based on the retrieved banking info\end{tabular} \\ \hline
 \end{tabular}%
 }
 \end{table}
@@ -479,6 +479,175 @@ None                              & None                & None                  
 
 %End of com.github.comp354project.service.account
 
+%Start of com.github.comp354project.account.remote
+
+\begin{table}[]
+\centering
+\caption{Class GetRemoteAccountRequest}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{5}{l|}{com.github.comp354project.service.account.remote.GetRemoteAccountRequest}                                                                   \\ \hline
+\textbf{Type}        & \multicolumn{5}{l|}{Public}                                                                                    \\ \hline
+\textbf{Inherits}    & \multicolumn{5}{l|}{N/A}                                                                                       \\ \hline
+\textbf{Implements}  & \multicolumn{5}{l|}{N/A}                                                                                       \\ \hline
+\textbf{Description} & \multicolumn{5}{l|}{Retrieve the remote account request}                                                       \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type} & \textbf{Name}    & \multicolumn{2}{l|}{\textbf{Description}}        \\ \hline
+                     & Private             & Integer            & accountID        & \multicolumn{2}{l|}{Identification of an account} \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}      & \textbf{Returns} & \textbf{Description}       & \textbf{Throws}     \\ \hline
+None                 &                     &                    &                  &                            &                     \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+
+\begin{table}[]
+\centering
+\caption{Class GetRemoteAccountResponse}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{5}{l|}{com.github.comp354project.service.account.remote.GetRemoteAccountResponse}                                                           \\ \hline
+\textbf{Type}        & \multicolumn{5}{l|}{Public}                                                                             \\ \hline
+\textbf{Inherits}    & \multicolumn{5}{l|}{N/A}                                                                                \\ \hline
+\textbf{Implements}  & \multicolumn{5}{l|}{N/A}                                                                                \\ \hline
+\textbf{Description} & \multicolumn{5}{l|}{Retrieve the response for the remote account request}                               \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type} & \textbf{Name}    & \multicolumn{2}{l|}{\textbf{Description}} \\ \hline
+                     & Private             & RemoteAccount      & account          & \multicolumn{2}{l|}{The remote account}   \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}      & \textbf{Returns} & \textbf{Description}   & \textbf{Throws}  \\ \hline
+None                 &                     &                    &                  &                        &                  \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+
+
+
+\begin{table}[]
+\centering
+\caption{Interface IRemoteAccountService}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\textbf{Name}        & \multicolumn{5}{l|}{com.github.comp354project.service.account.remote.IRemoteAccountService}                                  \\ \hline
+\textbf{Type}        & \multicolumn{5}{l|}{Public}                                                                                                \\ \hline
+\textbf{Inherits}    & \multicolumn{5}{l|}{N/A}                                                                                                   \\ \hline
+\textbf{Implements}  & \multicolumn{5}{l|}{N/A}                                                                                                   \\ \hline
+\textbf{Description} & \multicolumn{5}{l|}{The interface for the remote account service (request and response)}                                   \\ \hline
+\textbf{Attributes}  & \textbf{Visibility}     & \textbf{Data Type}        & \textbf{Name}          & \multicolumn{2}{l|}{\textbf{Description}}   \\ \hline
+None                 &                         &                           &                        & \multicolumn{2}{l|}{}                       \\ \hline
+\textbf{Methods}     & \textbf{Visibility}     & \textbf{Name}             & \textbf{Throws}        & \multicolumn{2}{l|}{\textbf{Description}}   \\ \hline
+                     & Public                  & IRemoteAccountService     & ValidationException    & \multicolumn{2}{l|}{Remote account service} \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+
+
+\begin{table}[]
+\centering
+\caption{Class RemoteAccount}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{5}{l|}{com.github.comp354project.service.account.remote.RemoteAccount}                            \\ \hline
+\textbf{Type}        & \multicolumn{5}{l|}{Public}                                                                                    \\ \hline
+\textbf{Inherits}    & \multicolumn{5}{l|}{N/A}                                                                                       \\ \hline
+\textbf{Implements}  & \multicolumn{5}{l|}{N/A}                                                                                       \\ \hline
+\textbf{Description} & \multicolumn{5}{l|}{The remote account with details}                                                           \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type} & \textbf{Name}    & \multicolumn{2}{l|}{\textbf{Description}}        \\ \hline
+\multirow{5}{*}{}    & Private             & Integer            & ID               & \multicolumn{2}{l|}{ID of the account}           \\ \cline{2-6}
+                     & Private             & String             & bankName         & \multicolumn{2}{l|}{Name of the bank}            \\ \cline{2-6}
+                     & Private             & String             & Type             & \multicolumn{2}{l|}{Type of the account}         \\ \cline{2-6}
+                     & Private             & Double             & balance          & \multicolumn{2}{l|}{Balance of the account}      \\ \cline{2-6}
+                     & Private             & ForeignCollection  & transactions     & \multicolumn{2}{l|}{Transactions of the account} \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}      & \textbf{Returns} & \textbf{Description}       & \textbf{Throws}     \\ \hline
+None                 &                     &                    &                  &                            &                     \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+
+
+\begin{table}[]
+\centering
+\caption{Class RemoteAccountModule}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.service.account.remote.RemoteAccountModule}                                                                                    \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{Public}                                                                                                                                                  \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                                                                                                     \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                                     \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{The module for remote account class}                                                                                                                     \\ \hline
+\textbf{Attributes}  & \textbf{Visibility}      & \textbf{Data Type}                           & \textbf{Name}                         & \textbf{Description}                                       \\ \hline
+None                 &                          &                                              &                                       &                                                            \\ \hline
+\textbf{Methods}     & \textbf{Visibility}      & \textbf{Name}                                & \textbf{Returns}                      & \textbf{Description}                                       \\ \hline
+\multirow{2}{*}{}    & \multirow{2}{*}{Default} & \multirow{2}{*}{provideRemoteAccountService} & \multirow{2}{*}{remoteAccountService} & \multirow{2}{*}{Module provide the remote account service} \\
+                     &                          &                                              &                                       &                                                            \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+
+
+
+\begin{table}[]
+\centering
+\caption{Class RemoteAccountService}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\textbf{Class Name}                  & \multicolumn{5}{l|}{com.github.comp354project.service.account.remote.RemoteAccountService}                                                                                                                                                                                                                                                                                                                                              \\ \hline
+\textbf{Type}                        & \multicolumn{5}{l|}{Public}                                                                                                                                                                                                                                                                                                                                                            \\ \hline
+\textbf{Inherits}                    & \multicolumn{5}{l|}{N/A}                                                                                                                                                                                                                                                                                                                                                               \\ \hline
+\textbf{Implements}                  & \multicolumn{5}{l|}{IRemoteAccountService}                                                                                                                                                                                                                                                                                                                                             \\ \hline
+\textbf{Description}                 & \multicolumn{5}{l|}{The services that the remote account can provide}                                                                                                                                                                                                                                                                                                                  \\ \hline
+\multirow{2}{*}{\textbf{Attributes}} & \textbf{Visibility}         & \textbf{Data Type}                                                                                            & \textbf{Name}                                                                       & \multicolumn{2}{l|}{\textbf{Description}}                                                                                                          \\ \cline{2-6}
+                                     & Private                     & Logger                                                                                                        & logger                                                                              & \multicolumn{2}{l|}{\begin{tabular}[c]{@{}l@{}}Gets the log \\ of the Remote\\ AccountService.class\end{tabular}}                                  \\ \hline
+                                     & Private                     & \begin{tabular}[c]{@{}l@{}}Dao \textless Remote\\ Account, Integer \textgreater\end{tabular}                  & \begin{tabular}[c]{@{}l@{}}Remote\\ AccountDao\end{tabular}                         & \multicolumn{2}{l|}{RemoteAccountDoa}                                                                                                              \\ \hline
+\textbf{Methods}                     & \textbf{Visibility}         & \textbf{Name}                                                                                                 & \textbf{Throws}                                                                     & \multicolumn{2}{l|}{\textbf{Description}}                                                                                                          \\ \hline
+                                     & \multicolumn{1}{c|}{Public} & \multicolumn{1}{c|}{RemoteAccountService(Dao  \textless RemoteAccount,Integer \textgreater remoteAccountDao)} & \multicolumn{1}{c|}{N/A}                                                            & \multicolumn{2}{l|}{\begin{tabular}[c]{@{}l@{}}The constructor \\ class for Remote\\ AccountService\end{tabular}}                                  \\ \hline
+                                     & Public                      & getAccount(GetRemoteAccountRequest request)                                                                   & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Validation\\ Exception\end{tabular}} & \multicolumn{2}{l|}{\begin{tabular}[c]{@{}l@{}}Return the account \\ information if \\ there is a request \\ for it and if it exists\end{tabular}} \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+
+
+\begin{table}[]
+\centering
+\caption{Class RemoteTransaction}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}                  & \multicolumn{4}{l|}{com.github.comp354project.service.account.remote.RemoteTransaction}                                                                                                                                           \\ \hline
+\textbf{Type}                        & \multicolumn{4}{l|}{Public}                                                                                                                                                      \\ \hline
+\textbf{Inherits}                    & \multicolumn{4}{l|}{N/A}                                                                                                                                                         \\ \hline
+\textbf{Implements}                  & \multicolumn{4}{l|}{N/A}                                                                                                                                                         \\ \hline
+\textbf{Description}                 & \multicolumn{4}{l|}{The remote transaction class}                                                                                                                                \\ \hline
+\multirow{3}{*}{\textbf{Attributes}} & \textbf{Visibility} & \textbf{Data Type} & \textbf{Name}    & \textbf{Description}                                                                                               \\ \cline{2-5}
+                                     & Private             & Integer            & ID               & \begin{tabular}[c]{@{}l@{}}Identification of the \\ remote transaction\end{tabular}                                \\ \cline{2-5}
+                                     & Private             & Integer            & date             & Date of the transaction                                                                                            \\ \hline
+                                     & Private             & Double             & amount           & Amount of money transitioned                                                                                       \\ \hline
+                                     & Private             & String             & type             & Type of transaction                                                                                                \\ \hline
+                                     & Private             & Integer            & SourceID         & \begin{tabular}[c]{@{}l@{}}Identification of the source \\ where the money was originally\\ resided\end{tabular}   \\ \hline
+                                     & Private             & Integer            & destinationID    & \begin{tabular}[c]{@{}l@{}}Identification of the destination\\ where the money will be\\ transitioned\end{tabular} \\ \hline
+                                     & Private             & Remote             & account          & The main account of the user                                                                                       \\ \hline
+\textbf{Methods}                     & \textbf{Visibility} & \textbf{Name}      & \textbf{Returns} & \textbf{Description}                                                                                               \\ \hline
+None                                 &                     &                    &                  &                                                                                                                    \\ \hline
+\end{tabular}%
+}
+\end{table}
+%end of Start of com.github.comp354project.account.remote
+
 % Start of com.github.comp354project.service.dao
 
 \begin{table}[H]
@@ -570,174 +739,6 @@ None                 &                     &                       &            
 \end{table}
 
 % End of com.github.comp354project.service.sqlite
-%Start of com.github.comp354project.account.remote
-
-\begin{table}[]
-\centering
-\caption{Class GetRemoteAccountRequest}
-\label{my-label}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-\textbf{Class Name}  & \multicolumn{5}{l|}{com.github.comp354project.service.account.remote.GetRemoteAccountRequest}                                                                   \\ \hline
-\textbf{Type}        & \multicolumn{5}{l|}{Public}                                                                                    \\ \hline
-\textbf{Inherits}    & \multicolumn{5}{l|}{N/A}                                                                                       \\ \hline
-\textbf{Implements}  & \multicolumn{5}{l|}{N/A}                                                                                       \\ \hline
-\textbf{Description} & \multicolumn{5}{l|}{Retrieve the remote account request}                                                       \\ \hline
-\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type} & \textbf{Name}    & \multicolumn{2}{l|}{\textbf{Description}}        \\ \hline
-                     & Private             & Integer            & accountID        & \multicolumn{2}{l|}{Identification of an account} \\ \hline
-\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}      & \textbf{Returns} & \textbf{Description}       & \textbf{Throws}     \\ \hline
-None                 &                     &                    &                  &                            &                     \\ \hline
-\end{tabular}%
-}
-\end{table}
-
-
-\begin{table}[]
-\centering
-\caption{Class GetRemoteAccountResponse}
-\label{my-label}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-\textbf{Class Name}  & \multicolumn{5}{l|}{com.github.comp354project.service.account.remote.GetRemoteAccountResponse}                                                           \\ \hline
-\textbf{Type}        & \multicolumn{5}{l|}{Public}                                                                             \\ \hline
-\textbf{Inherits}    & \multicolumn{5}{l|}{N/A}                                                                                \\ \hline
-\textbf{Implements}  & \multicolumn{5}{l|}{N/A}                                                                                \\ \hline
-\textbf{Description} & \multicolumn{5}{l|}{Retrieve the response for the remote account request}                               \\ \hline
-\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type} & \textbf{Name}    & \multicolumn{2}{l|}{\textbf{Description}} \\ \hline
-                     & Private             & RemoteAccount      & account          & \multicolumn{2}{l|}{The remote account}   \\ \hline
-\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}      & \textbf{Returns} & \textbf{Description}   & \textbf{Throws}  \\ \hline
-None                 &                     &                    &                  &                        &                  \\ \hline
-\end{tabular}%
-}
-\end{table}
-
-
-
-
-\begin{table}[]
-\centering
-\caption{Interface IRemoteAccountService}
-\label{my-label}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-\textbf{Name}        & \multicolumn{5}{l|}{com.github.comp354project.service.account.remote.IRemoteAccountService}                                  \\ \hline
-\textbf{Type}        & \multicolumn{5}{l|}{Public}                                                                                                \\ \hline
-\textbf{Inherits}    & \multicolumn{5}{l|}{N/A}                                                                                                   \\ \hline
-\textbf{Implements}  & \multicolumn{5}{l|}{N/A}                                                                                                   \\ \hline
-\textbf{Description} & \multicolumn{5}{l|}{The interface for the remote account service (request and response)}                                   \\ \hline
-\textbf{Attributes}  & \textbf{Visibility}     & \textbf{Data Type}        & \textbf{Name}          & \multicolumn{2}{l|}{\textbf{Description}}   \\ \hline
-None                 &                         &                           &                        & \multicolumn{2}{l|}{}                       \\ \hline
-\textbf{Methods}     & \textbf{Visibility}     & \textbf{Name}             & \textbf{Throws}        & \multicolumn{2}{l|}{\textbf{Description}}   \\ \hline
-                     & Public                  & IRemoteAccountService     & ValidationException    & \multicolumn{2}{l|}{Remote account service} \\ \hline
-\end{tabular}%
-}
-\end{table}
-
-
-
-\begin{table}[]
-\centering
-\caption{Class RemoteAccount}
-\label{my-label}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-\textbf{Class Name}  & \multicolumn{5}{l|}{com.github.comp354project.service.account.remote.RemoteAccount}                            \\ \hline
-\textbf{Type}        & \multicolumn{5}{l|}{Public}                                                                                    \\ \hline
-\textbf{Inherits}    & \multicolumn{5}{l|}{N/A}                                                                                       \\ \hline
-\textbf{Implements}  & \multicolumn{5}{l|}{N/A}                                                                                       \\ \hline
-\textbf{Description} & \multicolumn{5}{l|}{The remote account with details}                                                           \\ \hline
-\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type} & \textbf{Name}    & \multicolumn{2}{l|}{\textbf{Description}}        \\ \hline
-\multirow{5}{*}{}    & Private             & Integer            & ID               & \multicolumn{2}{l|}{ID of the account}           \\ \cline{2-6} 
-                     & Private             & String             & bankName         & \multicolumn{2}{l|}{Name of the bank}            \\ \cline{2-6} 
-                     & Private             & String             & Type             & \multicolumn{2}{l|}{Type of the account}         \\ \cline{2-6} 
-                     & Private             & Double             & balance          & \multicolumn{2}{l|}{Balance of the account}      \\ \cline{2-6} 
-                     & Private             & ForeignCollection  & transactions     & \multicolumn{2}{l|}{Transactions of the account} \\ \hline
-\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}      & \textbf{Returns} & \textbf{Description}       & \textbf{Throws}     \\ \hline
-None                 &                     &                    &                  &                            &                     \\ \hline
-\end{tabular}%
-}
-\end{table}
-
-
-
-\begin{table}[]
-\centering
-\caption{Class RemoteAccountModule}
-\label{my-label}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.service.account.remote.RemoteAccountModule}                                                                                    \\ \hline
-\textbf{Type}        & \multicolumn{4}{l|}{Public}                                                                                                                                                  \\ \hline
-\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                                                                                                     \\ \hline
-\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                                     \\ \hline
-\textbf{Description} & \multicolumn{4}{l|}{The module for remote account class}                                                                                                                     \\ \hline
-\textbf{Attributes}  & \textbf{Visibility}      & \textbf{Data Type}                           & \textbf{Name}                         & \textbf{Description}                                       \\ \hline
-None                 &                          &                                              &                                       &                                                            \\ \hline
-\textbf{Methods}     & \textbf{Visibility}      & \textbf{Name}                                & \textbf{Returns}                      & \textbf{Description}                                       \\ \hline
-\multirow{2}{*}{}    & \multirow{2}{*}{Default} & \multirow{2}{*}{provideRemoteAccountService} & \multirow{2}{*}{remoteAccountService} & \multirow{2}{*}{Module provide the remote account service} \\
-                     &                          &                                              &                                       &                                                            \\ \hline
-\end{tabular}%
-}
-\end{table}
-
-
-
-
-\begin{table}[]
-\centering
-\caption{Class RemoteAccountService}
-\label{my-label}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-\textbf{Class Name}                  & \multicolumn{5}{l|}{com.github.comp354project.service.account.remote.RemoteAccountService}                                                                                                                                                                                                                                                                                                                                              \\ \hline
-\textbf{Type}                        & \multicolumn{5}{l|}{Public}                                                                                                                                                                                                                                                                                                                                                            \\ \hline
-\textbf{Inherits}                    & \multicolumn{5}{l|}{N/A}                                                                                                                                                                                                                                                                                                                                                               \\ \hline
-\textbf{Implements}                  & \multicolumn{5}{l|}{IRemoteAccountService}                                                                                                                                                                                                                                                                                                                                             \\ \hline
-\textbf{Description}                 & \multicolumn{5}{l|}{The services that the remote account can provide}                                                                                                                                                                                                                                                                                                                  \\ \hline
-\multirow{2}{*}{\textbf{Attributes}} & \textbf{Visibility}         & \textbf{Data Type}                                                                                            & \textbf{Name}                                                                       & \multicolumn{2}{l|}{\textbf{Description}}                                                                                                          \\ \cline{2-6} 
-                                     & Private                     & Logger                                                                                                        & logger                                                                              & \multicolumn{2}{l|}{\begin{tabular}[c]{@{}l@{}}Gets the log \\ of the Remote\\ AccountService.class\end{tabular}}                                  \\ \hline
-                                     & Private                     & \begin{tabular}[c]{@{}l@{}}Dao \textless Remote\\ Account, Integer \textgreater\end{tabular}                  & \begin{tabular}[c]{@{}l@{}}Remote\\ AccountDao\end{tabular}                         & \multicolumn{2}{l|}{RemoteAccountDoa}                                                                                                              \\ \hline
-\textbf{Methods}                     & \textbf{Visibility}         & \textbf{Name}                                                                                                 & \textbf{Throws}                                                                     & \multicolumn{2}{l|}{\textbf{Description}}                                                                                                          \\ \hline
-                                     & \multicolumn{1}{c|}{Public} & \multicolumn{1}{c|}{RemoteAccountService(Dao  \textless RemoteAccount,Integer \textgreater remoteAccountDao)} & \multicolumn{1}{c|}{N/A}                                                            & \multicolumn{2}{l|}{\begin{tabular}[c]{@{}l@{}}The constructor \\ class for Remote\\ AccountService\end{tabular}}                                  \\ \hline
-                                     & Public                      & getAccount(GetRemoteAccountRequest request)                                                                   & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Validation\\ Exception\end{tabular}} & \multicolumn{2}{l|}{\begin{tabular}[c]{@{}l@{}}Return the account \\ information if \\ there is a request \\ for it and if it exists\end{tabular}} \\ \hline
-\end{tabular}%
-}
-\end{table}
-
-
-
-\begin{table}[]
-\centering
-\caption{Class RemoteTransaction}
-\label{my-label}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-\textbf{Class Name}                  & \multicolumn{4}{l|}{com.github.comp354project.service.account.remote.RemoteTransaction}                                                                                                                                           \\ \hline
-\textbf{Type}                        & \multicolumn{4}{l|}{Public}                                                                                                                                                      \\ \hline
-\textbf{Inherits}                    & \multicolumn{4}{l|}{N/A}                                                                                                                                                         \\ \hline
-\textbf{Implements}                  & \multicolumn{4}{l|}{N/A}                                                                                                                                                         \\ \hline
-\textbf{Description}                 & \multicolumn{4}{l|}{The remote transaction class}                                                                                                                                \\ \hline
-\multirow{3}{*}{\textbf{Attributes}} & \textbf{Visibility} & \textbf{Data Type} & \textbf{Name}    & \textbf{Description}                                                                                               \\ \cline{2-5} 
-                                     & Private             & Integer            & ID               & \begin{tabular}[c]{@{}l@{}}Identification of the \\ remote transaction\end{tabular}                                \\ \cline{2-5} 
-                                     & Private             & Integer            & date             & Date of the transaction                                                                                            \\ \hline
-                                     & Private             & Double             & amount           & Amount of money transitioned                                                                                       \\ \hline
-                                     & Private             & String             & type             & Type of transaction                                                                                                \\ \hline
-                                     & Private             & Integer            & SourceID         & \begin{tabular}[c]{@{}l@{}}Identification of the source \\ where the money was originally\\ resided\end{tabular}   \\ \hline
-                                     & Private             & Integer            & destinationID    & \begin{tabular}[c]{@{}l@{}}Identification of the destination\\ where the money will be\\ transitioned\end{tabular} \\ \hline
-                                     & Private             & Remote             & account          & The main account of the user                                                                                       \\ \hline
-\textbf{Methods}                     & \textbf{Visibility} & \textbf{Name}      & \textbf{Returns} & \textbf{Description}                                                                                               \\ \hline
-None                                 &                     &                    &                  &                                                                                                                    \\ \hline
-\end{tabular}%
-}
-\end{table}
-%end of Start of com.github.comp354project.account.remote
 
 \clearpage
 
