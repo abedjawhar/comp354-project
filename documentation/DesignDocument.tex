@@ -87,7 +87,7 @@ Wei Wang & 40041116 \\
 
 \section{Introduction and Purpose}
 
-The goal of this document is to define the design for the desktop application myMoney. The majority of the design decisions have been taken     with the Requirements document in mind, one may thus want to look at this document first to have a clear picture of the problem in mind as well as the requirements demanded for the solution. This document presents an implementation of a possible solution to answer this problem. Its design is is outlined through an Architectural Design (AD), a Detailed design (DD) and Dynamic Design Scenarios (DDS) for the application. The AD focuses on high-level project decomposition, the DD describes the overarching system design (which includes the UML design, divided into multiple subsections), and the DDS displays how the subsystems interact with one another in order to produce system-level services. This document may thus be used to plan, coordinate, and guide the development of the software, estimate and allocate necessary resources for proper execution, and  then actually implement the software for the system. It seeks, above all, to serve as a precise and stable reference throughout the development.
+The goal of this document is to define the design for the desktop application myMoney. The majority of the design decisions have been taken     with the Requirements document in mind, one may thus want to look at this document first to have a clear picture of the problem in mind as well as the requirements demanded for the solution. This document presents an implementation of a possible solution to answer this problem. Its design is is outlined through an Architectural Design (AD), a Detailed design (DD) and Dynamic Design Scenarios (DDS) for the application. The AD focuses on high-level project decomposition, the DD describes the overarching system design (which includes the UML design, divided into multiple subsections), and the DDS displays how the subsystems interact with one another in order to produce system-level services. This document may thus be used to plan, coordinate, and guide the development of the software, estimate and allocate necessary resources for proper execution, and  then actually implement the software for the system. It seeks, above all, to serve as a precise and stable reference throughout development.
 
 \section{Scope}
 
@@ -95,11 +95,13 @@ This document contains everything to do with the development decisions and desig
 
 \section{Architectural Design} \label{sec:arch}
 
-The myMoney application uses the Model-View-Controller (MVC) pattern to read, validate and modify the objects. The view is implemented through a JAVAFX front-end interface. This view then reports any events triggered by the user to the view controllers, which access the back-end and SQLite database to modify the model. Once updated, the model then passes its changes back to the view, to update the information displayed to the user. A more in-depth view of the interaction between the user and the view can be seen in the dynamic models, in section \ref{Dynamic Models}.
+The myMoney application uses the Model-View-Controller (MVC) architectural pattern at its core.
 
-The controllers are implemented through a series of function calls to services which handle different layers of the application. All services perform their own validation, whether it is for implementing the business rules, or simply ensuring expected application behaviour (no null objects, caught exceptions...). Once this validation has been verified, the controllers passes the actually requested model change to the model. Examples of such services, their intercommunication, and their validation, is explained more in-depth in section \ref{subsystem interface}.
+The \textit{view} is implemented through a JAVAFX front-end interface, which consists mostly of hard-coded tables structures or menus, which are then populated with table entries by the model, as requested by the view controllers. The view is interactive, and reports any events triggered by the user to the view controllers, which then pass the requests to the model controllers (services), which handle the modification of the model. Once updated, the model then passes its changes back to the view controllers, to update the information displayed to the user. A more in-depth view of the interaction between the user and the view can be seen in the dynamic models, in section \ref{Dynamic Models}.
 
-The model, which includes the back-end connection to the database, is the more complex part of the system. Lower layer services use the data access objects (DAO) to apply edits to the database, after the upper layers have verified the validity of the calls. Our system actually employs two databases; The first, a local database holding user info, bank account info, and transaction info, and the second, a "remote" database (also local, but acts as if it were remote) used to simulate the bank institutions' servers. When the user first adds a bank account, our view receives his input, passes it to the controls, which then makes requests for information to the "remote" database through the use of the services handling remote communication. These services receive a serialisation of the "remote" account, which it then translates into usable data for the local database. Once this has been successfully executed, the model triggers a view update, wherein the user can see his newly requested additions. All other events triggered by the user have no need of the remote database, and simply employ a series of communications between the controllers and the services handling local database. See section \ref{subsystem interface} for more details on these services and the databases.
+The \textit{controllers} are the most complex part of the system. They are organised in a layered structure of services, which each handle a different sector of the application (session management, account services, user services, etc). All services perform their own validation, whether it is for implementing the business rules, or simply ensuring expected application behaviour (no null objects, caught exceptions...). Once this validation has been verified, the controllers passes the actually requested change to the model. Examples of such services, their intercommunication, and their validation, is explained more in-depth in section \ref{subsystem interface}.
+
+The \textit{model}, which includes the back-end connection to the database, is composed of data access objects (DAOs), which are used to apply edits to the database, after the upper layers of the controllers have verified the validity of the calls. Our system actually employs two databases; The first, a local database holding user info, bank account info, and transaction info, and the second, a "remote" database (also local, but acts as if it were remote) used to simulate the bank servers. The only time the second database is actually accessed is when the user first adds a bank account. In this case, our view receives his input, passes it to the controls, which then makes requests for information to the "remote" database through the use of the services handling remote communication. These services receive, from the DAOs, a serialisation of the "remote" account, which it then translates into usable data for the local database. Once this has been successfully executed, the model triggers a view update, wherein the user can see his newly requested additions. All other events triggered by the user have no need of the remote database, and simply employ a series of communications between the controllers and the services handling local database. See section \ref{subsystem interface} for more details on these services and the databases.
 
 \subsection{Architectural Diagram}
 
@@ -107,11 +109,15 @@ The model, which includes the back-end connection to the database, is the more c
 \includegraphics[width=\linewidth]{package-diagram.png}
 \end{figure}
 
-This design represents the MVC pattern discussed previously. The big advantage of this design is that everything is separated with interfaces which makes it easier to use different implementations, modify the features and create or mock tests.
+We herewith present the architectural diagram of the design presented above, and provide an explanation of each package (but not for the subsystems within each package). A succint and precise description of each subsystem is available in the next section.
 
-The com.github.comp354project.service package is the main subsystem where most of the logic happens. The data validation and processing is done there. It connects to an SQLite database to persist the data. The com.github.comp354project.viewController calls this package to update the view and the model.
+Notice first that MVC's style forces a clear separation of concerns, and thus emphasises a great amount of intercommunication between each section. To embrace this, using interfaces for each component presented above will clearly separate the implementation from the structure of the module, which eases parallel addition, modification, or testing of the system.
 
-The com.github.comp354project.service package.account.remote package is a subsystem to our services which is meant to mock an API call to systems outside of ours like banks or credit card companies. Because we don't have access to these APIs for real, obviously, the data is persisted in the same SQLite database as the rest of the system.
+The com.github.comp354project.service package is the main subsystem of our project. As mentioned above, it is organised in a layered manner, wherein each layer handles its own services, and use the services of the layer below it within worrying about that layer's implementation. Data validation and processing is offered by each service: The account service, for example, validate calls to add or delete bank accounts, edit a transaction's category, or query for specific accounts. It does this by querying the database using an account DAO, and ensuring data integrity and validity (with regards to the business rules). It does not, however, worry about user authorisation, and simply assumes the layer above it (The user service) will have handled it. The com.github.comp354project.viewController calls services within this package to update the view and the model.
+
+The com.github.comp354project.viewController package contains a number of controllers for each different view. They are the ones handling the requests from the users, which they pass to the services in the package described above. They are also the ones who pass any errors from the services to the views, mostly to be used for testing and alerting the user of any problems that might have occured.
+
+The com.github.comp354project.service package.account.remote package is a subsystem to our services which mocks an API call to remote servers of banks or credit card companies. In our case however, we don't actually have access to such systems. For this reason, the remote data exists in an SQLite database like our local one.
 
 \subsection{Subsystem Interface Specifications} \label{subsystem interface}
 
@@ -123,8 +129,10 @@ including valid and invalid ranges of values.
 Each subsystem interface must be presented in a separate subsection.
 
 *Note: The above is a description of what to provide. Need to edit into our own
+\subsubsection{View Controllers}
 
-\subsubsection{SignUpController Interfaces}
+We herewith present the view controllers, and the services they access.
+\paragraph{SignUpController Interfaces}
 
 Below are the different models and services used in the SignUpController view.
 
@@ -134,7 +142,7 @@ Below are the different models and services used in the SignUpController view.
 
 \clearpage
 
-\subsubsection{LoginController Interfaces}
+\paragraph{LoginController Interfaces}
 
 Below are the different models and services used in the LoginController view.
 
@@ -144,7 +152,7 @@ Below are the different models and services used in the LoginController view.
 
 \clearpage
 
-\subsubsection{AcountDetailsController Interfaces}
+\paragraph{AcountDetailsController Interfaces}
 
 Below are the different models and services used in the AccountDetailsController view.
 
@@ -154,12 +162,12 @@ Below are the different models and services used in the AccountDetailsController
 
 \clearpage
 
-\subsubsection{AccountListController Interfaces}
+\paragraph{AccountListController Interfaces}
 
 Below are the different models and services used in the AccountListController view.
 
 \begin{figure}[H]
-\includegraphics[width=\linewidth]{subsystem-interface-AccountListController.jpg}
+\includegraphics[width=\linewidth]{subsystem-interface-AccountListController.png}
 \end{figure}
 
 \clearpage
@@ -326,7 +334,7 @@ None                 &                     &                         &          
                                      & private             & String                                            & type             & type of bank account (chequing, savings, ect) \\ \cline{2-5}
                                      & private             & Double                                            & balance          & Amount inside the account                     \\ \cline{2-5}
                                      & private             & User                                              & user             & name of the user                              \\ \cline{2-5}
-                                     & private             & ForeignCollection\textlessTransaction\textgreater & transactions     & transaction object                            \\ \hline
+                                     & private             & ForeignCollection\textless Transaction\textgreater & transactions     & transaction object                            \\ \hline
 \multirow{2}{*}{\textbf{Methods}}    & \textbf{Visibility} & \textbf{Name}                                     & \textbf{Returns} & \textbf{Description}                          \\ \cline{2-5}
                                      & none                & none                                              & none             & none                                          \\ \hline
 \end{tabular}%
@@ -348,8 +356,8 @@ None                 &                     &                         &          
 \textbf{Description}                 & \multicolumn{4}{l|}{\begin{tabular}[c]{@{}l@{}}Class used to request information from the bank\\ database in order to add or delete an account to myMoney application\end{tabular}}                                                                       \\ \hline
 \multirow{5}{*}{\textbf{Attributes}} & \textbf{Visibility} & \textbf{Data Type}                          & \textbf{Name}        & \textbf{Description}                                                                                                 \\ \cline{2-5}
                                      & private             & Logger                                      & logger               & \begin{tabular}[c]{@{}l@{}}logger object attribute used\\ to keep track of events\end{tabular}                                                                 \\ \cline{2-5}
-                                     & private             & Dao\textlessTransaction,Integer\textgreater & transactionDao       & \begin{tabular}[c]{@{}l@{}}Dao object used to \\query transactions\end{tabular}                                                                                \\ \cline{2-5}
-                                     & private             & Dao\textlessUser,Integer\textgreater        & userDao              & \begin{tabular}[c]{@{}l@{}}Dao object used to \\query users\end{tabular}                                                                             \\ \cline{2-5}
+                                     & private             & Dao\textless Transaction,Integer\textgreater & transactionDao       & \begin{tabular}[c]{@{}l@{}}Dao object used to \\query transactions\end{tabular}                                                                                \\ \cline{2-5}
+                                     & private             & Dao\textless User,Integer\textgreater        & userDao              & \begin{tabular}[c]{@{}l@{}}Dao object used to \\query users\end{tabular}                                                                             \\ \cline{2-5}
                                      & private             & IRemoteAccountService                       & remoteAccountService & \begin{tabular}[c]{@{}l@{}}Dao object used to \\query remote accounts\end{tabular}                                                                                    \\ \hline
 \multirow{5}{*}{\textbf{Methods}}    & \textbf{Visibility} & \textbf{Name}                               & \textbf{Returns}     & \textbf{Description}                                                                                                 \\ \cline{2-5}
                                      & public              & addAccount                                  & Account              & \begin{tabular}[c]{@{}l@{}}method to request bank \\information from the database\end{tabular}                                                                 \\ \cline{2-5}
@@ -468,7 +476,7 @@ None                              & None                & None                  
 \textbf{Description}                 & \multicolumn{4}{l|}{class used to help with transaction changes}                                                                               \\ \hline
 \multirow{4}{*}{\textbf{Attributes}} & \textbf{Visibility} & \textbf{Data Type}                          & \textbf{Name}     & \textbf{Description}                                   \\ \cline{2-5}
                                      & private             & Logger                                      & logger            & object used to interact with TransactionService class  \\ \cline{2-5}
-                                     & private             & Dao\textlessTransaction,Integer\textgreater & transactionDao    & object used to perform methods related to transactions \\ \cline{2-5}
+                                     & private             & Dao\textless Transaction,Integer\textgreater & transactionDao    & object used to perform methods related to transactions \\ \cline{2-5}
                                      & private             & ICategoryNameValidator                      & categoryValidator & object used to validate if a category is correct       \\ \hline
 \multirow{3}{*}{\textbf{Methods}}    & \textbf{Visibility} & \textbf{Name}                               & \textbf{Returns}  & \textbf{Description}                                   \\ \cline{2-5}
                                      & public              & TransactionService                          & N/A               & constructor                                            \\ \cline{2-5}
@@ -665,10 +673,10 @@ None                                 &                     &                    
 \textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}                                              & \textbf{Name}                                  & \textbf{Description}                                                                        \\ \hline
                      & private             & Logger                                                          & logger                                         & Logs event information                                                                      \\ \hline
 \textbf{Methods}     & \textbf{Visibility} & \textbf{Name}                                                   & \textbf{Returns}                               & \textbf{Description}                                                                        \\ \hline
-                     & public              & provideRemoteAccountDao(IConnectionProvider connectionProvider) & Dao\textlessRemoteAccount, Integer\textgreater & \begin{tabular}[c]{@{}l@{}}Returns the implementation \\ of a RemoteAccountDao\end{tabular} \\ \hline
-                     & public              & provideAccountDao(IConnectionProvider connectionProvider)       & Dao\textlessAccount, Integer\textgreater       & \begin{tabular}[c]{@{}l@{}}Returns the implementation\\ of an AccountDao\end{tabular}       \\ \hline
-                     & public              & provideTransactionDao(IConnectionProvider connectionProvider)   & Dao\textlessTransaction, Integer\textgreater   & \begin{tabular}[c]{@{}l@{}}Returns the implementation\\ of a TransactionDao\end{tabular}    \\ \hline
-                     & public              & provideUserDao(IConnectionProvider connectionProvider)          & Dao\textlessUser, Integer\textgreater          & \begin{tabular}[c]{@{}l@{}}Returns the implementation\\ of a UserDao\end{tabular}           \\ \hline
+                     & public              & provideRemoteAccountDao(IConnectionProvider connectionProvider) & Dao\textless RemoteAccount, Integer\textgreater & \begin{tabular}[c]{@{}l@{}}Returns the implementation \\ of a RemoteAccountDao\end{tabular} \\ \hline
+                     & public              & provideAccountDao(IConnectionProvider connectionProvider)       & Dao\textless Account, Integer\textgreater       & \begin{tabular}[c]{@{}l@{}}Returns the implementation\\ of an AccountDao\end{tabular}       \\ \hline
+                     & public              & provideTransactionDao(IConnectionProvider connectionProvider)   & Dao\textless Transaction, Integer\textgreater   & \begin{tabular}[c]{@{}l@{}}Returns the implementation\\ of a TransactionDao\end{tabular}    \\ \hline
+                     & public              & provideUserDao(IConnectionProvider connectionProvider)          & Dao\textless User, Integer\textgreater          & \begin{tabular}[c]{@{}l@{}}Returns the implementation\\ of a UserDao\end{tabular}           \\ \hline
 \end{tabular}%
 }
 \end{table}
