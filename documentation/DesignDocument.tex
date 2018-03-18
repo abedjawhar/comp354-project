@@ -125,7 +125,7 @@ The \textit{view}, our graphical user interface, is implemented through the JAVA
 
 The \textit{controllers}. The controller populates the views with the model and translates user input into service calls to manipulate the model. When the model is changed, it repopulates the views with new data. 
 
-The \textit{model} is consists of two parts: the application logic, and the data. The application logic is organised in a layered structure of services, which each manage a different section of the system (session management, accounts, users, etc).
+The \textit{model} consists of two parts: the application logic, and the data. The application logic is organised in a layered structure of services, which each manage a different section of the system (session management, accounts, users, etc).
 Each service performs validation related to its system domain on its inputs, and then delegates the calls to the services of the layer below. The Database Access Objects (DAO) lie  at the bottom of the hierarchy and directly communicate with the database. For examples in the controllers, their services, their intercommunication, and their validation, see section \ref{subsystem interface}.
 The data is stored in an SQLite database. Our system actually employs two databases; The first, a local database, and the second, a "remote" database (also local, but acts as if it were remote) used to simulate the bank servers. The data itself consists of model classes, (e.g. bank account, account transaction, user account), which corresponds to the domain model of our application. See section \ref{subsystem interface} for more details on these services and the databases.
 
@@ -771,6 +771,10 @@ Interface & A component of a system by which other entities (be it humans or oth
 API - Application Programming Interface & A protocol or set of functions which serve as a method of communication to a software system. It is a type of interface, and the one by which our system will communicate with the banking institutions' databases. \\
 \hline
 DAO - Data access object & An object that provides an abstract interface to some type of database or other persistence mechanism.\\
+\hline
+Dependency Injection (DI) & Software development technique where one object supplies the dependency of another object. \\
+\hline
+Module & Used in Dagger2 for the injection of dependencies into their classes and their submodules. Modules make the code less coupled. \\
 \hline
 
 \end{tabular}}
