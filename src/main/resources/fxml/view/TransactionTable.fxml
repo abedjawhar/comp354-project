@@ -3,7 +3,7 @@
 
 <TableView xmlns="http://javafx.com/javafx/9.0.1"
            xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.github.comp354project.viewController.view.TransactionTableController"
+           fx:controller="com.github.comp354project.viewController.TransactionTableController"
            fx:id="transactionTableView">
     <columns>
         <TableColumn fx:id="idCol" prefWidth="200.0" text="Account ID"/>

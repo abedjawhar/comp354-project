@@ -1,26 +1,29 @@
-package com.github.comp354project.viewController.view;
+package com.github.comp354project.viewController;
 
 import com.github.comp354project.MyMoneyApplication;
 import com.github.comp354project.model.account.ITransactionService;
 import com.github.comp354project.model.account.Transaction;
 import com.github.comp354project.model.exceptions.ValidationException;
-import com.github.comp354project.viewController.model.TransactionDisplayModel;
 import com.google.common.collect.ImmutableList;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -102,4 +105,71 @@ public class TransactionTableController implements Initializable {
     public void hideAccountIDColumn() {
         this.idCol.setVisible(false);
     }
+
+    public static class TransactionDisplayModel {
+
+        public void setAccountID(int accountID) {
+            this.accountID.set(accountID);
+        }
+
+        private SimpleIntegerProperty accountID;
+        private SimpleStringProperty date;
+        private SimpleDoubleProperty amount;
+        private SimpleStringProperty category;
+        private SimpleStringProperty type;
+        private final static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+
+        public TransactionDisplayModel(Transaction transaction) {
+            this.accountID = new SimpleIntegerProperty(transaction.getAccount().getID());
+            Date date = Date.from(Instant.ofEpochMilli(transaction.getDate()));
+            this.date = new SimpleStringProperty(formatter.format(date));
+            this.amount = new SimpleDoubleProperty(transaction.getAmount());
+            if (transaction.getType().equals("Transfer")) {
+                this.type = new SimpleStringProperty("Transfer to " + transaction.getDestinationID().toString());
+            } else if (transaction.getType().equals("Deposit")) {
+                this.type = new SimpleStringProperty("Deposit from " + transaction.getSourceID().toString());
+            } else {
+                this.type = new SimpleStringProperty("Withdrawal");
+            }
+            this.category = new SimpleStringProperty(transaction.getCategory());
+        }
+
+
+        public Integer getAccountID() { return this.accountID.get(); }
+
+        public void setAccountID(Integer accountID) { this.accountID.set(accountID); }
+
+        public String getDate() {
+            return this.date.get();
+        }
+
+        public void setDate(String date) {
+            this.date.set(date);
+        }
+
+        public Double getAmount() {
+            return this.amount.get();
+        }
+
+        public void setAmount(Double amount) {
+            this.amount.set(amount);
+        }
+
+        public String getCategory() {
+            return this.category.get();
+        }
+
+        public void setCategory(String category) {
+            this.category.set(category);
+        }
+
+        public String getType() {
+            return this.type.get();
+        }
+
+        public void setType(String type) {
+            this.type.set(type);
+        }
+    }
+
 }

@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<?import com.github.comp354project.viewController.view.TransactionTable?>
+<?import com.github.comp354project.view.TransactionTable?>
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.comp354project.viewController.AccountDetailsController">
    <children>
       <Button layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#gotoAccountList" text="&lt;" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="12.0" />
