@@ -1,10 +1,10 @@
 package com.github.comp354project.viewController;
 
 import com.github.comp354project.MyMoneyApplication;
-import com.github.comp354project.service.auth.SessionManager;
-import com.github.comp354project.service.auth.exceptions.UserLoggedInException;
-import com.github.comp354project.service.exceptions.ValidationException;
-import com.github.comp354project.service.user.IUserService;
+import com.github.comp354project.model.auth.SessionManager;
+import com.github.comp354project.model.auth.exceptions.UserLoggedInException;
+import com.github.comp354project.model.exceptions.ValidationException;
+import com.github.comp354project.model.user.IUserService;
 import com.github.comp354project.viewController.helper.AlertHelper;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;

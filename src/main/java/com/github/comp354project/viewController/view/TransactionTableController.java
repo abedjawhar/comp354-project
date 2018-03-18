@@ -1,9 +1,9 @@
 package com.github.comp354project.viewController.view;
 
 import com.github.comp354project.MyMoneyApplication;
-import com.github.comp354project.service.account.ITransactionService;
-import com.github.comp354project.service.account.Transaction;
-import com.github.comp354project.service.exceptions.ValidationException;
+import com.github.comp354project.model.account.ITransactionService;
+import com.github.comp354project.model.account.Transaction;
+import com.github.comp354project.model.exceptions.ValidationException;
 import com.github.comp354project.viewController.model.TransactionDisplayModel;
 import com.google.common.collect.ImmutableList;
 import javafx.collections.FXCollections;

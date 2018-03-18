@@ -1,11 +1,11 @@
 package com.github.comp354project;
 
-import com.github.comp354project.service.account.AccountServiceModule;
-import com.github.comp354project.service.account.remote.RemoteAccountModule;
-import com.github.comp354project.service.auth.AuthenticationModule;
-import com.github.comp354project.service.dao.DaoModule;
-import com.github.comp354project.service.sqlite.ConnectionModule;
-import com.github.comp354project.service.user.UserServiceModule;
+import com.github.comp354project.model.account.AccountServiceModule;
+import com.github.comp354project.model.account.remote.RemoteAccountModule;
+import com.github.comp354project.model.auth.AuthenticationModule;
+import com.github.comp354project.model.dao.DaoModule;
+import com.github.comp354project.model.sqlite.ConnectionModule;
+import com.github.comp354project.model.user.UserServiceModule;
 import com.github.comp354project.viewController.AccountListController;
 import com.github.comp354project.viewController.LoginController;
 import com.github.comp354project.viewController.SignUpController;

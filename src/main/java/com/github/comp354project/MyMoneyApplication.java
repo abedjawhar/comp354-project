@@ -1,7 +1,7 @@
 package com.github.comp354project;
-import com.github.comp354project.service.account.Account;
-import com.github.comp354project.service.auth.SessionManager;
-import com.github.comp354project.service.user.User;
+import com.github.comp354project.model.account.Account;
+import com.github.comp354project.model.auth.SessionManager;
+import com.github.comp354project.model.user.User;
 import com.github.comp354project.viewController.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;

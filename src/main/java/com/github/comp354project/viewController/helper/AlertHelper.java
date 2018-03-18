@@ -1,6 +1,6 @@
 package com.github.comp354project.viewController.helper;
 
-import com.github.comp354project.service.exceptions.ValidationException;
+import com.github.comp354project.model.exceptions.ValidationException;
 import javafx.scene.control.Alert;
 
 import java.util.List;
@@ -47,7 +47,7 @@ public class AlertHelper {
         final String errorsStr = exception.getErrors()
                 .stream()
                 .map(e -> e.getMessage())
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining("\n "));
         return generateAlert(Alert.AlertType.ERROR, title, header, errorsStr);
     }
 }

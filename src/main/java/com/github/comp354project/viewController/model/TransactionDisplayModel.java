@@ -1,6 +1,6 @@
 package com.github.comp354project.viewController.model;
 
-import com.github.comp354project.service.account.Transaction;
+import com.github.comp354project.model.account.Transaction;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
