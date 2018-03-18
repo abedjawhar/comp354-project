@@ -17,6 +17,7 @@ import lombok.Getter;
 import lombok.Setter;
 import javafx.scene.control.Label;
 import javax.inject.Inject;
+import javax.swing.*;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -110,12 +111,12 @@ public class UpdateUserAccountController implements Initializable {
     public void deleteUser(ActionEvent event){
 
         try {
-            TextInputDialog dialog = new TextInputDialog("Password");
-            dialog.setTitle("User Authentication");
-            dialog.setContentText("Please enter your password:");
-            Optional<String> result = dialog.showAndWait();
-            if (result.isPresent()){
-                if(result.get().equals(sessionManager.getUser().getPassword())){
+            JPasswordField pf = new JPasswordField();
+            int opt = JOptionPane.showConfirmDialog(null, pf, "Enter Password", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+            if (opt == JOptionPane.OK_OPTION) {
+                String password = new String(pf.getPassword());
+                if(password.equals(sessionManager.getUser().getPassword())){
                     userService.deleteUser(sessionManager.getUser());
                     this.sessionManager.logout();
                     MyMoneyApplication.application.displayLogin();
@@ -125,6 +126,7 @@ public class UpdateUserAccountController implements Initializable {
                             .build();
                 }
             }
+
         }
         catch (ValidationException e) {
             AlertHelper.generateErrorAlert("deleteUser error", "Error validating user", e).showAndWait();
