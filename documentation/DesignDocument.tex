@@ -101,7 +101,7 @@ The \textit{view} is implemented through a JAVAFX front-end interface, which con
 
 The \textit{controllers} are the most complex part of the system. They are organised in a layered structure of services, which each handle a different sector of the application (session management, account services, user services, etc). All services perform their own validation, whether it is for implementing the business rules, or simply ensuring expected application behaviour (no null objects, caught exceptions...). Once this validation has been verified, the controllers pass the requested change to the model. For example, their services, their intercommunication, and their validation are explained more in-depth in section \ref{subsystem interface}.
 
-The \textit{model}, which includes the back-end connection to the database, is composed of data access objects (DAOs), which are used to apply edits to the database, after the upper layers of the controllers have verified the validity of the calls. Our system actually employs two databases; The first, a local database holding user info, bank account info, and transaction info, and the second, a "remote" database (also local, but acts as if it were remote) used to simulate the bank servers. The only time where the second database is being accessed is when the user first adds a bank account. In this case, our view receives the user's input. The former passes it to the controls, which then makes requests for information to the "remote" database through the use of the services handling remote communication. From the DAOs, these services receive a serialisation of the "remote" account, which then translates the latter into usable data for the local database. Once this has been successfully executed, the model triggers a view update, wherein the user can see his newly requested additions. All other events triggered by the user have no need of the remote database, and simply employ a series of communications between the controllers and the services handling local database. See section \ref{subsystem interface} for more details on these services and the databases.
+The \textit{model}, which includes the back-end connection to the database, is composed of data access objects (DAOs), which are used to apply edits to the database, after the upper layers of the controllers have verified the validity of the calls. Our system employs two databases: The first, a local database holding user info, bank account info, and transaction info, and the second, a "remote" database (also local, but acts as if it were remote) used to simulate the bank servers. The only time where the second database is being accessed is when the user first adds a bank account. In this case, our view receives the user's input. The former passes input to the controls, which then makes requests for information to the "remote" database through the use of the services handling remote communication. From the DAOs, these services receive a serialisation of the "remote" account, which then translates the latter into usable data for the local database. Once this has been successfully executed, the model triggers a view update, wherein the user can see his newly requested additions. All other events triggered by the user have no need of the remote database, and simply employ a series of communications between the controllers and the services handling local database. See section \ref{subsystem interface} for more details on these services and the databases.
 
 \subsection{Architectural Diagram}
 
@@ -113,11 +113,11 @@ We herewith present the architectural diagram of the design presented above, and
 
 Notice first that MVC's style forces a clear separation of concerns, and thus emphasises a great amount of intercommunication between each section. To embrace this, using interfaces for each component presented above will clearly separate the implementation from the structure of the module, which eases parallel addition, modification, or testing of the system.
 
-The com.github.comp354project.service package is the main subsystem of our project. As mentioned above, it is organised in a layered manner, wherein each layer handles its own services, and use the services of the layer below it within worrying about that layer's implementation. Data validation and processing is offered by each service: The account service, for example, validate calls to add or delete bank accounts, edit a transaction's category, or query for specific accounts. It does this by querying the database using an account DAO, and ensuring data integrity and validity (with regards to the business rules). It does not, however, worry about user authorisation, and simply assumes the layer above it (The user service) will have handled it. The com.github.comp354project.viewController calls services within this package to update the view and the model.
+The com.github.comp354project.service package is the main subsystem of our project. As mentioned above, it is organised in a layered manner, wherein each layer handles its own services, and use the services of the layer below it within worrying about that layer's implementation. Data validation and processing is offered by each service; For example, the account service validates calls to add or delete bank accounts, edit a transaction's category, or query for specific accounts. It performs these actions by querying the database using an account DAO, and ensuring data integrity and validity (with regards to the business rules). However, it does not worry about user authorisation, and simply assumes the layer above it (The user service) will have handled it. The com.github.comp354project.viewController calls services within this package to update the view and the model.
 
 The com.github.comp354project.viewController package contains a number of controllers for each different view. They are the ones handling the requests from the users, which they pass to the services in the package described above. They are also the ones who pass any errors from the services to the views, mostly to be used for testing and alerting the user of any problems that might have occured.
 
-The com.github.comp354project.service package.account.remote package is a subsystem to our services which mocks an API call to remote servers of banks or credit card companies. In our case however, we don't actually have access to such systems. For this reason, the remote data exists in an SQLite database like our local one.
+The com.github.comp354project.service package.account.remote package is a subsystem to our services which mocks an API call to remote servers of banks or credit card companies. In our case, we do not have access to such systems. For this reason, the remote data exists in an SQLite database like our local one.
 
 \subsection{Subsystem Interface Specifications} \label{subsystem interface}
 
@@ -131,7 +131,7 @@ Each subsystem interface must be presented in a separate subsection.
 *Note: The above is a description of what to provide. Need to edit into our own
 \subsubsection{View Controllers}
 
-We herewith present the view controllers, and the services they access.
+We herewith present the view controllers and the services that they are accessed to.
 \paragraph{SignUpController Interfaces}
 
 Below are the different models and services used in the SignUpController view.
@@ -174,15 +174,15 @@ Below are the different models and services used in the AccountListController vi
 
 \section{Detailed Design} \label{sec:detail}
 
-The myMoney system architecture is designed to be easily modified because of the low coupling between the modules. This was done with interfaces and auto injection of dependencies in classes. Each service package has a Module class designed to bind and provide an implementation to an interface. This way, classes are never instantiated directly into each other, but injected. This design pattern is useful because a change in implementation is as simple as creating a new class and change the module binding. The classes that use it and the tests should in no way be changed. Mocking classes for test purposes is also much easier.
+The myMoney system architecture is designed to be easily modified because of the low coupling between the modules. This was done with interfaces and auto injection of dependencies in classes. Each service package has a Module class designed to bind and provide an implementation to an interface. This way, classes are never instantiated directly into each other, but injected. This design pattern is useful because a change in implementation is as simple as creating a new class and change the module binding. So, the classes that use the pattern and the tests will not be affected by the change and remain unchanged. Thus, mocking classes for test purposes becomes also much easier.
 
-As a side note, we noticed that merge conflicts using git were much less likely to happen because we can each work on different parts of the system without modifying another module.
+As a side note, we noticed that merge conflicts using git were much less likely to happen because each member can work on different parts of the system without modifying another module.
 
 The tool used for this purpose is Dagger version 2.
 
 \subsection{Class Diagram}
 
-In this section we provide the class diagram of our system, useful for the system developers and testers.This is an in depth look at all of the classes within our system see figure \ref{fig:class-diagram} below If a term is unclear, view section \ref{glossary} for the glossary.
+In this section, we provide the class diagram of our system, useful for the system developers and testers. This is an in depth look at all of the classes within our system, see figure \ref{fig:class-diagram} below. If a term is unclear, view section \ref{glossary} for the glossary.
 
 \begin{figure}[H]
 \includegraphics[width=\linewidth]{ClassDiagram1.png}
