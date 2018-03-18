@@ -4,13 +4,13 @@
 \usepackage{nth}
 \usepackage{enumitem}
 \usepackage{booktabs}
-\usepackage{tabularx}
 \usepackage{hyperref}
 \usepackage[pdftex]{graphicx}
 \pagestyle{empty}
 \setcounter{secnumdepth}{2}
 \usepackage{float}
 \usepackage{multirow}
+\usepackage{titlesec}
 
 \pagestyle{empty}
 \setcounter{secnumdepth}{2}
@@ -29,6 +29,19 @@
 \belowdisplayshortskip=2mm
 \normalbaselineskip=12pt
 \normalbaselines
+
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\titleformat{\subsubsection}
+{\normalfont\large\bfseries}{\thesubsubsection}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 
 \begin{document}
 
@@ -89,6 +102,8 @@ Wei Wang & 40041116 \\
 
 The goal of this document is to define the design for the desktop application myMoney. The majority of the design decisions have been taken     with the Requirements document in mind, one may thus want to look at this document first to have a clear picture of the problem in mind as well as the requirements demanded for the solution. This document presents an implementation of a possible solution to answer this problem. Its design is outlined through an Architectural Design (AD), a Detailed design (DD) and Dynamic Design Scenarios (DDS) for the application. The AD focuses on high-level project decomposition, the DD describes the overarching system design (which includes the UML design, divided into multiple subsections), and the DDS displays how the subsystems interact with one another in order to produce system-level services. This document may thus be used to plan, coordinate, and guide the development of the software, estimate and allocate necessary resources for proper execution, and  then actually implement the software for the system. It seeks, above all, to serve as a precise and stable reference throughout development.
 
+Check section \ref{glossary} for a glossary of terms and abbreviation.
+
 \section{Scope}
 
 This document contains everything to do with the development decisions and design of the system, all of which are derived from the requirements, which are not described in this document. Also not included in here is any testing of the system, which verifies that the requirements are met. It is merely a blueprint for a system that should, in theory, successfully pass any tests that would be done in correspondence with the requirements.
@@ -97,11 +112,11 @@ This document contains everything to do with the development decisions and desig
 
 The myMoney application uses the Model-View-Controller (MVC) architectural pattern at its core.
 
-The \textit{view} is implemented through a JAVAFX front-end interface, which consists mostly of hard-coded tables structures or menus, which are then populated with table entries by the model, as requested by the view controllers. The view is interactive, and reports any events triggered by the user to the view controllers, which then pass the requests to the model controllers (services), which handle the modification of the model. Once updated, the model then passes its changes back to the view controllers, to update the information displayed to the user. A more in-depth view of the interaction between the user and the view can be seen in the dynamic models, in section \ref{Dynamic Models}.
+The \textit{view}, our graphical user interface, is implemented through a JAVAFX front-end interface, which consists mostly of hard-coded tables structures or menus, which are then populated with table entries by the model, as requested by the view controllers. The view is the only component which is accessible by the user. It is interactive, and reports any events (mouse clicks, text entries...) triggered by the user to the view controllers, which then pass the requests to the model controllers (services), which handle the modification of the model. Once updated, the model then passes its changes back to the view controllers, to update the information displayed to the user. A more in-depth view of the interaction between the user and the view can be seen in the dynamic models, in section \ref{Dynamic Models}.
 
-The \textit{controllers} are the most complex part of the system. They are organised in a layered structure of services, which each handle a different sector of the application (session management, account services, user services, etc). All services perform their own validation, whether it is for implementing the business rules, or simply ensuring expected application behaviour (no null objects, caught exceptions...). Once this validation has been verified, the controllers pass the requested change to the model. For example, their services, their intercommunication, and their validation are explained more in-depth in section \ref{subsystem interface}.
+The \textit{controllers} are the most complex part of the system. They are organised in a layered structure of services, which each handle a different sector of the application (session management, account services, user services, etc). All services perform their own validation, whether it is for implementing the business rules, or simply ensuring expected application behaviour (no null objects, caught exceptions...). Once this validation has been verified, they pass these requested changes to a lower level for more validation, or directly request a change by passing it the the DAOs. The DAOs are the lowest level of our controllers, and they are the ones who perform the actual database edits. For examples in the controllers, their services, their intercommunication, and their validation, see section \ref{subsystem interface}.
 
-The \textit{model}, which includes the back-end connection to the database, is composed of data access objects (DAOs), which are used to apply edits to the database, after the upper layers of the controllers have verified the validity of the calls. Our system actually employs two databases; The first, a local database holding user info, bank account info, and transaction info, and the second, a "remote" database (also local, but acts as if it were remote) used to simulate the bank servers. The only time where the second database is being accessed is when the user first adds a bank account. In this case, our view receives the user's input. The former passes it to the controls, which then makes requests for information to the "remote" database through the use of the services handling remote communication. From the DAOs, these services receive a serialisation of the "remote" account, which then translates the latter into usable data for the local database. Once this has been successfully executed, the model triggers a view update, wherein the user can see his newly requested additions. All other events triggered by the user have no need of the remote database, and simply employ a series of communications between the controllers and the services handling local database. See section \ref{subsystem interface} for more details on these services and the databases.
+The \textit{model} contains the data as well as the state of the application. It is composed of an SQLite database, accessed by lower-level DAOs mentioned above. Our system actually employs two databases; The first, a local database holding user info, bank account info, and transaction info, and the second, a "remote" database (also local, but acts as if it were remote) used to simulate the bank servers. The only time where the second database is being accessed is when the user first adds a bank account. In this case, our view receives the user's input. The former passes it to the controls, which then makes requests for information to the "remote" database through the use of the services handling remote communication. From the DAOs, these services receive a serialisation of the "remote" account, which then translates the latter into usable data for the local database. Once this has been successfully executed, the model triggers a view update, wherein the user can see his newly requested additions. All other events triggered by the user have no need of the remote database, and simply employ a series of communications between the controllers and the services handling local database. See section \ref{subsystem interface} for more details on these services and the databases.
 
 \subsection{Architectural Diagram}
 
@@ -111,9 +126,9 @@ The \textit{model}, which includes the back-end connection to the database, is c
 
 We herewith present the architectural diagram of the design presented above, and provide an explanation of each package (but not for the subsystems within each package). A succint and precise description of each subsystem is available in the next section.
 
-Notice first that MVC's style forces a clear separation of concerns, and thus emphasises a great amount of intercommunication between each section. To embrace this, using interfaces for each component presented above will clearly separate the implementation from the structure of the module, which eases parallel addition, modification, or testing of the system.
+Notice first that MVC's style forces a clear separation of concerns, and thus emphasises a great amount of intercommunication between each section. To embrace this, using interfaces for each component presented above will clearly separate the implementation from the structure of the module, which eases parallel addition, modification, or testing of the system. This allows for a relatively large part of our team (upwards to 6 people, or half our team) to be working simultaneously on the application without fear of huge conflicts as people work on their sections. See \ref{subsystem interface} to see how the interfaces are injected. We also note that this separation of concerns also forces a certain structure on the submodules, ensuring that each module only keeps track of what it is directly managing. This allows for a more directed development and testing process. MVC's easy adaptability and maintainability, as well as its natural rigidity in structure, made it a clear choice for our architecture.
 
-The com.github.comp354project.service package is the main subsystem of our project. As mentioned above, it is organised in a layered manner, wherein each layer handles its own services, and use the services of the layer below it within worrying about that layer's implementation. Data validation and processing is offered by each service: The account service, for example, validate calls to add or delete bank accounts, edit a transaction's category, or query for specific accounts. It does this by querying the database using an account DAO, and ensuring data integrity and validity (with regards to the business rules). It does not, however, worry about user authorisation, and simply assumes the layer above it (The user service) will have handled it. The com.github.comp354project.viewController calls services within this package to update the view and the model.
+The com.github.comp354project.service package is the main subsystem of our project. As mentioned in the previous section, it is organised in a layered manner, wherein each layer handles its own services and use the services of the layer below it within worrying about that layer's implementation. Data validation and processing is offered by each service: The account service, for example, validate calls to add or delete bank accounts, edit a transaction's category, or query for specific accounts. It does this by querying the database using an account DAO, and ensuring data integrity and validity (with regards to the business rules). It does not, however, worry about user authorisation, and simply assumes the layer above it (The user service) will have handled it. The com.github.comp354project.viewController calls services within this package to update the view and the model.
 
 The com.github.comp354project.viewController package contains a number of controllers for each different view. They are the ones handling the requests from the users, which they pass to the services in the package described above. They are also the ones who pass any errors from the services to the views, mostly to be used for testing and alerting the user of any problems that might have occured.
 
@@ -131,7 +146,6 @@ Each subsystem interface must be presented in a separate subsection.
 *Note: The above is a description of what to provide. Need to edit into our own
 \subsubsection{View Controllers}
 
-We herewith present the view controllers, and the services they access.
 \paragraph{SignUpController Interfaces}
 
 Below are the different models and services used in the SignUpController view.
@@ -214,7 +228,6 @@ In this section we provide the class diagram of our system, useful for the syste
 \begin{table}[H]
 \centering
 \caption{Interface ApplicationComponent}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -239,7 +252,6 @@ None                              &                       &                     
 \begin{table}[H]
 \centering
 \caption{Class BusinessRulesConstants}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -264,7 +276,6 @@ None                 &                     &                    &               
 \begin{table}[H]
 \centering
 \caption{Class Main}
-\label{my-label}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.Main}                                                                                              \\ \hline
@@ -283,7 +294,6 @@ None                 &                     &                         &          
 \begin{table}[H]
 \centering
 \caption{Class MyMoneyApplication}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -320,7 +330,6 @@ None                 &                     &                         &          
 \begin{table}[H]
 \centering
 \caption{Class Account}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -345,7 +354,6 @@ None                 &                     &                         &          
 \begin{table}[H]
 \centering
 \caption{Class AccountService}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -373,7 +381,6 @@ None                 &                     &                         &          
 \begin{table}[H]
 \centering
 \caption{Class AccountServiceModule}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -395,7 +402,6 @@ None                 &                     &                         &          
 \begin{table}[H]
 \centering
 \caption{Interface IAccountService}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -417,7 +423,6 @@ None                              & None                & None               & n
 \begin{table}[H]
 \centering
 \caption{Interface ITransactionService}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -438,7 +443,6 @@ None                              & None                & None                  
 \begin{table}[H]
 \centering
 \caption{Class Transaction}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -465,7 +469,6 @@ None                              & None                & None                  
 \begin{table}[H]
 \centering
 \caption{Class TransactionService}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -492,7 +495,6 @@ None                              & None                & None                  
 \begin{table}[]
 \centering
 \caption{Class GetRemoteAccountRequest}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -513,7 +515,6 @@ None                 &                     &                    &               
 \begin{table}[]
 \centering
 \caption{Class GetRemoteAccountResponse}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -536,7 +537,6 @@ None                 &                     &                    &               
 \begin{table}[]
 \centering
 \caption{Interface IRemoteAccountService}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -558,7 +558,7 @@ None                 &                         &                           &    
 \begin{table}[]
 \centering
 \caption{Class RemoteAccount}
-\label{my-label}
+\label{el}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -584,7 +584,7 @@ None                 &                     &                    &               
 \begin{table}[]
 \centering
 \caption{Class RemoteAccountModule}
-\label{my-label}
+
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -608,7 +608,7 @@ None                 &                          &                               
 \begin{table}[]
 \centering
 \caption{Class RemoteAccountService}
-\label{my-label}
+
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -632,7 +632,7 @@ None                 &                          &                               
 \begin{table}[]
 \centering
 \caption{Class RemoteTransaction}
-\label{my-label}
+
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -661,7 +661,7 @@ None                                 &                     &                    
 \begin{table}[H]
 \centering
 \caption{Class DaoModule}
-\label{my-label}
+
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -688,7 +688,7 @@ None                                 &                     &                    
 \begin{table}[H]
 \centering
 \caption{Class ConnectionModule}
-\label{my-label}
+
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -708,7 +708,7 @@ None                 &                     &                                    
 \begin{table}[H]
 \centering
 \caption{Class ConnectionProvider}
-\label{my-label}
+
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -729,7 +729,6 @@ None                 &                     &                                    
 \begin{table}[H]
 \centering
 \caption{Interface IConnectionProvider}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -750,32 +749,14 @@ None                 &                     &                       &            
 
 \clearpage
 
-\subsection{Glossary of Domain Concepts} \label{glossary}
+\subsection{Glossary} \label{glossary}
 \begin{table}[H]
-\caption{Glossary of Domain Concepts}
+\caption{Glossary}
 \begin{center}
 \scalebox{0.7}{
 \begin{tabular}{|l|p{0.8\linewidth}|}
 \hline
 Expression &  Definition \\
-\hline
-User & The person that is using the application and the main provider of requests to the system. \\
-\hline
-User Account & A data object containing user information. It also contains the various bank accounts that a user may have linked to the system. \\
-\hline
-Bank Account & A data object containing transactions linked with a specific bank account in a bank institution. One user account may have more than one bank accounts.\\
-\hline
-Transaction & Any kind of money exchange associated with a bank account.\\
-\hline
-Transfer & A type of transaction that occurs between two parties.\\
-\hline
-Deposit & A type of transaction where the owner puts money in his own bank account.\\
-\hline
-Withdrawal & A type of transaction where the owner of the bank account removes money from his balance.\\
-\hline
-Database & A local or online container which holds data in an organized, efficient manner. \\
-\hline
-Server & a computer that is accessible on a network, on which a database and/or system may be hosted. The bank institutions' databases will be hosted on here. \\
 \hline
 Object-Oriented Programming & A programming paradigm which separates entities into objects, and uses the concept of inheritance of properties, polymorphism of objects, encapsulation of objects. We use this paradigm for its maintainability and structural benefits.\\
 \hline
