@@ -110,8 +110,9 @@ This document contains everything to do with the development decisions and desig
 
 \section{Architectural Design} \label{sec:arch}
 
-The myMoney application uses the Model-View-Controller (MVC) architectural pattern at its core. Note first that MVC's style forces a clear separation of concerns, and thus emphasises a great amount of intercommunication between each section. To embrace this, using interfaces for each component presented above will clearly separate the implementation from the structure of the module, which eases parallel addition, modification, or testing of the system. This allows for a relatively large part of our team (upwards to 6 people, or half our team) to be working simultaneously on the application without fear of huge conflicts as people work on their sections. See \ref{subsystem interface} to see how the interfaces are injected. We also note that this separation of concerns also forces a certain structure on the submodules, ensuring that each module only keeps track of what it is directly managing. This allows for a more directed development and testing process. MVC's easy adaptability and maintainability, as well as its natural rigidity in structure, made it a clear choice for our architecture.
+The myMoney application uses the MVC architectural pattern. MVC imposes a clear separation of concerns, and thus emphasises a high degree cohesion and low coupling. It is traditionally used for user interface applications, offers easy adaptability and maintainability, and a natural rigidity in module structure. All of these advantages made MVC a fitting choice for our architecture.
  
+ %To further  low coupling, using interfaces for each component will allow us to separate the implementation from the interface of the module, which eases parallel addition, modification, or testing of the system. This allows for a relatively large part of our team (upwards to 6 people, or half our team) to be working simultaneously on the application without fear of huge conflicts as people work on their sections.  See \ref{subsystem interface} to see how the interfaces are injected.
 
 %The former passes it to the controls, which then makes requests for information to the "remote" database through the use of the services handling remote communication. From the DAOs, these services receive a serialisation of the "remote" account, which then translates the latter into usable data for the local database. Once this has been successfully executed, the model triggers a view update, wherein the user can see his newly requested additions. All other events triggered by the user have no need of the remote database, and simply employ a series of communications between the controllers and the services handling local database. The only time where the second database is being accessed is when the user first adds a bank account. In this case, our view receives the user's input. 
 
@@ -125,14 +126,13 @@ The \textit{view}, our graphical user interface, is implemented through the JAVA
 
 The \textit{controllers}. The controller populates the views with the model and translates user input into service calls to manipulate the model. When the model is changed, it repopulates the views with new data. 
 
-The \textit{model} consists of two parts: the application logic, and the data. The application logic is organised in a layered structure of services, which each manage a different section of the system (session management, accounts, users, etc).
+The \textit{model} is consists of two parts: the application logic, and the data. The application logic is organised in a layered structure of services, which each manage a different section of the system (session management, accounts, users, etc).
 Each service performs validation related to its system domain on its inputs, and then delegates the calls to the services of the layer below. The Database Access Objects (DAO) lie  at the bottom of the hierarchy and directly communicate with the database. For examples in the controllers, their services, their intercommunication, and their validation, see section \ref{subsystem interface}.
 The data is stored in an SQLite database. Our system actually employs two databases; The first, a local database, and the second, a "remote" database (also local, but acts as if it were remote) used to simulate the bank servers. The data itself consists of model classes, (e.g. bank account, account transaction, user account), which corresponds to the domain model of our application. See section \ref{subsystem interface} for more details on these services and the databases.
 
 
 \subsection{Subsystem Interface Specifications} \label{subsystem interface}
 
-% We herewith present the architectural diagram of the design presented above, and provide an explanation of each package (but not for the subsystems within each package). A succint and precise description of each subsystem is available in the next section.
 
 % The com.github.comp354project.service package is the main subsystem of our project. As mentioned in the previous section, it is organised in a layered manner, wherein each layer handles its own services and use the services of the layer below it within worrying about that layer's implementation. Data validation and processing is offered by each service: The account service, for example, validate calls to add or delete bank accounts, edit a transaction's category, or query for specific accounts. It does this by querying the database using an account DAO, and ensuring data integrity and validity (with regards to the business rules). It does not, however, worry about user authorisation, and simply assumes the layer above it (The user service) will have handled it. The com.github.comp354project.viewController calls services within this package to update the view and the model.
 
@@ -494,6 +494,50 @@ None                              & None                & None                  
 
 %End of com.github.comp354project.service.account
 
+% Start of com.github.comp354project.service.exception
+
+\begin{table}[H]
+\centering
+\caption{Class AccountDoesNotExistException}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.account.exceptions.AccountDoesNotExistException}                                                             \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                    \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{RuntimeException}                                                                                      \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                         \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Exception thrown when a remote account does not exist}                                    \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}           & \textbf{Name}                & \textbf{Description}      \\ \hline
+                     & private             & GetRemoteAccountRequest      & request                      & The request that was sent \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}                & \textbf{Returns}             & \textbf{Description}      \\ \hline
+                     & public              & AccountDoesNotExistException & \begin{tabular}[c]{@{}l@{}}AccountDoesNotExistException(String message, \\Throwable cause, GetRemoteAccountRequest request)\end{tabular} & Constructs the exception  \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Class AccountExistsException}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.account.exceptions.AccountExistsException}                                                       \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                        \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{RuntimeException}                                                             \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                          \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Exception thrown when an account is already in use}                           \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}     & \textbf{Name}          & \textbf{Description}      \\ \hline
+                     & private             & Account                & account                & The account that was sent \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}          & \textbf{Returns}       & \textbf{Description}      \\ \hline
+                     & public              & AccountExistsException & \begin{tabular}[c]{@{}l@{}}AccountExistsException(String message, \\Throwable cause, Account account)\end{tabular} & Constructs the exception  \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+% End of com.github.comp354project.service.exception
+
 %Start of com.github.comp354project.account.remote
 
 \begin{table}[]
@@ -660,6 +704,163 @@ None                                 &                     &                    
 \end{table}
 %end of com.github.comp354project.account.remote
 
+% Start of com.github.comp354.model.auth
+
+\begin{table}[H]
+\centering
+\caption{Class AuthenticationModule}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.auth.AuthenticationModule}                                                                                                                                             \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                                                                                                                                 \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                                                                                                                                                   \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                                                                                   \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{The authentication module to provide the dependencies}                                                                                                                                                 \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}                                                                                                     & \textbf{Name}          & \textbf{Description}                               \\ \hline
+None                 &                     &                                                                                                                        &                        &                                                    \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}                                                                                                          & \textbf{Returns}       & \textbf{Description}                               \\ \hline
+                     & public              & \begin{tabular}[c]{@{}l@{}}ValidationException(String message, \\ Throwable cause, @Singular List errors)\end{tabular} & IAuthenticationService & Provides the authentication service implementation \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Class AuthenticationService}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.auth.AuthenticationService}                                                        \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                                             \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                                                               \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{IAuthenticationService}                                                                                            \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Service to authenticate users}                                                                                     \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}                             & \textbf{Name}         & \textbf{Description}                    \\ \hline
+                     & private             & Logger                                         & Logger                & Logger                                  \\ \hline
+                     & private             & Dao\textlessUser, Integer\textgreater          & userDao               & The service Dao to interact with the db \\ \hline
+                     & private             & IUsernameValidator                             & usernameValidator     & Used to validate a username             \\ \hline
+                     & private             & IPasswordValidator                             & passwordValidator     & Used to validate a password             \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}                                  & \textbf{Returns}      & \textbf{Description}                    \\ \hline
+                     & public              & AuthenticationService(Dao userDao)             & AuthenticationService & Constructs an AuthenticationService     \\ \hline
+                     & public              & authenticate(String username, String password) & User                  & Authenticates a user                    \\ \hline
+                     & private             & getUser(String username)                       & User                  & Finds a user by username                \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Class IAuthenticationService}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.auth.IAuthenticationService}                               \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{Interface}                                                                                 \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                                       \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                       \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Service to authenticate users}                                                             \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}                             & \textbf{Name}    & \textbf{Description} \\ \hline
+None                 &                     &                                                &                  &                      \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}                                  & \textbf{Returns} & \textbf{Description} \\ \hline
+                     & public              & authenticate(String username, String password) & User             & Authenticates a user \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Class SessionManager}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.auth.SessionManager}                                                                   \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{Class}                                                                                                                 \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                                                                   \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                   \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Service to manage user sessions}                                                                                       \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}                                           & \textbf{Name}         & \textbf{Description}          \\ \hline
+                     & private             & IAuthenticationService                                       & authenticationService & The authentication service    \\ \hline
+                     & private             & User                                                         & user                  & The current user logged in    \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}                                                & \textbf{Returns}      & \textbf{Description}          \\ \hline
+                     & public              & SessionManager(IAuthenticationService authenticationService) & SessionManager        & Constructs the SessionManager \\ \hline
+                     & public              & login(String username, String password)                      & User                  & Authenticates a user          \\ \hline
+                     & public              & logout()                                                     & void                  & Disconnects a user            \\ \hline
+                     & public              & isLoggedIn()                                                 & boolean               & Checks if a user is logged in \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+% End of com.github.comp354project.model.auth
+
+%Start of com.github.comp354project.model.auth.exception
+\begin{table}[H]
+\centering
+\caption{Class AuthenticationException}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.auth.exceptions.AuthenticationException}                                                                                                                    \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                                                                                                                      \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{Exception}                                                                                                                                                                                  \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                                                                        \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Exception thrown when a user did not authenticate properly}                                                                                                                                 \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}     & \textbf{Name}                                                                                                                         & \textbf{Description}     \\ \hline
+                     & private             & String                 & username                                                                                                                              & The username used        \\ \hline
+                     & private             & String                 & password                                                                                                                              & The password used        \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}          & \textbf{Returns}                                                                                                                      & \textbf{Description}     \\ \hline
+                     & public              & AccountExistsException & \begin{tabular}[c]{@{}l@{}}AuthenticationException(String message, Throwable cause, \\ String username, String password)\end{tabular} & Constructs the exception \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Class AuthorisationException}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.auth.exceptions.AuthorisationException}                                                  \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                                                   \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{Exception}                                                                                                               \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                     \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Exception thrown when a user is not authorised to execute/read}                                                          \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}     & \textbf{Name}                                                      & \textbf{Description}     \\ \hline
+                     & private             & User                   & user                                                               & The user used            \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}          & \textbf{Returns}                                                   & \textbf{Description}     \\ \hline
+                     & public              & AuthorisationException & AuthorisationException(String message, Throwable cause, User user) & Constructs the exception \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Class UserLoggedInException}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.auth.exceptions.UserLoggedInException}                                                                                            \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                                                                                            \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{Exception}                                                                                                                                                        \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                                              \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Exception thrown when a user needs to be logged in}                                                                                                               \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}    & \textbf{Name}                                                                                                & \textbf{Description}     \\ \hline
+                     & private             & User                  & user                                                                                                         & The user used            \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}         & \textbf{Returns}                                                                                             & \textbf{Description}     \\ \hline
+                     & public              & UserLoggedInException & \begin{tabular}[c]{@{}l@{}}UserLoggedInException(String message, \\ Throwable cause, User user)\end{tabular} & Constructs the exception \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+% End of com.github.comp354project.auth.exception
+
 % Start of com.github.comp354project.service.dao
 
 \begin{table}[H]
@@ -686,6 +887,74 @@ None                                 &                     &                    
 \end{table}
 
 %end of com.github.comp354project.service.dao
+
+%start of com.github.comp354project.model.exceptions
+
+\begin{table}[H]
+\centering
+\caption{Class UserLoggedInException}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.exceptions.DatabaseException}                                                                                  \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                                                                         \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{Exception}                                                                                                                                     \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                           \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Exception thrown when a the database has an exception}                                                                                         \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}                                                                            & \textbf{Name}     & \textbf{Description}     \\ \hline
+                     & private             & User                                                                                          & user              & The user used            \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}                                                                                 & \textbf{Returns}  & \textbf{Description}     \\ \hline
+                     & public              & DatabaseException(String message)                                                             & DatabaseException & Constructs the exception \\ \hline
+                     & public              & DatabaseException(Throwable inner)                                                            & DatabaseException & Constructs the exception \\ \hline
+                     & public              & \begin{tabular}[c]{@{}l@{}}DatabaseException(String message, \\ Throwable inner)\end{tabular} & DatabaseException & Constructs the exception \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Class ValidationError}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.exceptions.ValidationError}            \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                 \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                   \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                   \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Class used to build exceptions}                                        \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type} & \textbf{Name}    & \textbf{Description}         \\ \hline
+                     & private             & String             & message          & The error message            \\ \hline
+                     & private             & String             & parameterName    & The parameter in error       \\ \hline
+                     & private             & String             & parameterValue   & The parameter in error value \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}      & \textbf{Returns} & \textbf{Description}         \\ \hline
+None                 &                     &                    &                  &                              \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Class ValidationException}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.exceptions.ValidationException}                                                                                                           \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                                                                                                    \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{Exception}                                                                                                                                                                \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                                                      \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Exception used to hold multiple exceptions}                                                                                                                               \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}                                                                                                     & \textbf{Name}       & \textbf{Description}     \\ \hline
+                     & private             & List\textlessValidationException\textgreater                                                                           & errors              & The exception list       \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}                                                                                                          & \textbf{Returns}    & \textbf{Description}     \\ \hline
+                     & public              & \begin{tabular}[c]{@{}l@{}}ValidationException(String message, \\ Throwable cause, @Singular List errors)\end{tabular} & ValidationException & Constructs the exception \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+% end of com.github.comp354project.model.exceptions
 
 % Start of com.github.comp354project.service.sqlite
 
@@ -749,7 +1018,84 @@ None                 &                     &                       &            
 }
 \end{table}
 
-% End of com.github.comp354project.service.sqlite
+% End of com.github.comp354project.model.sqlite
+
+% Beginning of com.github.comp354project.viewController
+
+\begin{table}[H]
+\centering
+\caption{AlertHelper}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.viewController.helper.AlertHelper} \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{Class}   \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}     \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}     \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Creates an alert to notify the user of an error} \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}    & \textbf{Name}        & \textbf{Description} \\ \hline
+None                 &                     &                       &                      & \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}         & \textbf{Returns}     & \textbf{Description} \\ \hline
+                     & public              & generateAlert(Alert.AlertType alertType, String title, String header, String content) & Alert & \begin{tabular}[c]{@{}l@{}} Returns a new alert composed of the passed content \end{tabular} \\ \hline
+                    & public               & generateErrorAlert(String title, String header, String content) & Alert & \begin{tabular}[c]{@{}l@{}}  return a new alert of type ERROR \\ composed of the passed content \end{tabular} \\ \hline
+                  & public               & generateErrorAlert(String title, String header, ValidationException exception) & Alert & \begin{tabular}[c]{@{}l@{}}  return a new alert of type ERROR, \\ specifically for our custom validation exception. \end{tabular} \\ \hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Account Details Controller}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.viewController.AccountDetailsController} \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{Class}   \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}     \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{Initializable}     \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Populates the views with details and transactions of the specified account} \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}    & \textbf{Name}        & \textbf{Description} \\ \hline
+                     & private& TransactionTable & transactionTable & table of transactions \\ \hline
+                     & private& Label & accountBalance & balance of the specified account \\ \hline
+                     & private& Label & accountDescription & account ID and name of the bank \\ \hline
+                     & private& Label & accountType & type of the account \\ \hline
+                     & private& Account & account & specified acount \\ \hline
+
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}         & \textbf{Returns}     & \textbf{Description} \\ \hline
+                     & public              & initialize() & void & \begin{tabular}[c]{@{}l@{}} required by interface, but not actually used \end{tabular} \\ \hline
+                    & public               & setAccount(Account account) & void & \begin{tabular}[c]{@{}l@{}}  sets the account to be displayed \end{tabular} \\ \hline
+                  & public               & goToAccountList() &  void & \begin{tabular}[c]{@{}l@{}}  returns to the account list view \end{tabular} \\ \hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Account List Controller}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.viewController.AccountListController} \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{Class}   \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}     \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{Initializable}     \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Populates the views with the list of all accounts associated to the user} \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}    & \textbf{Name}        & \textbf{Description} \\ \hline
+                     & private& TextField & transactionTable & table of transactions \\ \hline
+                     & private& Label & accountBalance & balance of the specified account \\ \hline
+                     & private& Label & accountDescription & account ID and name of the bank \\ \hline
+                     & private& Label & accountType & type of the account \\ \hline
+                     & private& Account & account & specified acount \\ \hline
+
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}         & \textbf{Returns}     & \textbf{Description} \\ \hline
+                     & public              & initialize() & void & \begin{tabular}[c]{@{}l@{}} required by interface, but not actually used \end{tabular} \\ \hline
+                    & public               & setAccount(Account account) & void & \begin{tabular}[c]{@{}l@{}}  sets the account to be displayed \end{tabular} \\ \hline
+                  & public               & goToAccountList() &  void & \begin{tabular}[c]{@{}l@{}}  returns to the account list view \end{tabular} \\ \hline
+\end{tabular}
+}
+\end{table}
+
+
 
 \clearpage
 
@@ -771,10 +1117,6 @@ Interface & A component of a system by which other entities (be it humans or oth
 API - Application Programming Interface & A protocol or set of functions which serve as a method of communication to a software system. It is a type of interface, and the one by which our system will communicate with the banking institutions' databases. \\
 \hline
 DAO - Data access object & An object that provides an abstract interface to some type of database or other persistence mechanism.\\
-\hline
-Dependency Injection (DI) & Software development technique where one object supplies the dependency of another object. \\
-\hline
-Module & Used in Dagger2 for the injection of dependencies into their classes and their submodules. Modules make the code less coupled. \\
 \hline
 
 \end{tabular}}
