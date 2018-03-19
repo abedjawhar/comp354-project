@@ -97,7 +97,7 @@ public class MyMoneyApplication extends Application {
         controller.setAccount(account);
     }
 
-    public void displayAllAccountDetails(List<Account> accounts) {
+    public void displayAllTransactions(List<Account> accounts) {
         AllTransactionsController controller =
                 updateStage("/fxml/AllTransactions.fxml", "All Transactions", 800, 500);
         controller.setAccounts(accounts);

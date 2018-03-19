@@ -958,100 +958,7 @@ None                                 &                     &                    
 \end{table}
 %end of com.github.comp354project.account.remote
 
-% Start of com.github.comp354.model.auth
-
-\begin{table}[H]
-\centering
-\caption{Class AuthenticationModule}
-\label{my-label}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.auth.AuthenticationModule}                                                                                                                                             \\ \hline
-\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                                                                                                                                 \\ \hline
-\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                                                                                                                                                   \\ \hline
-\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                                                                                   \\ \hline
-\textbf{Description} & \multicolumn{4}{l|}{The authentication module to provide the dependencies}                                                                                                                                                 \\ \hline
-\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}                                                                                                     & \textbf{Name}          & \textbf{Description}                               \\ \hline
-None                 &                     &                                                                                                                        &                        &                                                    \\ \hline
-\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}                                                                                                          & \textbf{Returns}       & \textbf{Description}                               \\ \hline
-                     & public              & \begin{tabular}[c]{@{}l@{}}ValidationException(String message, \\ Throwable cause, @Singular List errors)\end{tabular} & IAuthenticationService & Provides the authentication service implementation \\ \hline
-\end{tabular}%
-}
-\end{table}
-
-\begin{table}[H]
-\centering
-\caption{Class AuthenticationService}
-\label{my-label}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.auth.AuthenticationService}                                                        \\ \hline
-\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                                             \\ \hline
-\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                                                               \\ \hline
-\textbf{Implements}  & \multicolumn{4}{l|}{IAuthenticationService}                                                                                            \\ \hline
-\textbf{Description} & \multicolumn{4}{l|}{Service to authenticate users}                                                                                     \\ \hline
-\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}                             & \textbf{Name}         & \textbf{Description}                    \\ \hline
-                     & private             & Logger                                         & Logger                & Logger                                  \\ \hline
-                     & private             & Dao\textlessUser, Integer\textgreater          & userDao               & The service Dao to interact with the db \\ \hline
-                     & private             & IUsernameValidator                             & usernameValidator     & Used to validate a username             \\ \hline
-                     & private             & IPasswordValidator                             & passwordValidator     & Used to validate a password             \\ \hline
-\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}                                  & \textbf{Returns}      & \textbf{Description}                    \\ \hline
-                     & public              & AuthenticationService(Dao userDao)             & AuthenticationService & Constructs an AuthenticationService     \\ \hline
-                     & public              & authenticate(String username, String password) & User                  & Authenticates a user                    \\ \hline
-                     & private             & getUser(String username)                       & User                  & Finds a user by username                \\ \hline
-\end{tabular}%
-}
-\end{table}
-
-\begin{table}[H]
-\centering
-\caption{Class IAuthenticationService}
-\label{my-label}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.auth.IAuthenticationService}                               \\ \hline
-\textbf{Type}        & \multicolumn{4}{l|}{Interface}                                                                                 \\ \hline
-\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                                       \\ \hline
-\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                       \\ \hline
-\textbf{Description} & \multicolumn{4}{l|}{Service to authenticate users}                                                             \\ \hline
-\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}                             & \textbf{Name}    & \textbf{Description} \\ \hline
-None                 &                     &                                                &                  &                      \\ \hline
-\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}                                  & \textbf{Returns} & \textbf{Description} \\ \hline
-                     & public              & authenticate(String username, String password) & User             & Authenticates a user \\ \hline
-\end{tabular}%
-}
-\end{table}
-
-\begin{table}[H]
-\centering
-\caption{Class SessionManager}
-\label{my-label}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.auth.SessionManager}                                                                   \\ \hline
-\textbf{Type}        & \multicolumn{4}{l|}{Class}                                                                                                                 \\ \hline
-\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                                                                   \\ \hline
-\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                   \\ \hline
-\textbf{Description} & \multicolumn{4}{l|}{Service to manage user sessions}                                                                                       \\ \hline
-\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}                                           & \textbf{Name}         & \textbf{Description}          \\ \hline
-                     & private             & IAuthenticationService                                       & authenticationService & The authentication service    \\ \hline
-                     & private             & User                                                         & user                  & The current user logged in    \\ \hline
-\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}                                                & \textbf{Returns}      & \textbf{Description}          \\ \hline
-                     & public              & SessionManager(IAuthenticationService authenticationService) & SessionManager        & Constructs the SessionManager \\ \hline
-                     & public              & login(String username, String password)                      & User                  & Authenticates a user          \\ \hline
-                     & public              & logout()                                                     & void                  & Disconnects a user            \\ \hline
-                     & public              & isLoggedIn()                                                 & boolean               & Checks if a user is logged in \\ \hline
-\end{tabular}%
-}
-\end{table}
-
-% End of com.github.comp354project.model.auth
-
-%Start of com.github.comp354project.model.auth.exception
+%Start of com.github.comp354project.auth.exception
 \begin{table}[H]
 \centering
 \caption{Class AuthenticationException}
@@ -1201,7 +1108,7 @@ None                 &                     &                    &               
 \textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                                                      \\ \hline
 \textbf{Description} & \multicolumn{4}{l|}{Exception used to hold multiple exceptions}                                                                                                                               \\ \hline
 \textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}                                                                                                     & \textbf{Name}       & \textbf{Description}     \\ \hline
-                     & private             & List\textlessValidationException\textgreater                                                                           & errors              & The exception list       \\ \hline
+                     & private             & List\textless ValidationException\textgreater                                                                           & errors              & The exception list       \\ \hline
 \textbf{Methods}     & \textbf{Visibility} & \textbf{Name}                                                                                                          & \textbf{Returns}    & \textbf{Description}     \\ \hline
                      & public              & \begin{tabular}[c]{@{}l@{}}ValidationException(String message, \\ Throwable cause, @Singular List errors)\end{tabular} & ValidationException & Constructs the exception \\ \hline
 \end{tabular}%
@@ -1349,6 +1256,132 @@ None                 &                     &                       &            
 }
 \end{table}
 
+\begin{table}[H]
+\centering
+\caption{Update User Account Controller}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.viewController.UpdateUserAccountController} \\ \hline
+\textbf{Visibility}  & \multicolumn{4}{l|}{Public}   \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{Class}   \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}     \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{Initializable}     \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Allows to update user account information and delete the account} \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}    & \textbf{Name}        & \textbf{Description} \\ \hline
+                     & private& Label & usernameTxt & username of the logged-in user \\ \hline
+                     & private& JFXTextField & addressTxt & address input field \\ \hline
+                     & private& JFXTextField & emailTxt & email input field \\ \hline
+                     & private& JFXTextField & lastnameTxt & last name input field \\ \hline
+                     & private& JFXTextField & firstnameTxt & first name input field \\ \hline
+                     & private& JFXTextField & phoneNumberTxt & phone number input field \\ \hline
+                     & private& JFXPasswordField & passwordField & password input field  \\ \hline
+                     & private& JFXPasswordField & passwordRepeatField & password repeat input field \\ \hline
+                     & protected& IUserService & userService & injected user service object \\ \hline
+                     & protected& SessionManager & sessionManager & injected session manager object \\ \hline
+                     & private& User & user & the logged-in user \\ \hline
+
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}         & \textbf{Returns}     & \textbf{Description} \\ \hline
+                     & public              & initialize() & void & \begin{tabular}[c]{@{}l@{}} populates the user and input fields \end{tabular} \\ \hline
+                    & public               & goBackToAccountList(ActionEvent) & void & \begin{tabular}[c]{@{}l@{}}  returns to the account list view \end{tabular} \\ \hline
+                    & public               & setUserInfo() &  void & \begin{tabular}[c]{@{}l@{}} Updates the input fields \end{tabular} \\ \hline
+                    & public               & updateUser(ActionEvent) &  void & \begin{tabular}[c]{@{}l@{}} Calls the userService to update the user \end{tabular} \\ \hline
+                    & public               & deleteUser(ActionEvent) &  void & \begin{tabular}[c]{@{}l@{}} Calls the userService to delete the user \end{tabular} \\ \hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Transaction Table Controller}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.viewController.TransactionTableController} \\ \hline
+\textbf{Visibility}  & \multicolumn{4}{l|}{Public}   \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{Class}   \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}     \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{Initializable}     \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Allows to display and edit transactions} \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}    & \textbf{Name}        & \textbf{Description} \\ \hline
+                     & private& TableColumn$<$TransactionDisplayModel, Integer$>$ & idCol & the transaction id column \\ \hline
+                     & private& TableColumn$<$TransactionDisplayModel, String$>$ & dateCol & the transaction date column \\ \hline
+                     & private& TableColumn$<$TransactionDisplayModel, String$>$ & amountCol & the transaction amount column \\ \hline
+                     & private& TableColumn$<$TransactionDisplayModel, String$>$ & categoryCol & the transaction category column \\ \hline
+                     & private& TableColumn$<$TransactionDisplayModel, String$>$ & typeCol & the transaction type column \\ \hline
+                     & private& TableView$<$TransactionDisplayModel$>$ & transactionTableView & the transaction table view \\ \hline
+                     & private& ObservableList$<$TransactionDisplayModel$>$ & tableData & the display models used to feed to the table \\ \hline
+                     & private& List$<Transaction>$ & transactions & the data used to construct dipslay models from \\ \hline
+                     & private& ITransactionService & transactionService & a transaction service object \\ \hline
+
+
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}         & \textbf{Returns}     & \textbf{Description} \\ \hline
+                     & public              & initialize() & void & \begin{tabular}[c]{@{}l@{}} populates the table view  \end{tabular} \\ \hline
+                    & public               & hideAccountIDColumn() & void & \begin{tabular}[c]{@{}l@{}}  hides the ID column of the table view \end{tabular} \\ \hline
+                    & public               & setTransactions(List$<$Transaction$>$) &  void & \begin{tabular}[c]{@{}l@{}} updates the transactions and table view data \end{tabular} \\ \hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Sign up controller}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.viewController.SignUpController} \\ \hline
+\textbf{Visibility}  & \multicolumn{4}{l|}{Public}   \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{Class}   \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}     \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{Initializable, EventHandler$<$KeyEvent$>$}     \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Allows to sign up a new user} \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}    & \textbf{Name}        & \textbf{Description} \\ \hline
+                     & private& JFXTextField & usernameTxt & username input field \\ \hline
+                     & private& JFXTextField & lastnameTxt & last name input field \\ \hline
+                     & private& JFXTextField & firstnameTxt & first name input field \\ \hline
+                     & private& JFXPasswordField & passwordField & password input field  \\ \hline
+                     & private& JFXPasswordField & passwordRepeatField & password repeat input field \\ \hline
+                     & protected& IUserService & userService & injected user service object \\ \hline
+
+
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}         & \textbf{Returns}     & \textbf{Description} \\ \hline
+                     & public              & initialize() & void & \begin{tabular}[c]{@{}l@{}} required by the interface, empty body  \end{tabular} \\ \hline
+                    & public               & signUp(ActionEvent) & void & \begin{tabular}[c]{@{}l@{}}  calls the signUp() method \end{tabular} \\ \hline
+                    & public               & handle(KeyEvent) &  void & \begin{tabular}[c]{@{}l@{}} handles user keyboard input \end{tabular} \\ \hline
+                    & private               & signUp() &  void & \begin{tabular}[c]{@{}l@{}} Calls the user service to create a new user \end{tabular} \\ \hline
+                     & private               & validatePasswords() &  void & \begin{tabular}[c]{@{}l@{}} ensures that the contents of the password fields match \end{tabular} \\ \hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Log in controller}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.viewController.LoginController} \\ \hline
+\textbf{Visibility}  & \multicolumn{4}{l|}{Public}   \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{Class}   \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}     \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{Initializable, EventHandler$<$KeyEvent$>$}     \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Allows the users to log in} \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}    & \textbf{Name}        & \textbf{Description} \\ \hline
+                     & private& JFXTextField & usernameTxt & username input field \\ \hline
+                     & private& JFXPasswordField & passwordField & password input field  \\ \hline
+                     & protected& SessionManager & userService & injected user service object \\ \hline
+                     & protected& IUserService & userService & injected user service object \\ \hline
+
+
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}         & \textbf{Returns}     & \textbf{Description} \\ \hline
+                     & public              & initialize() & void & \begin{tabular}[c]{@{}l@{}} required by the interface, empty body  \end{tabular} \\ \hline
+                    & public               & login(ActionEvent) & void & \begin{tabular}[c]{@{}l@{}}  calls the login() method \end{tabular} \\ \hline
+                    & public               & handle(KeyEvent) &  void & \begin{tabular}[c]{@{}l@{}} handles user keyboard input \end{tabular} \\ \hline
+                    & public               & signUp(ActionEvent) &  void & \begin{tabular}[c]{@{}l@{}} calls the user service to create a new user \end{tabular} \\ \hline
+                     & private               & login() &  void & \begin{tabular}[c]{@{}l@{}} calls the sessionManager to login the user \end{tabular} \\ \hline
+\end{tabular}
+}
+\end{table}
 
 
 \clearpage
