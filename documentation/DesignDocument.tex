@@ -135,14 +135,23 @@ The data is stored in an SQLite database. Our system actually employs two databa
 
 %VIEW -----------
 \subsubsection*{View Subsystem}
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{view_subsystem.png}
+\end{figure}
 Our resources/fxml folder contains the view subsystem. The view is implemented, as mentioned before, through the JavaFX framework. It is a collection of FXML files, containing a structure contained in an AnchorPane. If the view model is simple menu (Login.fxml, SignUp.fxml, UpdateUserAccount.fxml), it will merely contain a few labeled text fields and buttons with 'onAction' parameters tying the buttons to a function in the view controllers. If it is a table view, (AccountDetails.fxml, AccountList.fxml, AllTransactions.fxml), then a TableView will be used with labelled columns, which are then recognised by the controllers in order to populate them with the model data. As nothing in our view contains actual code,  no functions are mentioned here. 
 
 \subsubsection*{Controller Subsystem}
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{controller_subsystem.png}
+\end{figure}
 The com.github.comp354project.viewController package contains a number of controllers for each different view. Each view is handled by its own controller, which contains each column and/or label as a private data member, and each button 'onAction' as a function. All controllers implement the Initializable interface, and hence contain an initialize(URL location, ResourceBundle resources) function which is called when the view is first displayed to the user. This function serves to populate the views with the domain data, if needed.  The controllers may receive user input from the view and catch user events such as button presses or table entry selections. The functions catching these inputs pass these calls to the services in the model, described below.   They are also the ones who pass any errors from the services to the views, mostly to be used for testing and alerting the user of any problems that might have occured.
  A more precise description of each controller is available in \ref{classes}
  
  \subsubsection*{Model Subsystem}
-
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{model_subsystem.png}
+\end{figure}
 The com.github.comp354project.model package contains both our application logic and our database.  As mentioned in the previous section, it is organised in a layered manner, wherein each layer handles its own services and use the services of the layer below it within worrying about that layer's implementation. Data validation and processing is offered by each service: The account service, for example, validate calls to add or delete bank accounts, edit a transaction's category, or query for specific accounts. It does this by querying the database using an account DAO, and ensuring data integrity and validity (with regards to the business rules). It does not, however, worry about user authorisation, and simply assumes the layer above it (The user service) will have handled it. The com.github.comp354project.viewController calls services within this package to update the view and the model.
 
 The com.github.comp354project.service package.account.remote package is a subsystem to our model which mocks an API call to remote servers of banks or credit card companies. In our case however, we don't actually have access to such systems. For this reason, the remote data exists in an SQLite database like our local one.
@@ -969,7 +978,7 @@ None                 &                     &                                    
 \textbf{Description} & \multicolumn{4}{l|}{Service to authenticate users}                                                                                     \\ \hline
 \textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}                             & \textbf{Name}         & \textbf{Description}                    \\ \hline
                      & private             & Logger                                         & Logger                & Logger                                  \\ \hline
-                     & private             & Dao\textlessUser, Integer\textgreater          & userDao               & The service Dao to interact with the db \\ \hline
+                     & private             & Dao\textless User, Integer\textgreater          & userDao               & The service Dao to interact with the db \\ \hline
                      & private             & IUsernameValidator                             & usernameValidator     & Used to validate a username             \\ \hline
                      & private             & IPasswordValidator                             & passwordValidator     & Used to validate a password             \\ \hline
 \textbf{Methods}     & \textbf{Visibility} & \textbf{Name}                                  & \textbf{Returns}      & \textbf{Description}                    \\ \hline
