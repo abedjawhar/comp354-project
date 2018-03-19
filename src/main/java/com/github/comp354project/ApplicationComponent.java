@@ -10,7 +10,7 @@ import com.github.comp354project.viewController.AccountListController;
 import com.github.comp354project.viewController.LoginController;
 import com.github.comp354project.viewController.SignUpController;
 import com.github.comp354project.viewController.UpdateUserAccountController;
-import com.github.comp354project.viewController.view.TransactionTableController;
+import com.github.comp354project.viewController.TransactionTableController;
 import dagger.Component;
 
 import javax.inject.Singleton;

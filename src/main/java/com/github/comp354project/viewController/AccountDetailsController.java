@@ -3,7 +3,7 @@ package com.github.comp354project.viewController;
 import com.github.comp354project.MyMoneyApplication;
 import com.github.comp354project.model.account.Account;
 import com.github.comp354project.model.account.Transaction;
-import com.github.comp354project.viewController.view.TransactionTable;
+import com.github.comp354project.view.TransactionTable;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;

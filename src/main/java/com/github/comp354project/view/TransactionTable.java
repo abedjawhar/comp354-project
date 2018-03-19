@@ -1,6 +1,7 @@
-package com.github.comp354project.viewController.view;
+package com.github.comp354project.view;
 
 import com.github.comp354project.model.account.Transaction;
+import com.github.comp354project.viewController.TransactionTableController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Control;
