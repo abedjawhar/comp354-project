@@ -1298,28 +1298,6 @@ None                 &                     &                       &            
 
 \begin{table}[H]
 \centering
-\caption{AlertHelper}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.viewController.helper.AlertHelper} \\ \hline
-\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
-\textbf{Type}        & \multicolumn{4}{l|}{Class}   \\ \hline
-\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}     \\ \hline
-\textbf{Implements}  & \multicolumn{4}{l|}{N/A}     \\ \hline
-\textbf{Description} & \multicolumn{4}{l|}{Creates an alert to notify the user of an error} \\ \hline
-\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}    & \textbf{Name}        & \textbf{Description} \\ \hline
-None                 &                     &                       &                      & \\ \hline
-\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}         & \textbf{Returns}     & \textbf{Description} \\ \hline
-                     & public              & generateAlert(Alert.AlertType alertType, String title, String header, String content) & Alert & \begin{tabular}[c]{@{}l@{}} Returns a new alert composed of the passed content \end{tabular} \\ \hline
-                    & public               & generateErrorAlert(String title, String header, String content) & Alert & \begin{tabular}[c]{@{}l@{}}  return a new alert of type ERROR \\ composed of the passed content \end{tabular} \\ \hline
-                  & public               & generateErrorAlert(String title, String header, ValidationException exception) & Alert & \begin{tabular}[c]{@{}l@{}}  return a new alert of type ERROR, \\ specifically for our custom validation exception. \end{tabular} \\ \hline
-\end{tabular}
-}
-\end{table}
-
-\begin{table}[H]
-\centering
 \caption{Account Details Controller}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
@@ -1514,7 +1492,7 @@ None                 &                     &                       &            
 
 \begin{table}[H]
 \centering
-\caption{Log in controller}
+\caption{Login controller}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -1537,6 +1515,28 @@ None                 &                     &                       &            
                     & public               & handle(KeyEvent) &  void & \begin{tabular}[c]{@{}l@{}} handles user keyboard input \end{tabular} \\ \hline
                     & public               & signUp(ActionEvent) &  void & \begin{tabular}[c]{@{}l@{}} calls the user service to create a new user \end{tabular} \\ \hline
                      & private               & login() &  void & \begin{tabular}[c]{@{}l@{}} calls the sessionManager to login the user \end{tabular} \\ \hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{AlertHelper}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.viewController.helper.AlertHelper} \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{Class}   \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}     \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}     \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Creates an alert to notify the user of an error} \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}    & \textbf{Name}        & \textbf{Description} \\ \hline
+None                 &                     &                       &                      & \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}         & \textbf{Returns}     & \textbf{Description} \\ \hline
+                     & public              & generateAlert(Alert.AlertType alertType, String title, String header, String content) & Alert & \begin{tabular}[c]{@{}l@{}} Returns a new alert composed of the passed content \end{tabular} \\ \hline
+                    & public               & generateErrorAlert(String title, String header, String content) & Alert & \begin{tabular}[c]{@{}l@{}}  return a new alert of type ERROR \\ composed of the passed content \end{tabular} \\ \hline
+                  & public               & generateErrorAlert(String title, String header, ValidationException exception) & Alert & \begin{tabular}[c]{@{}l@{}}  return a new alert of type ERROR, \\ specifically for our custom validation exception. \end{tabular} \\ \hline
 \end{tabular}
 }
 \end{table}
