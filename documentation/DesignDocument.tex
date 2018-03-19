@@ -494,6 +494,50 @@ None                              & None                & None                  
 
 %End of com.github.comp354project.service.account
 
+% Start of com.github.comp354project.service.exception
+
+\begin{table}[H]
+\centering
+\caption{Class AccountDoesNotExistException}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.account.exceptions.AccountDoesNotExistException}                                                             \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                    \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{RuntimeException}                                                                                      \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                         \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Exception thrown when a remote account does not exist}                                    \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}           & \textbf{Name}                & \textbf{Description}      \\ \hline
+                     & private             & GetRemoteAccountRequest      & request                      & The request that was sent \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}                & \textbf{Returns}             & \textbf{Description}      \\ \hline
+                     & public              & AccountDoesNotExistException & \begin{tabular}[c]{@{}l@{}}AccountDoesNotExistException(String message, \\Throwable cause, GetRemoteAccountRequest request)\end{tabular} & Constructs the exception  \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Class AccountExistsException}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.account.exceptions.AccountExistsException}                                                       \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                        \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{RuntimeException}                                                             \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                          \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Exception thrown when an account is already in use}                           \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}     & \textbf{Name}          & \textbf{Description}      \\ \hline
+                     & private             & Account                & account                & The account that was sent \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}          & \textbf{Returns}       & \textbf{Description}      \\ \hline
+                     & public              & AccountExistsException & \begin{tabular}[c]{@{}l@{}}AccountExistsException(String message, \\Throwable cause, Account account)\end{tabular} & Constructs the exception  \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+% End of com.github.comp354project.service.exception
+
 %Start of com.github.comp354project.account.remote
 
 \begin{table}[]
@@ -660,6 +704,70 @@ None                                 &                     &                    
 \end{table}
 %end of com.github.comp354project.account.remote
 
+%Start of com.github.comp354project.auth.exception
+\begin{table}[H]
+\centering
+\caption{Class AuthenticationException}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.auth.exceptions.AuthenticationException}                                                                                                                    \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                                                                                                                      \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{Exception}                                                                                                                                                                                  \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                                                                        \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Exception thrown when a user did not authenticate properly}                                                                                                                                 \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}     & \textbf{Name}                                                                                                                         & \textbf{Description}     \\ \hline
+                     & private             & String                 & username                                                                                                                              & The username used        \\ \hline
+                     & private             & String                 & password                                                                                                                              & The password used        \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}          & \textbf{Returns}                                                                                                                      & \textbf{Description}     \\ \hline
+                     & public              & AccountExistsException & \begin{tabular}[c]{@{}l@{}}AuthenticationException(String message, Throwable cause, \\ String username, String password)\end{tabular} & Constructs the exception \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Class AuthorisationException}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.auth.exceptions.AuthorisationException}                                                  \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                                                   \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{Exception}                                                                                                               \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                     \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Exception thrown when a user is not authorised to execute/read}                                                          \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}     & \textbf{Name}                                                      & \textbf{Description}     \\ \hline
+                     & private             & User                   & user                                                               & The user used            \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}          & \textbf{Returns}                                                   & \textbf{Description}     \\ \hline
+                     & public              & AuthorisationException & AuthorisationException(String message, Throwable cause, User user) & Constructs the exception \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Class UserLoggedInException}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.auth.exceptions.UserLoggedInException}                                                                                            \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                                                                                            \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{Exception}                                                                                                                                                        \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                                              \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Exception thrown when a user needs to be logged in}                                                                                                               \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}    & \textbf{Name}                                                                                                & \textbf{Description}     \\ \hline
+                     & private             & User                  & user                                                                                                         & The user used            \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}         & \textbf{Returns}                                                                                             & \textbf{Description}     \\ \hline
+                     & public              & UserLoggedInException & \begin{tabular}[c]{@{}l@{}}UserLoggedInException(String message, \\ Throwable cause, User user)\end{tabular} & Constructs the exception \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+% End of com.github.comp354project.auth.exception
+
 % Start of com.github.comp354project.service.dao
 
 \begin{table}[H]
@@ -686,6 +794,74 @@ None                                 &                     &                    
 \end{table}
 
 %end of com.github.comp354project.service.dao
+
+%start of com.github.comp354project.model.exceptions
+
+\begin{table}[H]
+\centering
+\caption{Class UserLoggedInException}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.exceptions.DatabaseException}                                                                                  \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                                                                         \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{Exception}                                                                                                                                     \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                           \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Exception thrown when a the database has an exception}                                                                                         \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}                                                                            & \textbf{Name}     & \textbf{Description}     \\ \hline
+                     & private             & User                                                                                          & user              & The user used            \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}                                                                                 & \textbf{Returns}  & \textbf{Description}     \\ \hline
+                     & public              & DatabaseException(String message)                                                             & DatabaseException & Constructs the exception \\ \hline
+                     & public              & DatabaseException(Throwable inner)                                                            & DatabaseException & Constructs the exception \\ \hline
+                     & public              & \begin{tabular}[c]{@{}l@{}}DatabaseException(String message, \\ Throwable inner)\end{tabular} & DatabaseException & Constructs the exception \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Class ValidationError}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.exceptions.ValidationError}            \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                 \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                   \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                   \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Class used to build exceptions}                                        \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type} & \textbf{Name}    & \textbf{Description}         \\ \hline
+                     & private             & String             & message          & The error message            \\ \hline
+                     & private             & String             & parameterName    & The parameter in error       \\ \hline
+                     & private             & String             & parameterValue   & The parameter in error value \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}      & \textbf{Returns} & \textbf{Description}         \\ \hline
+None                 &                     &                    &                  &                              \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Class ValidationException}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.exceptions.ValidationException}                                                                                                           \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                                                                                                    \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{Exception}                                                                                                                                                                \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                                                      \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Exception used to hold multiple exceptions}                                                                                                                               \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}                                                                                                     & \textbf{Name}       & \textbf{Description}     \\ \hline
+                     & private             & List\textlessValidationException\textgreater                                                                           & errors              & The exception list       \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}                                                                                                          & \textbf{Returns}    & \textbf{Description}     \\ \hline
+                     & public              & \begin{tabular}[c]{@{}l@{}}ValidationException(String message, \\ Throwable cause, @Singular List errors)\end{tabular} & ValidationException & Constructs the exception \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+% end of com.github.comp354project.model.exceptions
 
 % Start of com.github.comp354project.service.sqlite
 
