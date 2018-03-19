@@ -133,60 +133,19 @@ The data is stored in an SQLite database. Our system actually employs two databa
 
 \subsection{Subsystem Interface Specifications} \label{subsystem interface}
 
+%VIEW -----------
+\subsubsection*{View Subsystem}
+Our resources/fxml folder contains the view subsystem. The view is implemented, as mentioned before, through the JavaFX framework. It is a collection of FXML files, containing a structure contained in an AnchorPane. If the view model is simple menu (Login.fxml, SignUp.fxml, UpdateUserAccount.fxml), it will merely contain a few labeled text fields and buttons with 'onAction' parameters tying the buttons to a function in the view controllers. If it is a table view, (AccountDetails.fxml, AccountList.fxml, AllTransactions.fxml), then a TableView will be used with labelled columns, which are then recognised by the controllers in order to populate them with the model data. As nothing in our view contains actual code,  no functions are mentioned here. 
 
-% The com.github.comp354project.service package is the main subsystem of our project. As mentioned in the previous section, it is organised in a layered manner, wherein each layer handles its own services and use the services of the layer below it within worrying about that layer's implementation. Data validation and processing is offered by each service: The account service, for example, validate calls to add or delete bank accounts, edit a transaction's category, or query for specific accounts. It does this by querying the database using an account DAO, and ensuring data integrity and validity (with regards to the business rules). It does not, however, worry about user authorisation, and simply assumes the layer above it (The user service) will have handled it. The com.github.comp354project.viewController calls services within this package to update the view and the model.
+\subsubsection*{Controller Subsystem}
+The com.github.comp354project.viewController package contains a number of controllers for each different view. Each view is handled by its own controller, which contains each column and/or label as a private data member, and each button 'onAction' as a function. All controllers implement the Initializable interface, and hence contain an initialize(URL location, ResourceBundle resources) function which is called when the view is first displayed to the user. This function serves to populate the views with the domain data, if needed.  The controllers may receive user input from the view and catch user events such as button presses or table entry selections. The functions catching these inputs pass these calls to the services in the model, described below.   They are also the ones who pass any errors from the services to the views, mostly to be used for testing and alerting the user of any problems that might have occured.
+ A more precise description of each controller is available in \ref{classes}
+ 
+ \subsubsection*{Model Subsystem}
 
-% The com.github.comp354project.viewController package contains a number of controllers for each different view. They are the ones handling the requests from the users, which they pass to the services in the package described above. They are also the ones who pass any errors from the services to the views, mostly to be used for testing and alerting the user of any problems that might have occured.
+The com.github.comp354project.model package contains both our application logic and our database.  As mentioned in the previous section, it is organised in a layered manner, wherein each layer handles its own services and use the services of the layer below it within worrying about that layer's implementation. Data validation and processing is offered by each service: The account service, for example, validate calls to add or delete bank accounts, edit a transaction's category, or query for specific accounts. It does this by querying the database using an account DAO, and ensuring data integrity and validity (with regards to the business rules). It does not, however, worry about user authorisation, and simply assumes the layer above it (The user service) will have handled it. The com.github.comp354project.viewController calls services within this package to update the view and the model.
 
-% The com.github.comp354project.service package.account.remote package is a subsystem to our services which mocks an API call to remote servers of banks or credit card companies. In our case however, we don't actually have access to such systems. For this reason, the remote data exists in an SQLite database like our local one.
-
-Specification of the software interfaces between the subsystems,
-i.e. specific messages (or function calls) that are exchanged by the subsystems.
-These are also often called ``Module Interface Specifications''.
-Description of the parameters to be passed into these function calls in order to have a service fulfilled,
-including valid and invalid ranges of values.
-Each subsystem interface must be presented in a separate subsection.
-
-*Note: The above is a description of what to provide. Need to edit into our own
-\subsubsection{View Controllers}
-
-\paragraph{SignUpController Interfaces}
-
-Below are the different models and services used in the SignUpController view.
-
-\begin{figure}[H]
-\includegraphics[width=\linewidth]{subsystem-interface-signup-controller.png}
-\end{figure}
-
-\clearpage
-
-\paragraph{LoginController Interfaces}
-
-Below are the different models and services used in the LoginController view.
-
-\begin{figure}[H]
-\includegraphics[width=\linewidth]{subsystem-interface-login-controller.png}
-\end{figure}
-
-\clearpage
-
-\paragraph{AcountDetailsController Interfaces}
-
-Below are the different models and services used in the AccountDetailsController view.
-
-\begin{figure}[H]
-\includegraphics[width=\linewidth]{account-details-controller.png}
-\end{figure}
-
-\clearpage
-
-\paragraph{AccountListController Interfaces}
-
-Below are the different models and services used in the AccountListController view.
-
-\begin{figure}[H]
-\includegraphics[width=\linewidth]{subsystem-interface-AccountListController.png}
-\end{figure}
+The com.github.comp354project.service package.account.remote package is a subsystem to our model which mocks an API call to remote servers of banks or credit card companies. In our case however, we don't actually have access to such systems. For this reason, the remote data exists in an SQLite database like our local one.
 
 \clearpage
 
@@ -226,7 +185,7 @@ In this section we provide the class diagram of our system, useful for the syste
 
 \clearpage
 
-\subsection{Classes}
+\subsection{Classes}\label{classes}
 
 %Start of com.github.comp354project%
 \begin{table}[H]
