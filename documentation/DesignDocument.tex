@@ -329,6 +329,260 @@ None                 &                     &                         &          
 \end{table}
 %End of com.github.comp354project%
 
+%Start of com.github.comp354project.service.user
+\begin{table}[]
+    \centering
+    \caption{Interface IUserService}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.user.IUserService}                             \\ \hline
+    Type       & \multicolumn{4}{l|}{Interface}                                                                        \\ \hline
+    Inherits   & \multicolumn{4}{l|}{N/A}                                                                              \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A}                                                                              \\ \hline
+    Attributes & Visibility  & Data Type                          & Name    & Description                              \\ \hline
+                & N/A         &                                    &         &                                          \\ \hline
+    Method     & Visibility  & Name                               & Returns & Description                              \\ \hline
+                & no modifier & createUser(User user)              & User    & User to create a new user                \\ \hline
+                & no modifier & deleteBankAccount(Account account) & void    & Deletes a bank account belonging to user \\ \hline
+                & no modifier & updateUser(User user)              & User    & Updates the user's info                  \\ \hline
+                & no modifier & deleteUser(User user)              & void    & Deletes a user                           \\ \hline
+    \end{tabular}
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Class User}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.user.User}       \\ \hline
+    Type       & \multicolumn{4}{l|}{Class}                                              \\ \hline
+    Inherits   & \multicolumn{4}{l|}{N/A}                                                \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A}                                                \\ \hline
+    Attributes & Visibility & Data Type         & Name      & Description                \\ \hline
+                & private    & Integer           & ID        & User identification number \\ \hline
+                & private    & String            & username  & Username of user           \\ \hline
+                & private    & String            & password  & User's password            \\ \hline
+                & private    & String            & firstName & User's first name          \\ \hline
+                & private    & String            & lastName  & User's last name           \\ \hline
+                & private    & String            & email     & User's email               \\ \hline
+                & private    & String            & address   & User's address             \\ \hline
+                & private    & String            & phone     & User's phone number        \\ \hline
+                & private    & ForeignCollection & accounts  & Accounts belonging to user \\ \hline
+    Method     & Visibility & Name              & Returns   & Description                \\ \hline
+                & N/A        &                   &           &                            \\ \hline
+    \end{tabular}
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Class UserService}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.user.UserService}                                                                                                                                                         \\ \hline
+    Type       & \multicolumn{4}{l|}{Class}                                                                                                                                                                                                    \\ \hline
+    Inherits   & \multicolumn{4}{l|}{N/A}                                                                                                                                                                                                          \\ \hline
+    Implements & \multicolumn{4}{l|}{IUserService}                                                                                                                                                                                                          \\ \hline
+    Attributes & Visibility & Data Type                                                                                             & Name              & Description                                                                              \\ \hline
+                & Private    & Logger                                                                                                & logger            & Logger used to Log things such as errors                                                 \\ \hline
+                & Private    & Dao                                                                                                   & userDao           & User data access object used to interact with the user data stored in the database       \\ \hline
+                & Private    & Dao                                                                                                   & accountDao        & Account data access object used to interact with the account data stored in the database \\ \hline
+                & Private    & IUsernameValidator                                                                                    & usernameValidator & Used to validate a username                                                              \\ \hline
+                & Private    & IUserValidator                                                                                        & userValidator     & Used to validate a user                                                                  \\ \hline
+                & Private    & SessionManager                                                                                        & sessionManager    & Used to keep track of the currently logged in user                                       \\ \hline
+                & Private    & AccountService                                                                                        & accountService    & Used to interact with the account service layer                                          \\ \hline
+    Method     & Visibility & Name                                                                                                  & Returns           & Description                                                                              \\ \hline
+                & public     & UserService(Dao userDao,Dao accountDao, SessionManager sessionManager, AccountService accountService) & N/A               & constructor used to create UserService                                                   \\ \hline
+                & public     & createUser(User user)                                                                                 & User              & User to create a new user                                                                \\ \hline
+                & public     & getUser(String username)                                                                              & User              & Get's a user by their username                                                           \\ \hline
+                & public     & deleteBankAccount(Account account)                                                                    & void              & Deletes a bank account belonging to user                                                 \\ \hline
+                & public     & updateUser(User user)                                                                                 & User              & Updates the user's info                                                                  \\ \hline
+                & public     & deleteUser(User user)                                                                                 & void              & Deletes a user                                                                           \\ \hline
+    \end{tabular}
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Class UserServiceModule}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.user.UserServiceModule}                   \\ \hline
+    Type       & \multicolumn{4}{l|}{Class}                                                                       \\ \hline
+    Inherits   & \multicolumn{4}{l|}{N/A}                                                                         \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A}                                                                         \\ \hline
+    Attributes & Visibility & Data Type                                   & Name         & Description            \\ \hline
+                & N/A        &                                             &              &                        \\ \hline
+    Method     & Visibility & Name                                        & Returns      & Description            \\ \hline
+                & public     & provideUserService(UserService userService) & IUserService & Provides a UserService \\ \hline
+    \end{tabular}
+    }
+    \end{table}
+    %Start of com.github.comp354project.service.user
+    
+    %Start of com.github.comp354project.model.validators
+    \begin{table}[]
+    \centering
+    \caption{Interface ICategoryNameValidator}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.validators.ICategoryNameValidator} \\ \hline
+    Type & \multicolumn{4}{l|}{Interface} \\ \hline
+    Inherits & \multicolumn{4}{l|}{N/A} \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A} \\ \hline
+    Attributes & Visibility & Data Type & Name & Description \\ \hline
+        & N/A &  &  &  \\ \hline
+    Method & Visibility & Name & Returns & Description \\ \hline
+        & public & validateCategory(String category, String message) & List & Validates transaction categories \\ \hline
+    \end{tabular}
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Interface INameValidator}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.validators.INameValidator} \\ \hline
+    Type & \multicolumn{4}{l|}{Interface} \\ \hline
+    Inherits & \multicolumn{4}{l|}{N/A} \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A} \\ \hline
+    Attributes & Visibility & Data Type & Name & Description \\ \hline
+        & N/A &  &  &  \\ \hline
+    Method & Visibility & Name & Returns & Description \\ \hline
+        & public & validateName(String name, String message) & List & Validates first and last name of user \\ \hline
+    \end{tabular}
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Interface INameValidator}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.validators.INameValidator} \\ \hline
+    Type & \multicolumn{4}{l|}{Interface} \\ \hline
+    Inherits & \multicolumn{4}{l|}{N/A} \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A} \\ \hline
+    Attributes & Visibility & Data Type & Name & Description \\ \hline
+        & N/A &  &  &  \\ \hline
+    Method & Visibility & Name & Returns & Description \\ \hline
+        & public & validatePassword(String password, String message) & List & Validates that password meets required criteria \\ \hline
+    \end{tabular}
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Interface INameValidator}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.validators.INameValidator} \\ \hline
+    Type & \multicolumn{4}{l|}{Interface} \\ \hline
+    Inherits & \multicolumn{4}{l|}{N/A} \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A} \\ \hline
+    Attributes & Visibility & Data Type & Name & Description \\ \hline
+        & N/A &  &  &  \\ \hline
+    Method & Visibility & Name & Returns & Description \\ \hline
+        & public & validateUsername(String username, String message) & List & Validates that username meets required criteria \\ \hline
+    \end{tabular}
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Interface IUserValidator}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.validators.IUserValidator} \\ \hline
+    Type & \multicolumn{4}{l|}{Interface} \\ \hline
+    Inherits & \multicolumn{4}{l|}{N/A} \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A} \\ \hline
+    Attributes & Visibility & Data Type & Name & Description \\ \hline
+        & N/A &  &  &  \\ \hline
+    Method & Visibility & Name & Returns & Description \\ \hline
+        & public & validateUser(User user) & List & Validates the user data \\ \hline
+    \end{tabular}
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Class StringLengthValidator}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.validators.StringLengthValidator} \\ \hline
+    Type & \multicolumn{4}{l|}{Class} \\ \hline
+    Inherits & \multicolumn{4}{l|}{ICategoryNameValidator, IUsernameValidator, IPasswordValidator, INameValidator} \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A} \\ \hline
+    Attributes & Visibility & Data Type & Name & Description \\ \hline
+        & private & Integer & minLength & Minimum length of String \\ \hline
+        & private & Integer & maxLength & Maximum length of String \\ \hline
+    Method & Visibility & Name & Returns & Description \\ \hline
+        & public & StringLengthValidator(intminLength, int maxLength) & N/A & constructor \\ \hline
+        & public & validateName(String name, String message) & List & validates first and last name of user \\ \hline
+        & public & validateCategory(String category, String message) & List & validates the category of a transaction \\ \hline
+        & public & validatePassword(String password, String message) & List & validates that password meets criteria \\ \hline
+        & public & validateUsername(String username, String message) & List & validates that username meets criteria \\ \hline
+        & public & validate(String string, String paramName, String message) & List & validates the length of a string \\ \hline
+    \end{tabular}%
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Class UserValidator}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.validators.UserValidator} \\ \hline
+    Type & \multicolumn{4}{l|}{Class} \\ \hline
+    Inherits & \multicolumn{4}{l|}{IUserValidator} \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A} \\ \hline
+    Attributes & Visibility & Data Type & Name & Description \\ \hline
+        & private & IUsernameValidator & usernameValidator & used to validate the user \\ \hline
+        & private & IPasswordValidator & passwordValidator & used to validate the user's password \\ \hline
+        & private & INameValidator & nameValidator & used to validate the first and last name of user \\ \hline
+    Method & Visibility & Name & Returns & Description \\ \hline
+        & public & \begin{tabular}[c]{@{}l@{}}UserValidator(IUsernameValidatorusernameValidator, IPasswordValidator \\ passwordValidator, INameValidator nameValidator)\end{tabular} & N/A & Constructor \\ \hline
+        & public & validateUser(Useruser) & List & validates user attributes \\ \hline
+    \end{tabular}%
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Class ValidatorFactory}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.validators.ValidatorFactory} \\ \hline
+    Type & \multicolumn{4}{l|}{Class} \\ \hline
+    Inherits & \multicolumn{4}{l|}{N/A} \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A} \\ \hline
+    Attributes & Visibility & Data Type & Name & Description \\ \hline
+        & N/A &  &  &  \\ \hline
+    Method & Visibility & Name & Returns & Description \\ \hline
+        & public & usernameValidator() & IUsernameValidator & creates a UsernameValidator \\ \hline
+        & public & passwordValidator() & IPasswordValidator & createsa PasswordValidator \\ \hline
+        & public & categoryNameValidator() & ICategoryNameValidator & creates a CategoryNameValidato \\ \hline
+        & public & userValidator() & IUserValidator & creates a UserValidator \\ \hline
+    \end{tabular}%
+    }
+    \end{table}
+    %End of com.github.comp354project.model.validators
+
 %Start of com.github.comp354project.service.account
 
 \begin{table}[H]
