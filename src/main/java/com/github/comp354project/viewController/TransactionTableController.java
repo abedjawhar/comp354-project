@@ -16,6 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,6 +28,7 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class TransactionTableController implements Initializable {
     private static final Logger logger = LogManager.getLogger(TransactionTableController.class);
@@ -47,6 +49,7 @@ public class TransactionTableController implements Initializable {
 
     private ObservableList<TransactionDisplayModel> tableData = FXCollections.observableArrayList();
 
+    @Getter
     private List<Transaction> transactions;
 
     @Inject
@@ -59,13 +62,22 @@ public class TransactionTableController implements Initializable {
             .add("Rent").build();
 
     public TransactionTableController() {
+        MyMoneyApplication.application.getComponent().inject(this);
+    }
+
+    public void setCategoryFilter(String category){
+        List<Transaction> filteredTransactions = this.transactions.stream()
+                .filter(t -> {
+                    return category.length() == 0 || ((t.getCategory() != null) && t.getCategory().toLowerCase().contains(category.toLowerCase()));
+                }).collect(Collectors.toList());
+        this.tableData.clear();
+        filteredTransactions.forEach(t -> this.tableData.add(new TransactionDisplayModel(t)));
     }
 
     public void setTransactions(List<Transaction> transactions) {
         this.tableData.clear();
         this.transactions = transactions;
         transactions.forEach(t -> this.tableData.add(new TransactionDisplayModel(t)));
-        MyMoneyApplication.application.getComponent().inject(this);
     }
 
     @Override
