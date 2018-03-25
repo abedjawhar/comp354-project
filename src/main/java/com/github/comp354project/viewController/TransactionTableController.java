@@ -85,20 +85,20 @@ public class TransactionTableController implements Initializable {
             return ct;
         });
         categoryCol.setOnEditCommit(event -> {
-        String category = event.getNewValue() != null ? event.getNewValue() :
-                event.getOldValue();
-        category = category.trim();
+            String category = event.getNewValue() != null ? event.getNewValue() :
+                    event.getOldValue();
+            category = category.trim();
 
-        Integer transactionIndex = event.getTablePosition().getRow();
-        Transaction transactionToUpdate = this.transactions.get(transactionIndex);
-        try {
-            Transaction updatedTransaction = transactionService.updateTransactionCategory(transactionToUpdate.getID(), category);
-            this.transactions.set(transactionIndex, updatedTransaction);
-            event.getTableView().getItems().set(transactionIndex, new TransactionDisplayModel(updatedTransaction));
-        } catch (ValidationException e){
-            event.getTableView().getItems().set(transactionIndex, new TransactionDisplayModel(transactionToUpdate));
-            logger.error(e);
-        }
+            Integer transactionIndex = event.getTablePosition().getRow();
+            Transaction transactionToUpdate = this.transactions.get(transactionIndex);
+            try {
+                Transaction updatedTransaction = transactionService.updateTransactionCategory(transactionToUpdate.getID(), category);
+                this.transactions.set(transactionIndex, updatedTransaction);
+                event.getTableView().getItems().set(transactionIndex, new TransactionDisplayModel(updatedTransaction));
+            } catch (ValidationException e){
+                event.getTableView().getItems().set(transactionIndex, new TransactionDisplayModel(transactionToUpdate));
+                logger.error(e);
+            }
         });
     }
 

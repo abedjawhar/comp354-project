@@ -22,10 +22,10 @@
                prefWidth="200.0" textAlignment="CENTER" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0"
                AnchorPane.topAnchor="7.0"/>
 
-       <TransactionTable fx:id="transactionTable"
+        <fx:include source="TransactionTableController.fxml" fx:id="transactionTableView"
                          layoutX="-4.0" layoutY="50.0" prefHeight="452.0" prefWidth="800.0"
                          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                          AnchorPane.topAnchor="48.0">
-       </TransactionTable>
+        </fx:include>
     </children>
 </AnchorPane>

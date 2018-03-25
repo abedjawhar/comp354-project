@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<?import com.github.comp354project.view.TransactionTable?>
+<?import javafx.scene.layout.Pane?>
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.comp354project.viewController.AccountDetailsController">
    <children>
       <Button layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#gotoAccountList" text="&lt;" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="12.0" />
@@ -17,11 +17,10 @@
       <Label fx:id="accountBalance" layoutX="96.0" layoutY="18.0" text="\$0.00" AnchorPane.leftAnchor="103.0" AnchorPane.topAnchor="15.0" />
       <Label fx:id="accountDescription" alignment="CENTER" layoutX="378.0" layoutY="7.0" prefHeight="17.0" prefWidth="200.0" textAlignment="CENTER" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="7.0" />
       <Label fx:id="accountType" alignment="CENTER" layoutX="386.0" layoutY="24.0" prefWidth="200.0" textAlignment="CENTER" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="24.0" />
-       <TransactionTable fx:id="transactionTable"
-                         layoutX="-4.0" layoutY="50.0" prefHeight="452.0" prefWidth="800.0"
-                         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                         AnchorPane.topAnchor="48.0">
-       </TransactionTable>
+      <fx:include source="TransactionTableController.fxml" fx:id="transactionTableView"
+                  layoutX="-4.0" layoutY="50.0" prefHeight="452.0" prefWidth="800.0"
+                  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                  AnchorPane.topAnchor="48.0"/>
       <!--<Button fx:id="deleteAccountBtn" layoutX="688.0" layoutY="12.0" mnemonicParsing="false" text="Delete Account" />-->
    </children>
 </AnchorPane>
