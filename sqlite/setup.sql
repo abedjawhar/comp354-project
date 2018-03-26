@@ -54,67 +54,6 @@ CREATE TABLE AccountTransaction(
   FOREIGN KEY(account_id) REFERENCES Account(id)
 );
 
-INSERT INTO Account(
-  id,
-  user_id,
-  bank_name,
-  type,
-  balance
-)
-VALUES(
-    1,
-    1,
-    'TD',
-    'Checking',
-    15823.12
-  ),
-  (
-    20,
-    2,
-    'SocGen',
-    'Checking',
-    48572.95
-  ),
-  (
-    21,
-    2,
-    'Desjardins',
-    'Visa',
-    0.00
-  );
-
-INSERT INTO AccountTransaction(
-      id,
-      account_id,
-      date,
-      amount,
-      type,
-      category,
-      source_id,
-      destination_id
-    )
-    VALUES
-    (
-    	1,
-    	1,
-    	1517091082,
-    	52.2,
-    	'Transfer',
-    	'Rent',
-    	NULL,
-    	2
-    ),
-    (
-    	2,
-      1,
-      1517099082,
-      232,
-      'Transfer',
-      'Leisure',
-      NULL,
-      3
-    );
-
 INSERT INTO RemoteAccount (
     id,
     bank_name,
@@ -141,21 +80,21 @@ INSERT INTO RemoteAccount (
     1312.12
   ),
   (
-    20,
+    4,
     'SocGen',
     'Checking',
     48572.95
   ),
   (
-    21,
+    5,
     'Desjardins',
-    'Visa',
+    'Savings',
     0.00
   ),
   (
-    22,
+    6,
     'Capital One',
-    'Mastercard',
+    'Checking',
     -800
   );
 
@@ -180,7 +119,7 @@ INSERT INTO RemoteAccountTransaction (
     2
   ),
 	(
-	  2,
+	2,
     1,
     1517099082,
     232,
@@ -196,7 +135,62 @@ INSERT INTO RemoteAccountTransaction (
     'Deposit',
     2,
     NULL
-	);
+	),
+	(
+    4,
+    2,
+    1522023463,
+    5334.12,
+    'Transfer',
+    NULL,
+    3
+    ),
+    (
+    5,
+    3,
+    1520342525,
+    2342.12,
+    'Deposit',
+    2,
+    NULL
+    ),
+    (
+    6,
+    5,
+    1510342525,
+    50.21,
+    'Deposit',
+    1,
+    NULL
+    ),
+    (
+    7,
+    6,
+    1510342525,
+    50.21,
+    'Deposit',
+    1,
+    NULL
+    ),
+    (
+    8,
+    4,
+    1500342525,
+    11000.12,
+    'Deposit',
+    6,
+    NULL
+    ),
+    (
+    9,
+    2,
+    1510342525,
+    123.123,
+    'Transfer',
+    NULL,
+    1
+    );
+
 
 INSERT INTO User(
     id,

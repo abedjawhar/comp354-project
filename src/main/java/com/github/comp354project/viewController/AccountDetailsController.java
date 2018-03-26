@@ -29,16 +29,10 @@ public class AccountDetailsController implements Initializable {
     @FXML
     private Label accountType;
 
-    @FXML
-    private TextField categoryTextField;
-
     @Getter
     private Account account;
 
     public void initialize(URL url, ResourceBundle rb) {
-        this.categoryTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            this.transactionTableViewController.setCategoryFilter(newValue);
-        });
     }
 
     @FXML
