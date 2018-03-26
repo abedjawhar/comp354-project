@@ -22,7 +22,6 @@
       <Label fx:id="accountDescription" alignment="CENTER" layoutX="378.0" layoutY="7.0" prefHeight="17.0" prefWidth="200.0" textAlignment="CENTER" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="7.0" />
       <Label fx:id="accountType" alignment="CENTER" layoutX="386.0" layoutY="24.0" prefWidth="200.0" textAlignment="CENTER" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="24.0" />
       <fx:include fx:id="transactionTableView" layoutX="-4.0" layoutY="50.0" prefHeight="452.0" prefWidth="800.0" source="TransactionTableController.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0" />
-      <TextField fx:id="categoryTextField" layoutX="798.0" layoutY="20.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="15.0" />
       <!--<Button fx:id="deleteAccountBtn" layoutX="688.0" layoutY="12.0" mnemonicParsing="false" text="Delete Account" />-->
    </children>
 </AnchorPane>

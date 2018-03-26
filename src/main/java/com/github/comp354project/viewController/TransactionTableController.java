@@ -12,11 +12,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.Getter;
+import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,6 +28,9 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -46,11 +52,21 @@ public class TransactionTableController implements Initializable {
     private TableColumn<TransactionDisplayModel, String> categoryCol;
     @FXML
     private TableColumn<TransactionDisplayModel, String> typeCol;
+    @FXML
+    private TextField categoryTextField;
+    @FXML
+    private DatePicker startDatePicker;
+    @FXML
+    private DatePicker endDatePicker;
 
     private ObservableList<TransactionDisplayModel> tableData = FXCollections.observableArrayList();
 
-    @Getter
-    private List<Transaction> transactions;
+    private List<Transaction> transactions = new ArrayList<>();
+
+    public void setTransactions(List<Transaction> transactions){
+        this.transactions = transactions;
+        updateTableData();
+    }
 
     @Inject
     ITransactionService transactionService;
@@ -65,19 +81,20 @@ public class TransactionTableController implements Initializable {
         MyMoneyApplication.application.getComponent().inject(this);
     }
 
-    public void setCategoryFilter(String category){
-        List<Transaction> filteredTransactions = this.transactions.stream()
-                .filter(t -> {
-                    return category.length() == 0 || ((t.getCategory() != null) && t.getCategory().toLowerCase().contains(category.toLowerCase()));
-                }).collect(Collectors.toList());
+    private void updateTableData(){
         this.tableData.clear();
-        filteredTransactions.forEach(t -> this.tableData.add(new TransactionDisplayModel(t)));
+        this.transactions.stream()
+                // filter by category
+                .filter(t -> categoryTextField.getText().trim().length() == 0 || ((t.getCategory() != null) &&
+                        t.getCategory().toLowerCase().startsWith(categoryTextField.getText().trim().toLowerCase())))
+                // filter by start and end dates
+                .filter(t -> (startDatePicker.getValue() == null || t.getDate() >= toEpochSecond(startDatePicker.getValue())) &&
+                            (endDatePicker.getValue() == null || t.getDate() <= toEpochSecond(endDatePicker.getValue())))
+                .forEach(t -> this.tableData.add(new TransactionDisplayModel(t)));
     }
 
-    public void setTransactions(List<Transaction> transactions) {
-        this.tableData.clear();
-        this.transactions = transactions;
-        transactions.forEach(t -> this.tableData.add(new TransactionDisplayModel(t)));
+    private long toEpochSecond(LocalDate localDateTime) {
+        return localDateTime.atStartOfDay(ZoneId.systemDefault()).toEpochSecond();
     }
 
     @Override
@@ -89,6 +106,12 @@ public class TransactionTableController implements Initializable {
         this.typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         this.transactionTableView.setItems(this.tableData);
         this.transactionTableView.setEditable(true);
+
+        this.updateColumnWidth();
+
+        this.categoryTextField.textProperty().addListener((observable, oldValue, newValue) -> this.updateTableData());
+        this.startDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> this.updateTableData());
+        this.endDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> this.updateTableData());
 
         categoryCol.setCellFactory(tableCol -> {
             ComboBoxTableCell<TransactionDisplayModel, String> ct = new ComboBoxTableCell<>();
@@ -116,6 +139,16 @@ public class TransactionTableController implements Initializable {
 
     public void hideAccountIDColumn() {
         this.idCol.setVisible(false);
+        this.updateColumnWidth();
+    }
+
+    private void updateColumnWidth(){
+        int columnCount = (this.idCol.isVisible() ? 5 : 4);
+        idCol.prefWidthProperty().bind(transactionTableView.widthProperty().divide(columnCount)); // w * 1/4
+        dateCol.prefWidthProperty().bind(transactionTableView.widthProperty().divide(columnCount)); // w * 1/2
+        amountCol.prefWidthProperty().bind(transactionTableView.widthProperty().divide(columnCount)); // w * 1/4
+        categoryCol.prefWidthProperty().bind(transactionTableView.widthProperty().divide(columnCount)); // w * 1/4
+        typeCol.prefWidthProperty().bind(transactionTableView.widthProperty().divide(columnCount)); // w * 1/4
     }
 
     public static class TransactionDisplayModel {
@@ -129,11 +162,11 @@ public class TransactionTableController implements Initializable {
         private SimpleDoubleProperty amount;
         private SimpleStringProperty category;
         private SimpleStringProperty type;
-        private final static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+        private final static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         public TransactionDisplayModel(Transaction transaction) {
             this.accountID = new SimpleIntegerProperty(transaction.getAccount().getID());
-            Date date = Date.from(Instant.ofEpochMilli(transaction.getDate()));
+            Date date = Date.from(Instant.ofEpochSecond(transaction.getDate()));
             this.date = new SimpleStringProperty(formatter.format(date));
             this.amount = new SimpleDoubleProperty(transaction.getAmount());
             if (transaction.getType().equals("Transfer")) {
