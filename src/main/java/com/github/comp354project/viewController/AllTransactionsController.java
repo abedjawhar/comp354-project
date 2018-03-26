@@ -9,7 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-
+import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,9 +24,14 @@ public class AllTransactionsController implements Initializable {
     @FXML private Parent transactionTableView;
 
     @FXML private TransactionTableController transactionTableViewController;
-    
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+
+    @FXML private TextField categoryTextField;
+
+
+    public void initialize(URL url, ResourceBundle rb) {
+        this.categoryTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            this.transactionTableViewController.setCategoryFilter(newValue);
+        });
     }
 
     public void setAccounts(List<Account> accounts){
