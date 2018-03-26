@@ -25,13 +25,7 @@ public class AllTransactionsController implements Initializable {
 
     @FXML private TransactionTableController transactionTableViewController;
 
-    @FXML private TextField categoryTextField;
-
-
     public void initialize(URL url, ResourceBundle rb) {
-        this.categoryTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            this.transactionTableViewController.setCategoryFilter(newValue);
-        });
     }
 
     public void setAccounts(List<Account> accounts){
