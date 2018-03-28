@@ -3,13 +3,13 @@ package com.github.comp354project.viewController;
 import com.github.comp354project.MyMoneyApplication;
 import com.github.comp354project.model.account.Account;
 import com.github.comp354project.model.account.Transaction;
-import com.github.comp354project.view.TransactionTable;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-
+import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,10 +21,11 @@ public class AllTransactionsController implements Initializable {
     @FXML private Label totalBalanceLabel;
     @FXML private Label descriptionLabel;
 
-    @FXML private TransactionTable transactionTable;
-    
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @FXML private Parent transactionTableView;
+
+    @FXML private TransactionTableController transactionTableViewController;
+
+    public void initialize(URL url, ResourceBundle rb) {
     }
 
     public void setAccounts(List<Account> accounts){
@@ -34,7 +35,7 @@ public class AllTransactionsController implements Initializable {
             balance += a.getBalance();
             transactions.addAll(a.getTransactions());
         }
-        this.transactionTable.addTransactions(transactions);
+        this.transactionTableViewController.setTransactions(transactions);
         this.totalBalanceLabel.setText("$" + balance);
         this.descriptionLabel.setText("All Transactions");
         AnchorPane.setTopAnchor(descriptionLabel, 15.0);

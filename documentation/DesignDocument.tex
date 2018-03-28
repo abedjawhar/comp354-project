@@ -133,60 +133,28 @@ The data is stored in an SQLite database. Our system actually employs two databa
 
 \subsection{Subsystem Interface Specifications} \label{subsystem interface}
 
+%VIEW -----------
+\subsubsection*{View Subsystem}
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{view_subsystem.png}
+\end{figure}
+Our resources/fxml folder contains the view subsystem. The view is implemented, as mentioned before, through the JavaFX framework. It is a collection of FXML files, containing a structure contained in an AnchorPane. If the view model is simple menu (Login.fxml, SignUp.fxml, UpdateUserAccount.fxml), it will merely contain a few labeled text fields and buttons with 'onAction' parameters tying the buttons to a function in the view controllers. If it is a table view, (AccountDetails.fxml, AccountList.fxml, AllTransactions.fxml), then a TableView will be used with labelled columns, which are then recognised by the controllers in order to populate them with the model data. As nothing in our view contains actual code,  no functions are mentioned here. 
 
-% The com.github.comp354project.service package is the main subsystem of our project. As mentioned in the previous section, it is organised in a layered manner, wherein each layer handles its own services and use the services of the layer below it within worrying about that layer's implementation. Data validation and processing is offered by each service: The account service, for example, validate calls to add or delete bank accounts, edit a transaction's category, or query for specific accounts. It does this by querying the database using an account DAO, and ensuring data integrity and validity (with regards to the business rules). It does not, however, worry about user authorisation, and simply assumes the layer above it (The user service) will have handled it. The com.github.comp354project.viewController calls services within this package to update the view and the model.
-
-% The com.github.comp354project.viewController package contains a number of controllers for each different view. They are the ones handling the requests from the users, which they pass to the services in the package described above. They are also the ones who pass any errors from the services to the views, mostly to be used for testing and alerting the user of any problems that might have occured.
-
-% The com.github.comp354project.service package.account.remote package is a subsystem to our services which mocks an API call to remote servers of banks or credit card companies. In our case however, we don't actually have access to such systems. For this reason, the remote data exists in an SQLite database like our local one.
-
-Specification of the software interfaces between the subsystems,
-i.e. specific messages (or function calls) that are exchanged by the subsystems.
-These are also often called ``Module Interface Specifications''.
-Description of the parameters to be passed into these function calls in order to have a service fulfilled,
-including valid and invalid ranges of values.
-Each subsystem interface must be presented in a separate subsection.
-
-*Note: The above is a description of what to provide. Need to edit into our own
-\subsubsection{View Controllers}
-
-\paragraph{SignUpController Interfaces}
-
-Below are the different models and services used in the SignUpController view.
+\subsubsection*{Controller Subsystem}
 
 \begin{figure}[H]
-\includegraphics[width=\linewidth]{subsystem-interface-signup-controller.png}
+\includegraphics[width=\linewidth]{controller_subsystem.png}
 \end{figure}
-
-\clearpage
-
-\paragraph{LoginController Interfaces}
-
-Below are the different models and services used in the LoginController view.
-
+The com.github.comp354project.viewController package contains a number of controllers for each different view. Each view is handled by its own controller, which contains each column and/or label as a private data member, and each button 'onAction' as a function. All controllers implement the Initializable interface, and hence contain an initialize(URL location, ResourceBundle resources) function which is called when the view is first displayed to the user. This function serves to populate the views with the domain data, if needed.  The controllers may receive user input from the view and catch user events such as button presses or table entry selections. The functions catching these inputs pass these calls to the services in the model, described below.   They are also the ones who pass any errors from the services to the views, mostly to be used for testing and alerting the user of any problems that might have occured.
+ A more precise description of each controller is available in \ref{classes}
+ 
+ \subsubsection*{Model Subsystem}
 \begin{figure}[H]
-\includegraphics[width=\linewidth]{subsystem-interface-login-controller.png}
+\includegraphics[width=\linewidth]{model_subsystem.png}
 \end{figure}
+The com.github.comp354project.model package contains both our application logic and our database.  As mentioned in the previous section, it is organised in a layered manner, wherein each layer handles its own services and use the services of the layer below it within worrying about that layer's implementation. Data validation and processing is offered by each service: The account service, for example, validate calls to add or delete bank accounts, edit a transaction's category, or query for specific accounts. It does this by querying the database using an account DAO, and ensuring data integrity and validity (with regards to the business rules). It does not, however, worry about user authorisation, and simply assumes the layer above it (The user service) will have handled it. The com.github.comp354project.viewController calls services within this package to update the view and the model.
 
-\clearpage
-
-\paragraph{AcountDetailsController Interfaces}
-
-Below are the different models and services used in the AccountDetailsController view.
-
-\begin{figure}[H]
-\includegraphics[width=\linewidth]{account-details-controller.png}
-\end{figure}
-
-\clearpage
-
-\paragraph{AccountListController Interfaces}
-
-Below are the different models and services used in the AccountListController view.
-
-\begin{figure}[H]
-\includegraphics[width=\linewidth]{subsystem-interface-AccountListController.png}
-\end{figure}
+The com.github.comp354project.service package.account.remote package is a subsystem to our model which mocks an API call to remote servers of banks or credit card companies. In our case however, we don't actually have access to such systems. For this reason, the remote data exists in an SQLite database like our local one.
 
 \clearpage
 
@@ -226,7 +194,7 @@ In this section we provide the class diagram of our system, useful for the syste
 
 \clearpage
 
-\subsection{Classes}
+\subsection{Classes}\label{classes}
 
 %Start of com.github.comp354project%
 \begin{table}[H]
@@ -236,6 +204,7 @@ In this section we provide the class diagram of our system, useful for the syste
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}               & \multicolumn{4}{l|}{com.github.comp354project.ApplicationComponent}                                                                                            \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}                     & \multicolumn{4}{l|}{Interface}                                                                                                                                 \\ \hline
 \textbf{Inherits}                 & \multicolumn{4}{l|}{N/A}                                                                                                                                       \\ \hline
 \textbf{Implements}               & \multicolumn{4}{l|}{N/A}                                                                                                                                       \\ \hline
@@ -260,6 +229,7 @@ None                              &                       &                     
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.BusinessRulesConstants}                               \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{4}{l|}{Class}                                                                          \\ \hline
 \textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                            \\ \hline
 \textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                            \\ \hline
@@ -283,6 +253,7 @@ None                 &                     &                    &               
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.Main}                                                                                              \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{4}{l|}{Class}                                                                                                                       \\ \hline
 \textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                                                                         \\ \hline
 \textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                         \\ \hline
@@ -302,6 +273,7 @@ None                 &                     &                         &          
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.MyMoneyApplication}                                                                                                                                                                         \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{4}{l|}{Class}                                                                                                                                                                                                                \\ \hline
 \textbf{Inherits}    & \multicolumn{4}{l|}{Application}                                                                                                                                                                                                          \\ \hline
 \textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                                                                                                  \\ \hline
@@ -323,11 +295,265 @@ None                 &                     &                         &          
                      & public              & displayAccounts()                                             & void               & \begin{tabular}[c]{@{}l@{}}Displays the user accounts view \end{tabular}                                                                                            \\ \hline
                      & public              & displayUpdateUser()                                           & void               & \begin{tabular}[c]{@{}l@{}}Displays the update user view \end{tabular}                                                                                            \\ \hline
                      & public              & displayAccountDetails(Account account)                        & void               & \begin{tabular}[c]{@{}l@{}}Displays the account details view \end{tabular}                                                                                            \\ \hline
-                     & public              & displayAllAccountDetails(List accounts)                       & void               & \begin{tabular}[c]{@{}l@{}}Displays all accounts details view \end{tabular}                                                                                            \\ \hline
+                     & public              & displayAllTransactions(List accounts)                       & void               & \begin{tabular}[c]{@{}l@{}}Displays all transactions details view \end{tabular}                                                                                            \\ \hline
 \end{tabular}%
 }
 \end{table}
 %End of com.github.comp354project%
+
+%Start of com.github.comp354project.service.user
+\begin{table}[]
+    \centering
+    \caption{Interface IUserService}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.user.IUserService}                             \\ \hline
+    Type       & \multicolumn{4}{l|}{Interface}                                                                        \\ \hline
+    Inherits   & \multicolumn{4}{l|}{N/A}                                                                              \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A}                                                                              \\ \hline
+    Attributes & Visibility  & Data Type                          & Name    & Description                              \\ \hline
+                & N/A         &                                    &         &                                          \\ \hline
+    Method     & Visibility  & Name                               & Returns & Description                              \\ \hline
+                & no modifier & createUser(User user)              & User    & User to create a new user                \\ \hline
+                & no modifier & deleteBankAccount(Account account) & void    & Deletes a bank account belonging to user \\ \hline
+                & no modifier & updateUser(User user)              & User    & Updates the user's info                  \\ \hline
+                & no modifier & deleteUser(User user)              & void    & Deletes a user                           \\ \hline
+    \end{tabular}
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Class User}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.user.User}       \\ \hline
+    Type       & \multicolumn{4}{l|}{Class}                                              \\ \hline
+    Inherits   & \multicolumn{4}{l|}{N/A}                                                \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A}                                                \\ \hline
+    Attributes & Visibility & Data Type         & Name      & Description                \\ \hline
+                & private    & Integer           & ID        & User identification number \\ \hline
+                & private    & String            & username  & Username of user           \\ \hline
+                & private    & String            & password  & User's password            \\ \hline
+                & private    & String            & firstName & User's first name          \\ \hline
+                & private    & String            & lastName  & User's last name           \\ \hline
+                & private    & String            & email     & User's email               \\ \hline
+                & private    & String            & address   & User's address             \\ \hline
+                & private    & String            & phone     & User's phone number        \\ \hline
+                & private    & ForeignCollection & accounts  & Accounts belonging to user \\ \hline
+    Method     & Visibility & Name              & Returns   & Description                \\ \hline
+                & N/A        &                   &           &                            \\ \hline
+    \end{tabular}
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Class UserService}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.user.UserService}                                                                                                                                                         \\ \hline
+    Type       & \multicolumn{4}{l|}{Class}                                                                                                                                                                                                    \\ \hline
+    Inherits   & \multicolumn{4}{l|}{N/A}                                                                                                                                                                                                          \\ \hline
+    Implements & \multicolumn{4}{l|}{IUserService}                                                                                                                                                                                                          \\ \hline
+    Attributes & Visibility & Data Type                                                                                             & Name              & Description                                                                              \\ \hline
+                & Private    & Logger                                                                                                & logger            & Logger used to Log things such as errors                                                 \\ \hline
+                & Private    & Dao                                                                                                   & userDao           & User data access object used to interact with the user data stored in the database       \\ \hline
+                & Private    & Dao                                                                                                   & accountDao        & Account data access object used to interact with the account data stored in the database \\ \hline
+                & Private    & IUsernameValidator                                                                                    & usernameValidator & Used to validate a username                                                              \\ \hline
+                & Private    & IUserValidator                                                                                        & userValidator     & Used to validate a user                                                                  \\ \hline
+                & Private    & SessionManager                                                                                        & sessionManager    & Used to keep track of the currently logged in user                                       \\ \hline
+                & Private    & AccountService                                                                                        & accountService    & Used to interact with the account service layer                                          \\ \hline
+    Method     & Visibility & Name                                                                                                  & Returns           & Description                                                                              \\ \hline
+                & public     & UserService(Dao userDao,Dao accountDao, SessionManager sessionManager, AccountService accountService) & N/A               & constructor used to create UserService                                                   \\ \hline
+                & public     & createUser(User user)                                                                                 & User              & User to create a new user                                                                \\ \hline
+                & public     & getUser(String username)                                                                              & User              & Get's a user by their username                                                           \\ \hline
+                & public     & deleteBankAccount(Account account)                                                                    & void              & Deletes a bank account belonging to user                                                 \\ \hline
+                & public     & updateUser(User user)                                                                                 & User              & Updates the user's info                                                                  \\ \hline
+                & public     & deleteUser(User user)                                                                                 & void              & Deletes a user                                                                           \\ \hline
+    \end{tabular}
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Class UserServiceModule}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.user.UserServiceModule}                   \\ \hline
+    Type       & \multicolumn{4}{l|}{Class}                                                                       \\ \hline
+    Inherits   & \multicolumn{4}{l|}{N/A}                                                                         \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A}                                                                         \\ \hline
+    Attributes & Visibility & Data Type                                   & Name         & Description            \\ \hline
+                & N/A        &                                             &              &                        \\ \hline
+    Method     & Visibility & Name                                        & Returns      & Description            \\ \hline
+                & public     & provideUserService(UserService userService) & IUserService & Provides a UserService \\ \hline
+    \end{tabular}
+    }
+    \end{table}
+    %Start of com.github.comp354project.service.user
+    
+    %Start of com.github.comp354project.model.validators
+    \begin{table}[]
+    \centering
+    \caption{Interface ICategoryNameValidator}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.validators.ICategoryNameValidator} \\ \hline
+    Type & \multicolumn{4}{l|}{Interface} \\ \hline
+    Inherits & \multicolumn{4}{l|}{N/A} \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A} \\ \hline
+    Attributes & Visibility & Data Type & Name & Description \\ \hline
+        & N/A &  &  &  \\ \hline
+    Method & Visibility & Name & Returns & Description \\ \hline
+        & public & validateCategory(String category, String message) & List & Validates transaction categories \\ \hline
+    \end{tabular}
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Interface INameValidator}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.validators.INameValidator} \\ \hline
+    Type & \multicolumn{4}{l|}{Interface} \\ \hline
+    Inherits & \multicolumn{4}{l|}{N/A} \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A} \\ \hline
+    Attributes & Visibility & Data Type & Name & Description \\ \hline
+        & N/A &  &  &  \\ \hline
+    Method & Visibility & Name & Returns & Description \\ \hline
+        & public & validateName(String name, String message) & List & Validates first and last name of user \\ \hline
+    \end{tabular}
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Interface INameValidator}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.validators.INameValidator} \\ \hline
+    Type & \multicolumn{4}{l|}{Interface} \\ \hline
+    Inherits & \multicolumn{4}{l|}{N/A} \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A} \\ \hline
+    Attributes & Visibility & Data Type & Name & Description \\ \hline
+        & N/A &  &  &  \\ \hline
+    Method & Visibility & Name & Returns & Description \\ \hline
+        & public & validatePassword(String password, String message) & List & Validates that password meets required criteria \\ \hline
+    \end{tabular}
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Interface INameValidator}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.validators.INameValidator} \\ \hline
+    Type & \multicolumn{4}{l|}{Interface} \\ \hline
+    Inherits & \multicolumn{4}{l|}{N/A} \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A} \\ \hline
+    Attributes & Visibility & Data Type & Name & Description \\ \hline
+        & N/A &  &  &  \\ \hline
+    Method & Visibility & Name & Returns & Description \\ \hline
+        & public & validateUsername(String username, String message) & List & Validates that username meets required criteria \\ \hline
+    \end{tabular}
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Interface IUserValidator}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.validators.IUserValidator} \\ \hline
+    Type & \multicolumn{4}{l|}{Interface} \\ \hline
+    Inherits & \multicolumn{4}{l|}{N/A} \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A} \\ \hline
+    Attributes & Visibility & Data Type & Name & Description \\ \hline
+        & N/A &  &  &  \\ \hline
+    Method & Visibility & Name & Returns & Description \\ \hline
+        & public & validateUser(User user) & List & Validates the user data \\ \hline
+    \end{tabular}
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Class StringLengthValidator}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.validators.StringLengthValidator} \\ \hline
+    Type & \multicolumn{4}{l|}{Class} \\ \hline
+    Inherits & \multicolumn{4}{l|}{ICategoryNameValidator, IUsernameValidator, IPasswordValidator, INameValidator} \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A} \\ \hline
+    Attributes & Visibility & Data Type & Name & Description \\ \hline
+        & private & Integer & minLength & Minimum length of String \\ \hline
+        & private & Integer & maxLength & Maximum length of String \\ \hline
+    Method & Visibility & Name & Returns & Description \\ \hline
+        & public & StringLengthValidator(intminLength, int maxLength) & N/A & constructor \\ \hline
+        & public & validateName(String name, String message) & List & validates first and last name of user \\ \hline
+        & public & validateCategory(String category, String message) & List & validates the category of a transaction \\ \hline
+        & public & validatePassword(String password, String message) & List & validates that password meets criteria \\ \hline
+        & public & validateUsername(String username, String message) & List & validates that username meets criteria \\ \hline
+        & public & validate(String string, String paramName, String message) & List & validates the length of a string \\ \hline
+    \end{tabular}%
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Class UserValidator}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.validators.UserValidator} \\ \hline
+    Type & \multicolumn{4}{l|}{Class} \\ \hline
+    Inherits & \multicolumn{4}{l|}{IUserValidator} \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A} \\ \hline
+    Attributes & Visibility & Data Type & Name & Description \\ \hline
+        & private & IUsernameValidator & usernameValidator & used to validate the user \\ \hline
+        & private & IPasswordValidator & passwordValidator & used to validate the user's password \\ \hline
+        & private & INameValidator & nameValidator & used to validate the first and last name of user \\ \hline
+    Method & Visibility & Name & Returns & Description \\ \hline
+        & public & \begin{tabular}[c]{@{}l@{}}UserValidator(IUsernameValidatorusernameValidator, IPasswordValidator \\ passwordValidator, INameValidator nameValidator)\end{tabular} & N/A & Constructor \\ \hline
+        & public & validateUser(Useruser) & List & validates user attributes \\ \hline
+    \end{tabular}%
+    }
+    \end{table}
+    
+    \begin{table}[]
+    \centering
+    \caption{Class ValidatorFactory}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Class Name & \multicolumn{4}{l|}{com.github.comp345project.model.validators.ValidatorFactory} \\ \hline
+    Type & \multicolumn{4}{l|}{Class} \\ \hline
+    Inherits & \multicolumn{4}{l|}{N/A} \\ \hline
+    Implements & \multicolumn{4}{l|}{N/A} \\ \hline
+    Attributes & Visibility & Data Type & Name & Description \\ \hline
+        & N/A &  &  &  \\ \hline
+    Method & Visibility & Name & Returns & Description \\ \hline
+        & public & usernameValidator() & IUsernameValidator & creates a UsernameValidator \\ \hline
+        & public & passwordValidator() & IPasswordValidator & createsa PasswordValidator \\ \hline
+        & public & categoryNameValidator() & ICategoryNameValidator & creates a CategoryNameValidato \\ \hline
+        & public & userValidator() & IUserValidator & creates a UserValidator \\ \hline
+    \end{tabular}%
+    }
+    \end{table}
+    %End of com.github.comp354project.model.validators
 
 %Start of com.github.comp354project.service.account
 
@@ -338,6 +564,7 @@ None                 &                     &                         &          
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}                  & \multicolumn{4}{l|}{com.github.comp354project.model.account.Account}                                                                             \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}                        & \multicolumn{4}{l|}{Class}                                                                                                                \\ \hline
 \textbf{Inherits}                    & \multicolumn{4}{l|}{N/A}                                                                                                                   \\ \hline
 \textbf{Implements}                  & \multicolumn{4}{l|}{N/A}                                                                                                                   \\ \hline
@@ -362,6 +589,7 @@ None                 &                     &                         &          
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}                  & \multicolumn{4}{l|}{com.github.comp354project.model.account.AccountService}                                                                                                                                   \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}                        & \multicolumn{4}{l|}{Class}                                                                                                                                                                                     \\ \hline
 \textbf{Inherits}                    & \multicolumn{4}{l|}{N/A}                                                                                                                                                                                        \\ \hline
 \textbf{Implements}                  & \multicolumn{4}{l|}{IAccountService}                                                                                                                                                                            \\ \hline
@@ -389,6 +617,7 @@ None                 &                     &                         &          
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}                  & \multicolumn{4}{l|}{com.github.comp354project.model.account.AccountServiceModule}                     \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}                        & \multicolumn{4}{l|}{Class}                                                                                \\ \hline
 \textbf{Inherits}                    & \multicolumn{4}{l|}{N/A}                                                                                \\ \hline
 \textbf{Implements}                  & \multicolumn{4}{l|}{N/A}                                                                                \\ \hline
@@ -410,6 +639,7 @@ None                 &                     &                         &          
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}               & \multicolumn{4}{l|}{com.github.comp354project.model.account.IAccountService}     \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}                     & \multicolumn{4}{l|}{Interface}                                                     \\ \hline
 \textbf{Inherits}                 & \multicolumn{4}{l|}{N/A}                                                           \\ \hline
 \textbf{Implements}               & \multicolumn{4}{l|}{N/A}                                                           \\ \hline
@@ -431,6 +661,7 @@ None                              & None                & None               & n
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}               & \multicolumn{4}{l|}{com.github.comp354project.model.account.ITransactionService}        \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}                     & \multicolumn{4}{l|}{Interface}                                                            \\ \hline
 \textbf{Inherits}                 & \multicolumn{4}{l|}{N/A}                                                                  \\ \hline
 \textbf{Implements}               & \multicolumn{4}{l|}{N/A}                                                                  \\ \hline
@@ -451,6 +682,7 @@ None                              & None                & None                  
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}                  & \multicolumn{4}{l|}{com.github.comp354project.model.account.Transaction}                       \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}                        & \multicolumn{4}{l|}{Class}                                                                         \\ \hline
 \textbf{Inherits}                    & \multicolumn{4}{l|}{N/A}                                                                         \\ \hline
 \textbf{Implements}                  & \multicolumn{4}{l|}{N/A}                                                                         \\ \hline
@@ -477,6 +709,7 @@ None                              & None                & None                  
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}                  & \multicolumn{4}{l|}{com.github.comp354project.model.account.TransactionService}                                                              \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}                        & \multicolumn{4}{l|}{Class}                                                                                                                       \\ \hline
 \textbf{Inherits}                    & \multicolumn{4}{l|}{N/A}                                                                                                                       \\ \hline
 \textbf{Implements}                  & \multicolumn{4}{l|}{ITransactionService}                                                                                                       \\ \hline
@@ -499,11 +732,11 @@ None                              & None                & None                  
 \begin{table}[H]
 \centering
 \caption{Class AccountDoesNotExistException}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.account.exceptions.AccountDoesNotExistException}                                                             \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                    \\ \hline
 \textbf{Inherits}    & \multicolumn{4}{l|}{RuntimeException}                                                                                      \\ \hline
 \textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                         \\ \hline
@@ -519,11 +752,11 @@ None                              & None                & None                  
 \begin{table}[H]
 \centering
 \caption{Class AccountExistsException}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.account.exceptions.AccountExistsException}                                                       \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{4}{l|}{class}                                                                        \\ \hline
 \textbf{Inherits}    & \multicolumn{4}{l|}{RuntimeException}                                                             \\ \hline
 \textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                          \\ \hline
@@ -547,6 +780,7 @@ None                              & None                & None                  
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{5}{l|}{com.github.comp354project.model.account.remote.GetRemoteAccountRequest}                                                                   \\ \hline
+\textbf{Visibility}        & \multicolumn{5}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{5}{l|}{Public}                                                                                    \\ \hline
 \textbf{Inherits}    & \multicolumn{5}{l|}{N/A}                                                                                       \\ \hline
 \textbf{Implements}  & \multicolumn{5}{l|}{N/A}                                                                                       \\ \hline
@@ -567,6 +801,7 @@ None                 &                     &                    &               
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{5}{l|}{com.github.comp354project.model.account.remote.GetRemoteAccountResponse}                                                           \\ \hline
+\textbf{Visibility}        & \multicolumn{5}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{5}{l|}{Public}                                                                             \\ \hline
 \textbf{Inherits}    & \multicolumn{5}{l|}{N/A}                                                                                \\ \hline
 \textbf{Implements}  & \multicolumn{5}{l|}{N/A}                                                                                \\ \hline
@@ -589,6 +824,7 @@ None                 &                     &                    &               
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 \textbf{Name}        & \multicolumn{5}{l|}{com.github.comp354project.model.account.remote.IRemoteAccountService}                                  \\ \hline
+\textbf{Visibility}        & \multicolumn{5}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{5}{l|}{Public}                                                                                                \\ \hline
 \textbf{Inherits}    & \multicolumn{5}{l|}{N/A}                                                                                                   \\ \hline
 \textbf{Implements}  & \multicolumn{5}{l|}{N/A}                                                                                                   \\ \hline
@@ -611,6 +847,7 @@ None                 &                         &                           &    
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{5}{l|}{com.github.comp354project.model.account.remote.RemoteAccount}                            \\ \hline
+\textbf{Visibility}        & \multicolumn{5}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{5}{l|}{Public}                                                                                    \\ \hline
 \textbf{Inherits}    & \multicolumn{5}{l|}{N/A}                                                                                       \\ \hline
 \textbf{Implements}  & \multicolumn{5}{l|}{N/A}                                                                                       \\ \hline
@@ -637,6 +874,7 @@ None                 &                     &                    &               
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.account.remote.RemoteAccountModule}                                                                                    \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{4}{l|}{Public}                                                                                                                                                  \\ \hline
 \textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                                                                                                     \\ \hline
 \textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                                     \\ \hline
@@ -661,6 +899,7 @@ None                 &                          &                               
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 \textbf{Class Name}                  & \multicolumn{5}{l|}{com.github.comp354project.model.account.remote.RemoteAccountService}                                                                                                                                                                                                                                                                                                                                              \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}                        & \multicolumn{5}{l|}{Public}                                                                                                                                                                                                                                                                                                                                                            \\ \hline
 \textbf{Inherits}                    & \multicolumn{5}{l|}{N/A}                                                                                                                                                                                                                                                                                                                                                               \\ \hline
 \textbf{Implements}                  & \multicolumn{5}{l|}{IRemoteAccountService}                                                                                                                                                                                                                                                                                                                                             \\ \hline
@@ -685,6 +924,7 @@ None                 &                          &                               
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}                  & \multicolumn{4}{l|}{com.github.comp354project.model.account.remote.RemoteTransaction}                                                                                                                                           \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}                        & \multicolumn{4}{l|}{Public}                                                                                                                                                      \\ \hline
 \textbf{Inherits}                    & \multicolumn{4}{l|}{N/A}                                                                                                                                                         \\ \hline
 \textbf{Implements}                  & \multicolumn{4}{l|}{N/A}                                                                                                                                                         \\ \hline
@@ -703,8 +943,6 @@ None                                 &                     &                    
 }
 \end{table}
 %end of com.github.comp354project.account.remote
-
-% Start of com.github.comp354.model.auth
 
 \begin{table}[H]
 \centering
@@ -740,7 +978,7 @@ None                 &                     &                                    
 \textbf{Description} & \multicolumn{4}{l|}{Service to authenticate users}                                                                                     \\ \hline
 \textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}                             & \textbf{Name}         & \textbf{Description}                    \\ \hline
                      & private             & Logger                                         & Logger                & Logger                                  \\ \hline
-                     & private             & Dao\textlessUser, Integer\textgreater          & userDao               & The service Dao to interact with the db \\ \hline
+                     & private             & Dao\textless User, Integer\textgreater          & userDao               & The service Dao to interact with the db \\ \hline
                      & private             & IUsernameValidator                             & usernameValidator     & Used to validate a username             \\ \hline
                      & private             & IPasswordValidator                             & passwordValidator     & Used to validate a password             \\ \hline
 \textbf{Methods}     & \textbf{Visibility} & \textbf{Name}                                  & \textbf{Returns}      & \textbf{Description}                    \\ \hline
@@ -797,15 +1035,15 @@ None                 &                     &                                    
 
 % End of com.github.comp354project.model.auth
 
-%Start of com.github.comp354project.model.auth.exception
+%Start of com.github.comp354project.auth.exception
 \begin{table}[H]
 \centering
 \caption{Class AuthenticationException}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.auth.exceptions.AuthenticationException}                                                                                                                    \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                                                                                                                      \\ \hline
 \textbf{Inherits}    & \multicolumn{4}{l|}{Exception}                                                                                                                                                                                  \\ \hline
 \textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                                                                        \\ \hline
@@ -822,11 +1060,11 @@ None                 &                     &                                    
 \begin{table}[H]
 \centering
 \caption{Class AuthorisationException}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.auth.exceptions.AuthorisationException}                                                  \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                                                   \\ \hline
 \textbf{Inherits}    & \multicolumn{4}{l|}{Exception}                                                                                                               \\ \hline
 \textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                     \\ \hline
@@ -842,11 +1080,11 @@ None                 &                     &                                    
 \begin{table}[H]
 \centering
 \caption{Class UserLoggedInException}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.auth.exceptions.UserLoggedInException}                                                                                            \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                                                                                            \\ \hline
 \textbf{Inherits}    & \multicolumn{4}{l|}{Exception}                                                                                                                                                        \\ \hline
 \textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                                              \\ \hline
@@ -871,6 +1109,7 @@ None                 &                     &                                    
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.dao.DaoModule}                                                                                                                                                                 \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{4}{l|}{Class}                                                                                                                                                                                                           \\ \hline
 \textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                                                                                                                                                             \\ \hline
 \textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                                                                                             \\ \hline
@@ -893,11 +1132,11 @@ None                 &                     &                                    
 \begin{table}[H]
 \centering
 \caption{Class UserLoggedInException}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.exceptions.DatabaseException}                                                                                  \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                                                                         \\ \hline
 \textbf{Inherits}    & \multicolumn{4}{l|}{Exception}                                                                                                                                     \\ \hline
 \textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                           \\ \hline
@@ -915,11 +1154,11 @@ None                 &                     &                                    
 \begin{table}[H]
 \centering
 \caption{Class ValidationError}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.exceptions.ValidationError}            \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{4}{l|}{class}                                                                 \\ \hline
 \textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                   \\ \hline
 \textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                   \\ \hline
@@ -937,17 +1176,17 @@ None                 &                     &                    &               
 \begin{table}[H]
 \centering
 \caption{Class ValidationException}
-\label{my-label}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.exceptions.ValidationException}                                                                                                           \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{4}{l|}{class}                                                                                                                                                                    \\ \hline
 \textbf{Inherits}    & \multicolumn{4}{l|}{Exception}                                                                                                                                                                \\ \hline
 \textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                                                      \\ \hline
 \textbf{Description} & \multicolumn{4}{l|}{Exception used to hold multiple exceptions}                                                                                                                               \\ \hline
 \textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}                                                                                                     & \textbf{Name}       & \textbf{Description}     \\ \hline
-                     & private             & List\textlessValidationException\textgreater                                                                           & errors              & The exception list       \\ \hline
+                     & private             & List\textless ValidationException\textgreater                                                                           & errors              & The exception list       \\ \hline
 \textbf{Methods}     & \textbf{Visibility} & \textbf{Name}                                                                                                          & \textbf{Returns}    & \textbf{Description}     \\ \hline
                      & public              & \begin{tabular}[c]{@{}l@{}}ValidationException(String message, \\ Throwable cause, @Singular List errors)\end{tabular} & ValidationException & Constructs the exception \\ \hline
 \end{tabular}%
@@ -966,6 +1205,7 @@ None                 &                     &                    &               
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.sqlite.ConnectionModule}                                                                                                                      \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{4}{l|}{Class}                                                                                                                                                                          \\ \hline
 \textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                                                                                                                            \\ \hline
 \textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                                                                            \\ \hline
@@ -986,6 +1226,7 @@ None                 &                     &                                    
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.sqlite.ConnectionProvider}                                                                    \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{4}{l|}{Class}                                                                                                                          \\ \hline
 \textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                                                                            \\ \hline
 \textbf{Implements}  & \multicolumn{4}{l|}{IConnectionProvider}                                                                                                            \\ \hline
@@ -1006,6 +1247,7 @@ None                 &                     &                                    
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.model.sqlite.IConnectionProvider}                                                                   \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{4}{l|}{Interface}                                                                                                                      \\ \hline
 \textbf{Inherits}    & \multicolumn{4}{l|}{N/A}                                                                                                                            \\ \hline
 \textbf{Implements}  & \multicolumn{4}{l|}{N/A}                                                                                                                            \\ \hline
@@ -1024,32 +1266,12 @@ None                 &                     &                       &            
 
 \begin{table}[H]
 \centering
-\caption{AlertHelper}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.viewController.helper.AlertHelper} \\ \hline
-\textbf{Type}        & \multicolumn{4}{l|}{Class}   \\ \hline
-\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}     \\ \hline
-\textbf{Implements}  & \multicolumn{4}{l|}{N/A}     \\ \hline
-\textbf{Description} & \multicolumn{4}{l|}{Creates an alert to notify the user of an error} \\ \hline
-\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}    & \textbf{Name}        & \textbf{Description} \\ \hline
-None                 &                     &                       &                      & \\ \hline
-\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}         & \textbf{Returns}     & \textbf{Description} \\ \hline
-                     & public              & generateAlert(Alert.AlertType alertType, String title, String header, String content) & Alert & \begin{tabular}[c]{@{}l@{}} Returns a new alert composed of the passed content \end{tabular} \\ \hline
-                    & public               & generateErrorAlert(String title, String header, String content) & Alert & \begin{tabular}[c]{@{}l@{}}  return a new alert of type ERROR \\ composed of the passed content \end{tabular} \\ \hline
-                  & public               & generateErrorAlert(String title, String header, ValidationException exception) & Alert & \begin{tabular}[c]{@{}l@{}}  return a new alert of type ERROR, \\ specifically for our custom validation exception. \end{tabular} \\ \hline
-\end{tabular}
-}
-\end{table}
-
-\begin{table}[H]
-\centering
 \caption{Account Details Controller}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.viewController.AccountDetailsController} \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{4}{l|}{Class}   \\ \hline
 \textbf{Inherits}    & \multicolumn{4}{l|}{N/A}     \\ \hline
 \textbf{Implements}  & \multicolumn{4}{l|}{Initializable}     \\ \hline
@@ -1076,25 +1298,216 @@ None                 &                     &                       &            
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.viewController.AccountListController} \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
 \textbf{Type}        & \multicolumn{4}{l|}{Class}   \\ \hline
 \textbf{Inherits}    & \multicolumn{4}{l|}{N/A}     \\ \hline
 \textbf{Implements}  & \multicolumn{4}{l|}{Initializable}     \\ \hline
 \textbf{Description} & \multicolumn{4}{l|}{Populates the views with the list of all accounts associated to the user} \\ \hline
 \textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}    & \textbf{Name}        & \textbf{Description} \\ \hline
-                     & private& TextField & transactionTable & table of transactions \\ \hline
-                     & private& Label & accountBalance & balance of the specified account \\ \hline
-                     & private& Label & accountDescription & account ID and name of the bank \\ \hline
-                     & private& Label & accountType & type of the account \\ \hline
-                     & private& Account & account & specified acount \\ \hline
+                         & private& TextField & accountIdTxt & text field for account ID \\ \hline
+                     & private& TableView$<$AccountDisplayModel$>$ & accountsTable & display model for the accounts \\ \hline
+                         & private& TableColumn$<$AccountDisplayModel, Integer$>$ & idCol & display model for the acccount ids     \\ \hline
+                     & private& TableColumn$<$AccountDisplayModel, String$>$ & bankNameCol & display model  for the bank names\\ \hline
+                     & private& TableColumn$<$AccountDisplayModel, String$>$ & typeCol & display model for the account type \\ \hline
+                     & private& TableColumn$<$AccountDisplayModel, Double$>$ & balanceCol & display model for the account balances \\ \hline
+                     & private& List$<$Account$>$ & accounts & list of the accounts \\ \hline
+                     & private& ObservableList$<$AccountDisplayModel$>$ & tableData & the data used to feed to the table \\ \hline
+                     & protected& SessionManager & sessionManager & manager for the current logged in user(s) \\ \hline
+                     & protected& IAccountService & accountService & an instance of the AccountService object for model access \\ \hline
+                     & protected& IUserService & userService & an instance of the UserService object for model access \\ \hline
+
 
 \textbf{Methods}     & \textbf{Visibility} & \textbf{Name}         & \textbf{Returns}     & \textbf{Description} \\ \hline
-                     & public              & initialize() & void & \begin{tabular}[c]{@{}l@{}} required by interface, but not actually used \end{tabular} \\ \hline
-                    & public               & setAccount(Account account) & void & \begin{tabular}[c]{@{}l@{}}  sets the account to be displayed \end{tabular} \\ \hline
-                  & public               & goToAccountList() &  void & \begin{tabular}[c]{@{}l@{}}  returns to the account list view \end{tabular} \\ \hline
+                     & public              & initialize() & void & \begin{tabular}[c]{@{}l@{}} required by interface, populates the columns \end{tabular} \\ \hline
+                     & public               & setAccounts(List<Account> accounts) & void & \begin{tabular}[c]{@{}l@{}}  sets the accounts to be displayed \end{tabular} \\ \hline
+                     & public               & selectAccount(MouseEvent event) &  void & \begin{tabular}[c]{@{}l@{}}  called when a user clicks an account, \\ sets the selected account. \end{tabular} \\ \hline
+                     & public               & displayAllTransactions() & void & \begin{tabular}[c]{@{}l@{}} goes to the display All Transactions view \end{tabular} \\ \hline
+                     & public               & logout() & void & \begin{tabular}[c]{@{}l@{}}  logs out the user and returns to login menu \end{tabular} \\ \hline
+                     & public               & updateUserInfo() & void & \begin{tabular}[c]{@{}l@{}}  goes to update User info view \end{tabular} \\ \hline
+                     & public               & addAccount() & void & \begin{tabular}[c]{@{}l@{}}  associates a new account to the user account \end{tabular} \\ \hline
+                     & public               & removeAccount() & void & \begin{tabular}[c]{@{}l@{}}  sets the accounts to be displayed \end{tabular} \\ \hline
+                     & public               & setAccounts(List<Account> accounts) & void & \begin{tabular}[c]{@{}l@{}}  sets the accounts to be displayed \end{tabular} \\ \hline
+                        
 \end{tabular}
 }
 \end{table}
 
+\begin{table}[H]
+\centering
+\caption{Update User Account Controller}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.viewController.UpdateUserAccountController} \\ \hline
+\textbf{Visibility}  & \multicolumn{4}{l|}{Public}   \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{Class}   \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}     \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{Initializable}     \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Allows to update user account information and delete the account} \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}    & \textbf{Name}        & \textbf{Description} \\ \hline
+                     & private& Label & usernameTxt & username of the logged-in user \\ \hline
+                     & private& JFXTextField & addressTxt & address input field \\ \hline
+                     & private& JFXTextField & emailTxt & email input field \\ \hline
+                     & private& JFXTextField & lastnameTxt & last name input field \\ \hline
+                     & private& JFXTextField & firstnameTxt & first name input field \\ \hline
+                     & private& JFXTextField & phoneNumberTxt & phone number input field \\ \hline
+                     & private& JFXPasswordField & passwordField & password input field  \\ \hline
+                     & private& JFXPasswordField & passwordRepeatField & password repeat input field \\ \hline
+                     & protected& IUserService & userService & injected user service object \\ \hline
+                     & protected& SessionManager & sessionManager & injected session manager object \\ \hline
+                     & private& User & user & the logged-in user \\ \hline
+
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}         & \textbf{Returns}     & \textbf{Description} \\ \hline
+                     & public              & initialize() & void & \begin{tabular}[c]{@{}l@{}} populates the user and input fields \end{tabular} \\ \hline
+                    & public               & goBackToAccountList(ActionEvent) & void & \begin{tabular}[c]{@{}l@{}}  returns to the account list view \end{tabular} \\ \hline
+                    & public               & setUserInfo() &  void & \begin{tabular}[c]{@{}l@{}} Updates the input fields \end{tabular} \\ \hline
+                    & public               & updateUser(ActionEvent) &  void & \begin{tabular}[c]{@{}l@{}} Calls the userService to update the user \end{tabular} \\ \hline
+                    & public               & deleteUser(ActionEvent) &  void & \begin{tabular}[c]{@{}l@{}} Calls the userService to delete the user \end{tabular} \\ \hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{All Transactions Controller}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.viewController.AllTransactionsController} \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{Class}   \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}     \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{Initializable}     \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Populates the views with all transactions} \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}    & \textbf{Name}        & \textbf{Description} \\ \hline
+                     & private& Label & totalBalanceLabel & balance of the specified account \\ \hline
+                     & private& Label & descriptionLabel & account ID and name of the bank \\ \hline
+                     & private& Label & accountType & type of the account \\ \hline
+                     & private& TransactionTable & transactionTable & table of transactions \\ \hline
+
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}         & \textbf{Returns}     & \textbf{Description} \\ \hline
+                     & public              & initialize() & void & \begin{tabular}[c]{@{}l@{}} required by interface, but not actually used \end{tabular} \\ \hline
+                    & public               & setAccounts(List<Account> accounts) & void & \begin{tabular}[c]{@{}l@{}}  sets the accounts to be displayed \end{tabular} \\ \hline
+                  & public               & gotoAccountList(MouseEvent event) &  void & \begin{tabular}[c]{@{}l@{}}  returns to the account list view \end{tabular} \\ \hline
+\end{tabular}
+}
+\end{table}
+
+\clearpage
+
+\begin{table}[H]
+\centering
+\caption{Transaction Table Controller}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.viewController.TransactionTableController} \\ \hline
+\textbf{Visibility}  & \multicolumn{4}{l|}{Public}   \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{Class}   \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}     \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{Initializable}     \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Allows to display and edit transactions} \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}    & \textbf{Name}        & \textbf{Description} \\ \hline
+                     & private& TableColumn$<$TransactionDisplayModel, Integer$>$ & idCol & the transaction id column \\ \hline
+                     & private& TableColumn$<$TransactionDisplayModel, String$>$ & dateCol & the transaction date column \\ \hline
+                     & private& TableColumn$<$TransactionDisplayModel, String$>$ & amountCol & the transaction amount column \\ \hline
+                     & private& TableColumn$<$TransactionDisplayModel, String$>$ & categoryCol & the transaction category column \\ \hline
+                     & private& TableColumn$<$TransactionDisplayModel, String$>$ & typeCol & the transaction type column \\ \hline
+                     & private& TableView$<$TransactionDisplayModel$>$ & transactionTableView & the transaction table view \\ \hline
+                     & private& ObservableList$<$TransactionDisplayModel$>$ & tableData & the display models used to feed to the table \\ \hline
+                     & private& List$<Transaction>$ & transactions & the data used to construct dipslay models from \\ \hline
+                     & private& ITransactionService & transactionService & a transaction service object \\ \hline
+
+
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}         & \textbf{Returns}     & \textbf{Description} \\ \hline
+                     & public              & initialize() & void & \begin{tabular}[c]{@{}l@{}} populates the table view  \end{tabular} \\ \hline
+                    & public               & hideAccountIDColumn() & void & \begin{tabular}[c]{@{}l@{}}  hides the ID column of the table view \end{tabular} \\ \hline
+                    & public               & setTransactions(List$<$Transaction$>$) &  void & \begin{tabular}[c]{@{}l@{}} updates the transactions and table view data \end{tabular} \\ \hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Sign up controller}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.viewController.SignUpController} \\ \hline
+\textbf{Visibility}  & \multicolumn{4}{l|}{Public}   \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{Class}   \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}     \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{Initializable, EventHandler$<$KeyEvent$>$}     \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Allows to sign up a new user} \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}    & \textbf{Name}        & \textbf{Description} \\ \hline
+                     & private& JFXTextField & usernameTxt & username input field \\ \hline
+                     & private& JFXTextField & lastnameTxt & last name input field \\ \hline
+                     & private& JFXTextField & firstnameTxt & first name input field \\ \hline
+                     & private& JFXPasswordField & passwordField & password input field  \\ \hline
+                     & private& JFXPasswordField & passwordRepeatField & password repeat input field \\ \hline
+                     & protected& IUserService & userService & injected user service object \\ \hline
+
+
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}         & \textbf{Returns}     & \textbf{Description} \\ \hline
+                     & public              & initialize() & void & \begin{tabular}[c]{@{}l@{}} required by the interface, empty body  \end{tabular} \\ \hline
+                    & public               & signUp(ActionEvent) & void & \begin{tabular}[c]{@{}l@{}}  calls the signUp() method \end{tabular} \\ \hline
+                    & public               & handle(KeyEvent) &  void & \begin{tabular}[c]{@{}l@{}} handles user keyboard input \end{tabular} \\ \hline
+                    & private               & signUp() &  void & \begin{tabular}[c]{@{}l@{}} Calls the user service to create a new user \end{tabular} \\ \hline
+                     & private               & validatePasswords() &  void & \begin{tabular}[c]{@{}l@{}} ensures that the contents of the password fields match \end{tabular} \\ \hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Login controller}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.viewController.LoginController} \\ \hline
+\textbf{Visibility}  & \multicolumn{4}{l|}{Public}   \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{Class}   \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}     \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{Initializable, EventHandler$<$KeyEvent$>$}     \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Allows the users to log in} \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}    & \textbf{Name}        & \textbf{Description} \\ \hline
+                     & private& JFXTextField & usernameTxt & username input field \\ \hline
+                     & private& JFXPasswordField & passwordField & password input field  \\ \hline
+                     & protected& SessionManager & userService & injected user service object \\ \hline
+                     & protected& IUserService & userService & injected user service object \\ \hline
+
+
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}         & \textbf{Returns}     & \textbf{Description} \\ \hline
+                     & public              & initialize() & void & \begin{tabular}[c]{@{}l@{}} required by the interface, empty body  \end{tabular} \\ \hline
+                    & public               & login(ActionEvent) & void & \begin{tabular}[c]{@{}l@{}}  calls the login() method \end{tabular} \\ \hline
+                    & public               & handle(KeyEvent) &  void & \begin{tabular}[c]{@{}l@{}} handles user keyboard input \end{tabular} \\ \hline
+                    & public               & signUp(ActionEvent) &  void & \begin{tabular}[c]{@{}l@{}} calls the user service to create a new user \end{tabular} \\ \hline
+                     & private               & login() &  void & \begin{tabular}[c]{@{}l@{}} calls the sessionManager to login the user \end{tabular} \\ \hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{AlertHelper}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Class Name}  & \multicolumn{4}{l|}{com.github.comp354project.viewController.helper.AlertHelper} \\ \hline
+\textbf{Visibility}        & \multicolumn{4}{l|}{Public}   \\ \hline
+\textbf{Type}        & \multicolumn{4}{l|}{Class}   \\ \hline
+\textbf{Inherits}    & \multicolumn{4}{l|}{N/A}     \\ \hline
+\textbf{Implements}  & \multicolumn{4}{l|}{N/A}     \\ \hline
+\textbf{Description} & \multicolumn{4}{l|}{Creates an alert to notify the user of an error} \\ \hline
+\textbf{Attributes}  & \textbf{Visibility} & \textbf{Data Type}    & \textbf{Name}        & \textbf{Description} \\ \hline
+None                 &                     &                       &                      & \\ \hline
+\textbf{Methods}     & \textbf{Visibility} & \textbf{Name}         & \textbf{Returns}     & \textbf{Description} \\ \hline
+                     & public              & generateAlert(Alert.AlertType alertType, String title, String header, String content) & Alert & \begin{tabular}[c]{@{}l@{}} Returns a new alert composed of the passed content \end{tabular} \\ \hline
+                    & public               & generateErrorAlert(String title, String header, String content) & Alert & \begin{tabular}[c]{@{}l@{}}  return a new alert of type ERROR \\ composed of the passed content \end{tabular} \\ \hline
+                  & public               & generateErrorAlert(String title, String header, ValidationException exception) & Alert & \begin{tabular}[c]{@{}l@{}}  return a new alert of type ERROR, \\ specifically for our custom validation exception. \end{tabular} \\ \hline
+\end{tabular}
+}
+\end{table}
 
 
 \clearpage
@@ -1118,7 +1531,10 @@ API - Application Programming Interface & A protocol or set of functions which s
 \hline
 DAO - Data access object & An object that provides an abstract interface to some type of database or other persistence mechanism.\\
 \hline
-
+Dependency Injection (DI) & Software development technique where one object supplies the dependency of another object. \\
+\hline
+Module & Used in Dagger2 for the injection of dependencies into their classes and their submodules. Modules make the code less coupled. \\
+\hline
 \end{tabular}}
 \end{center}
 \end{table}

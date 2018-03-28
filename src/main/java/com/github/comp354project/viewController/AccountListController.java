@@ -82,7 +82,7 @@ public class AccountListController implements Initializable {
 
 	@FXML
 	public void viewAllAccounts()  {
-		MyMoneyApplication.application.displayAllAccountDetails(accounts);
+		MyMoneyApplication.application.displayAllTransactions(accounts);
 	}
 
 	@FXML

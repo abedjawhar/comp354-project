@@ -80,6 +80,7 @@ public class UpdateUserAccountController implements Initializable {
 
     @FXML
     public void updateUser(ActionEvent event)  {
+
     try{
         if (passwordField.getText().equals(passwordRepeatField.getText())) {
              sessionManager.setUser(userService.updateUser((User.builder()
@@ -109,7 +110,6 @@ public class UpdateUserAccountController implements Initializable {
 
     @FXML
     public void deleteUser(ActionEvent event){
-
         try {
             JPasswordField pf = new JPasswordField();
             int opt = JOptionPane.showConfirmDialog(null, pf, "Enter Password", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
