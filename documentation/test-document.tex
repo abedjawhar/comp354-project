@@ -1,0 +1,335 @@
+\documentclass[12pt]{article}
+
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage[table,xcdraw]{xcolor}
+
+\usepackage{seqsplit}
+\usepackage{url}
+
+\usepackage{longtable}
+
+\makeatletter
+\g@addto@macro\UrlSpecials{\camelurl}
+\def\camelurl{%
+\count@`a
+\loop
+\mathcode\count@"8000
+\uccode`\~\count@\uppercase{\edef~{\mathchar\the\count@\noexpand\breakifupper}}%
+\ifnum\count@<`\z
+\advance\count@\@ne
+\repeat}
+
+\def\breakifupper#1{%
+\ifcat .\noexpand#1%
+\ifnum`#1>40
+\ifnum`#1<91
+\penalty\z@
+\fi\fi\fi
+#1%
+}
+
+\makeatother
+
+\pagestyle{empty}
+\setcounter{secnumdepth}{2}
+
+\topmargin=0cm
+\oddsidemargin=0cm
+\textheight=22.0cm
+\textwidth=17cm
+\parindent=0cm
+\parskip=0.15cm
+\topskip=0truecm
+\raggedbottom
+\abovedisplayskip=3mm
+\belowdisplayskip=3mm
+\abovedisplayshortskip=0mm
+\belowdisplayshortskip=2mm
+\normalbaselineskip=12pt
+\normalbaselines
+
+% environment slightly edited from https://tex.stackexchange.com/questions/10293/latex-template-for-use-cases
+\newcommand\tabularhead[1]{
+    \begin{table}[ht]
+        \addtocounter{use case ID}{1}
+        \caption{Use Case \arabic{use case ID} - #1}
+        \vspace{0.2cm}
+        \begin{tabular}{|p{0.2\linewidth}|p{0.70\linewidth}|}
+            \hline
+            \textbf{Action} & \textbf{#1} \\
+            \hline}
+
+        \newcommand\addrow[2]{#1 & #2\\ \hline}
+
+            \newcommand\addmulrow[2]{ \begin{minipage}[t][][t]{2.5cm}#1\end{minipage}
+                &\begin{minipage}[t][][t]{11cm}
+                    \begin{enumerate}[itemsep=-1ex] #2   \end{enumerate}
+                \end{minipage}\vfill\\ \hline}
+
+            \newenvironment{usecase}{\tabularhead}
+        {\hline\end{tabular}\end{table}}
+
+
+
+        % cheaty non-functional requirement env
+
+        \newcounter{req ID}
+        \newcommand\tabularheadfsd[1]{
+            \begin{table}[ht]
+                \addtocounter{req ID}{1}
+                \caption{Non-Functional Requirement \arabic{req ID} - #1}
+                \vspace{0.2cm}
+                \begin{tabular}{|p{0.2\linewidth}|p{0.70\linewidth}|}
+                    \hline
+                    \textbf{Action} & \textbf{#1} \\
+                    \hline}
+
+                \newenvironment{requirement}{\tabularheadfsd}
+                {\hline\end{tabular}\end{table}}
+
+                \begin{document}
+
+                \vspace*{0.5in}
+                \centerline{\bf\Large COMP 354}
+                \centerline{\bf\Large Test Document for the project myMoney}
+
+                \vspace*{0.5in}
+                \centerline{\bf\Large Team PA-PK}
+
+                \vspace*{0.5in}
+                \centerline{\today}
+
+                \vspace*{1.5in}
+                \begin{table}[htbp]
+                    \caption{Team}
+                    \begin{center}
+                        \begin{tabular}{|r | c|}
+                            \hline
+                            Name & ID Number \\
+                            \hline\hline
+                            Anne-Laure Ehresmann & 27858906 \\
+                            \hline
+                            Marc-Antoine Dube & 40029307 \\
+                            \hline
+                            Kadeem Caines & 26343600 \\
+                            \hline
+                            Abdel Rahman Jawhar & 27192142 \\
+                            \hline
+                            Keith Dion & 40036340 \\
+                            \hline
+                            Hrachya Hakobyan & 40041555 \\
+                            \hline
+                            Andrew-Smith & 40034936 \\
+                            \hline
+                            Dongyu Chen & 27241909 \\
+                            \hline
+                            Yauheni Karaniuk & 40005680 \\
+                            \hline
+                            Renny Xu & 40005262\\
+                            \hline
+                            Wei Wang & 40041116 \\
+                            \hline
+                        \end{tabular}
+                    \end{center}
+                \end{table}
+
+                \begin{table}[htbp]
+                    \caption{Revision history}
+                    \begin{center}
+                        \begin{tabular}{|r | c| c |}
+                            \hline
+                            Version & Date & Changes \\
+                            \hline
+                            1.0 & \nth{15} March 2018 & Completed test document \\
+                            \hline
+                        \end{tabular}
+                    \end{center}
+                \end{table}
+
+
+                \tableofcontents
+\listoffigures
+\clearpage
+\listoftables
+
+\clearpage
+
+\section{Introduction}
+
+{\it
+The introduction of the document provides an overview of the entire document,
+briefly introducing what are its goals, and what information is to be found in it.
+}
+
+\section{Test Plan}
+
+{\it
+Describe what forms of testing you plan to do (unit, subsystem, integration),
+describe briefly the schedule and resources for testing,
+and
+how you designed your test cases.
+
+Indicate which qualities (from requirements) were tested and which qualities were not tested.
+}
+
+\subsection{System Level Test Cases}
+
+{\it
+All test cases for testing at the system level.
+}
+
+\subsubsection{Test Case 1} \label{tc:1}
+
+\noindent
+{\bf Purpose}\\
+State the purpose of the test.
+Indicate which requirement and which aspect of that requirement is being tested.
+
+\noindent
+{\bf Input Specification}\\
+State the context for the test in terms of system state.
+State the input test data. You may need to mention operations invoked as well as data for the operation.
+You can cross-reference to actual file data specified in an appendix.
+
+\noindent
+{\bf Expected Output}\\
+State the expected system response and output.
+You can cross-reference to actual file data specified in an appendix.
+
+\noindent
+{\bf Traces to Use Cases}\\
+State which requirements (at the level of use case and scenario) are tested by this test case.
+
+\subsection{Subsystem Level Test Cases}
+
+{\it
+All test cases for testing at the subsystem level.
+}
+
+{\it
+One subsection per subsystem
+}
+
+\subsubsection{Subsystem X}
+
+\subsection{Unit Test cases}
+
+\subsubsection{com.github.comp354project.model.user.UserService.createUser(User)}
+\begin{longtable}{|m{4cm}|l|l|l|}
+\caption[]{createUser(User)}
+\hline
+\cellcolor[HTML]{C0C0C0}\textbf{Tester Name} & \multicolumn{2}{p{13cm}|}{Hrachya}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Test Date} & \multicolumn{2}{p{13cm}|}{1/31/18}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Class Name} & \multicolumn{2}{p{13cm}|}{com.github.comp354project.model.user.UserService}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Method Name} & \multicolumn{2}{p{13cm}|}{createUser(User)}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{2}{p{13cm}|}{This test suite tests the creation of a user}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Use Cases} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}01\\ \end{tabular}}\\ \hline
+\multicolumn{3}{|l|}{\cellcolor[HTML]{C0C0C0}\textbf{Test Scenarios}}\\ \hline
+\multicolumn{3}{|l|}{createUser\_withNullUser\_shouldThrow}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  \multicolumn{2}{l|}{user} \\ \cline{2-3}
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \multicolumn{2}{l|}{ null } \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{2}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{2}{p{13cm}|}{No null user can be saved in the database}\\ \hline
+\multicolumn{3}{|l|}{testCreateUser\_withInvalidUser\_shouldThrow}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  user &  errors \\ \cline{2-3}
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \begin{tabular}[c]{@{}l@{}}\end{tabular}& 4 \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ 4 exceptions are thrown because missing fields: username, password, firstname, lastname\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ 4 exceptions are thrown because missing fields: username, password, firstname, lastname\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{2}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{2}{p{13cm}|}{No empty value user can be saved in the database}\\ \hline
+\multicolumn{3}{|l|}{testCreateUser\_withValidUser\_shouldReturnUser}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  \multicolumn{2}{l|}{user} \\ \cline{2-3}
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \multicolumn{2}{l|}{ \begin{tabular}[c]{@{}l@{}}username: USERNAME\\ password: PASSWORD\\ firstName: FIRSTNAME\\ lastName: LASTNAME\\ \end{tabular}} \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}User ID was autogenerated upon save\\ The saved user is the same as the inputted user\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}User ID was autogenerated upon save\\ The saved user is the same as the inputted user\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{2}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{2}{p{13cm}|}{A valid user should be inserted in the database}\\ \hline
+\multicolumn{3}{|l|}{testCreateUser\_withExistingUsername\_shouldThrow}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  \multicolumn{2}{l|}{user} \\ \cline{2-3}
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \multicolumn{2}{l|}{ \begin{tabular}[c]{@{}l@{}}username: USERNAME\\ password: PASSWORD\\ firstName: FIRSTNAME\\ lastName: LASTNAME\\ \end{tabular}} \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{2}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{2}{p{13cm}|}{A user cannot be created if the username is already taken}\\ \hline
+\end{longtable}
+
+\subsubsection{com.github.comp354project.model.user.UserService.deleteBankAccount(Account)}
+\begin{longtable}{|m{4cm}|l|l|l|l|}
+\caption[]{deleteBankAccount(Account)}
+\hline
+\cellcolor[HTML]{C0C0C0}\textbf{Tester Name} & \multicolumn{3}{p{13cm}|}{Anne-Laure}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Test Date} & \multicolumn{3}{p{13cm}|}{3/7/18}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Class Name} & \multicolumn{3}{p{13cm}|}{com.github.comp354project.model.user.UserService}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Method Name} & \multicolumn{3}{p{13cm}|}{deleteBankAccount(Account)}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{3}{p{13cm}|}{This test suite tests the deletion of a bank account}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Use Cases} & \multicolumn{3}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}04\\ \end{tabular}}\\ \hline
+\multicolumn{4}{|l|}{\cellcolor[HTML]{C0C0C0}\textbf{Test Scenarios}}\\ \hline
+\multicolumn{4}{|l|}{testDeleteBankAccount\_withNullAccount\_ShouldThrow}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  \multicolumn{3}{l|}{account} \\ \cline{2-4}
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \multicolumn{3}{l|}{ null } \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{3}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{3}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{3}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{3}{p{13cm}|}{No null account can be passed to the function}\\ \hline
+\multicolumn{4}{|l|}{testDeleteBankAccount\_withoutBeingLoggedIn\_ShouldThrow}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  account &  \multicolumn{2}{l|}{testUser} \\ \cline{2-4}
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \begin{tabular}[c]{@{}l@{}}ID: 1\\ user: testUser\\ bankName: TD\\ type: Checking\\ balance: 15823.12\\ \end{tabular}& \multicolumn{2}{l|}{ \begin{tabular}[c]{@{}l@{}}ID: 1\\ firstName: Hrachya\\ lastName: Hakobyan\\ username: admin\\ password: admin\\ email: sample@email.com\\ address: address\\ phone: 111111\\ \end{tabular}} \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{3}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}AuthenticationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{3}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}AuthenticationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{3}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{3}{p{13cm}|}{A user that is not authenticated cannot delete his accounts}\\ \hline
+\multicolumn{4}{|l|}{testDeleteBankAccount\_withoutProperAuthorisation\_ShouldThrow}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  testUser &  user2 &  testAccount \\ \cline{2-4}
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \begin{tabular}[c]{@{}l@{}}ID: 1\\ firstName: Hrachya\\ lastName: Hakobyan\\ username: admin\\ password: admin\\ email: sample@email.com\\ address: address\\ phone: 111111\\ \end{tabular}& \begin{tabular}[c]{@{}l@{}}username: username\\ password: password\\ firstName: firstname\\ lastName: lastname\\ ID: 999\\ \end{tabular}& \begin{tabular}[c]{@{}l@{}}ID: 1\\ user: testUser\\ bankName: TD\\ type: Checking\\ balance: 15823.12\\ \end{tabular}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{3}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}AuthorisationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{3}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}AuthorisationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{3}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{3}{p{13cm}|}{A user cannot modify the accounts of another user}\\ \hline
+\multicolumn{4}{|l|}{testDeleteBankAccount\_WithProperAuthorisation\_ShouldSucceed}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  testUser &  testAccount &  invocationCount \\ \cline{2-4}
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \begin{tabular}[c]{@{}l@{}}ID: 1\\ firstName: Hrachya\\ lastName: Hakobyan\\ username: admin\\ password: admin\\ email: sample@email.com\\ address: address\\ phone: 111111\\ \end{tabular}& \begin{tabular}[c]{@{}l@{}}ID: 1\\ user: testUser\\ bankName: TD\\ type: Checking\\ balance: 15823.12\\ \end{tabular}& 1 \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{3}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}Execution of the deletion of the account once\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{3}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}Execution of the deletion of the account once\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{3}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{3}{p{13cm}|}{An authenticated user should succeed in deleting his own bank accounts}\\ \hline
+\end{longtable}
+
+
+
+
+
+
+
+{\it
+All test cases for testing at the unit level.
+}
+
+{\it
+One subsection per unit
+}
+
+\subsubsection{Unit X}
+
+\section{Test Results}
+
+{\it
+List the tests, indicating which passed and which did not pass.
+List requirements indicating the percentage of tests that passed for that requirement.
+}
+
+\section{References}
+
+\appendix
+
+\section{Description of Input Files}
+
+Describe/include test data from input files.
+
+\section{Description of Output Files}
+
+Describe/include test expected output that are output files.
+
+\end{document}
