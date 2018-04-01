@@ -1,0 +1,30 @@
+{
+  "testerName": "Hrachya",
+  "testDate": "2/7/18",
+  "className": "com.github.comp354project.model.auth.SessionManager",
+  "methodName": "logout()",
+  "purpose": "This test suite tests the function to logout",
+  "useCases": [
+    "02"
+  ],
+  "testScenarios": {
+    "testLogin_withInvalidCredentials_shouldThrow": {
+      "inputSpecification": {
+        "username": "",
+        "password": "",
+        "isLoggedIn": false,
+        "currentUser": null
+      },
+      "expectedOutput": [
+        "After logout, the login status should be false",
+        "After logout, the current user should be null"
+      ],
+      "actualOutput": [
+        "After logout, the login status should be false",
+        "After logout, the current user should be null"
+      ],
+      "bugFound": false,
+      "purpose": "A user should be completely logged out of the application"
+    }
+  }
+}

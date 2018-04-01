@@ -372,6 +372,61 @@ One subsection per subsystem
 \cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{4}{p{13cm}|}{A valid user should be updated}\\ \hline
 \end{longtable}
 
+\subsubsection{com.github.comp354project.model.auth.SessionManager.login(username, password)}
+\begin{longtable}{|m{4cm}|l|l|l|l|l|l|}
+\caption[]{login(username, password)}
+\hline
+\cellcolor[HTML]{C0C0C0}\textbf{Tester Name} & \multicolumn{5}{p{13cm}|}{Hrachya}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Test Date} & \multicolumn{5}{p{13cm}|}{2/7/18}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Class Name} & \multicolumn{5}{p{13cm}|}{com.github.comp354project.model.auth.SessionManager}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Method Name} & \multicolumn{5}{p{13cm}|}{login(username, password)}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{5}{p{13cm}|}{This test suite tests the login of a user}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Use Cases} & \multicolumn{5}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}02\\ \end{tabular}}\\ \hline
+\multicolumn{6}{|l|}{\cellcolor[HTML]{C0C0C0}\textbf{Test Scenarios}}\\ \hline
+\multicolumn{6}{|l|}{testLogin\_withInvalidCredentials\_shouldThrow}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  username &  \multicolumn{4}{l|}{password} \\ \cline{2-6}
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} &  & \multicolumn{4}{l|}{  } \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{5}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{5}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{5}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{5}{p{13cm}|}{A user with invalid credentials should not be able to login}\\ \hline
+\multicolumn{6}{|l|}{testLogin\_withValidCredentials\_shouldReturnUser}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  testUser &  username &  password &  loggedIn &  authenticateInvocations \\ \cline{2-6}
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \begin{tabular}[c]{@{}l@{}}ID: 1\\ firstName: Hrachya\\ lastName: Hakobyan\\ username: admin\\ password: admin\\ email: sample@email.com\\ address: address\\ phone: 111111\\ \end{tabular}&  &  & true & 1 \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{5}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}The method authenticate is invoked 1 time\\ The user is logged in\\ The logged in user is equal to 'testUser' object\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{5}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}The method authenticate is invoked 1 time\\ The user is logged in\\ The logged in user is equal to 'testUser' object\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{5}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{5}{p{13cm}|}{A user with valid credentials should be able to login}\\ \hline
+\multicolumn{6}{|l|}{testLogin\_withLoggedInUser\_shouldThrow}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  username &  \multicolumn{4}{l|}{password} \\ \cline{2-6}
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} &  & \multicolumn{4}{l|}{  } \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{5}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}UserLoggedInException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{5}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}UserLoggedInException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{5}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{5}{p{13cm}|}{A user that is already logged in should not be able to login again}\\ \hline
+\end{longtable}
+
+
+
+\subsubsection{com.github.comp354project.model.auth.SessionManager.logout()}
+\begin{longtable}{|m{4cm}|l|l|l|l|l|}
+\caption[]{logout()}
+\hline
+\cellcolor[HTML]{C0C0C0}\textbf{Tester Name} & \multicolumn{4}{p{13cm}|}{Hrachya}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Test Date} & \multicolumn{4}{p{13cm}|}{2/7/18}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Class Name} & \multicolumn{4}{p{13cm}|}{com.github.comp354project.model.auth.SessionManager}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Method Name} & \multicolumn{4}{p{13cm}|}{logout()}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{4}{p{13cm}|}{This test suite tests the function to logout}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Use Cases} & \multicolumn{4}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}02\\ \end{tabular}}\\ \hline
+\multicolumn{5}{|l|}{\cellcolor[HTML]{C0C0C0}\textbf{Test Scenarios}}\\ \hline
+\multicolumn{5}{|l|}{testLogin\_withInvalidCredentials\_shouldThrow}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  username &  password &  isLoggedIn &  currentUser \\ \cline{2-5}
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} &  &  & false & null \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{4}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}After logout, the login status should be false\\ After logout, the current user should be null\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{4}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}After logout, the login status should be false\\ After logout, the current user should be null\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{4}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{4}{p{13cm}|}{A user should be completely logged out of the application}\\ \hline
+\end{longtable}
 
 
 

@@ -1,0 +1,70 @@
+{
+  "testerName": "Hrachya",
+  "testDate": "2/7/18",
+  "className": "com.github.comp354project.model.auth.SessionManager",
+  "methodName": "login(username, password)",
+  "purpose": "This test suite tests the login of a user",
+  "useCases": [
+    "02"
+  ],
+  "testScenarios": {
+    "testLogin_withInvalidCredentials_shouldThrow": {
+      "inputSpecification": {
+        "username": "",
+        "password": ""
+      },
+      "expectedOutput": [
+        "ValidationException is thrown"
+      ],
+      "actualOutput": [
+        "ValidationException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "A user with invalid credentials should not be able to login"
+    },
+    "testLogin_withValidCredentials_shouldReturnUser": {
+      "inputSpecification": {
+        "testUser": {
+          "ID": 1,
+          "firstName": "Hrachya",
+          "lastName": "Hakobyan",
+          "username": "admin",
+          "password": "admin",
+          "email": "sample@email.com",
+          "address": "address",
+          "phone": "111111"
+        },
+        "username": "",
+        "password": "",
+        "loggedIn": true,
+        "authenticateInvocations": 1
+      },
+      "expectedOutput": [
+        "The method authenticate is invoked 1 time",
+        "The user is logged in",
+        "The logged in user is equal to 'testUser' object"
+      ],
+      "actualOutput": [
+        "The method authenticate is invoked 1 time",
+        "The user is logged in",
+        "The logged in user is equal to 'testUser' object"
+      ],
+      "bugFound": false,
+      "purpose": "A user with valid credentials should be able to login"
+    },
+    "testLogin_withLoggedInUser_shouldThrow": {
+      "inputSpecification": {
+        "username": "",
+        "password": ""
+      },
+      "expectedOutput": [
+        "UserLoggedInException is thrown"
+      ],
+      "actualOutput": [
+        "UserLoggedInException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "A user that is already logged in should not be able to login again"
+    }
+  }
+}
