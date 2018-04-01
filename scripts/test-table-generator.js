@@ -117,7 +117,7 @@ Object.keys(json.testScenarios).forEach((scenarioName) => {
         headerVariableRow += headerCol;
         valueRow += valueCol;
     });
-    headerVariableRow += '\\\\ \\cline{2-3} ' + '\n';
+    headerVariableRow += `\\\\ \\cline{2-${(1 + maxTestVarCount)} ` + '\n';
     valueRow += '\\\\ \\hline' + '\n';
 
     table += headerVariableRow + valueRow;
