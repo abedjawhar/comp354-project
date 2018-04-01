@@ -1,0 +1,103 @@
+{
+  "testerName": "Abed Jawhar",
+  "testDate": "3/13/18",
+  "className": "com.github.comp354project.model.user.UserService",
+  "methodName": "deleteUser(User)",
+  "purpose": "This test suite tests the deletion of a user",
+  "useCases": [
+    "02"
+  ],
+  "testScenarios": {
+    "testDeleteUser_withNullUser_shouldThrow": {
+      "inputSpecification": {
+        "user": null
+      },
+      "expectedOutput": [
+        "ValidationException is thrown"
+      ],
+      "actualOutput": [
+        "ValidationException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "A null user can't be deleted"
+    },
+    "testDeleteUser_withNonexistantUser_shouldThrow": {
+      "inputSpecification": {
+        "testUser": {
+          "ID": 1,
+          "firstName": "Hrachya",
+          "lastName": "Hakobyan",
+          "username": "admin",
+          "password": "admin",
+          "email": "sample@email.com",
+          "address": "address",
+          "phone": "111111"
+        }
+      },
+      "expectedOutput": [
+        "ValidationException is thrown"
+      ],
+      "actualOutput": [
+        "ValidationException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "A user that does not exist can't be deleted"
+    },
+    "testDeleteUser_withExistingtUser_shouldSucceed": {
+      "inputSpecification": {
+        "testUser": {
+          "ID": 1,
+          "firstName": "Hrachya",
+          "lastName": "Hakobyan",
+          "username": "admin",
+          "password": "admin",
+          "email": "sample@email.com",
+          "address": "address",
+          "phone": "111111"
+        },
+        "returnSize": 0
+      },
+      "expectedOutput": [
+        "The number of users with ID 1 is 0"
+      ],
+      "actualOutput": [
+        "The number of users with ID 1 is 0"
+      ],
+      "bugFound": false,
+      "purpose": "A valid user should be deleted"
+    },
+    "testDeleteUser_withExistingtUser_shouldDeleteAssociatedAccounts": {
+      "inputSpecification": {
+        "testUser": {
+          "ID": 1,
+          "firstName": "Hrachya",
+          "lastName": "Hakobyan",
+          "username": "admin",
+          "password": "admin",
+          "email": "sample@email.com",
+          "address": "address",
+          "phone": "111111"
+        },
+        "testAccount": {
+          "ID": 1,
+          "user": "testUser",
+          "bankName": "TD",
+          "type": "Checking",
+          "balance": 15823.12
+        },
+        "returnSize": 0,
+        "deleteAccountInvocation": 1
+      },
+      "expectedOutput": [
+        "The number of users with ID 1 is 0",
+        "Delete account should be invocated 1 time"
+      ],
+      "actualOutput": [
+        "The number of users with ID 1 is 0",
+        "Delete account should be invocated 1 time"
+      ],
+      "bugFound": false,
+      "purpose": "A valid user should be deleted and his accounts also"
+    }
+  }
+}

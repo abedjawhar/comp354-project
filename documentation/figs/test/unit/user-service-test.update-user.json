@@ -1,0 +1,76 @@
+{
+  "testerName": "Abed Jawhar",
+  "testDate": "3/13/18",
+  "className": "com.github.comp354project.model.user.UserService",
+  "methodName": "updateUser(User)",
+  "purpose": "This test suite tests the update of a user",
+  "useCases": [
+    "02"
+  ],
+  "testScenarios": {
+    "testUpdateUser_withNullUser_shouldThrow": {
+      "inputSpecification": {
+        "user": null
+      },
+      "expectedOutput": [
+        "ValidationException is thrown"
+      ],
+      "actualOutput": [
+        "ValidationException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "A null user can't be updated"
+    },
+    "testUpdateUser_withNonexistenttUser_shouldThrow": {
+      "inputSpecification": {
+        "testUser": {
+          "ID": 1,
+          "firstName": "Hrachya",
+          "lastName": "Hakobyan",
+          "username": "admin",
+          "password": "admin",
+          "email": "sample@email.com",
+          "address": "address",
+          "phone": "111111"
+        }
+      },
+      "expectedOutput": [
+        "ValidationException is thrown"
+      ],
+      "actualOutput": [
+        "ValidationException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "A user that does not exist can't be updated"
+    },
+    "testUpdateUser_withValidUser_shouldSucceed": {
+      "inputSpecification": {
+        "testUser": {
+          "ID": 1,
+          "firstName": "Hrachya",
+          "lastName": "Hakobyan",
+          "username": "admin",
+          "password": "admin",
+          "email": "sample@email.com",
+          "address": "address",
+          "phone": "111111"
+        },
+        "firstName": "Abed",
+        "lastName": "jawhar",
+        "password": "admin2"
+      },
+      "expectedOutput": [
+        "The firstName is updated to 'Abed'",
+        "The lastName is updated to 'jawhar'",
+        "The password is updated to 'admin2'"
+      ],
+      "actualOutput": [
+        "The firstName is updated to 'Abed'",
+        "The lastName is updated to 'jawhar'",
+        "The password is updated to 'admin2'"
+      ],
+      "bugFound": false,
+      "purpose": "A valid user should be updated"
+    }
+  }
+}

@@ -297,7 +297,80 @@ One subsection per subsystem
 \cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{3}{p{13cm}|}{An authenticated user should succeed in deleting his own bank accounts}\\ \hline
 \end{longtable}
 
+\subsubsection{com.github.comp354project.model.user.UserService.deleteUser(User)}
+\begin{longtable}{|m{4cm}|l|l|l|l|l|}
+\caption[]{deleteUser(User)}
+\hline
+\cellcolor[HTML]{C0C0C0}\textbf{Tester Name} & \multicolumn{4}{p{13cm}|}{Abed Jawhar}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Test Date} & \multicolumn{4}{p{13cm}|}{3/13/18}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Class Name} & \multicolumn{4}{p{13cm}|}{com.github.comp354project.model.user.UserService}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Method Name} & \multicolumn{4}{p{13cm}|}{deleteUser(User)}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{4}{p{13cm}|}{This test suite tests the creation of a user}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Use Cases} & \multicolumn{4}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}02\\ \end{tabular}}\\ \hline
+\multicolumn{5}{|l|}{\cellcolor[HTML]{C0C0C0}\textbf{Test Scenarios}}\\ \hline
+\multicolumn{5}{|l|}{testDeleteUser\_withNullUser\_shouldThrow}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  \multicolumn{4}{l|}{user} \\ \cline{2-5}
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \multicolumn{4}{l|}{ null } \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{4}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{4}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{4}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{4}{p{13cm}|}{A null user can't be deleted}\\ \hline
+\multicolumn{5}{|l|}{testDeleteUser\_withNonexistantUser\_shouldThrow}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  \multicolumn{4}{l|}{testUser} \\ \cline{2-5}
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \multicolumn{4}{l|}{ \begin{tabular}[c]{@{}l@{}}ID: 1\\ firstName: Hrachya\\ lastName: Hakobyan\\ username: admin\\ password: admin\\ email: sample@email.com\\ address: address\\ phone: 111111\\ \end{tabular}} \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{4}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{4}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{4}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{4}{p{13cm}|}{A user that does not exist can't be deleted}\\ \hline
+\multicolumn{5}{|l|}{testDeleteUser\_withExistingtUser\_shouldSucceed}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  testUser &  \multicolumn{3}{l|}{returnSize} \\ \cline{2-5}
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \begin{tabular}[c]{@{}l@{}}ID: 1\\ firstName: Hrachya\\ lastName: Hakobyan\\ username: admin\\ password: admin\\ email: sample@email.com\\ address: address\\ phone: 111111\\ \end{tabular}& \multicolumn{3}{l|}{ 0 } \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{4}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}The number of users with ID 1 is 0\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{4}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}The number of users with ID 1 is 0\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{4}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{4}{p{13cm}|}{A valid user should be deleted}\\ \hline
+\multicolumn{5}{|l|}{testDeleteUser\_withExistingtUser\_shouldDeleteAssociatedAccounts}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  testUser &  testAccount &  returnSize &  deleteAccountInvocation \\ \cline{2-5}
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \begin{tabular}[c]{@{}l@{}}ID: 1\\ firstName: Hrachya\\ lastName: Hakobyan\\ username: admin\\ password: admin\\ email: sample@email.com\\ address: address\\ phone: 111111\\ \end{tabular}& \begin{tabular}[c]{@{}l@{}}ID: 1\\ user: testUser\\ bankName: TD\\ type: Checking\\ balance: 15823.12\\ \end{tabular}& 0 & 1 \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{4}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}The number of users with ID 1 is 0\\ Delete account should be invocated 1 time\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{4}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}The number of users with ID 1 is 0\\ Delete account should be invocated 1 time\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{4}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{4}{p{13cm}|}{A valid user should be deleted and his accounts also}\\ \hline
+\end{longtable}
 
+\subsubsection{com.github.comp354project.model.user.UserService.updateUser(User)}
+\begin{longtable}{|m{4cm}|l|l|l|l|l|}
+\caption[]{updateUser(User)}
+\hline
+\cellcolor[HTML]{C0C0C0}\textbf{Tester Name} & \multicolumn{4}{p{13cm}|}{Abed Jawhar}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Test Date} & \multicolumn{4}{p{13cm}|}{3/13/18}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Class Name} & \multicolumn{4}{p{13cm}|}{com.github.comp354project.model.user.UserService}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Method Name} & \multicolumn{4}{p{13cm}|}{updateUser(User)}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{4}{p{13cm}|}{This test suite tests the update of a user}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Use Cases} & \multicolumn{4}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}02\\ \end{tabular}}\\ \hline
+\multicolumn{5}{|l|}{\cellcolor[HTML]{C0C0C0}\textbf{Test Scenarios}}\\ \hline
+\multicolumn{5}{|l|}{testUpdateUser\_withNullUser\_shouldThrow}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  \multicolumn{4}{l|}{user} \\ \cline{2-5}
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \multicolumn{4}{l|}{ null } \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{4}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{4}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{4}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{4}{p{13cm}|}{A null user can't be updated}\\ \hline
+\multicolumn{5}{|l|}{testUpdateUser\_withNonexistenttUser\_shouldThrow}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  \multicolumn{4}{l|}{testUser} \\ \cline{2-5}
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \multicolumn{4}{l|}{ \begin{tabular}[c]{@{}l@{}}ID: 1\\ firstName: Hrachya\\ lastName: Hakobyan\\ username: admin\\ password: admin\\ email: sample@email.com\\ address: address\\ phone: 111111\\ \end{tabular}} \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{4}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{4}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{4}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{4}{p{13cm}|}{A user that does not exist can't be updated}\\ \hline
+\multicolumn{5}{|l|}{testUpdateUser\_withValidUser\_shouldSucceed}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  testUser &  firstName &  lastName &  password \\ \cline{2-5}
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \begin{tabular}[c]{@{}l@{}}ID: 1\\ firstName: Hrachya\\ lastName: Hakobyan\\ username: admin\\ password: admin\\ email: sample@email.com\\ address: address\\ phone: 111111\\ \end{tabular}& Abed & jawhar & admin2 \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{4}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}The firstName is updated to 'Abed'\\ The lastName is updated to 'jawhar'\\ The password is updated to 'admin2'\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{4}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}The firstName is updated to 'Abed'\\ The lastName is updated to 'jawhar'\\ The password is updated to 'admin2'\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{4}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{4}{p{13cm}|}{A valid user should be updated}\\ \hline
+\end{longtable}
 
 
 
