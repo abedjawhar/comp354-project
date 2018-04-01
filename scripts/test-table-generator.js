@@ -38,7 +38,7 @@ Object.keys(json.testScenarios).forEach((scenarioName) => {
         headerVariableRow += headerCol;
         valueRow += valueCol;
     });
-    headerVariableRow += `\\\\ \\cline{2-${(1 + maxTestVarCount)} ` + '\n';
+    headerVariableRow += `\\\\ \\cline{2-${(1 + maxTestVarCount)}} ` + '\n';
     valueRow += '\\\\ \\hline' + '\n';
 
     table += headerVariableRow + valueRow;
@@ -69,8 +69,9 @@ function generateTableTop() {
     for (let i = 0; i < maxTestVarCount; i++) {
         cols += 'l|';
     }
-    return `\\begin{longtable}{|m{${firstColSize}}|l|${cols}}`
-        + `\\caption[]{${json.className}.${json.methodName}}`
+    return `\\subsubsection{${json.className}.${json.methodName}}` + '\n'
+        + `\\begin{longtable}{|m{${firstColSize}}|l|${cols}}` + '\n'
+        + `\\caption[]{${json.methodName}}` + '\n'
         + `\\hline`;
 }
 

@@ -1,0 +1,120 @@
+{
+  "testerName": "Anne-Laure",
+  "testDate": "3/7/18",
+  "className": "com.github.comp354project.model.user.UserService",
+  "methodName": "deleteBankAccount(Account)",
+  "purpose": "This test suite tests the deletion of a bank account",
+  "useCases": [
+    "04"
+  ],
+  "testScenarios": {
+    "testDeleteBankAccount_withNullAccount_ShouldThrow": {
+      "inputSpecification": {
+        "account": null
+      },
+      "expectedOutput": [
+        "ValidationException is thrown"
+      ],
+      "actualOutput": [
+        "ValidationException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "No null account can be passed to the function"
+    },
+    "testDeleteBankAccount_withoutBeingLoggedIn_ShouldThrow": {
+      "inputSpecification": {
+        "account": {
+          "ID": 1,
+          "user": "testUser",
+          "bankName": "TD",
+          "type": "Checking",
+          "balance": 15823.12
+        },
+        "testUser": {
+          "ID": 1,
+          "firstName": "Hrachya",
+          "lastName": "Hakobyan",
+          "username": "admin",
+          "password": "admin",
+          "email": "sample@email.com",
+          "address": "address",
+          "phone": "111111"
+        }
+      },
+      "expectedOutput": [
+        "AuthenticationException is thrown"
+      ],
+      "actualOutput": [
+        "AuthenticationException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "A user that is not authenticated cannot delete his accounts"
+    },
+    "testDeleteBankAccount_withoutProperAuthorisation_ShouldThrow": {
+      "inputSpecification": {
+        "testUser": {
+          "ID": 1,
+          "firstName": "Hrachya",
+          "lastName": "Hakobyan",
+          "username": "admin",
+          "password": "admin",
+          "email": "sample@email.com",
+          "address": "address",
+          "phone": "111111"
+        },
+        "user2": {
+          "username": "username",
+          "password": "password",
+          "firstName": "firstname",
+          "lastName": "lastname",
+          "ID": 999
+        },
+        "testAccount": {
+          "ID": 1,
+          "user": "testUser",
+          "bankName": "TD",
+          "type": "Checking",
+          "balance": 15823.12
+        }
+      },
+      "expectedOutput": [
+        "AuthorisationException is thrown"
+      ],
+      "actualOutput": [
+        "AuthorisationException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "A user cannot modify the accounts of another user"
+    },
+    "testDeleteBankAccount_WithProperAuthorisation_ShouldSucceed": {
+      "inputSpecification": {
+        "testUser": {
+          "ID": 1,
+          "firstName": "Hrachya",
+          "lastName": "Hakobyan",
+          "username": "admin",
+          "password": "admin",
+          "email": "sample@email.com",
+          "address": "address",
+          "phone": "111111"
+        },
+        "testAccount": {
+          "ID": 1,
+          "user": "testUser",
+          "bankName": "TD",
+          "type": "Checking",
+          "balance": 15823.12
+        },
+        "invocationCount": 1
+      },
+      "expectedOutput": [
+        "Execution of the deletion of the account once"
+      ],
+      "actualOutput": [
+        "Execution of the deletion of the account once"
+      ],
+      "bugFound": false,
+      "purpose": "An authenticated user should succeed in deleting his own bank accounts"
+    }
+  }
+}
