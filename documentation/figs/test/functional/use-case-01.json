@@ -1,0 +1,27 @@
+{
+  "useCase" : "Add user account",
+  "testCases" : {
+    "TestCase1" : {
+      "description" : "Desciption1",
+      "input" : [
+        "Input1",
+        "Input2"
+      ],
+      "output": [
+        "output1",
+        "output2"
+      ]
+    },
+    "TestCase2" : {
+      "description" : "Desciption2",
+      "input" : [
+        "Input1",
+        "Input2"
+      ],
+      "output": [
+        "output1",
+        "output2"
+      ]
+    }
+  }
+}
