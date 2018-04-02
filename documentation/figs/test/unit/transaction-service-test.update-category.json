@@ -1,0 +1,96 @@
+{
+  "testerName": "Hrachya",
+  "testDate": "3/4/18",
+  "className": "com.github.comp354project.model.account.TransactionService",
+  "methodName": "updateTransactionCategory(transactionID, category)",
+  "purpose": "This test suite tests the functionality of updating the category of a transaction",
+  "useCases": [
+    "08"
+  ],
+  "testScenarios": {
+    "testUpdateCategory_withNullTransactionID_shouldThrow": {
+      "inputSpecification": {
+        "transactionID" : "null",
+        "category" : "Leisure"
+      },
+      "expectedOutput": [
+        "ValidationException is thrown"
+      ],
+      "actualOutput": [
+        "ValidationException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "Updating a null transaction ID should fail"
+    },
+    "testUpdateCategory_withNonexistentTransaction_shouldThrow": {
+      "inputSpecification": {
+        "transactionID" : 111111,
+        "category" : "Leisure"
+      },
+      "expectedOutput": [
+        "ValidationException is thrown"
+      ],
+      "actualOutput": [
+        "ValidationException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "Updating a nonexistent transaction should fail"
+    },
+    "testUpdateCategory_withNullCategory_shouldSucceed": {
+      "inputSpecification": {
+        "transactionID" : 10,
+        "category" : "null"
+      },
+      "expectedOutput": [
+        "The 'category' of the transaction with the specified ID is set to null"
+      ],
+      "actualOutput": [
+        "The 'category' of the transaction with the specified ID is set to null"
+      ],
+      "bugFound": false,
+      "purpose": "Updating the category of a valid transaction to null must succeed"
+    },
+    "testUpdateCategory_withEmptyCategory_shouldSucceed": {
+      "inputSpecification": {
+        "transactionID" : 10,
+        "category" : ""
+      },
+      "expectedOutput": [
+        "The 'category' of the transaction with the specified ID is set to ''"
+      ],
+      "actualOutput": [
+        "The 'category' of the transaction with the specified ID is set to ''"
+      ],
+      "bugFound": false,
+      "purpose": "Updating the category of a valid transaction to an empty string must succeed"
+    },
+    "testUpdateCategory_withValidCategory_shouldSucceed": {
+      "inputSpecification": {
+        "transactionID" : 10,
+        "category" : "Leisure"
+      },
+      "expectedOutput": [
+        "The 'category' of the transaction with the specified ID is set to 'Leisure'"
+      ],
+      "actualOutput": [
+        "The 'category' of the transaction with the specified ID is set to 'Leisure'"
+      ],
+      "bugFound": false,
+      "purpose": "Updating the category of a valid transaction must succeed"
+    },
+    "testUpdateCategory_withInvalidCategory_shouldThrow": {
+      "inputSpecification": {
+        "transactionID" : 10,
+        "category" : "AAAAAAAAAAAAAAAAA"
+      },
+      "expectedOutput": [
+        "ValidationException is thrown"
+      ],
+      "actualOutput": [
+        "ValidationException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "Updating the category of a valid transaction to a an invalid value as determined by the business rules must fail"
+    }
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "testerName": "Hrachya",
+  "testDate": "2/7/18",
+  "className": "com.github.comp354project.model.account.AccountService",
+  "methodName": "addAccount(request, user)",
+  "purpose": "This test suite tests the functionality of adding a new bank account",
+  "useCases": [
+    "03"
+  ],
+  "testScenarios": {
+    "testAddAccount_withInvalidParameters_shouldThrow": {
+      "inputSpecification": {
+        "request": "null",
+        "accountOwner": "null"
+      },
+      "expectedOutput": [
+        "ValidationException is thrown",
+        "The number of ValidationErrors is equal to 2"
+      ],
+      "actualOutput": [
+        "ValidationException is thrown",
+        "The number of ValidationErrors is equal to 2"
+      ],
+      "bugFound": false,
+      "purpose": "Adding an account with invalid request or user should fail"
+    },
+    "testAddAccount_withNonexistentRemoteAccount_shouldThrow": {
+      "inputSpecification": {
+        "request": {
+          "ID":1
+        },
+        "accountOwner": {
+          "ID": 1,
+          "firstName": "Hrachya",
+          "lastName": "Hakobyan",
+          "username": "admin",
+          "password": "admin",
+          "email": "sample@email.com",
+          "address": "address",
+          "phone": "111111"
+        }
+      },
+      "expectedOutput": [
+        "AccountDoestNotExistException is thrown"
+      ],
+      "actualOutput": [
+        "AccountDoestNotExistException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "A request for adding a nonexistent account should fail"
+    },
+    "testAddAccount_withInvalidUser_shouldThrow": {
+      "inputSpecification": {
+        "request": {
+          "ID":1
+        },
+        "accountOwner": {
+          "ID": 1,
+          "firstName": "Hrachya",
+          "lastName": "Hakobyan",
+          "username": "admin",
+          "password": "admin",
+          "email": "sample@email.com",
+          "address": "address",
+          "phone": "111111"
+        }
+      },
+      "expectedOutput": [
+        "ValidationException is thrown"
+      ],
+      "actualOutput": [
+        "ValidationException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "Adding an account with an invalid owner should throw"
+    },
+    "testAddAccount_withExistingAccount_shouldThrow": {
+      "inputSpecification": {
+        "request": {
+          "ID":1
+        },
+        "accountOwner": {
+          "ID": 1,
+          "firstName": "Hrachya",
+          "lastName": "Hakobyan",
+          "username": "admin",
+          "password": "admin",
+          "email": "sample@email.com",
+          "address": "address",
+          "phone": "111111"
+        }
+      },
+      "expectedOutput": [
+        "AccountExistsException is thrown"
+      ],
+      "actualOutput": [
+        "AccountExistsException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "Adding an already existing account should throw"
+    },
+    "testAddAccount_withValidAccount_shouldReturnValidAccount": {
+      "inputSpecification": {
+        "request": {
+          "ID":1
+        },
+        "accountOwner": {
+          "ID": 1,
+          "firstName": "Hrachya",
+          "lastName": "Hakobyan",
+          "username": "admin",
+          "password": "admin",
+          "email": "sample@email.com",
+          "address": "address",
+          "phone": "111111"
+        },
+        "expectedAccount":{
+          "ID": 1,
+          "user": "accountOwner",
+          "bankName" : "TD",
+          "type" : "Checking",
+          "balance" : 15823.12
+        }
+      },
+      "expectedOutput": [
+        "The account is fetched and persisted in the database",
+        "The persisted account is equal to the 'expectedAccount' object",
+        "The returned account is equal to the 'expectedAccount' object"
+      ],
+      "actualOutput": [
+        "The account is fetched and persisted in the database",
+        "The persisted account is equal to the 'expectedAccount' object",
+        "The returned account is equal to the 'expectedAccount' object"
+      ],
+      "bugFound": false,
+      "purpose": "Adding a valid account with a valid owner must succeed"
+    }
+  }
+}

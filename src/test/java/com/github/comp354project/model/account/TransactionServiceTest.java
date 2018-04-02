@@ -58,7 +58,7 @@ public class TransactionServiceTest{
     }
 
     @Test
-    public void setUpdateCategory_withValidCategory_shouldSucceed() throws Exception{
+    public void testUpdateCategory_withValidCategory_shouldSucceed() throws Exception{
         updateCategory(TestUtils.testTransaction, "Leisure");
     }
 

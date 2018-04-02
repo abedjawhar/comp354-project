@@ -126,6 +126,7 @@ public class AccountServiceTest{
         Account actualAccount = accountService.addAccount(request, accountOwner);
 
         assertEquals(expectedAccount, actualAccount);
+        assertEquals(expectedAccount, accountDao.queryForId(expectedAccount.getID()));
         assertEquals(1, actualAccount.getTransactions().size());
     }
 
@@ -171,5 +172,6 @@ public class AccountServiceTest{
         Account actualAccount = accountDao.queryForId(existingAccount.getID());
 
         assertTrue(leftoverTransactions.isEmpty());
+        assertNull(actualAccount);
     }
 }

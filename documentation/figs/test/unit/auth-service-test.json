@@ -1,0 +1,92 @@
+{
+  "testerName": "Hrachya",
+  "testDate": "2/3/18",
+  "className": "com.github.comp354project.model.auth.AuthenticationService",
+  "methodName": "authenticate(username, password)",
+  "purpose": "This test suite tests the authentication of the user",
+  "useCases": [
+    "01"
+  ],
+  "testScenarios": {
+    "testAuthenticate_withInvalidUsernameOrPassword_shouldThrow": {
+      "inputSpecification": {
+        "username": "null",
+        "password": "null"
+      },
+      "expectedOutput": [
+        "ValidationException is thrown",
+        "The number of ValidationErrors is equal to 2"
+      ],
+      "actualOutput": [
+        "ValidationException is thrown",
+        "The number of ValidationErrors is equal to 2"
+      ],
+      "bugFound": false,
+      "purpose": "A user with invalid credentials should not be able to authenticate"
+    },
+    "testAuthenticate_withNonexistentUsername_shouldThrow": {
+      "inputSpecification": {
+        "username": "username",
+        "password": "password"
+      },
+      "expectedOutput": [
+        "ValidationException is thrown"
+      ],
+      "actualOutput": [
+        "ValidationException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "A user with a nonexistent username should not be able to authenticate"
+    },
+    "testAuthenticate_withIncorrectPassword_shouldThrow": {
+      "inputSpecification": {
+        "testUser": {
+          "ID": 1,
+          "firstName": "Hrachya",
+          "lastName": "Hakobyan",
+          "username": "admin",
+          "password": "admin",
+          "email": "sample@email.com",
+          "address": "address",
+          "phone": "111111"
+        },
+        "username": "admin",
+        "password": "INCORRECT_PASSWORD"
+      },
+      "expectedOutput": [
+        "ValidationException is thrown"
+      ],
+      "actualOutput": [
+        "UserLoggedInException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "Authentication with a valid username but an incorrect password should fail"
+    },
+    "testAuthenticate_withCorrectCredentials_shouldReturnUser": {
+      "inputSpecification": {
+        "testUser": {
+          "ID": 1,
+          "firstName": "Hrachya",
+          "lastName": "Hakobyan",
+          "username": "admin",
+          "password": "admin",
+          "email": "sample@email.com",
+          "address": "address",
+          "phone": "111111"
+        },
+        "username": "admin",
+        "password": "admin"
+      },
+      "expectedOutput": [
+        "The authentication is successful and the authenticated user is returned",
+        "The authenticated user is equal to the 'testUser' object"
+      ],
+      "actualOutput": [
+        "The authentication is successful and the authenticated user is returned",
+        "The authenticated user is equal to the 'testUser' object"
+      ],
+      "bugFound": false,
+      "purpose": "Authentication with a valid username but an incorrect password should fail"
+    }
+  }
+}

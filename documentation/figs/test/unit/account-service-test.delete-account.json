@@ -1,0 +1,113 @@
+{
+  "testerName": "Anne-Laure",
+  "testDate": "3/5/18",
+  "className": "com.github.comp354project.model.account.AccountService",
+  "methodName": "deleteAccount(account)",
+  "purpose": "This test suite tests the functionality of removing a user's bank account",
+  "useCases": [
+    "04"
+  ],
+  "testScenarios": {
+    "testDeleteAccount_withNullAccount_shouldThrow": {
+      "inputSpecification": {
+        "account" : "null"
+      },
+      "expectedOutput": [
+        "ValidationException is thrown"
+      ],
+      "actualOutput": [
+        "ValidationException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "Delete a null account should fail"
+    },
+    "testDeleteAccount_withAccountWithNullID_shouldThrow": {
+      "inputSpecification": {
+        "account" : {
+          "ID": "null",
+          "user": "null",
+          "bankName" : "",
+          "type" : "",
+          "balance" : 0.0
+        }
+      },
+      "expectedOutput": [
+        "ValidationException is thrown"
+      ],
+      "actualOutput": [
+        "ValidationException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "Deleting an account with null ID should fail"
+    },
+    "testDeleteAccount_withNonExistentAccount_shouldThrow": {
+      "inputSpecification": {
+        "account":{
+          "ID": 1,
+          "user": "accountOwner",
+          "bankName" : "TD",
+          "type" : "Checking",
+          "balance" : 15823.12
+        }
+      },
+      "expectedOutput": [
+        "ValidationException is thrown"
+      ],
+      "actualOutput": [
+        "ValidationException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "Deleting an nonexistent account should fail"
+    },
+    "testDeleteAccount_withValidAccount_shouldSucceed": {
+      "inputSpecification": {
+        "account":{
+          "ID": 1,
+          "user": "accountOwner",
+          "bankName" : "TD",
+          "type" : "Checking",
+          "balance" : 15823.12
+        }
+      },
+      "expectedOutput": [
+        "The account is deleted from the database"
+      ],
+      "actualOutput": [
+        "The account is deleted from the database"
+      ],
+      "bugFound": false,
+      "purpose": "Deleting an existing account should succeed"
+    },
+    "testDeleteAccount_withValidAccount_shouldDeleteAllAssociatedTransactionsAndAccount": {
+      "inputSpecification": {
+        "account":{
+          "ID": 1,
+          "user": "accountOwner",
+          "bankName" : "TD",
+          "type" : "Checking",
+          "balance" : 15823.12,
+          "transactions" : [
+            {"ID": 10,
+            "account" : "account",
+            "date" : 1517091082,
+            "amount" :52.2,
+            "type" : "Transfer",
+            "category" : "Rent",
+            "sourceID" : "null",
+            "destinationID" : 2}
+          ]
+        }
+      },
+      "expectedOutput": [
+        "The account is deleted from the database",
+        "All the associated transactions are deleted from the database"
+      ],
+      "actualOutput": [
+        "The account is deleted from the database",
+        "All the associated transactions are deleted from the database"
+      ],
+      "bugFound": false,
+      "purpose": "Deleting an existing account should delete all associated transactions"
+    }
+  }
+}
