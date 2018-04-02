@@ -157,61 +157,23 @@
 
 \section{Introduction}
 
-{\it
-The introduction of the document provides an overview of the entire document,
-briefly introducing what are its goals, and what information is to be found in it.
-}
+The aim of this document is to ensure that a coherent and accurate testing strategy is used by each member of the testing team. It seeks to test the implementation of the system described in the Design Plan, testing its validity, robustness, and reliableness as a software, as well as ensuring that the requirements in the Requirements Specification are met. It seeks to do this in a rigorous and justified manner.
+This document contains an overarching test plan, which seeks to outline each test subsystem, its strategy with regards to testing the associated requirements, and its execution strategy. This document then contains, for each subsystem, a detailed explanation of the set of tests included, and a test case for each individual test. Put together, the test subsystems group into a entire system test.
 
 \section{Test Plan}
 
-{\it
-Describe what forms of testing you plan to do (unit, subsystem, integration),
-describe briefly the schedule and resources for testing,
-and
-how you designed your test cases.
+The system test plan has been split into five subsystems:
 
-Indicate which qualities (from requirements) were tested and which qualities were not tested.
-}
+\begin{itemize}
+    \item \textbf{Functional Testing:} This test subsystem seeks to certify the functionality of the software against the requirements set in the Requirements Specification. This category will use black-box testing as its strategy, ignoring the design document and instead purely basing itself off of what the software is expected to do. In its execution, a test will typically first identify how the software should perform, verifying the functionality and reliability of the software given valid user behaviour, and then robustness given invalid user behaviour.
+    \item \textbf{Structural Testing:} This test subsystem seeks to verify the structure and code logic of the software. We ensure here that each part of the code functions as expected given both valid and invalid input, and test the behaviour of the system in unexpected states. This will let us confirm the valid flow of our code, and ensure logic faults are caught. For the execution of the test, we will use JUnit to create individual tests for each case. Each test will have an initial setup phase, a test phase, and a teardown phase, to ensure independence of state between each test. A test will also use Mockito, a mocking library, to ensure that the failure of some other, unrelated component of the code does not affect the performance of the tested component in each test.
+    \item \textbf{Performance Testing:} This test subsystem seeks to measure the behaviour of the software in extreme states, when under particular workloads or dealing with extremely large datasets. It is useful for testing a number of our non-functional requirements, notably reliability, scalability, and, obviously, performance. In its execution, The tests measure performance statistics given a normal or 'control' environment, then compare it to the performance statistic given a particular dataset or workload.
+    \item \textbf{Acceptance Testing:} This test subsystem seeks to meet the requirements of the use cases in the requirements set in the Requirements Specification. This is also a black-box testing category, as in functional testing, but unlike the aforementioned, we are instead performing a validation of the system: is our system actually what the user needs? In its execution, each test will typically follow a use case and verify that the needs of the user are met and further usability in the domain of the use case is available.
+    \item \textbf{Installation Testing:} This test subsystem seeks to verify that the installation process is both successful and easy in the platforms to be supported. This means ensuring that the choices taken by the user are respected (location of installation, installation just for one user or for whole computer...), verify that all dependent files and libraries are successfully linked and loaded, and valid configurations and connectivity to the database. The execution of this category is simply an activity wherein the installation process is attempted in a particular environment, testing all decisions and options available in the installation.
+\end{itemize}
 
-\subsection{System Level Test Cases}
-
-{\it
-All test cases for testing at the system level.
-}
-
-\subsubsection{Test Case 1} \label{tc:1}
-
-\noindent
-{\bf Purpose}\\
-State the purpose of the test.
-Indicate which requirement and which aspect of that requirement is being tested.
-
-\noindent
-{\bf Input Specification}\\
-State the context for the test in terms of system state.
-State the input test data. You may need to mention operations invoked as well as data for the operation.
-You can cross-reference to actual file data specified in an appendix.
-
-\noindent
-{\bf Expected Output}\\
-State the expected system response and output.
-You can cross-reference to actual file data specified in an appendix.
-
-\noindent
-{\bf Traces to Use Cases}\\
-State which requirements (at the level of use case and scenario) are tested by this test case.
-
-\subsection{Subsystem Level Test Cases}
-
-{\it
-All test cases for testing at the subsystem level.
-}
-
-{\it
-One subsection per subsystem
-}
-
-\subsubsection{Subsystem X}
+\section{Functional Testing}
+\section{Structural Testing}
 
 \subsection{Unit Test cases}
 
@@ -698,23 +660,9 @@ e category of a valid transaction to a an invalid value as determined by the bus
 iness rules must fail}\\ \hline
 \end{longtable}
 
-
-{\it
-All test cases for testing at the unit level.
-}
-
-{\it
-One subsection per unit
-}
-
-\subsubsection{Unit X}
-
-\section{Test Results}
-
-{\it
-List the tests, indicating which passed and which did not pass.
-List requirements indicating the percentage of tests that passed for that requirement.
-}
+\section{Performance Testing}
+\section{Acceptance Testing}
+\section{Installation Testing}
 
 \section{References}
 
