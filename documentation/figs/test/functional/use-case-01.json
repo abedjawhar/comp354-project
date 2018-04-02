@@ -1,26 +1,59 @@
 {
-  "useCase" : "Add user account",
+  "useCase" : "Create User Account",
   "testCases" : {
-    "TestCase1" : {
-      "description" : "Desciption1",
+    "First name, last name, username and password are mandatory" : {
+      "description" : "The user cannot sign up without providing a valid first name, last name, a username and a password",
       "input" : [
-        "Input1",
-        "Input2"
+        "Go to 'Sign Up'",
+        "Leave all the input fields blank",
+        "Click 'Sign up'"
       ],
       "output": [
-        "output1",
-        "output2"
+        "Sign up fails, the account is not created",
+        "An error window displays all the errors"
       ]
     },
-    "TestCase2" : {
-      "description" : "Desciption2",
+    "The username must be unique" : {
+      "description" : "The user cannot sign up with an already existing username",
       "input" : [
-        "Input1",
-        "Input2"
+        "Successfully sign",
+        "Log out",
+        "Go to 'Sign up'",
+        "Fill in all the input fields",
+        "Set the username field to be the username of the user created in the first step",
+        "Click 'Sign Up'"
       ],
       "output": [
-        "output1",
-        "output2"
+        "Sign up failed, the account is not created",
+        "An error window notifies that the username already exists"
+      ]
+    },
+    "The password must be valid" : {
+      "description" : "The user cannot sign up with a password not matching the required format, as specified in the business rules",
+      "input" : [
+        "Go to 'Sign up'",
+        "Fill in all the input fields",
+        "Set the password to an alpha-numeric sequence of length less than 4",
+        "Set the repeat password field to match the password field",
+        "Click 'Sign Up'"
+      ],
+      "output": [
+        "Sign up failed, the account is not created",
+        "An error window notifies that the password is not valid"
+      ]
+    },
+    "The user account is successfully created" : {
+      "description" : "The user must be able to successfully create an account provided that all input information is valid",
+      "input" : [
+        "Go to 'Sign up'",
+        "Fill in all the input fields with valid data",
+        "Click 'Sign Up'",
+        "Moved to the login page: input the username and the passowrd",
+        "Click 'Login'"
+      ],
+      "output": [
+        "Sign up successful, the account is created",
+        "The user is logged-in to the newly created account"
       ]
     }
   }

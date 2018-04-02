@@ -173,6 +173,41 @@ The system test plan has been split into five subsystems:
 \end{itemize}
 
 \section{Functional Testing}
+
+\subsubsection{Create User Account}
+\begin{longtable}{|m{4cm}|l|l|}
+\hline
+\cellcolor[HTML]{C0C0C0}\textbf{Test Case} & \multicolumn{2}{p{13cm}|}{First name, last name, username and password are mandatory}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Description} & \multicolumn{2}{p{13cm}|}{The user cannot sign up without providing a valid first name, last name, a username and a password}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Input/Steps} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}1. Go to 'Sign Up'\\ 2. Leave all the input fields blank\\ 3. Click 'Sign up'\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Output/Results} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}$\bullet$ Sign up fails, the account is not created\\ $\bullet$ An error window displays all the errors\\ \end{tabular}}\\ \hline
+\end{longtable}
+\begin{longtable}{|m{4cm}|l|l|}
+\hline
+\cellcolor[HTML]{C0C0C0}\textbf{Test Case} & \multicolumn{2}{p{13cm}|}{The username must be unique}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Description} & \multicolumn{2}{p{13cm}|}{The user cannot sign up with an already existing username}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Input/Steps} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}1. Successfully sign\\ 2. Log out\\ 3. Go to 'Sign up'\\ 4. Fill in all the input fields\\ 5. Set the username field to be the username of the user created in the first st
+ep\\ 6. Click 'Sign Up'\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Output/Results} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}$\bullet$ Sign up failed, the account is not created\\ $\bullet$ An error window notifies that the username already exists\\ \end{tabular}}\\ \hline
+\end{longtable}
+\begin{longtable}{|m{4cm}|l|l|}
+\hline
+\cellcolor[HTML]{C0C0C0}\textbf{Test Case} & \multicolumn{2}{p{13cm}|}{The password must be valid}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Description} & \multicolumn{2}{p{13cm}|}{The user cannot sign up with a password not matching the required format, as specified in the business rules}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Input/Steps} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}1. Go to 'Sign up'\\ 2. Fill in all the input fields\\ 3. Set the password to an alpha-numeric sequence of length less than 4\\ 4. Set the repeat password field to match t
+he password field\\ 5. Click 'Sign Up'\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Output/Results} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}$\bullet$ Sign up failed, the account is not created\\ $\bullet$ An error window notifies that the password is not valid\\ \end{tabular}}\\ \hline
+\end{longtable}
+\begin{longtable}{|m{4cm}|l|l|}
+\hline
+\cellcolor[HTML]{C0C0C0}\textbf{Test Case} & \multicolumn{2}{p{13cm}|}{The user account is successfully created}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Description} & \multicolumn{2}{p{13cm}|}{The user must be able to successfully create an account provided that all input information is valid}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Input/Steps} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}1. Go to 'Sign up'\\ 2. Fill in all the input fields with valid data\\ 3. Click 'Sign Up'\\ 4. Moved to the login page: input the username and the passowrd\\ 5. Click 'Log
+in'\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Output/Results} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}$\bullet$ Sign up successful, the account is created\\ $\bullet$ The user is logged-in to the newly created account\\ \end{tabular}}\\ \hline
+\end{longtable}
+
+
 \section{Structural Testing}
 
 \subsection{Unit Test cases}
