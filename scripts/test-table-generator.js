@@ -72,7 +72,7 @@ function generateTableTop() {
     return `\\subsubsection{${json.className}.${json.methodName}}` + '\n'
         + `\\begin{longtable}{|m{${firstColSize}}|l|${cols}}` + '\n'
         + `\\caption[]{${json.methodName}}` + '\n'
-        + `\\hline`;
+        + `\\\\\\hline`;
 }
 
 function generateRow(label, value) {

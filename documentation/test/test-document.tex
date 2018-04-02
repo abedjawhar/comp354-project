@@ -1,0 +1,200 @@
+\documentclass[12pt]{article}
+
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage[table,xcdraw]{xcolor}
+
+\usepackage{seqsplit}
+\usepackage{url}
+\usepackage{import}
+\usepackage{longtable}
+
+\makeatletter
+\g@addto@macro\UrlSpecials{\camelurl}
+\def\camelurl{%
+\count@`a
+\loop
+\mathcode\count@"8000
+\uccode`\~\count@\uppercase{\edef~{\mathchar\the\count@\noexpand\breakifupper}}%
+\ifnum\count@<`\z
+\advance\count@\@ne
+\repeat}
+
+\def\breakifupper#1{%
+\ifcat .\noexpand#1%
+\ifnum`#1>40
+\ifnum`#1<91
+\penalty\z@
+\fi\fi\fi
+#1%
+}
+
+\makeatother
+
+\pagestyle{empty}
+\setcounter{secnumdepth}{2}
+
+\topmargin=0cm
+\oddsidemargin=0cm
+\textheight=22.0cm
+\textwidth=17cm
+\parindent=0cm
+\parskip=0.15cm
+\topskip=0truecm
+\raggedbottom
+\abovedisplayskip=3mm
+\belowdisplayskip=3mm
+\abovedisplayshortskip=0mm
+\belowdisplayshortskip=2mm
+\normalbaselineskip=12pt
+\normalbaselines
+
+% environment slightly edited from https://tex.stackexchange.com/questions/10293/latex-template-for-use-cases
+\newcommand\tabularhead[1]{
+    \begin{table}[ht]
+        \addtocounter{use case ID}{1}
+        \caption{Use Case \arabic{use case ID} - #1}
+        \vspace{0.2cm}
+        \begin{tabular}{|p{0.2\linewidth}|p{0.70\linewidth}|}
+            \hline
+            \textbf{Action} & \textbf{#1} \\
+            \hline}
+
+        \newcommand\addrow[2]{#1 & #2\\ \hline}
+
+            \newcommand\addmulrow[2]{ \begin{minipage}[t][][t]{2.5cm}#1\end{minipage}
+                &\begin{minipage}[t][][t]{11cm}
+                    \begin{enumerate}[itemsep=-1ex] #2   \end{enumerate}
+                \end{minipage}\vfill\\ \hline}
+
+            \newenvironment{usecase}{\tabularhead}
+        {\hline\end{tabular}\end{table}}
+
+
+
+        % cheaty non-functional requirement env
+
+        \newcounter{req ID}
+        \newcommand\tabularheadfsd[1]{
+            \begin{table}[ht]
+                \addtocounter{req ID}{1}
+                \caption{Non-Functional Requirement \arabic{req ID} - #1}
+                \vspace{0.2cm}
+                \begin{tabular}{|p{0.2\linewidth}|p{0.70\linewidth}|}
+                    \hline
+                    \textbf{Action} & \textbf{#1} \\
+                    \hline}
+
+                \newenvironment{requirement}{\tabularheadfsd}
+                {\hline\end{tabular}\end{table}}
+
+                \begin{document}
+
+                \vspace*{0.5in}
+                \centerline{\bf\Large COMP 354}
+                \centerline{\bf\Large Test Document for the project myMoney}
+
+                \vspace*{0.5in}
+                \centerline{\bf\Large Team PA-PK}
+
+                \vspace*{0.5in}
+                \centerline{\today}
+
+                \vspace*{1.5in}
+                \begin{table}[htbp]
+                    \caption{Team}
+                    \begin{center}
+                        \begin{tabular}{|r | c|}
+                            \hline
+                            Name & ID Number \\
+                            \hline\hline
+                            Anne-Laure Ehresmann & 27858906 \\
+                            \hline
+                            Marc-Antoine Dube & 40029307 \\
+                            \hline
+                            Kadeem Caines & 26343600 \\
+                            \hline
+                            Abdel Rahman Jawhar & 27192142 \\
+                            \hline
+                            Keith Dion & 40036340 \\
+                            \hline
+                            Hrachya Hakobyan & 40041555 \\
+                            \hline
+                            Andrew-Smith & 40034936 \\
+                            \hline
+                            Dongyu Chen & 27241909 \\
+                            \hline
+                            Yauheni Karaniuk & 40005680 \\
+                            \hline
+                            Renny Xu & 40005262\\
+                            \hline
+                            Wei Wang & 40041116 \\
+                            \hline
+                        \end{tabular}
+                    \end{center}
+                \end{table}
+
+                \begin{table}[htbp]
+                    \caption{Revision history}
+                    \begin{center}
+                        \begin{tabular}{|r | c| c |}
+                            \hline
+                            Version & Date & Changes \\
+                            \hline
+                            1.0 & 15 March 2018 & Completed test document \\
+                            \hline
+                        \end{tabular}
+                    \end{center}
+                \end{table}
+
+
+                \tableofcontents
+\listoffigures
+\clearpage
+\listoftables
+
+\clearpage
+
+\section{Introduction}
+
+The aim of this document is to ensure that a coherent and accurate testing strategy is used by each member of the testing team. It seeks to test the implementation of the system described in the Design Plan, testing its validity, robustness, and reliableness as a software, as well as ensuring that the requirements in the Requirements Specification are met. It seeks to do this in a rigorous and justified manner.
+This document contains an overarching test plan, which seeks to outline each test subsystem, its strategy with regards to testing the associated requirements, and its execution strategy. This document then contains, for each subsystem, a detailed explanation of the set of tests included, and a test case for each individual test. Put together, the test subsystems group into a entire system test.
+
+\section{Test Plan}
+
+The system test plan has been split into five subsystems:
+
+\begin{itemize}
+    \item \textbf{Functional Testing:} This test subsystem seeks to certify the functionality of the software against the requirements set in the Requirements Specification. This category will use black-box testing as its strategy, ignoring the design document and instead purely basing itself off of what the software is expected to do. In its execution, a test will typically first identify how the software should perform, verifying the functionality and reliability of the software given valid user behaviour, and then robustness given invalid user behaviour.
+    \item \textbf{Structural Testing:} This test subsystem seeks to verify the structure and code logic of the software. We ensure here that each part of the code functions as expected given both valid and invalid input, and test the behaviour of the system in unexpected states. This will let us confirm the valid flow of our code, and ensure logic faults are caught. For the execution of the test, we will use JUnit to create individual tests for each case. Each test will have an initial setup phase, a test phase, and a teardown phase, to ensure independence of state between each test. A test will also use Mockito, a mocking library, to ensure that the failure of some other, unrelated component of the code does not affect the performance of the tested component in each test.
+    \item \textbf{Performance Testing:} This test subsystem seeks to measure the behaviour of the software in extreme states, when under particular workloads or dealing with extremely large datasets. It is useful for testing a number of our non-functional requirements, notably reliability, scalability, and, obviously, performance. In its execution, The tests measure performance statistics given a normal or 'control' environment, then compare it to the performance statistic given a particular dataset or workload.
+    \item \textbf{Acceptance Testing:} This test subsystem seeks to meet the requirements of the use cases in the requirements set in the Requirements Specification. This is also a black-box testing category, as in functional testing, but unlike the aforementioned, we are instead performing a validation of the system: is our system actually what the user needs? In its execution, each test will typically follow a use case and verify that the needs of the user are met and further usability in the domain of the use case is available.
+    \item \textbf{Installation Testing:} This test subsystem seeks to verify that the installation process is both successful and easy in the platforms to be supported. This means ensuring that the choices taken by the user are respected (location of installation, installation just for one user or for whole computer...), verify that all dependent files and libraries are successfully linked and loaded, and valid configurations and connectivity to the database. The execution of this category is simply an activity wherein the installation process is attempted in a particular environment, testing all decisions and options available in the installation.
+\end{itemize}
+
+\section{Functional Testing}
+\input{test/all_func}
+
+\section{Structural Testing}
+
+\subsection{Unit Test cases}
+\input{test/all_unit}
+
+
+\section{Performance Testing}
+\section{Acceptance Testing}
+\section{Installation Testing}
+
+\section{References}
+
+\appendix
+
+\section{Description of Input Files}
+
+Describe/include test data from input files.
+
+\section{Description of Output Files}
+
+Describe/include test expected output that are output files.
+
+\end{document}

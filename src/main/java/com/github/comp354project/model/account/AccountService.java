@@ -16,6 +16,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class AccountService implements IAccountService {
@@ -102,6 +103,28 @@ public class AccountService implements IAccountService {
             throw new DatabaseException(e);
         } catch(AccountExistsException e){
             throw e;
+        }
+    }
+
+    @Override
+    public void deleteAccountsForUser(Integer userID) throws ValidationException {
+        if(userID == null){
+            throw ValidationException.builder().message("Failed to delete accounts")
+                    .error(ValidationError.builder()
+                            .parameterName("userID")
+                            .message("userID is null").build()).build();
+        }
+        try{
+            List<Account> accountsToDelete = accountDao.queryForEq("user_id", userID);
+            List<Transaction> transactions = new ArrayList<>();
+            for(Account account : accountsToDelete){
+                transactions.addAll(transactionDao.queryForEq("account_id", account));
+            }
+            accountDao.delete(accountsToDelete);
+            transactionDao.delete(transactions);
+        } catch (SQLException e){
+            logger.error(e);
+            throw new DatabaseException(e);
         }
     }
 

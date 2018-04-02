@@ -174,4 +174,40 @@ public class AccountServiceTest{
         assertTrue(leftoverTransactions.isEmpty());
         assertNull(actualAccount);
     }
+
+    @Test(expected = ValidationException.class)
+    public void testDeleteAccountsForUser_withNullUserID_shouldThrow() throws Exception{
+        accountService.deleteAccountsForUser(null);
+    }
+
+    @Test
+    public void testDeleteAccountsForUser_withNonexistentUserID_shouldSucceed() throws Exception{
+        accountService.deleteAccountsForUser(1);
+    }
+
+    @Test
+    public void testDeleteAccountsForUser_withValidUserAndEmptyAccounts_shouldSucceed() throws Exception{
+        User accountOwner = TestUtils.testUser;
+        userDao.create(accountOwner);
+        accountService.deleteAccountsForUser(accountOwner.getID());
+    }
+
+    @Test
+    public void testDeleteAccountsForUser_withAssociatedTransactions_shouldDeleteAccountAndTransactions() throws Exception{
+        User accountOwner = TestUtils.testUser;
+        userDao.create(accountOwner);
+        Account account = TestUtils.testAccount;
+        accountDao.create(account);
+        Transaction transaction = TestUtils.testTransaction;
+        transactionDao.create(transaction);
+        List<Account> accountsToDelete = new ArrayList<>();
+        accountsToDelete.add(account);
+
+        accountService.deleteAccountsForUser(accountOwner.getID());
+
+        for(Account acc : accountsToDelete){
+            assertNull(accountDao.queryForId(acc.getID()));
+            assertEquals(0, transactionDao.queryForEq("account_id", account).size());
+        }
+    }
 }

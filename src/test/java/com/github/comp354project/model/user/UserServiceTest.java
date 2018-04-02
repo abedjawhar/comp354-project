@@ -45,7 +45,7 @@ public class UserServiceTest {
         accountService = mock(AccountService.class);
         accountDao = DaoManager.createDao(connectionSource, Account.class);
         transactionDao = DaoManager.createDao(connectionSource, Transaction.class);
-        userService = new UserService(userDao, accountDao, sessionManager, accountService);
+        userService = new UserService(userDao, sessionManager, accountService);
         TableUtils.createTable(connectionSource, User.class);
         TableUtils.createTable(connectionSource, Account.class);
         TableUtils.createTable(connectionSource, Transaction.class);
@@ -178,7 +178,7 @@ public class UserServiceTest {
         when(sessionManager.getUser()).thenReturn(user);
         userService.deleteUser(user);
         assertEquals(0, userDao.queryForEq("id", user.getID()).size());
-        verify(accountService, times(1)).deleteAccount(account);
+        verify(accountService, times(1)).deleteAccountsForUser(user.getID());
 
     }
 

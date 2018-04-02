@@ -51,7 +51,7 @@
           "phone": "111111"
         },
         "username": "admin",
-        "password": "INCORRECT_PASSWORD"
+        "password": "INCORRECT\\_PASSWORD"
       },
       "expectedOutput": [
         "ValidationException is thrown"

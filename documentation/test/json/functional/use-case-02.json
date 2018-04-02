@@ -1,0 +1,53 @@
+{
+  "useCase" : "Delete User Account",
+  "testCases" : {
+    "Password required" : {
+      "description" : "The program asks for the user's password before to delete the account",
+      "input" : [
+        "Go to 'Update User Account'",
+        "Click 'Delete user'"
+      ],
+      "output": [
+        "A an input window appears asking for the user password"
+      ]
+    },
+    "The password must be valid" : {
+      "description" : "The user cannot delete the account if the password is invalid",
+      "input" : [
+        "Go to 'Update User Account'",
+        "Click 'Delete user'",
+        "Enter a wrong password"
+      ],
+      "output": [
+        "The account is not deleted",
+        "An error window must appear notifying the user that the password was invalid"
+      ]
+    },
+    "The account is successfully deleted" : {
+      "description" : "The user account is successfully deleted if the password is correct",
+      "input" : [
+        "Go to 'Update User Account'",
+        "Click 'Delete user'",
+        "Enter the correct password"
+      ],
+      "output": [
+        "The account is not deleted",
+        "An error window must appear notifying the user that the password was invalid"
+      ]
+    },
+    "The user account is successfully created" : {
+      "description" : "The user must be able to successfully create an account provided that all input information is valid",
+      "input" : [
+        "Go to 'Sign up'",
+        "Fill in all the input fields with valid data",
+        "Click 'Sign Up'",
+        "Moved to the login page: input the username and the passowrd",
+        "Click 'Login'"
+      ],
+      "output": [
+        "Sign up successful, the account is created",
+        "The user is logged-in to the newly created account"
+      ]
+    }
+  }
+}

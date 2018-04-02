@@ -24,16 +24,14 @@ import java.util.List;
 public class UserService implements IUserService {
     private static final Logger logger = LogManager.getLogger(UserService.class);
     private Dao<User, Integer> userDao;
-    private Dao<Account, Integer> accountDao;
     private IUsernameValidator usernameValidator;
     private IUserValidator userValidator;
     private SessionManager sessionManager;
     private AccountService accountService;
 
     @Inject
-    public UserService(Dao<User, Integer> userDao,Dao<Account, Integer> accountDao, SessionManager sessionManager, AccountService accountService) {
+    public UserService(Dao<User, Integer> userDao, SessionManager sessionManager, AccountService accountService) {
         this.userDao = userDao;
-        this.accountDao = accountDao;
         this.sessionManager = sessionManager;
         this.usernameValidator = ValidatorFactory.usernameValidator();
         this.userValidator = ValidatorFactory.userValidator();
@@ -135,10 +133,7 @@ public class UserService implements IUserService {
             if(!sessionManager.getUser().getID().equals(user.getID())) throw AuthorisationException.builder()
                     .message("Tried to update user that is not owned by the logged in user!")
                     .build();
-            List<Account> accountsToDelete = accountDao.queryForEq("user_id", user);
-            for(Account a : accountsToDelete){
-                accountService.deleteAccount(a);
-            }
+            accountService.deleteAccountsForUser(user.getID());
             userDao.delete(user);
         }
         catch(SQLException e){
@@ -150,7 +145,6 @@ public class UserService implements IUserService {
 
         }
     }
-
 
 
     @Override

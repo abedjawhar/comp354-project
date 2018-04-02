@@ -1,0 +1,101 @@
+{
+  "testerName": "Hrachya",
+  "testDate": "4/2/18",
+  "className": "com.github.comp354project.model.account.AccountService",
+  "methodName": "deleteAccountsForUser(user)",
+  "purpose": "This test suite tests the functionality of removing a user's bank accounts and associated transactions",
+  "useCases": [
+    "04"
+  ],
+  "testScenarios": {
+    "testDeleteAccountsForUser_withNullUserID_shouldThrow": {
+      "inputSpecification": {
+        "userID" : "null"
+      },
+      "expectedOutput": [
+        "ValidationException is thrown"
+      ],
+      "actualOutput": [
+        "ValidationException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "Deleting accounts with null user ID should fail"
+    },
+    "testDeleteAccountsForUser_withNonexistentUser_shouldSucceed": {
+      "inputSpecification": {
+        "userID" : 1
+      },
+      "expectedOutput": [
+        "No accounts are deleted. The system state is not changed."
+      ],
+      "actualOutput": [
+        "No accounts are deleted. The system state is not changed."
+      ],
+      "bugFound": false,
+      "purpose": "Deleting a nonexistent user's accounts should succeed and should not inflict any changes to the system."
+    },
+    "testDeleteAccountsForUser_withValidUserAndEmptyAccounts_shouldSucceed": {
+      "inputSpecification": {
+        "user" : {
+          "ID": 1,
+          "firstName": "Hrachya",
+          "lastName": "Hakobyan",
+          "username": "admin",
+          "password": "admin",
+          "email": "sample@email.com",
+          "address": "address",
+          "phone": "111111"
+        }
+      },
+      "expectedOutput": [
+        "No accounts are deleted. The system state is not changed."
+      ],
+      "actualOutput": [
+        "No accounts are deleted. The system state is not changed."
+      ],
+      "bugFound": false,
+      "purpose": "Deleting the accounts of a user who does not have any accounts should succeed and inflict no changes to the system"
+    },
+    "testDeleteAccountsForUser_withAssociatedTransactions_shouldDeleteAccountAndTransactions": {
+      "inputSpecification": {
+        "user" :  {
+          "ID": 1,
+        "firstName": "Hrachya",
+        "lastName": "Hakobyan",
+        "username": "admin",
+        "password": "admin",
+        "email": "sample@email.com",
+        "address": "address",
+        "phone": "111111"
+        },
+        "account":{
+          "ID": 1,
+          "user": "user",
+          "bankName" : "TD",
+          "type" : "Checking",
+          "balance" : 15823.12,
+          "transactions" : [
+            {"ID": 10,
+              "account" : "account",
+              "date" : 1517091082,
+              "amount" :52.2,
+              "type" : "Transfer",
+              "category" : "Rent",
+              "sourceID" : "null",
+              "destinationID" : 2}
+          ]
+        }
+      },
+      "expectedOutput": [
+        "The accounts are deleted from the database",
+        "All the associated transactions are deleted from the database"
+      ],
+      "actualOutput": [
+        "The accounts are deleted from the database",
+        "All the associated transactions are deleted from the database"
+      ],
+      "bugFound": false,
+      "purpose": "Deleting the accounts of the user should also delete all the associated transactions."
+    }
+  }
+}
