@@ -176,6 +176,40 @@
 \cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{3}{p{13cm}|}{Authentication with a valid username but an incorrect password should fail}\\ \hline
 \end{longtable}
 
+\subsubsection{com.github.comp354project.model.account.remote.getAccount(GetRemoteAccountRequest)}
+\begin{longtable}{|m{4cm}|l|l|l|l|}
+\caption[]{getAccount(GetRemoteAccountRequest)}
+\\\hline
+\cellcolor[HTML]{C0C0C0}\textbf{Tester Name} & \multicolumn{3}{p{13cm}|}{Abed Jawhar}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Test Date} & \multicolumn{3}{p{13cm}|}{3/13/18}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Class Name} & \multicolumn{3}{p{13cm}|}{com.github.comp354project.model.account.remote}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Method Name} & \multicolumn{3}{p{13cm}|}{getAccount(GetRemoteAccountRequest)}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{3}{p{13cm}|}{This test suite tests fetching an account in the 'API' that connects to other systems}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Use Cases} & \multicolumn{3}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}03\\ \end{tabular}}\\ \hline
+\multicolumn{4}{|l|}{\cellcolor[HTML]{C0C0C0}\textbf{Test Scenarios}}\\ \hline
+\multicolumn{4}{|l|}{testGetAccount\_withNullRequest\_shouldThrow}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  \multicolumn{3}{l|}{request} \\ \cline{2-4} 
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \multicolumn{3}{l|}{ null } \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{3}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{3}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{3}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{3}{p{13cm}|}{A null account can't be fetched}\\ \hline
+\multicolumn{4}{|l|}{testGetAccount\_withInvalidRequest\_shouldThrow}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  \multicolumn{3}{l|}{request} \\ \cline{2-4} 
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \multicolumn{3}{l|}{ \begin{tabular}[c]{@{}l@{}}\end{tabular}} \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{3}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{3}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{3}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{3}{p{13cm}|}{An empty account can't be fetched}\\ \hline
+\multicolumn{4}{|l|}{testGetAccount\_withExistingAccount\_shouldReturnValidAccount}\\ \hline
+\rowcolor[HTML]{C0C0C0} &  expectedAccount &  expectedAccountTransactions &  request \\ \cline{2-4} 
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \begin{tabular}[c]{@{}l@{}}ID: 1\\ bankName: TD\\ type: Checking\\ balance: 15823.12\\ \end{tabular}& \begin{tabular}[c]{@{}l@{}}ID: 1\\ account: testRem\\ date: 1517091082\\ amount: 52.2\\ type: Transfer\\ sourceID: null\\ destinationID: 2\\ \end{tabular}& \begin{tabular}[c]{@{}l@{}}accountID: 1\\ \end{tabular}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{3}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}The fetched account should be the same as the 'expectedAccount'\\ The number of transactions fetched should be 1\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{3}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}The fetched account should be the same as the 'expectedAccount'\\ The number of transactions fetched should be 1\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{3}{p{13cm}|}{false}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{3}{p{13cm}|}{A valid account should be fetched}\\ \hline
+\end{longtable}
+
 \subsubsection{com.github.comp354project.model.auth.SessionManager.login(username, password)}
 \begin{longtable}{|m{4cm}|l|l|l|l|l|l|}
 \caption[]{login(username, password)}

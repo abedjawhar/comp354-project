@@ -1,0 +1,72 @@
+{
+  "testerName": "Abed Jawhar",
+  "testDate": "3/13/18",
+  "className": "com.github.comp354project.model.account.remote",
+  "methodName": "getAccount(GetRemoteAccountRequest)",
+  "purpose": "This test suite tests fetching an account in the 'API' that connects to other systems",
+  "useCases": [
+    "03"
+  ],
+  "testScenarios": {
+    "testGetAccount_withNullRequest_shouldThrow": {
+      "inputSpecification": {
+        "request": null
+      },
+      "expectedOutput": [
+        "ValidationException is thrown"
+      ],
+      "actualOutput": [
+        "ValidationException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "A null account can't be fetched"
+    },
+    "testGetAccount_withInvalidRequest_shouldThrow": {
+      "inputSpecification": {
+        "request": {
+
+        }
+      },
+      "expectedOutput": [
+        "ValidationException is thrown"
+      ],
+      "actualOutput": [
+        "ValidationException is thrown"
+      ],
+      "bugFound": false,
+      "purpose": "An empty account can't be fetched"
+    },
+    "testGetAccount_withExistingAccount_shouldReturnValidAccount": {
+      "inputSpecification": {
+        "expectedAccount": {
+          "ID": 1,
+          "bankName": "TD",
+          "type": "Checking",
+          "balance": 15823.12
+        },
+        "expectedAccountTransactions": {
+          "ID": 1,
+          "account": "testRem",
+          "date": "1517091082",
+          "amount": 52.2,
+          "type": "Transfer",
+          "sourceID": null,
+          "destinationID": 2
+        },
+        "request": {
+          "accountID": 1
+        }
+      },
+      "expectedOutput": [
+        "The fetched account should be the same as the 'expectedAccount'",
+        "The number of transactions fetched should be 1"
+      ],
+      "actualOutput": [
+        "The fetched account should be the same as the 'expectedAccount'",
+        "The number of transactions fetched should be 1"
+      ],
+      "bugFound": false,
+      "purpose": "A valid account should be fetched"
+    }
+  }
+}
