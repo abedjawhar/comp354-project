@@ -30,7 +30,7 @@ public class AllTransactionsController implements Initializable {
 
 
     private TransactionGenerateFileController generator = new TransactionGenerateFileController();
-
+    private SendMailController sender = new SendMailController();
 
     private List<Account> accounts;
 
@@ -82,7 +82,15 @@ public class AllTransactionsController implements Initializable {
         }
 
     }
-
+     @FXML
+    public void sendAllTransactionsEmail(){
+        try{
+            sender.SendMailNow();
+            System.out.println("Done");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     }
 
