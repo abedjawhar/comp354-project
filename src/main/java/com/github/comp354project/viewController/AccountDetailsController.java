@@ -35,7 +35,8 @@ public class AccountDetailsController implements Initializable {
     private Account account;
 
     private TransactionGenerateFileController generator = new TransactionGenerateFileController();
-
+    private SendMailController sender = new SendMailController();
+    
     public void initialize(URL url, ResourceBundle rb) {
     }
 
@@ -74,6 +75,14 @@ public class AccountDetailsController implements Initializable {
         }
 
     }
-
+       @FXML
+    public void sendTransactionEmail(){
+        try{
+            sender.SendMailNow();;
+            System.out.println("File has been sent to your email");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }
