@@ -26,7 +26,7 @@ public class SendMail {
         //MyMoneyApp official password for now
         final String password = "MyMoneyApp123";
         //Get it from account user info.
-        final String client = "hellolalela@gmail.com";
+        final String client = "mymoneyappofficial@gmail.com";
 
         Properties props = new Properties();
         props.put("mail.smtp.starttls.enable", "true");
