@@ -55,6 +55,7 @@ public class TransactionGenerateFileController {
         Iterator<Transaction> i = transactions.listIterator();
 
         DateFormat df = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss");
+        
 
         pw.append("Transaction ID");
         pw.append(',');
@@ -68,11 +69,15 @@ public class TransactionGenerateFileController {
         pw.append("\n");
 
         while (i.hasNext()) {
+            
+            Date date = Date.from(Instant.ofEpochSecond(transaction.getDate()));
+            date = new SimpleStringProperty(df.format(date));
+            
             Transaction transaction = (Transaction) i.next();
 
             pw.append(String.valueOf(transaction.getID()));
             pw.append(',');
-            pw.append(df.format(transaction.getDate()));
+            pw.append(date);
             pw.append(',');
             pw.append(String.valueOf(transaction.getAmount()));
             pw.append(',');
