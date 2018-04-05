@@ -3,14 +3,15 @@ package com.github.comp354project.viewController;
 import com.github.comp354project.MyMoneyApplication;
 import com.github.comp354project.model.account.Account;
 import com.github.comp354project.model.account.Transaction;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.control.TextField;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -20,6 +21,11 @@ import java.util.ResourceBundle;
 
 
 public class AllTransactionsController implements Initializable {
+
+    private static final Logger logger = LogManager.getLogger(AllTransactionsController.class);
+
+    private final static String FILE_PREFIX = "all-transactions";
+    private final static String FILE_EXTENSION = ".csv";
 
     @FXML private Label totalBalanceLabel;
     @FXML private Label descriptionLabel;
@@ -75,8 +81,9 @@ public class AllTransactionsController implements Initializable {
         }
 
         try {
-            generator.GenerateFile(transactions,"AllTransactions.csv");
-            System.out.println("File" +" "+"AllTransactions.csv"+" "+"created");
+            final String fileName = FILE_PREFIX + System.currentTimeMillis() + FILE_EXTENSION;
+            generator.generateTransactionCsvFile(transactions,fileName);
+            logger.info("Generated file: " + fileName);
         } catch (Exception e) {
             e.printStackTrace();
         }
