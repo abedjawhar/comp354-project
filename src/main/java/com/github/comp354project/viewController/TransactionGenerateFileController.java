@@ -5,34 +5,10 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.util.AbstractSequentialList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
-import com.github.comp354project.MyMoneyApplication;
-import com.github.comp354project.model.account.ITransactionService;
 import com.github.comp354project.model.account.Transaction;
-import com.github.comp354project.model.exceptions.ValidationException;
-import com.github.comp354project.viewController.TransactionTableController.TransactionDisplayModel;
-import com.google.common.collect.ImmutableList;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.ComboBoxTableCell;
-import javafx.scene.control.cell.PropertyValueFactory;
-import lombok.Getter;
-import lombok.Setter;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
  * This class is used to mainly to create the GenerateFile method, which will be used to generate a CSV file that will
@@ -41,6 +17,8 @@ import org.apache.logging.log4j.Logger;
 
 public class TransactionGenerateFileController {
 
+    private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss");
+
     /**
      * This method is used to generate and display a CSV file or excel file using the attributes from the Transaction
      * Class.
@@ -48,12 +26,8 @@ public class TransactionGenerateFileController {
      * @param FileName second parameter that accepts a String that will name the CSV file
      * @throws IOException
      */
-
-    public void GenerateFile (List<Transaction> transactions, String FileName) throws IOException {
-
+    public void generateTransactionCsvFile(List<Transaction> transactions, String FileName) throws IOException {
         PrintWriter pw = new PrintWriter(new File(FileName));
-
-        DateFormat df = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss");
 
         pw.append("Transaction ID");
         pw.append(',');
@@ -70,7 +44,7 @@ public class TransactionGenerateFileController {
             Date date = Date.from(Instant.ofEpochSecond(transaction.getDate()));
             pw.append(String.valueOf(transaction.getID()));
             pw.append(',');
-            pw.append(df.format(date));
+            pw.append(DATE_FORMAT.format(date));
             pw.append(',');
             pw.append(String.valueOf(transaction.getAmount()));
             pw.append(',');
