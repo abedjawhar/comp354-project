@@ -45,7 +45,7 @@ public class AuthenticationService implements IAuthenticationService {
         User user = getUser(username);
         if(user == null){
             throw ValidationException.builder()
-                    .message("Failed to authenticate user. User not found")
+                    .message("Failed to authenticate user.")
                     .error(ValidationError.builder()
                             .message("Invalid username")
                             .parameterName("username")
@@ -54,7 +54,7 @@ public class AuthenticationService implements IAuthenticationService {
         }
         if(!user.getPassword().equals(password)){
             throw ValidationException.builder()
-                    .message("Failed to authenticate user. Incorrect password")
+                    .message("Failed to authenticate user.")
                     .error(ValidationError.builder()
                             .message("Incorrect password")
                             .parameterName("password")

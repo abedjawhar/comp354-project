@@ -39,15 +39,14 @@ public class AlertHelper {
     /**
      * Generates an error alert with a ValidationException
      * @param title
-     * @param header
      * @param exception
      * @return
      */
-    public static Alert generateErrorAlert(String title, String header, ValidationException exception) {
+    public static Alert generateErrorAlert(String title, ValidationException exception) {
         final String errorsStr = exception.getErrors()
                 .stream()
                 .map(e -> e.getMessage())
                 .collect(Collectors.joining("\n "));
-        return generateAlert(Alert.AlertType.ERROR, title, header, errorsStr);
+        return generateAlert(Alert.AlertType.ERROR, title, exception.getMessage(), errorsStr);
     }
 }

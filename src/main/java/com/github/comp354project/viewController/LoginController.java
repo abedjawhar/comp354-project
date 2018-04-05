@@ -54,7 +54,7 @@ public class LoginController implements Initializable, EventHandler<KeyEvent> {
             MyMoneyApplication.application.displayAccounts();
         }
         catch (ValidationException exception) {
-            AlertHelper.generateErrorAlert("Login error", "Error logging in", exception)
+            AlertHelper.generateErrorAlert("Login error",  exception)
                     .showAndWait();
         } catch (UserLoggedInException e) {
             AlertHelper.generateErrorAlert("Login error", "Error logging in", "Already logged in").showAndWait();

@@ -5,6 +5,7 @@ import com.github.comp354project.model.account.remote.RemoteAccountModule;
 import com.github.comp354project.model.auth.AuthenticationModule;
 import com.github.comp354project.model.csv.CSVGeneratorModule;
 import com.github.comp354project.model.dao.DaoModule;
+import com.github.comp354project.model.email.EmailServiceModule;
 import com.github.comp354project.model.sqlite.ConnectionModule;
 import com.github.comp354project.model.user.UserServiceModule;
 import com.github.comp354project.viewController.*;
@@ -26,7 +27,8 @@ import javax.inject.Singleton;
         RemoteAccountModule.class,
         DaoModule.class,
         AuthenticationModule.class,
-        CSVGeneratorModule.class
+        CSVGeneratorModule.class,
+        EmailServiceModule.class
 })
 public interface ApplicationComponent {
 
@@ -49,4 +51,6 @@ public interface ApplicationComponent {
     void inject(UpdateUserAccountController updateUserAccountController);
 
     void inject(AllTransactionsController allTransactionsController);
+
+    void inject(AccountDetailsController accountDetailsController);
 }

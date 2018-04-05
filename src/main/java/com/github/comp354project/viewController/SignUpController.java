@@ -70,7 +70,7 @@ public class SignUpController implements Initializable, EventHandler<KeyEvent>{
 
             MyMoneyApplication.application.displayLogin();
         } catch(ValidationException e) {
-            AlertHelper.generateErrorAlert("Sign up error", "Error creating an account", e)
+            AlertHelper.generateErrorAlert("Sign up error",  e)
                     .showAndWait();
         }
     }
@@ -83,7 +83,7 @@ public class SignUpController implements Initializable, EventHandler<KeyEvent>{
         if (!this.passwordField.getText().equalsIgnoreCase(this.passwordRepeatField.getText())) {
             throw ValidationException.builder()
                     .error(ValidationError.builder()
-                            .message("The passwords are not the same")
+                            .message("The passwords do not match")
                             .parameterName("password").build())
                     .build();
         }

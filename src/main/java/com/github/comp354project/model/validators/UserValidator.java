@@ -12,11 +12,16 @@ public class UserValidator implements IUserValidator {
     private IUsernameValidator usernameValidator;
     private IPasswordValidator passwordValidator;
     private INameValidator nameValidator;
+    private  IEmailValidator emailValidator;
 
-    public UserValidator(IUsernameValidator usernameValidator, IPasswordValidator passwordValidator, INameValidator nameValidator){
+    public UserValidator(IUsernameValidator usernameValidator,
+                         IPasswordValidator passwordValidator,
+                         INameValidator nameValidator,
+                         IEmailValidator emailValidator){
         this.usernameValidator = usernameValidator;
         this.passwordValidator = passwordValidator;
         this.nameValidator = nameValidator;
+        this.emailValidator = emailValidator;
     }
 
     @Override
@@ -29,6 +34,7 @@ public class UserValidator implements IUserValidator {
             errors.addAll(passwordValidator.validatePassword(user.getPassword(), "Invalid password"));
             errors.addAll(nameValidator.validateName(user.getFirstName(), "Invalid first name"));
             errors.addAll(nameValidator.validateName(user.getLastName(), "Invalid last name"));
+            errors.addAll(emailValidator.validateEmail(user.getEmail(), "Invalid email"));
         }
         return errors;
     }

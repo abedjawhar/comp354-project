@@ -76,6 +76,8 @@ public class AccountListController implements Initializable {
 	@FXML
 	public void selectAccount(MouseEvent event)  {
 	    if (event.getClickCount() == 2) {
+			int index = accountsTable.getSelectionModel().getSelectedIndex();
+			if (index == -1) return; // no account selected
             MyMoneyApplication.application.displayAccountDetails(accounts.get(accountsTable.getSelectionModel().getSelectedIndex()));
 	    }
 	}
@@ -106,7 +108,7 @@ public class AccountListController implements Initializable {
 			this.accounts.add(account);
 			this.tableData.add(new AccountDisplayModel(account));
 		} catch (ValidationException e) {
-			AlertHelper.generateErrorAlert("Creation error", "Error validating account", e)
+			AlertHelper.generateErrorAlert("Creation error",  e)
 					.showAndWait();
 		} catch(RuntimeException e) {
 			AlertHelper.generateErrorAlert("Creation error", "Error validating account", e.getMessage())
@@ -124,7 +126,7 @@ public class AccountListController implements Initializable {
 			setAccounts(accounts);
 		}
 		catch (ValidationException e) {
-			AlertHelper.generateErrorAlert("removeAccount error", "Error validating account", e).showAndWait();
+			AlertHelper.generateErrorAlert("removeAccount error",  e).showAndWait();
 		}
 		catch (AuthenticationException e) {
 			AlertHelper.generateErrorAlert("removeAccount error", "Error authenticating user", e.getMessage());

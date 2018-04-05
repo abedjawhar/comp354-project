@@ -3,7 +3,12 @@ package com.github.comp354project.viewController;
 import com.github.comp354project.MyMoneyApplication;
 import com.github.comp354project.model.account.ITransactionService;
 import com.github.comp354project.model.account.Transaction;
+import com.github.comp354project.model.auth.SessionManager;
+import com.github.comp354project.model.csv.ICSVGenerator;
+import com.github.comp354project.model.email.IEmailService;
 import com.github.comp354project.model.exceptions.ValidationException;
+import com.github.comp354project.viewController.helper.AlertHelper;
+import com.github.comp354project.viewController.helper.FileHelper;
 import com.google.common.collect.ImmutableList;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -24,6 +29,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
+import javax.mail.MessagingException;
+import java.io.File;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -59,7 +66,15 @@ public class TransactionTableController implements Initializable {
     @FXML
     private DatePicker endDatePicker;
 
-    @Getter
+    @Inject
+    ICSVGenerator csvGenerator;
+
+    @Inject
+    IEmailService emailService;
+
+    @Inject
+    SessionManager sessionManager;
+
     private ObservableList<TransactionDisplayModel> tableData = FXCollections.observableArrayList();
 
     private List<Transaction> transactions = new ArrayList<>();
@@ -150,6 +165,37 @@ public class TransactionTableController implements Initializable {
         amountCol.prefWidthProperty().bind(transactionTableView.widthProperty().divide(columnCount)); // w * 1/4
         categoryCol.prefWidthProperty().bind(transactionTableView.widthProperty().divide(columnCount)); // w * 1/4
         typeCol.prefWidthProperty().bind(transactionTableView.widthProperty().divide(columnCount)); // w * 1/4
+    }
+
+    @FXML
+    public void exportAction() {
+        try {
+            File csv = csvGenerator.generateCSV(tableData);
+            FileHelper.saveFile(csv);
+        } catch (Exception e) {
+            logger.error(e);
+            AlertHelper.generateErrorAlert("Error", "Could not generate the statement", "Something went wrong :(").showAndWait();
+        }
+    }
+
+    @FXML
+    public void emailAction(){
+        try{
+            File csv = csvGenerator.generateCSV(tableData);
+            String email = sessionManager.getUser().getEmail();
+            if(email == null){
+                email = "";
+            }
+            emailService.sendEmail(email, "Statement", "", csv, "statement.csv");
+        }
+        catch (MessagingException e){
+            logger.error(e);
+            AlertHelper.generateErrorAlert("Error", "Could not email the statement", "Empty email address").showAndWait();
+        }
+        catch (Exception e){
+            logger.error(e);
+            AlertHelper.generateErrorAlert("Error", "Could not email the statement", "Something went wrong :(").showAndWait();
+        }
     }
 
     public static class TransactionDisplayModel {

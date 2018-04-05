@@ -16,6 +16,9 @@ import javafx.scene.control.TextInputDialog;
 import lombok.Getter;
 import lombok.Setter;
 import javafx.scene.control.Label;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.inject.Inject;
 import javax.swing.*;
 import java.net.URL;
@@ -25,6 +28,7 @@ import java.util.ResourceBundle;
 
 
 public class UpdateUserAccountController implements Initializable {
+    private static final Logger logger = LogManager.getLogger(UpdateUserAccountController.class);
     @FXML
     private Label usernameTxt;
     @FXML
@@ -68,14 +72,14 @@ public class UpdateUserAccountController implements Initializable {
     }
 
     public void setUserInfo() {
-    usernameTxt.setText(user.getUsername());
-    firstnameTxt.setText(user.getFirstName());
-    lastnameTxt.setText(user.getLastName());
-    emailTxt.setText(user.getEmail());
-    phoneNumberTxt.setText(user.getPhone());
-    addressTxt.setText(user.getAddress());
-    passwordField.setText((user.getPassword()));
-    passwordRepeatField.setText(user.getPassword());
+        usernameTxt.setText(getOrDefault(user.getUsername(), ""));
+        firstnameTxt.setText(getOrDefault(user.getFirstName(), ""));
+        lastnameTxt.setText(getOrDefault(user.getLastName(), ""));
+        emailTxt.setText(getOrDefault(user.getEmail(), ""));
+        phoneNumberTxt.setText(getOrDefault(user.getPhone(), ""));
+        addressTxt.setText(getOrDefault(user.getAddress(), ""));
+        passwordField.setText(getOrDefault(user.getPassword(), ""));
+        passwordRepeatField.setText(getOrDefault(user.getPassword(), ""));
     }
 
     @FXML
@@ -83,7 +87,7 @@ public class UpdateUserAccountController implements Initializable {
 
     try{
         if (passwordField.getText().equals(passwordRepeatField.getText())) {
-             sessionManager.setUser(userService.updateUser((User.builder()
+            User userToUpdate = (User.builder()
                     .ID(user.getID())
                     .username(usernameTxt.getText().trim())
                     .firstName(firstnameTxt.getText().trim())
@@ -92,13 +96,14 @@ public class UpdateUserAccountController implements Initializable {
                     .phone(phoneNumberTxt.getText().trim())
                     .address(addressTxt.getText().trim())
                     .password(passwordField.getText())
-                    .build())));
+                    .build());
+            sessionManager.setUser(userService.updateUser(userToUpdate));
             MyMoneyApplication.application.displayAccounts();
         }
         else
             throw ValidationException.builder().message("Your passwords don't match!").build();
     } catch(ValidationException e){
-        AlertHelper.generateErrorAlert("Error", "Something", e).showAndWait();
+        AlertHelper.generateErrorAlert("Error",  e).showAndWait();
     } catch (AuthenticationException e) {
         AlertHelper.generateErrorAlert("removeAcc", "Error authenticating user", e.getMessage());
     }
@@ -129,7 +134,7 @@ public class UpdateUserAccountController implements Initializable {
 
         }
         catch (ValidationException e) {
-            AlertHelper.generateErrorAlert("deleteUser error", "Error validating user", e).showAndWait();
+            AlertHelper.generateErrorAlert("deleteUser error",  e).showAndWait();
         }
         catch (AuthenticationException e) {
             AlertHelper.generateErrorAlert("deleteUser error", "Error authenticating user", e.getMessage()).showAndWait();
@@ -139,5 +144,10 @@ public class UpdateUserAccountController implements Initializable {
                     "Error, user does not have the authority to delete this user", e.getMessage());
         }
     }
+
+    private <T> T getOrDefault(T val, T def){
+        return (val == null ? def : val);
+    }
+
 
 }
