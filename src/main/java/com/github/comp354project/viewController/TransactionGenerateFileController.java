@@ -4,6 +4,7 @@ import java.io.*;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.AbstractSequentialList;
 import java.util.Date;
 import java.util.Iterator;
@@ -52,10 +53,7 @@ public class TransactionGenerateFileController {
 
         PrintWriter pw = new PrintWriter(new File(FileName));
 
-        Iterator<Transaction> i = transactions.listIterator();
-
         DateFormat df = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss");
-        
 
         pw.append("Transaction ID");
         pw.append(',');
@@ -68,16 +66,11 @@ public class TransactionGenerateFileController {
         pw.append("Category");
         pw.append("\n");
 
-        while (i.hasNext()) {
-            
+        transactions.forEach(transaction -> {
             Date date = Date.from(Instant.ofEpochSecond(transaction.getDate()));
-            date = new SimpleStringProperty(df.format(date));
-            
-            Transaction transaction = (Transaction) i.next();
-
             pw.append(String.valueOf(transaction.getID()));
             pw.append(',');
-            pw.append(date);
+            pw.append(df.format(date));
             pw.append(',');
             pw.append(String.valueOf(transaction.getAmount()));
             pw.append(',');
@@ -85,8 +78,7 @@ public class TransactionGenerateFileController {
             pw.append(',');
             pw.append(String.valueOf(transaction.getCategory()));
             pw.append('\n');
-
-        }
+        });
 
 
         pw.flush();
