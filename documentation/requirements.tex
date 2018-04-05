@@ -120,6 +120,7 @@
                             \hline
                             Version & Date & Changes \\
                             \hline
+                            1.2 & \nth{5} April 2018 & added more detail to use cases\\
                             1.1 & \nth{12} March 2018 & fixed business rules\\
                             1.0 & \nth{11} February 2018 & completed requirements \\
                             \hline
@@ -469,56 +470,50 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
 
 \begin{usecase}{Create User Account}
     \addrow{Case ID}{01}
-    \addrow{Summary}{User gives information about a new user account, system validates it and creates the account.}
+    \addrow{Summary}{User gives information about a new user account to the system, which validates it then creates the account.}
     \addrow{Scope}{money and budget management application}
     \addrow{Level}{user-goal}
     \addrow{Actors}{\textbf{User}}
     \addmulrow{Stakeholders and Interests}{
-    \item User: Wants fast and easy account creation, clear and comprehensible display of account requirements.
-    \item Company: Wants user interests to be fulfilled, wants to prevent erroneous input, wants fast communication with the local account database as well as failure tolerance when dealing with database manipulation. }
-    \addrow{Pre-Conditions}{User has opened the application and is in the sign-up menu.}
+    \item User: Wants fast and easy account creation and a comprehensible display of the account requirements.
+    \item Company: Wants user interests to be fulfilled, validation of input, communication with the local account database as well as failure tolerance when dealing with database manipulation. }
+    \addrow{Pre-Conditions}{User has launched the application.}
     \addrow{Success Guarantee}{Account successfully saved in local account database, with account details as specified by the user.}
     \addmulrow{Main Success Flow}{
-    \item User enters a username, first name, last name, email, phone number, and address and password.
+    \item User clicks on the sign-up menu, enters a username, first name, last name, email, phone number, and address and password.
     \item System validates user account details, then creates new account.
     \item System moves to login screen.}
     \addmulrow{Exceptions}{
     \item Another account with the same username already exists.
     \item User specified is not created if the business rules for account creation are not met.}
     \addmulrow{Alternate Flows}{
-    \item The System will move to the login menu after successful account creations.
-    \item \textbf{Alternative Flow - Unmet account business rule:} The System will notify the user of an unmet account requirement.
-    \item \textbf{Alternative Flow - Already used username:}the System will notify the user if his username is already used by an existing user account.System}
+    \item The System will notify the user the his username is already used by an existing user account, and return to the account creation menu.
+    \item The System will notify the user of unmet account requirement, then return to the account creation menu. }
     \addrow{Priority}{High}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
 \begin{usecase}{Delete User Account}
     \addrow{Case ID}{02}
-    \addrow{Summary}{User deletes a user account from the local accounts database, removing all bank accounts and information associated with that account.}
+    \addrow{Summary}{User deletes his user account, removing all bank accounts and information associated with that account.}
      \addrow{Scope}{money and budget management application}
      \addrow{Level}{user-goal}
      \addrow{Actors}{\textbf{User}}
      \addmulrow{Stakeholders and Interests}{
-     \item User: Wants easy navigation and secure account deletion, no risk of accidental deletion, proof of successful account deletion.
-     \item Company: Wants user interests to be fulfilled, wants to ensure clean deletion from the database. }
+     \item User: Wants easy navigation and secure account deletion, no risk of accidental deletion.
+     \item Company: Wants user interests to be fulfilled and clean deletion of account and associated data in the database. }
      \addrow{Pre-Conditions}{User has logged in the user account he wants to delete.}
      \addrow{Success Guarantee}{user account is successfully deleted, all associated bank information is deleted, and user is returned to the home menu.}
      \addmulrow{Main Success Flow}{
-     \item User enters the account settings, then selects 'delete account'.
+     \item User enters the user account details view, then selects 'delete account'.
      \item System brings up a confirmation menu to ensure that this selection was not accidentally entered.
      \item User confirms his choice.
-     \item System successfully deletes all relevant entries in the local database, then notifies the user of this successful deletion.
-     \item User confirms having read this notification.
-     \item System brings the user back to the home menu.}
+     \item System successfully deletes the user account as well as all associated bank account and transactions in the local database, then brings the user back to the login/create user menu.}
      \addmulrow{Exceptions}{
-     \item User does not have authority to delete the account.
      \item User enters incorrect password and is denied ability to delete user account.
      }
      \addmulrow{Alternate Flows}{
-     \item All user account information is deleted and returns user to the login/create user screen.
-     \item Error message will be displayed and user account is not deleted and all user information remains unchanged.
-     }
+     \item Incorrect password error message will be displayed, the user account will not be deleted, and the user will be returned to the user account details view.}
      \addrow{Priority}{Medium}
      \addrow{Traces to Test Cases}{}
 \end{usecase}
@@ -531,51 +526,47 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
     \addrow{Level}{user-goal}
     \addrow{Actors}{\textbf{User}, Bank}
     \addmulrow{Stakeholders and Interests}{
-    \item User: Wants fast and easy account creation, clear and comprehensible display, proof of successful account creation.
-    \item Company: Wants user interests to be fulfilled, wants to prevent erroneous input, wants fast communication with the local account database as well as the bank, wants fault tolerance in case of database conflicts, issues with the bank, or other possible local database problems.
-    \item Bank: Wants to satisfy its customer base, wants correctly formatted account information given to its API, inexpensive and non-redundant communication of bank account data to third-party applications.}
-    \addrow{Pre-Conditions}{User has logged in a user account and is in the user home menu.}
+    \item User: Wants fast and easy account creation, clear and comprehensible display of bank account requirements.
+    \item Company: Wants user and bank interests to be fulfilled, wants to prevent erroneous input, wants fast communication with the local account database as well as the bank, wants fault tolerance in case of database conflicts, issues with the bank, or other possible remote database problems.
+    \item Bank: Wants to satisfy its own customer base, wants correctly formatted account information given to its API, inexpensive and non-redundant communication of bank account data to third-party applications.}
+    \addrow{Pre-Conditions}{User has logged in a user account and is in the account list menu.}
     \addrow{Success Guarantee}{Bank account successfully saved in local account database, with information corresponding the data validated by the bank.}
     \addmulrow{Main Success Flow}{
-    \item User enters his/her bank account number.
+    \item User enters his/her bank account ID in the text field for bank account addition.
     \item System validates input, and sends it to the bank for verification and connection.
     \item Bank validates bank account number, and then responds with the bank account information.
-    \item System records the valid bank account details securely in its database, and notifies the user of the successful addition of the bank account in the database.}
+    \item System records the valid bank account details securely in its database, and the account list is updated with this new account.}
     \addmulrow{Exceptions}{
-        \item an invalid account ID was provided.
-        \item Account is not added if the account has already been added
-        \item Account is not added if an account could not be found by the bank}
+        \item An invalid account ID was provided.
+        \item Account has already been added to the user account.
+        \item Account was not validated by the bank (could not find account, invalid ID on their side of the validation, etc.) }
     \addmulrow{Alternate Flows}{
-        \item The account has been added. Account displayed in account list.
-        \item The account has not been added. An error will be displayed describing what went wrong}
+        \item The account ID is not sent to the bank servers for validation, instead an error will be displayed requesting a valid bank account ID then the system returns to the account list menu.
+        \item the account ID is validated but found to have been already associated with this user account; this error is displayed by the system, which then returns to the account list menu.
+        \item the accound ID is validated and queried to the bank, which replies with an error. The system displays this error to the user then returns to the account list menu.}
     \addrow{Priority}{High}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
 \begin{usecase}{Remove Bank Account from a User Account}
     \addrow{Case ID}{04}
-    \addrow{Summary}{User deletes a bank account from the local database.}
+    \addrow{Summary}{User removes a bank account associated with his user account.}
      \addrow{Scope}{money and budget management application}
      \addrow{Level}{user-goal}
      \addrow{Actors}{\textbf{User}}
      \addmulrow{Stakeholders and Interests}{
-     \item User: Wants easy navigation and secure account deletion, no risk of accidental deletion, proof of successful account deletion.
+     \item User: Wants easy navigation and secure account deletion.
      \item Company: Wants user interests to be fulfilled, wants to ensure clean deletion from the database. }
      \addrow{Pre-Conditions}{User has logged in the user account whose active association with a bank account is the one the user wants to delete.}
      \addrow{Success Guarantee}{Bank account is successfully removed from that user account, all associated bank information is deleted from the local database, and user is returned to the account home menu.}
      \addmulrow{Main Success Flow}{
-     \item User selects the account he wants to remove, then selects 'remove account'.
-     \item System brings up a confirmation menu to ensure that this selection was not accidentally entered.
-     \item User confirms his choice.
-     \item System successfully deletes all relevant entries in the local database, then notifies the user of this successful deletion.
-     \item User confirms having read this notification.
-     \item System brings the user back to the home account menu.}
+     \item User selects the account he wants to remove, then selects \textit{remove selected account}.
+     \item System successfully deletes the bank account and its associated transactions in the local database, then updates the account list to display this change.}
      \addmulrow{Exceptions}{
-     \item The user is not the primary account holder, and the account is not deleted.
+     \item The user clicks \textit{remove selected account} without having selected an account.
      }
      \addmulrow{Alternate Flows}{
-     \item The selected account is removed from the database and cleared from the view accounts screen.
-     \item Error message will be displayed, the selected account is not removed from the database and account information remains unchanged.
+     \item No account is deleted and the system ignores the call, staying in the accounts list menu.
      }
      \addrow{Priority}{High}
      \addrow{Traces to Test Cases}{}
@@ -583,26 +574,23 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
 
 \begin{usecase}{View Transactions for Specific Bank Account}
     \addrow{Case ID}{05}
-    \addrow{Summary}{User selects specific bank account and views transactions associated with with selected bank account}
+    \addrow{Summary}{User selects specific bank account and views transactions associated with selected bank account}
     \addrow{Scope}{money and budget management application}
     \addrow{Level}{user-goal}
     \addrow{Actors}{\textbf{User}}
     \addmulrow{Stakeholders and Interests}{
-    \item User: Wants quick and convenient viewing of previous transactions from one specific bank account
-    \item Company: Wants to give user ability to micromanage every aspect of the application down to each bank account and transaction.}
+    \item User: Wants quick and convenient viewing of transactions associated with a specific bank account.
+    \item Company: Wants user interests to be fulfilled.}
     \addrow{Pre-Conditions}{User has created and logged into a user account, and has added at least one bank account to his/her myMoney account. }
-    \addrow{Success Guarantee}{User can view transaction by bank account.}
+    \addrow{Success Guarantee}{User can view transactions of specific bank account.}
     \addmulrow{Main Success Flow}{
     \item User selects specific bank account from list of all accounts.
-    \item System displays all previous transactions under specified bank account.
-    \item User selects desired transaction.
-    \item System shows all information about desired transaction, such as date and amount withdrawn, deposited, or transferred.}
+    \item System enters the detailed view for that bank account, displaying all transactions for that account.}
     \addmulrow{Exceptions}{
-    \item User is not authorized to view account details and denied access to view transactions for specified bank account.
     \item User has no transactions for selected bank account.
     }
     \addrow{Alternate Flows}{
-    User will be able to see all transactions associated with the selected bank account.
+    System displays the detailed view of the bank account nonetheless, but the list of transaction is empty.
     }
     \addrow{Priority}{High}
     \addrow{Traces to Test Cases}{}
@@ -617,17 +605,17 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
     \addmulrow{Stakeholders and Interests}{
     \item User: Wants easy and convenient viewing of all transactions among all bank accounts.
     \item Company: Wants user interests to be fulfilled.}
-    \addrow{Pre-Conditions}{User has created and logged into a user account, and at least one bank account has been added to his/her myMoney account.}
+    \addrow{Pre-Conditions}{User has created and logged into a user account.}
     \addrow{Success Guarantee}{User is able to conveniently view all transactions from all institutions in one display.}
     \addmulrow{Main Success Flow}{
     \item User selects View All Transactions option.
-    \item System shows all transactions across all accounts on one display.
-	\item Balance of all bank accounts is calculated and displayed on the top-left.}
+    \item System shows all transactions across all accounts in one unified list.}
     \addmulrow{Exceptions}{
     \item User has not added any account.
     \item User has no transactions to record.}
     \addmulrow{Alternate Flows}{
-    \item User will see all transactions from all bank accounts.
+    \item System displays an empty list of transactions.
+    \item System displays an empty list of transactions.
     }
     \addrow{Priority}{High}
     \addrow{Traces to Test Cases}{}
@@ -640,12 +628,12 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
     \addrow{Level}{user-goal}
     \addrow{Actors}{\textbf{User}}
     \addmulrow{Stakeholders and Interests}{
-    \item User:  Wants to change personal information to keep up-to-date records on information such as address and email as well as changing user account password.
-    \item Company: Wants user interests to be fulfilled. }
+    \item User:  Wants to user account attributes to keep up-to-date records on information such as address and email as well as changing user account password.
+    \item Company: Wants user interests to be fulfilled and ensure validation of changed user account attributes. }
     \addrow{Pre-Conditions}{User has created and logged in a user account.}
     \addrow{Success Guarantee}{User can easily update changes in personal information to guarantee accurate personal records }
     \addmulrow{Main Success Flow}{
-    \item User selects update user account information.
+    \item User selects \textit{Your profile}.
     \item System shows current user account information.
     \item User selects the piece of information that requires updating.
     \item User enters new information.
@@ -653,11 +641,13 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
     }
     \addmulrow{Exceptions}{
     \item Passwords do not match, user information is not updated
-    \item First or last name is left empty, user information is not updated.
+    \item First name, last name, or password is left empty, user information is not updated.
+    \item email is an invalid email address.
     }
     \addmulrow{Alternate Flows}{
-    \item User enters updated information and new information is saved. User is returned to home page.
-    \item Error message is displayed prompting user that there is an error in the entered information.
+    \item Error message is displayed prompting user that his passwords do not match and user account is not updated.
+    \item Error message is displayed prompting user that he is missing required information and user account is not updated.
+    \item Error message is displayed prompting user that his email address is invalid nd user account is not updated.
     }
     \addrow{Priority}{Medium}
     \addrow{Traces to Test Cases}{}
@@ -666,24 +656,24 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
 
 \begin{usecase}{Sort Transactions by Any Attribute}
     \addrow{Case ID}{08}
-    \addrow{Summary}{User can sort transactions by any attribute (date, transaction amount, category, and transaction type)}
+    \addrow{Summary}{User can sort transactions by any attribute (date, transaction amount, category, and transaction type.)}
     \addrow{Scope}{money and budget management application}
     \addrow{Level}{user-goal}
     \addrow{Actors}{\textbf{User}}
     \addmulrow{Stakeholders and Interests}{
     \item User: Wants to view transactions sorted by any one attribute.
-    \item Company: Wants to optimize the ease in which a user can allocate his/her budget, and track spending habits.}
+    \item Company: Wants user interests to be fulfilled.}
     \addrow{Pre-Conditions}{User has created and logged in a user account.}
-    \addrow{Success Guarantee}{User can sort transactions by selecting one attribute. Default sorting is ascending order by alphabet or value of number. Click the same attribute twice will sort in descending order.}
+    \addrow{Success Guarantee}{User can sort transactions by selecting one attribute. The default sorting is ascending order by alphabet or value of number. Double-clicking will sort in descending order.}
     \addmulrow{Main Success Flow}{
-    \item User clicks the button<View All Transactions>.
-    \item System shows all transactions from all accounts on one display.
+    \item User enters a transaction list view by choosing to view all bank account transactions or a detailed bank account view.
+    \item System shows a transaction list.
     \item User selects to view sorted transaction by clicking any one attribute.
     \item System sorts transactions by the selected attribute in ascending order.}
     \addmulrow{Exceptions}{
-    \item User has not added any account.
     \item User has no transactions in his account.}
-    \addrow{Alternate Flows}{the transactions with the given attribute are displayed in an sorted order based on the selected attribute.}
+    \addmulrow{Alternate Flows}{
+      \item The system will display an empty transaction list.}
     \addrow{Priority}{High}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
@@ -701,15 +691,19 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
      \addrow{Pre-Conditions}{User has created and logged in a user account, added at least one bank account, and has made at least one type of transaction.}
      \addrow{Success Guarantee}{User can quickly and efficiently categorize each transaction.}
      \addmulrow{Main Success Flow}{
-     \item User selects desired transaction to categorize.
+     \item User enters a transaction list view by choosing to view all bank account transactions or a detailed bank account view.
+     \item User selects the desired transaction to categorize.
      \item User selects the categorize option.
      \item System displays the categories in a drop down menu.
-     \item User selects preferred category to represent the current transaction.
-     \item System saves transaction under chosen category.}
+     \item User selects preferred category to represent the current transaction, or types in his own category.
+     \item System changes the category attribute on the chosen transaction to the category that the user selected or wrote in.}
      \addmulrow{Exceptions} {
-     \item User has not added a bank account and cannot categorize any transactions within until one is added \item User does not have any transactions within his bank account and cannot categorize anything}
-     \addrow{Alternate Flows}{User will have organized his transactions into specific categories of his choosing for easier viewing. The application will save these new categorized transactions.}
-     \addrow{Priority}{High}
+        \item the user writes in a category name of exceeding length (exceeding as defined by the business rules.)
+     }
+     \addmulrow{Alternate Flows}{
+        \item The system rejects the call and leaves the category unchanged.
+     }
+     \addrow{Priority}{Medium}
      \addrow{Traces to Test Cases}{}
 
 \end{usecase}
@@ -722,7 +716,7 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
     \addrow{Actors}{\textbf{User}}
     \addmulrow{Stakeholders and Interests}{
     \item User: Wants to view transactions between two selected dates, to optimize spending habits for select durations.
-    \item Company: Wants to optimize the ease in which a user can track their spending between specific dates and time periods.}
+    \item Company: Wants user interests to be fulfilled.}
     \addrow{Pre-Conditions}{User has created and logged in a user account.}
     \addrow{Success Guarantee}{User can view all transactions from select bank accounts, or all bank accounts between two specified dates.}
     \addmulrow{Main Success Flow}{
@@ -731,19 +725,16 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
     \item User selects desired dates to view transactions between the two dates.
     \item System shows all transactions between the two specified dates.}
     \addmulrow{Exceptions}{
-    \item User has not added any account.
-    \item User has no transaction record.
-    \item User selects invalid or impossible range of dates.
+    \item User selects impossible range of dates.
     }
     \addmulrow{Alternate Flows}{
-    \item Transactions that were made between the two selected dates are displayed.
-    \item Error message displays that dates selected are invalid.
+    \item no transactions are displayed.
     }
-    \addrow{Priority}{Medium}
+    \addrow{Priority}{Low}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
-\begin{usecase}{Search Transactions by Category}
+\begin{usecase}{Filter Transactions by Category}
     \addrow{Case ID}{11}
     \addrow{Summary}{User can choose a category to filter by, which will result in all transactions which are not in that category to be removed from the view}
     \addrow{Scope}{money and budget management application}
@@ -761,12 +752,10 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
       \item System updates the view to show only the transactions with the specified category.
     }
     \addmulrow{Exceptions}{
-    \item User has not added any account.
-    \item User has no transaction record.
     \item User enters a non-existent category (a category by which no transaction is categorised).
     }
     \addmulrow{Alternate Flows}{
-    \item Only the transactions in the specified category are displayed in the transactions view.}
+    \item No transactions are displayed.}
     \addrow{Priority}{High}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
@@ -783,22 +772,21 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
     \addrow{Pre-Conditions}{The user has created a user account, logged in, connected at least one bank account and has reached a transactions view either through \textit{view all transactions} view, either through \textit{account details} view.}
     \addrow{Success Guarantee}{A CSV file has been successfully generated from the transactions currently displayed, and was saved where the user asked for it to be saved.}
     \addmulrow{Main Success Flow}{
-      \item User decides to view all bank accounts or selects a specific bank account.
+      \item User chooses to view all bank account transactions or a detailed bank account view.
       \item System shows transactions.
       \item User clicks on the button to export to CSV.
-      \item System displays a view asking where the user wants this statement to be saved.
-      \item User enters the path of the folder in which the file should be saved.
-      \item System generates the statement and saves it in the desired folder of the user's choosing.
+      \item System displays a menu asking where the user wants this statement to be saved.
+      \item User selects the directory wherein he wishes to export the statement.
+      \item System generates the statement and saves it in the desired folder of the user's choosing. It may be blank if the user has no transaction displayed in his view.
     }
     \addmulrow{Exceptions}{
-    \item User has no transaction record.
     \item User enters a non-existent path.
     \item User enters an unauthorised path.
     \item User enters a valid path, but a file with the same name as the statement to be generated already exists.
     }
     \addmulrow{Alternate Flows}{
-    \item The CSV file has successfully been generated, and saved in the specified location. It may be blank if the user has no transaction displayed in his view.
-    \item An error message indicating a failure to write the file in the specified location should the path be invalid or unauthorised.
+    \item The save button is greyed out, preventing the user from selecting that path and thus requiring a valid path to be entered to move on.
+    \item The save button is greyed out, preventing the user from selecting that path and thus requiring a valid path to be entered to move on.
     \item A confirmation box should ask the user if he wants to overwrite a file if a file already exists in the specified location.}
     \addrow{Priority}{Low}
     \addrow{Traces to Test Cases}{}
@@ -816,20 +804,16 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
     \addrow{Pre-Conditions}{A user created a user accountl, logged in, connected at least one bank account and has reached a transactions view either through \textit{view all transactions} view, either through \textit{account details} view.}
     \addrow{Success Guarantee}{A CSV file has been successfully generated from the transactions currently displayed, and was saved where the user asked for it to be saved.}
     \addmulrow{Main Success Flow}{
-      \item User decides to view all bank accounts or selects a specific bank account.
+      \item User chooses to view all bank account transactions or a detailed bank account view.
       \item System shows transactions.
       \item User clicks on the button to email CSV.
       \item System generates the statement and sends it to the user's email.
     }
     \addmulrow{Exceptions}{
-    \item User has an invalid or empty email in his user account details.
-    \item User enters a non-existent path.
-    \item User enters an unauthorised path.
-    \item User enters a valid path, but a file with the same name as the statement to be generated already exists.
-    }
+    \item User hasn't set his email in his user account details.}
     \addmulrow{Alternate Flows}{
-    \item The CSV file has successfully been generated, and sent by email. It may be blank if the user has no transaction displayed in his view.
-    \item An error message indicating a failure to send an email, if the email address was empty or invalid.}
+    \item the System notifies the user that his email address is empty and doesn't send the CSV file.
+    }
     \addrow{Priority}{Low}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
