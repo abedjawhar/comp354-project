@@ -508,9 +508,15 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
      \item System successfully deletes all relevant entries in the local database, then notifies the user of this successful deletion.
      \item User confirms having read this notification.
      \item System brings the user back to the home menu.}
-     \addrow{Exceptions}{}
-     \addrow{Post-Conditions}{}
-     \addrow{Priority}{}
+     \addmulrow{Exceptions}{
+     \item User does not have authority to delete the account.
+     \item User enters incorrect password and is denied ability to delete user account.
+     }
+     \addmulrow{Post-Conditions}{
+     \item All user account information is deleted and returns user to the login/create user screen.
+     \item Error message will be displayed and user account is not deleted and all user information remains unchanged.
+     }
+     \addrow{Priority}{Medium}
      \addrow{Traces to Test Cases}{}
 \end{usecase}
 
@@ -561,9 +567,14 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
      \item System successfully deletes all relevant entries in the local database, then notifies the user of this successful deletion.
      \item User confirms having read this notification.
      \item System brings the user back to the home account menu.}
-     \addrow{Exceptions}{}
-     \addrow{Post-Conditions}{}
-     \addrow{Priority}{}
+     \addmulrow{Exceptions}{
+     \item The user is not the primary account holder, and the account is not deleted.
+     }
+     \addmulrow{Post-Conditions}{
+     \item The selected account is removed from the database and cleared from the view accounts screen.
+     \item Error message will be displayed, the selected account is not removed from the database and account information remains unchanged.
+     }
+     \addrow{Priority}{High}
      \addrow{Traces to Test Cases}{}
 \end{usecase}
 
@@ -583,9 +594,14 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
     \item System displays all previous transactions under specified bank account.
     \item User selects desired transaction.
     \item System shows all information about desired transaction, such as date and amount withdrawn, deposited, or transferred.}
-    \addrow{Exceptions}{}
-    \addrow{Post-Conditions}{}
-    \addrow{Priority}{}
+    \addmulrow{Exceptions}{
+    \item User is not authorized to view account details and denied access to view transactions for specified bank account.
+    \item User has no transactions for selected bank account.
+    }
+    \addrow{Post-Conditions}{
+    User will be able to see all transactions associated with the selected bank account.
+    }
+    \addrow{Priority}{High}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
@@ -606,8 +622,10 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
 	\item Balance of all bank accounts is calculated and displayed on the top-left.}
     \addmulrow{Exceptions}{
     \item User has not added any account.
-    \item User has no any transaction record.}
-    \addrow{Post-Conditions}{}
+    \item User has no transactions to record.}
+    \addmulrow{Post-Conditions}{
+    \item User will see all transactions from all bank accounts.
+    }
     \addrow{Priority}{High}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
@@ -630,9 +648,15 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
     \item User enters new information.
     \item System updates and saves the new information.
     }
-    \addrow{Exceptions}{}
-    \addrow{Post-Conditions}{}
-    \addrow{Priority}{}
+    \addmulrow{Exceptions}{
+    \item Passwords do not match, user information is not updated
+    \item First or last name is left empty, user information is not updated.
+    }
+    \addmulrow{Post-Conditions}{
+    \item User enters updated information and new information is saved. User is returned to home page.
+    \item Error message is displayed prompting user that there is an error in the entered information.
+    }
+    \addrow{Priority}{Medium}
     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
@@ -686,8 +710,107 @@ Use cases 1 through 4 deal with the user manipulating his accounts. Use cases 5 
     \addrow{Traces to Test Cases}{}
 \end{usecase}
 
+\begin{usecase}{Filter Transactions by Date Range}
+    \addrow{Case ID}{10}
+    \addrow{Summary}{User can view all transactions between two selected dates.}
+    \addrow{Scope}{money and budget management application}
+    \addrow{Level}{user-goal}
+    \addrow{Actors}{\textbf{User}}
+    \addmulrow{Stakeholders and Interests}{
+    \item User: Wants to view transactions between two selected dates, to optimize spending habits for select durations.
+    \item Company: Wants to optimize the ease in which a user can track their spending between specific dates and time periods..}
+    \addrow{Pre-Conditions}{User has created and logged in a user account, has added at least one bank account, and has made at least one transaction.}
+    \addrow{Success Guarantee}{User can view all transactions from select bank accounts, or all bank accounts between two specified dates.}
+    \addmulrow{Main Success Flow}{
+    \item User decides to view all bank accounts or selects a specific bank account.
+    \item System shows transactions.
+    \item User selects desired dates to view transactions between the two dates.
+    \item System shows all purchases between the two specified dates.}
+    \addmulrow{Exceptions}{
+    \item User has not added any account.
+    \item User has no transaction record.
+    \item User selects invalid or impossible range of dates.
+    }
+    \addmulrow{Post-Conditions}{
+    \item Transactions that were made between the two selected dates are displayed.
+    \item Error message displays that dates selected are invalid.
+    }
+    \addrow{Priority}{Medium}
+    \addrow{Traces to Test Cases}{}
+\end{usecase}
+
+\begin{usecase}{Search Transactions by Category}
+    \addrow{Case ID}{11}
+    \addrow{Summary}{}
+    \addrow{Scope}{money and budget management application}
+    \addrow{Level}{user-goal}
+    \addrow{Actors}{\textbf{User}}
+    \addmulrow{Stakeholders and Interests}{
+    \item User:
+    \item Company:}
+    \addrow{Pre-Conditions}{}
+    \addrow{Success Guarantee}{}
+    \addmulrow{Main Success Flow}{
+    }
+    \addmulrow{Post-Conditions}{
+   
+    }
+    \addrow{Priority}{}
+    \addrow{Traces to Test Cases}{}
+\end{usecase}
+
+\begin{usecase}{Generate Statement}
+    \addrow{Case ID}{12}
+    \addrow{Summary}{
+    }
+    \addrow{Scope}{money and budget management application}
+    \addrow{Level}{user-goal}
+    \addrow{Actors}{\textbf{User}}
+    \addmulrow{Stakeholders and Interests}{
+    \item User:
+    \item Company: }
+    \addrow{Pre-Conditions}{
+    }
+    \addrow{Success Guarantee}{}
+    \addmulrow{Main Success Flow}{
+    }
+    \addmulrow{Exceptions}{
+    }
+    \addmulrow{Post-Conditions}{
+ 
+    }
+    \addrow{Priority}{}
+    \addrow{Traces to Test Cases}{}
+\end{usecase}
+
+\begin{usecase}{Email Statement}
+    \addrow{Case ID}{13}
+    \addrow{Summary}{
+    }
+    \addrow{Scope}{money and budget management application}
+    \addrow{Level}{user-goal}
+    \addrow{Actors}{\textbf{User}}
+    \addmulrow{Stakeholders and Interests}{
+    \item User:
+    \item Company: }
+    \addrow{Pre-Conditions}{
+    }
+    \addrow{Success Guarantee}{}
+    \addmulrow{Main Success Flow}{
+    }
+    \addmulrow{Exceptions}{
+    }
+    \addmulrow{Post-Conditions}{
+ 
+    }
+    \addrow{Priority}{}
+    \addrow{Traces to Test Cases}{}
+\end{usecase}
+
 \clearpage
 \section{Reference}
+
+
 
 \begin{itemize}
     \item User information: As our user and use-cases was based on feedback provided by our developers, our references lie mainly within our own team.
