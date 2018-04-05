@@ -3,6 +3,9 @@ package com.github.comp354project.viewController;
 import com.github.comp354project.MyMoneyApplication;
 import com.github.comp354project.model.account.Account;
 import com.github.comp354project.model.account.Transaction;
+import com.github.comp354project.model.csv.ICSVGenerator;
+import com.github.comp354project.viewController.helper.AlertHelper;
+import com.github.comp354project.viewController.helper.FileHelper;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,8 +13,12 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import lombok.Getter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import javax.inject.Inject;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -20,6 +27,7 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class AccountDetailsController implements Initializable {
+    private static final Logger logger = LogManager.getLogger(AccountDetailsController.class);
     @FXML
     private Parent transactionTableView;
     @FXML
@@ -34,7 +42,9 @@ public class AccountDetailsController implements Initializable {
     @Getter
     private Account account;
 
-    private TransactionGenerateFileController generator = new TransactionGenerateFileController();
+    @Inject
+    ICSVGenerator csvGenerator;
+
     private SendMailController sender = new SendMailController();
     
     public void initialize(URL url, ResourceBundle rb) {
@@ -65,13 +75,13 @@ public class AccountDetailsController implements Initializable {
 
     @FXML
     public void generateTransactions() {
-
-        List<Transaction> transactions = new ArrayList<>(account.getTransactions());
         try {
-            generator.GenerateFile(transactions,"Transaction.csv");
+            File csv = csvGenerator.generateCSV(transactionTableViewController.getTableData());
+            FileHelper.saveFile(csv);
             System.out.println("File" +" "+"Transactions.csv"+" "+"created");
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e);
+            AlertHelper.generateErrorAlert("Error", "Could not generate the statement", "Something went wrong :(").showAndWait();
         }
 
     }

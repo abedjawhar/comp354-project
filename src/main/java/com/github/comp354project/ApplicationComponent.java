@@ -3,14 +3,11 @@ package com.github.comp354project;
 import com.github.comp354project.model.account.AccountServiceModule;
 import com.github.comp354project.model.account.remote.RemoteAccountModule;
 import com.github.comp354project.model.auth.AuthenticationModule;
+import com.github.comp354project.model.csv.CSVGeneratorModule;
 import com.github.comp354project.model.dao.DaoModule;
 import com.github.comp354project.model.sqlite.ConnectionModule;
 import com.github.comp354project.model.user.UserServiceModule;
-import com.github.comp354project.viewController.AccountListController;
-import com.github.comp354project.viewController.LoginController;
-import com.github.comp354project.viewController.SignUpController;
-import com.github.comp354project.viewController.UpdateUserAccountController;
-import com.github.comp354project.viewController.TransactionTableController;
+import com.github.comp354project.viewController.*;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -28,7 +25,8 @@ import javax.inject.Singleton;
         ConnectionModule.class,
         RemoteAccountModule.class,
         DaoModule.class,
-        AuthenticationModule.class
+        AuthenticationModule.class,
+        CSVGeneratorModule.class
 })
 public interface ApplicationComponent {
 
@@ -49,4 +47,6 @@ public interface ApplicationComponent {
     void inject(TransactionTableController tableController);
 
     void inject(UpdateUserAccountController updateUserAccountController);
+
+    void inject(AllTransactionsController allTransactionsController);
 }

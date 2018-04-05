@@ -59,6 +59,7 @@ public class TransactionTableController implements Initializable {
     @FXML
     private DatePicker endDatePicker;
 
+    @Getter
     private ObservableList<TransactionDisplayModel> tableData = FXCollections.observableArrayList();
 
     private List<Transaction> transactions = new ArrayList<>();

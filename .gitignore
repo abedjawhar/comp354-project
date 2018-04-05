@@ -28,3 +28,4 @@ target/
 out/
 sqlite/run/
 sqlite/test/
+temp/

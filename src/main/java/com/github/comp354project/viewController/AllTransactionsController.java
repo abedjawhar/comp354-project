@@ -3,6 +3,10 @@ package com.github.comp354project.viewController;
 import com.github.comp354project.MyMoneyApplication;
 import com.github.comp354project.model.account.Account;
 import com.github.comp354project.model.account.Transaction;
+import com.github.comp354project.model.csv.ICSVGenerator;
+import com.github.comp354project.model.user.UserService;
+import com.github.comp354project.viewController.helper.AlertHelper;
+import com.github.comp354project.viewController.helper.FileHelper;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +15,11 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.TextField;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import javax.inject.Inject;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -20,6 +29,7 @@ import java.util.ResourceBundle;
 
 
 public class AllTransactionsController implements Initializable {
+    private static final Logger logger = LogManager.getLogger(AllTransactionsController.class);
 
     @FXML private Label totalBalanceLabel;
     @FXML private Label descriptionLabel;
@@ -28,11 +38,16 @@ public class AllTransactionsController implements Initializable {
 
     @FXML private TransactionTableController transactionTableViewController;
 
+    @Inject
+    ICSVGenerator csvGenerator;
 
-    private TransactionGenerateFileController generator = new TransactionGenerateFileController();
     private SendMailController sender = new SendMailController();
 
     private List<Account> accounts;
+
+    public AllTransactionsController(){
+        MyMoneyApplication.application.getComponent().inject(this);
+    }
 
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -50,7 +65,6 @@ public class AllTransactionsController implements Initializable {
         this.totalBalanceLabel.setText("$" + balance);
         this.descriptionLabel.setText("All Transactions");
         AnchorPane.setTopAnchor(descriptionLabel, 15.0);
-
     }
 
     @FXML
@@ -67,22 +81,16 @@ public class AllTransactionsController implements Initializable {
      */
     @FXML
     public void generateAllTransactions() {
-        List<Transaction> transactions = new ArrayList<>();
-        if(accounts != null) {
-            for(Account a : accounts){
-                transactions.addAll(a.getTransactions());
-            }
-        }
-
         try {
-            generator.GenerateFile(transactions,"AllTransactions.csv");
-            System.out.println("File" +" "+"AllTransactions.csv"+" "+"created");
+            File csv = csvGenerator.generateCSV(transactionTableViewController.getTableData());
+            FileHelper.saveFile(csv);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e);
+            AlertHelper.generateErrorAlert("Error", "Could not generate the statement", "Something went wrong :(").showAndWait();
         }
-
     }
-     @FXML
+
+    @FXML
     public void sendAllTransactionsEmail(){
         try{
             sender.SendMailNow();
@@ -92,7 +100,7 @@ public class AllTransactionsController implements Initializable {
         }
     }
 
-    }
+}
 
 
 

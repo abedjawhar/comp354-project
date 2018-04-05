@@ -32,6 +32,8 @@ public class MyMoneyApplication extends Application {
 
     @Getter
     private ApplicationComponent component;
+
+    @Getter
     private Stage primaryStage;
 
     public MyMoneyApplication() {
