@@ -26,3 +26,5 @@ target/
 *.iml
 .gradle/
 out/
+sqlite/run/
+sqlite/test/
