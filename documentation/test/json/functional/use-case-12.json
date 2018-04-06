@@ -1,0 +1,38 @@
+{
+  "useCase" : "Generate transaction statement by exporting to CSV",
+  "testCases" : {
+    "Generate statement from All Transactions view": {
+      "description": "The All Transactions view should let generate a statement",
+      "input": [
+        "Click the button 'View All Transactions'",
+        "Click the button 'Generate Excel'",
+        "Select the location of the generated file"
+      ],
+      "output": [
+        "A file named 'all-transactions${TIMESTAMP}.csv' should be generated in the selected folder"
+      ]
+    },
+    "Generate statement from Account Details view": {
+      "description": "The Account Details view should let generate a statement",
+      "input": [
+        "Select an account by double clicking on a row",
+        "Click the button 'Generate Excel'",
+        "Select the location of the generated file"
+      ],
+      "output": [
+        "A file named 'transactions${TIMESTAMP}.csv' should be generated in the selected folder"
+      ]
+    },
+    "Generate empty statement": {
+      "description": "An account with no transactions should still generate a statement",
+      "input": [
+        "Click the button 'View All Transactions'",
+        "Click the button 'Generate Excel'",
+        "Select the location of the generated file"
+      ],
+      "output": [
+        "A file named 'all-transactions${TIMESTAMP}.csv' should be generated in the selected folder and should only have headers"
+      ]
+    }
+  }
+}

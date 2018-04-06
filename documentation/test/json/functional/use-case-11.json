@@ -12,7 +12,7 @@
       ]
     },
     "Filter transactions by category in detailed account view": {
-      "description": "he accounts details view should let filter by categories",
+      "description": "The accounts details view should let filter by categories",
       "input": [
         "Select an account by double clicking on a row",
         "Input a category in the 'category' field"
