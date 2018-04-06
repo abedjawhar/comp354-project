@@ -1,0 +1,125 @@
+{
+  "testerName": "Anne-Laure",
+  "testDate": "5/4/18",
+  "purpose": "This test suite contains the series of tests performed with yourKit Java Profiler.",
+  "systemSpec": {
+    "OS": "GNU/Linux Fedora 27 x64, version 4.13.9-300",
+    "RAM": "4GB",
+    "Graphics Card": "Intel Celeron 3205U @ 1.50GHz x 2",
+    "OpenJDK version": "1.8.0\\_144",
+    "Profiler": "YourKit Java Profiler 2017.02-b75"
+  },
+  "tests": {
+  "control stress test: local database with 5 accounts and 5 transactions": {
+    "CPU usage chart": "CPU usage chart 1",
+    "Thread Count chart": "Thread Count chart 1",
+    "events": [
+      "44m 38s: application launched",
+      "44m 40s: login menu loaded",
+      "44m 45s: logged in",
+      "44m 47s: sorted accounts by type",
+      "44m 53s: removed bank account 2",
+      "44m 58s: added back account 2",
+      "45m 02s: viewed all transactions",
+      "45m 15s: shut down application"
+    ],
+    "Memory": {
+      "Heap Memory": {
+        "Used": "73MB",
+        "Allocated": "140MB",
+        "Limit": "910MB"
+      },
+      "Non-Heap Memory": {
+        "Used": "65 MB",
+        "Allocated": "67MB",
+        "Limit": "unknown"
+      }
+    },
+    "CPU": {
+      "Classes": "8,415",
+      "Threads": {
+        "Currently live": "11",
+        "Currently live daemons": "5",
+        "Peak": "31",
+        "Total created": "53"
+      }
+    }
+  },
+  "stress test: local database with 11,000 accounts and 5 transactions": {
+    "CPU usage chart": "CPU usage chart 2",
+    "Thread Count chart": "Thread Count chart 2",
+    "Events": {
+      "2m 43s": "application launched",
+      "2m 46s": "login menu loaded",
+      "2m 51s": "logged in",
+      "2m 52s": "sorted accounts by type",
+      "2m 53s": "reversed sort of accounts by type",
+      "2m 54s": "sorted accounts by ID",
+      "2m 55s": "clicked on an account to view account details",
+      "2m 57s": "returned to account list",
+      "3m 02s": "viewed all transactions",
+      "3m 15s": "shut down application"
+    },
+    "Memory": {
+      "Heap Memory": {
+        "Used": "123MB",
+        "Allocated": "203MB",
+        "Limit": "910MB"
+      },
+      "Non-Heap Memory": {
+        "Used": "67 MB",
+        "Allocated": "68MB",
+        "Limit": "unknown"
+      }
+    },
+    "CPU": {
+      "Classes": "8,454",
+      "Threads": {
+        "Currently live": "14",
+        "Currently live daemons": "6",
+        "Peak": "31",
+        "Total created": "48"
+      }
+    }
+  },
+  "stress test: local database with 11,000 accounts and 10,000 transactions": {
+    "CPU usage chart": "CPU usage chart 2",
+    "Thread Count chart": "Thread Count chart 2",
+    "Events": {
+      "34m 11s": "application launched",
+      "34m 14s": "login menu loaded",
+      "34m 18s": "logged in",
+      "34m 20s": "sorted accounts by type",
+      "34m 25s": "reversed sort of accounts by type",
+      "34m 27s": "sorted accounts by ID",
+      "34m 29s": "clicked on an account to view account details",
+      "34m 30s": "returned to account list",
+      "34m 34s": "viewed all transactions",
+      "34m 37s": "returned to account list",
+      "35m 1s": "shut down application"
+    },
+    "Memory": {
+      "Heap Memory": {
+        "Used": "158MB",
+        "Allocated": "207MB",
+        "Limit": "910MB"
+      },
+      "Non-Heap Memory": {
+        "Used": "70 MB",
+        "Allocated": "71MB",
+        "Limit": "unknown"
+      }
+    },
+    "CPU": {
+      "Classes": "8,456",
+      "Threads": {
+        "Currently live": "14",
+        "Currently live daemons": "6",
+        "Peak": "31",
+        "Total created": "88"
+      }
+    }
+  },
+  "Stopwatch test":{}
+}
+}

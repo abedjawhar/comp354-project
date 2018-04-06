@@ -58,3 +58,11 @@ run {
     environment "db", "sqlite/run/mymoney.db"
     classpath += files('config/run/log')
 }
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'com.github.comp354project.Main'
+    }
+    baseName = 'MyMoney'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}

@@ -165,10 +165,10 @@ This document contains an overarching test plan, which seeks to outline each tes
 The system test plan has been split into five subsystems:
 
 \begin{itemize}
-    \item \textbf{Functional Testing:} This test subsystem seeks to certify the functionality of the software against the requirements set in the Requirements Specification. This category will use black-box testing as its strategy, ignoring the design document and instead purely basing itself off of what the software is expected to do. In its execution, a test will typically first identify how the software should perform, verifying the functionality and reliability of the software given valid user behaviour, and then robustness given invalid user behaviour.
+    \item \textbf{Functional Testing:} This test subsystem seeks to certify the functionality of the software against the use cases in the Requirements Specification. This category will use black-box testing as its strategy, verifying the usability given different inputs and regardless of the implementation of the sfotware. In its execution, a developer running such a test will typically first identify how the software should perform. Then, he or she verifies the functionality and reliability of the software given valid user behaviour, and then checks for robustness given invalid user behaviour.
     \item \textbf{Structural Testing:} This test subsystem seeks to verify the structure and code logic of the software. We ensure here that each part of the code functions as expected given both valid and invalid input, and test the behaviour of the system in unexpected states. This will let us confirm the valid flow of our code, and ensure logic faults are caught. For the execution of the test, we will use JUnit to create individual tests for each case. Each test will have an initial setup phase, a test phase, and a teardown phase, to ensure independence of state between each test. A test will also use Mockito, a mocking library, to ensure that the failure of some other, unrelated component of the code does not affect the performance of the tested component in each test.
     \item \textbf{Performance Testing:} This test subsystem seeks to measure the behaviour of the software in extreme states, when under particular workloads or dealing with extremely large datasets. It is useful for testing a number of our non-functional requirements, notably reliability, scalability, and, obviously, performance. In its execution, The tests measure performance statistics given a normal or 'control' environment, then compare it to the performance statistic given a particular dataset or workload.
-    \item \textbf{Acceptance Testing:} This test subsystem seeks to meet the requirements of the use cases in the requirements set in the Requirements Specification. This is also a black-box testing category, as in functional testing, but unlike the aforementioned, we are instead performing a validation of the system: is our system actually what the user needs? In its execution, each test will typically follow a use case and verify that the needs of the user are met and further usability in the domain of the use case is available.
+    \item \textbf{Acceptance Testing:} This test subsystem seeks to meet the requirements of the use cases in the requirements set in the Requirements Specification. This is also a black-box testing category, as in functional testing, but unlike the aforementioned, we are instead performing a validation of the system: is our system actually what the user needs? In its execution, the system is given to a user, who will assert whether his needs are met and correspond to what how he or she expects the software to function.
     \item \textbf{Installation Testing:} This test subsystem seeks to verify that the installation process is both successful and easy in the platforms to be supported. This means ensuring that the choices taken by the user are respected (location of installation, installation just for one user or for whole computer...), verify that all dependent files and libraries are successfully linked and loaded, and valid configurations and connectivity to the database. The execution of this category is simply an activity wherein the installation process is attempted in a particular environment, testing all decisions and options available in the installation.
 \end{itemize}
 
@@ -180,8 +180,9 @@ The system test plan has been split into five subsystems:
 \subsection{Unit Test cases}
 \input{test/all_unit}
 
-
 \section{Performance Testing}
+\input{test/all_performance}
+
 \section{Acceptance Testing}
 \section{Installation Testing}
 
