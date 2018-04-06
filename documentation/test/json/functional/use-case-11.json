@@ -1,0 +1,46 @@
+{
+  "useCase" : "Search transaction by existing category",
+  "testCases" : {
+    "Filter transactions by category in all transactions view": {
+      "description": "The All Transactions view should let filter by categories",
+      "input": [
+        "Click the button 'View All Transactions'",
+        "Input a category in the 'category' field"
+      ],
+      "output": [
+        "Only the categories starting with what was inputted should be displayed"
+      ]
+    },
+    "Filter transactions by category in detailed account view": {
+      "description": "he accounts details view should let filter by categories",
+      "input": [
+        "Select an account by double clicking on a row",
+        "Input a category in the 'category' field"
+      ],
+      "output": [
+        "Only the categories starting with what was inputted should be displayed"
+      ]
+    },
+    "An empty search should return all transactions": {
+      "description": "When the category field is empty, all transactions should be shown",
+      "input": [
+        "Click the button 'View All Transactions'",
+        "Input a category in the 'category' field",
+        "Clear the category field"
+      ],
+      "output": [
+        "All transactions from before the filtering should be shown"
+      ]
+    },
+    "A search with a non-existing category should yield no result": {
+      "description": "If no categories match the category filter, no transactions should be shown",
+      "input": [
+        "Click the button 'View All Transactions'",
+        "Input a category that does not exist in the 'category' field"
+      ],
+      "output": [
+        "No transactions should be shown"
+      ]
+    }
+  }
+}
