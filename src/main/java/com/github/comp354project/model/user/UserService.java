@@ -11,6 +11,7 @@ import com.github.comp354project.model.exceptions.ValidationException;
 import com.github.comp354project.model.validators.IUserValidator;
 import com.github.comp354project.model.validators.IUsernameValidator;
 import com.github.comp354project.model.validators.ValidatorFactory;
+import com.github.comp354project.utils.Timing;
 import com.google.common.base.Strings;
 import com.j256.ormlite.dao.Dao;
 import org.apache.logging.log4j.LogManager;
@@ -21,6 +22,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Timing
 public class UserService implements IUserService {
     private static final Logger logger = LogManager.getLogger(UserService.class);
     private Dao<User, Integer> userDao;

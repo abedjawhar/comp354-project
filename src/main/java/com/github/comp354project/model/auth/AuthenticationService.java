@@ -7,6 +7,7 @@ import com.github.comp354project.model.user.User;
 import com.github.comp354project.model.validators.IPasswordValidator;
 import com.github.comp354project.model.validators.IUsernameValidator;
 import com.github.comp354project.model.validators.ValidatorFactory;
+import com.github.comp354project.utils.Timing;
 import com.j256.ormlite.dao.Dao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,6 +17,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Timing
 public class AuthenticationService implements IAuthenticationService {
     private static final Logger logger = LogManager.getLogger(AuthenticationService.class);
 

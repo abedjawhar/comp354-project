@@ -1,5 +1,6 @@
 package com.github.comp354project.model.user;
 
+import com.github.comp354project.utils.ProxyFactory;
 import dagger.Module;
 import dagger.Provides;
 
@@ -14,6 +15,6 @@ public class UserServiceModule {
     @Provides
     @Singleton
     static IUserService provideUserService(UserService userService) {
-        return userService;
+        return ProxyFactory.newInstance(userService, IUserService.class);
     }
 }

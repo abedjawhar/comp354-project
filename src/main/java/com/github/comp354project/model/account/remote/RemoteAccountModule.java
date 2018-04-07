@@ -1,5 +1,6 @@
 package com.github.comp354project.model.account.remote;
 
+import com.github.comp354project.utils.ProxyFactory;
 import dagger.Module;
 import dagger.Provides;
 
@@ -7,6 +8,6 @@ import dagger.Provides;
 public class RemoteAccountModule {
     @Provides
     static IRemoteAccountService provideRemoteAccountService(RemoteAccountService remoteAccountService){
-        return remoteAccountService;
+        return ProxyFactory.newInstance(remoteAccountService, IRemoteAccountService.class);
     }
 }

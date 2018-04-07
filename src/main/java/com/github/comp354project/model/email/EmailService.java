@@ -1,5 +1,7 @@
 package com.github.comp354project.model.email;
 
+import com.github.comp354project.utils.Timing;
+
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -13,6 +15,7 @@ import javax.mail.internet.MimeMultipart;
 import java.io.File;
 import java.util.Properties;
 
+@Timing
 public class EmailService implements IEmailService {
 
     private Session session;

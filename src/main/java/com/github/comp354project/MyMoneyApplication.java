@@ -2,6 +2,7 @@ package com.github.comp354project;
 import com.github.comp354project.model.account.Account;
 import com.github.comp354project.model.auth.SessionManager;
 import com.github.comp354project.model.user.User;
+import com.github.comp354project.utils.Timing;
 import com.github.comp354project.viewController.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -22,6 +23,7 @@ import org.apache.logging.log4j.LogManager;
 import java.io.IOException;
 import java.util.ArrayList;
 
+@Timing
 public class MyMoneyApplication extends Application {
     private static final Logger logger = LogManager.getLogger(MyMoneyApplication.class);
 

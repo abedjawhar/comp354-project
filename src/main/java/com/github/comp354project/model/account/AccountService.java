@@ -7,6 +7,7 @@ import com.github.comp354project.model.exceptions.DatabaseException;
 import com.github.comp354project.model.exceptions.ValidationError;
 import com.github.comp354project.model.exceptions.ValidationException;
 import com.github.comp354project.model.user.User;
+import com.github.comp354project.utils.Timing;
 import com.j256.ormlite.dao.Dao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+@Timing
 public class AccountService implements IAccountService {
     private static final Logger logger = LogManager.getLogger(AccountService.class);
 

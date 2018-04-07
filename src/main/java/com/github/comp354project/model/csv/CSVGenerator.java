@@ -1,6 +1,7 @@
 package com.github.comp354project.model.csv;
 
 import com.github.comp354project.model.account.Transaction;
+import com.github.comp354project.utils.Timing;
 import com.github.comp354project.viewController.TransactionTableController;
 
 import javax.inject.Inject;
@@ -13,6 +14,7 @@ import java.time.Instant;
 import java.util.Collection;
 import java.util.Date;
 
+@Timing
 public class CSVGenerator implements ICSVGenerator {
     private static final SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SSS");
 
