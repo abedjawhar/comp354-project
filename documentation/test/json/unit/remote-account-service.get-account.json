@@ -1,7 +1,7 @@
 {
   "testerName": "Abed Jawhar",
   "testDate": "3/13/18",
-  "className": "com.github.comp354project.model.account.remote",
+  "className": "com.github.comp354project.model.account.remote.RemoteAccountService",
   "methodName": "getAccount(GetRemoteAccountRequest)",
   "purpose": "This test suite tests fetching an account in the 'API' that connects to other systems",
   "useCases": [
