@@ -22,7 +22,12 @@ public class CSVGenerator implements ICSVGenerator {
     @Override
     public File generateCSV(Collection<TransactionTableController.TransactionDisplayModel> transactions) throws IOException {
         String date = format.format(new Date());
-        String filename = String.format("temp/%s.csv",date );
+        String dirName = "temp/";
+        File dir = new File(dirName);
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
+        String filename = String.format("%s%s.csv",dirName, date);
         File file = new File(filename);
         PrintWriter pw = new PrintWriter(file);
         pw.append(date).append("\n");

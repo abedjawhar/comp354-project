@@ -47,22 +47,37 @@ task wrapper(type: Wrapper) {
 }
 
 test {
-    environment "env", "test"
     environment "db", "sqlite/test/mymoney.db"
     classpath += files("config/test/log")
-    exclude '**/SQLite*'
 }
 
 run {
-    environment "env", "run"
     environment "db", "sqlite/run/mymoney.db"
     classpath += files('config/run/log')
 }
+
 task fatJar(type: Jar) {
     manifest {
         attributes 'Main-Class': 'com.github.comp354project.Main'
     }
-    baseName = 'MyMoney'
+    archiveName = "MyMoney.jar"
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
+
+task zip(type: Zip) {
+    delete fileTree('/') {
+        include '*.zip'
+    }
+    from ('build/libs') {
+        include '*.jar'
+    }
+    from ('sqlite'){
+        include 'mymoney_backup.db'
+        rename { 'mymoney.db' }
+    }
+    archiveName 'MyMoney.zip'
+    destinationDir(file('/'))
+}
+
+tasks.zip.dependsOn(fatJar)

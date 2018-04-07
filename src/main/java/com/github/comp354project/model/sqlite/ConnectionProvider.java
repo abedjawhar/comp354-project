@@ -19,8 +19,8 @@ public class ConnectionProvider implements IConnectionProvider{
 
     @Override
     public JdbcConnectionSource getConnectionSource() {
-        String env = System.getenv("env");
-        String dbName = "jdbc:sqlite:" + System.getenv("db");
+        String dbName = "jdbc:sqlite:sqlite/mymoney.db";
+        System.out.println(dbName);
         try {
             return new JdbcConnectionSource(dbName);
         } catch (SQLException e) {
