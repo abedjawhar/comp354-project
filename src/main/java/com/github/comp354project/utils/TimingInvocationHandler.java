@@ -8,7 +8,8 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 public class TimingInvocationHandler implements InvocationHandler {
-    private static final Logger logger = LogManager.getLogger("Timing");
+    private static final Logger jsonlogger = LogManager.getLogger("TimingJson");
+    private static final Logger columnLogger = LogManager.getLogger("TimingColumn");
 
     private Object obj;
     public  TimingInvocationHandler(Object obj) {
@@ -37,12 +38,19 @@ public class TimingInvocationHandler implements InvocationHandler {
     private void logMessage(Method method, long elapsed){
         double millis = elapsed / 1000000.0;
         double seconds = elapsed / 1000000000.0;
-        String message = String.format("{\"class\":\"%s\", \"method\":\"%s\", \"nano\":\"%d\", \"milli\":\"%f\", \"sec\":\"%f\"}",
+        String jsonMessage = String.format("{\"class\":\"%s\", \"method\":\"%s\", \"nano\":\"%d\", \"milli\":\"%f\", \"sec\":\"%f\"}",
                 obj.getClass().getName(),
                 method.getName(),
                 elapsed,
                 millis,
                 seconds);
-        logger.trace(message);
+        String columnMessage = String.format("%s %s %d %f %f",
+                obj.getClass().getName(),
+                method.getName(),
+                elapsed,
+                millis,
+                seconds);
+        jsonlogger.trace(jsonMessage);
+        columnLogger.trace(columnMessage);
     }
 }
