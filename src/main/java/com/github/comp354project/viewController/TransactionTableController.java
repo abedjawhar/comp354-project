@@ -6,9 +6,11 @@ import com.github.comp354project.model.account.Transaction;
 import com.github.comp354project.model.auth.SessionManager;
 import com.github.comp354project.model.csv.ICSVGenerator;
 import com.github.comp354project.model.email.IEmailService;
+import com.github.comp354project.model.exceptions.ValidationError;
 import com.github.comp354project.model.exceptions.ValidationException;
 import com.github.comp354project.viewController.helper.AlertHelper;
 import com.github.comp354project.viewController.helper.FileHelper;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -183,14 +185,18 @@ public class TransactionTableController implements Initializable {
         try{
             File csv = csvGenerator.generateCSV(tableData);
             String email = sessionManager.getUser().getEmail();
-            if(email == null){
-                email = "";
+            if(Strings.isNullOrEmpty(email)){
+                throw ValidationException.builder()
+                        .message("Could not email the statement")
+                        .error(ValidationError.builder()
+                                .parameterName("email")
+                                .message("Empty email").build()).build();
             }
             emailService.sendEmail(email, "Statement", "", csv, "statement.csv");
         }
-        catch (MessagingException e){
+        catch (ValidationException e){
             logger.error(e);
-            AlertHelper.generateErrorAlert("Error", "Could not email the statement", "Empty email address").showAndWait();
+            AlertHelper.generateErrorAlert("Error", e).showAndWait();
         }
         catch (Exception e){
             logger.error(e);
