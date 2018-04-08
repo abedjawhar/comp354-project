@@ -1,0 +1,9 @@
+{
+  "useCase": "Create User Account",
+  "description": "As a user, I would like to be able to create an account",
+  "usability": [
+    "The create account button is visible and easy to find",
+    "Clear error codes were shown when errors were inputted",
+    "The processing is fast enough"
+  ]
+}
