@@ -72,8 +72,8 @@ task zip(type: Zip) {
     from ('build/libs') {
         include '*.jar'
     }
-    from ('sqlite'){
-        include 'mymoney_backup.db'
+    from ('.'){
+        include 'sqlite/mymoney_backup.db'
         rename { 'mymoney.db' }
     }
     archiveName 'MyMoney.zip'

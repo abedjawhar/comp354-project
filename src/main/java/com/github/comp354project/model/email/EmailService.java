@@ -43,7 +43,6 @@ public class EmailService implements IEmailService {
 
     @Override
     public void sendEmail(String email, String subject, String text, File attachment, String attachmentName) throws MessagingException {
-
         //Create the default MimeMessage object.
         Message msg = new MimeMessage(session);
 
