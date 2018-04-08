@@ -1,5 +1,5 @@
 {
-  "useCase" : "Send statement by email",
+  "useCase" : "13. Send statement by email",
   "testCases" : {
     "Send statement by email from All Transactions view": {
       "description": "A statement should be sent by email from the All Transactions view",

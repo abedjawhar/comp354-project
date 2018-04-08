@@ -1,5 +1,5 @@
 {
-  "useCase": "Categorize transaction",
+  "useCase": "9. Categorize transaction",
   "testCases": {
     "Categorize from predefined list": {
       "description": "The user wants to set the category of the transaction from the predefined categories.",

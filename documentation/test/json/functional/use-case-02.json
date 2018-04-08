@@ -1,5 +1,5 @@
 {
-  "useCase" : "Delete User Account",
+  "useCase" : "2. Delete User Account",
   "testCases" : {
     "Password required" : {
       "description" : "The program asks for the user's password before to delete the account",

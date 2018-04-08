@@ -190,30 +190,73 @@ For performance testing, we seek to know the performance of the software in term
 
 \textit{System Resources}
 
+We first provide a small note of static tests concerning the file size and supported platforms. These are in accordance with the Portability and Performance non-functional requirements detailed in the requirements specification document.
+
 \begin{longtable}{|m{4cm}|m{6cm}|l|}
 \hline
 \cellcolor[HTML]{C0C0C0}\textbf{Tester Name} & \multicolumn{2}{p{13cm}|}{Anne-Laure}\\ \hline
 \cellcolor[HTML]{C0C0C0}\textbf{Test Date} & \multicolumn{2}{p{13cm}|}{7/4/18}\\ \hline
 \cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{2}{p{13cm}|}{Test suit containing the static testing of performance.}\\ \hline
 \cellcolor[HTML]{C0C0C0}\textbf{Quality tested} & \cellcolor[HTML]{C0C0C0}\textbf{Expected value} & \cellcolor[HTML]{C0C0C0}\textbf{Actual value}\\ \hline
-\cellcolor[HTML]{C0C0C0}\textbf{Zip file size} & <50MB & 21.6MB \\ \hline
- \cellcolor[HTML]{C0C0C0}\textbf{full system size} & <50MB & 23.5MB + database size \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Zip file size} & $<$50MB & 21.6MB \\ \hline
+ \cellcolor[HTML]{C0C0C0}\textbf{full system size} & $<$50MB & 23.5MB + database size \\ \hline
  \cellcolor[HTML]{C0C0C0}\textbf{Supported platforms} & Linux, Mac, Windows & Linux, Mac, Windows\\ \hline
-%   \cellcolor[HTML]{C0C0C0}\textbf{OpenJDK version} & \multicolumn{1}{p{13cm}|}{1.8.0\_144}\\ \hline
-%   \cellcolor[HTML]{C0C0C0}\textbf{Profiler} & \multicolumn{1}{p{13cm}|}{YourKit Java Profiler 2017.02-b75}\\ \hline
 \end{longtable}
 
-We opted for using a java heap profiler (YourKit Java Profiler) to profile the CPU and memory usage of the system given a particular database, and when applying modifications or queries to the database. We have created databases with an varying number of bank accounts and transactions, some exceeding what would be considered a "reasonable" quantity of accounts and transactions for an average user. We then compare statistics on the state of the system as various functionalities of the system (adding and removing accounts, sorting transactions, searching...) were used. We reached the conclusion that our application was extremely well capable of bearing a huge amount of accounts and transactions, and was efficient in its memory and CPU usage.
-Below is a set of charts connected to a stress test profiled with YourKit Java Profiler. See the list of test cases after the charts to read more about the conditions of each test.
+We now enter dynamic testing for system resources. We opted for using a java heap profiler (YourKit Java Profiler) to profile the CPU and memory usage of the system given a particular database, and when applying modifications or queries to the database. We have created databases with an varying number of bank accounts and transactions, some exceeding what would be considered a "reasonable" quantity of accounts and transactions for an average user. We then perform stress tests on the databases, and compare statistics on the state of the system as various functionalities of the system (adding and removing accounts, sorting transactions, searching...) were used. We reached the conclusion that our application was extremely well capable of bearing a huge amount of accounts and transactions, and was efficient in its memory and CPU usage.
+Below is a set of charts connected to a stress test profiled with YourKit Java Profiler. See the list of test cases after the charts to read more about the conditions of each test and the events logged.
 
-To ensure that we were also not only performing well in terms of system resources
+% for these files, see the figs in documentation/figs/test
+\begin{figure}[htbp]
+    \includegraphics[width=\linewidth]{Chart--CPU-time_1.png}
+    \caption{CPU usage for stress test 1: control test}
+    \label{fig:CPU1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \includegraphics[width=\linewidth]{Chart--CPU-time_2.png}
+    \caption{CPU usage for stress test 2: test with database containing 11,000 bank accounts}
+    \label{fig:CPU2}
+\end{figure}
+
+\begin{figure}[htbp]
+    \includegraphics[width=\linewidth]{Chart--CPU-time_3.png}
+    \caption{CPU usage for stress test 3: test with database containing 11,000 bank accounts and 10,000 transactions}
+    \label{fig:CPU3}
+\end{figure}
+
+
+\begin{figure}[htbp]
+    \includegraphics[width=\linewidth]{Chart--Threads_1.png}
+    \caption{Thread count for stress test 1: control test}
+    \label{fig:Thread1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \includegraphics[width=\linewidth]{Chart--Threads_2.png}
+    \caption{Thread count for stress test 2: test with database containing 11,000 bank accounts}
+    \label{fig:Thread2}
+\end{figure}
+
+\begin{figure}[htbp]
+    \includegraphics[width=\linewidth]{Chart--Threads_3.png}
+    \caption{Thread count for stress test 3: test with database containing 11,000 bank accounts and 10,000 transactions}
+    \label{fig:Thread3}
+\end{figure}
+
+\clearpage
+
 \input{test/all_performance}
+
+\textit{Responsiveness}
+
+Finally, the series of tests performed for responsiveness. Here, we used stopwatch testing, where each call and return to a service is logged by a stopwatch (the stopwatch used is from java's standard library). We ran these functions a multitude of times, and computed the average computing time for each method. We also averaged those for each class, and computed the average computing time for all functions in a specific class. We notice here that the connection to the database is extremely fast even on a fairly underpowered computer, with all database functions staying under half a second. The only function that fails the performance requirement (staying under 2 seconds of computing time) here is the send email function, however that could potentially be due to internet speeds or poor optimisation on the side of the email library we use. Hence, we consider that we have met 90\% of the performance non-functional requirement as set in the requirements specification.
+
+\input{test/all_stopwatch}
+
 
 \section{Acceptance Testing}
 \section{Installation Testing}
-
-\subsection{Glossary} \label{glossary}
-\input{test/all_glossary}
 
 \section{References}
 

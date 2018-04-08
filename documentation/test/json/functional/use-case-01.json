@@ -1,5 +1,5 @@
 {
-  "useCase" : "Create User Account",
+  "useCase" : "1. Create User Account",
   "testCases" : {
     "First name, last name, username and password are mandatory" : {
       "description" : "The user cannot sign up without providing a valid first name, last name, a username and a password",

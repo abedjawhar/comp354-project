@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.util.Locale;
 
 public class TimingInvocationHandler implements InvocationHandler {
     private static final Logger jsonlogger = LogManager.getLogger("TimingJson");
@@ -38,18 +39,19 @@ public class TimingInvocationHandler implements InvocationHandler {
     private void logMessage(Method method, long elapsed){
         double millis = elapsed / 1000000.0;
         double seconds = elapsed / 1000000000.0;
-        String jsonMessage = String.format("{\"class\":\"%s\", \"method\":\"%s\", \"nano\":\"%d\", \"milli\":\"%f\", \"sec\":\"%f\"}",
+        String jsonMessage = String.format(Locale.US,"{\"class\":\"%s\", \"method\":\"%s\", \"nano\":\"%d\", \"milli\":\"%f\", \"sec\":\"%f\"}",
                 obj.getClass().getName(),
                 method.getName(),
                 elapsed,
                 millis,
                 seconds);
-        String columnMessage = String.format("%s %s %d %f %f",
+        String columnMessage = String.format(Locale.US,"%s %s %d %f %f",
                 obj.getClass().getName(),
                 method.getName(),
                 elapsed,
                 millis,
                 seconds);
+        System.out.println(columnMessage);
         jsonlogger.trace(jsonMessage);
         columnLogger.trace(columnMessage);
     }

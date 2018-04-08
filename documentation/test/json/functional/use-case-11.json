@@ -1,5 +1,5 @@
 {
-  "useCase" : "Search transaction by existing category",
+  "useCase" : "11. Search transaction by existing category",
   "testCases" : {
     "Filter transactions by category in all transactions view": {
       "description": "The All Transactions view should let filter by categories",

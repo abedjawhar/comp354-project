@@ -1,5 +1,5 @@
 {
-  "useCase" : "Add Bank Account to a User Account",
+  "useCase" : "3. Add Bank Account to a User Account",
   "testCases" : {
     "Add a valid bank account to a user": {
       "description": "A valid bank account should be added to the user",

@@ -1,0 +1,27 @@
+{
+  "testerName": "Anne-Laure",
+  "testDate": "7/4/18",
+  "purpose": "This test suite contains the average time of lengths obtained through stopwatch testing.",
+  "systemSpec": {
+    "OS": "GNU/Linux Fedora 27 x64, version 4.13.9-300",
+    "RAM": "4GB",
+    "Graphics Card": "Intel Celeron 3205U @ 1.50GHz x 2",
+    "OpenJDK version": "1.8.0\\_144",
+    "Profiler": "YourKit Java Profiler 2017.02-b75"
+  },
+  "average running time in seconds for each service method": {
+    "com.github.comp354project.model.email.EmailService:sendEmail" : "5.88586",
+    "com.github.comp354project.model.csv.CSVGenerator:generateCSV" : "0.015645",
+    "com.github.comp354project.model.user.UserService:deleteBankAccount" : "0.377784",
+    "com.github.comp354project.model.account.AccountService:addAccount" : "0.21009",
+    "com.github.comp354project.model.user.UserService:updateUser" : "0.022402",
+    "com.github.comp354project.model.sqlite.ConnectionProvider:getConnectionSource" : "0.187765"
+  },
+  "average method running time in seconds for each class": {
+    "com.github.comp354project.model.user.UserService" : "0.400186",
+    "com.github.comp354project.model.csv.CSVGenerator" : "0.015645",
+    "com.github.comp354project.model.account.AccountService" : "0.21009",
+    "com.github.comp354project.model.sqlite.ConnectionProvider" : "0.187765",
+    "com.github.comp354project.model.email.EmailService" : "5.88586"
+}
+}

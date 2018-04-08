@@ -490,7 +490,7 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
     \item The System will notify the user the his username is already used by an existing user account, and return to the account creation menu.
     \item The System will notify the user of unmet account requirement, then return to the account creation menu. }
     \addrow{Priority}{High}
-    \addrow{Traces to Test Cases}{}
+    \addrow{Traces to Test Cases}{Functional test case 1}
 \end{usecase}
 
 \begin{usecase}{Delete User Account}
@@ -515,7 +515,7 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
      \addmulrow{Alternate Flows}{
      \item Incorrect password error message will be displayed, the user account will not be deleted, and the user will be returned to the user account details view.}
      \addrow{Priority}{Medium}
-     \addrow{Traces to Test Cases}{}
+     \addrow{Traces to Test Cases}{Functional test case 2}
 \end{usecase}
 
 
@@ -545,7 +545,7 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
         \item the account ID is validated but found to have been already associated with this user account; this error is displayed by the system, which then returns to the account list menu.
         \item the accound ID is validated and queried to the bank, which replies with an error. The system displays this error to the user then returns to the account list menu.}
     \addrow{Priority}{High}
-    \addrow{Traces to Test Cases}{}
+    \addrow{Traces to Test Cases}{Functional test case 3}
 \end{usecase}
 
 \begin{usecase}{Remove Bank Account from a User Account}
@@ -569,7 +569,7 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
      \item No account is deleted and the system ignores the call, staying in the accounts list menu.
      }
      \addrow{Priority}{High}
-     \addrow{Traces to Test Cases}{}
+     \addrow{Traces to Test Cases}{Functional test case 4}
 \end{usecase}
 
 \begin{usecase}{View Transactions for Specific Bank Account}
@@ -593,7 +593,7 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
     System displays the detailed view of the bank account nonetheless, but the list of transaction is empty.
     }
     \addrow{Priority}{High}
-    \addrow{Traces to Test Cases}{}
+    \addrow{Traces to Test Cases}{Functional test case 5}
 \end{usecase}
 
 \begin{usecase}{View All Transactions from all Bank Accounts}
@@ -618,7 +618,7 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
     \item System displays an empty list of transactions.
     }
     \addrow{Priority}{High}
-    \addrow{Traces to Test Cases}{}
+    \addrow{Traces to Test Cases}{Functional test case 6}
 \end{usecase}
 
 \begin{usecase}{Update User Account}
@@ -650,7 +650,7 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
     \item Error message is displayed prompting user that his email address is invalid nd user account is not updated.
     }
     \addrow{Priority}{Medium}
-    \addrow{Traces to Test Cases}{}
+    \addrow{Traces to Test Cases}{Functional test case 7}
 \end{usecase}
 
 
@@ -675,7 +675,7 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
     \addmulrow{Alternate Flows}{
       \item The system will display an empty transaction list.}
     \addrow{Priority}{High}
-    \addrow{Traces to Test Cases}{}
+    \addrow{Traces to Test Cases}{Functional test case 8}
 \end{usecase}
 
 \begin{usecase}{Categorize Transaction}
@@ -704,7 +704,7 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
         \item The system rejects the call and leaves the category unchanged.
      }
      \addrow{Priority}{Medium}
-     \addrow{Traces to Test Cases}{}
+     \addrow{Traces to Test Cases}{Functional test case 9}
 
 \end{usecase}
 
@@ -731,7 +731,7 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
     \item no transactions are displayed.
     }
     \addrow{Priority}{Low}
-    \addrow{Traces to Test Cases}{}
+    \addrow{Traces to Test Cases}{10}
 \end{usecase}
 
 \begin{usecase}{Filter Transactions by Category}
@@ -757,7 +757,7 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
     \addmulrow{Alternate Flows}{
     \item No transactions are displayed.}
     \addrow{Priority}{High}
-    \addrow{Traces to Test Cases}{}
+    \addrow{Traces to Test Cases}{Functional test case 11}
 \end{usecase}
 
 \begin{usecase}{Export Statement as a CSV file}
@@ -789,7 +789,7 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
     \item The save button is greyed out, preventing the user from selecting that path and thus requiring a valid path to be entered to move on.
     \item A confirmation box should ask the user if he wants to overwrite a file if a file already exists in the specified location.}
     \addrow{Priority}{Low}
-    \addrow{Traces to Test Cases}{}
+    \addrow{Traces to Test Cases}{Functional test case 12}
 \end{usecase}
 
 \begin{usecase}{Email Statement}
@@ -815,7 +815,7 @@ Below is figure \ref{fig:use-case-diagram} which represents our use case diagram
     \item the System notifies the user that his email address is empty and doesn't send the CSV file.
     }
     \addrow{Priority}{Low}
-    \addrow{Traces to Test Cases}{}
+    \addrow{Traces to Test Cases}{Functional test case 13}
 \end{usecase}
 
 \clearpage

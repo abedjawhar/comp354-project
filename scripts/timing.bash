@@ -13,11 +13,11 @@ awk -F ' ' '
              END{
                  print "method avg.sec";
                  for (a in m_sec) {
-                     print a " " m_sec[a] / m_count[a];
+                     print a " " m_sec[a];
                  }
                  print "class avg.sec";
                  for (a in c_sec) {
-                      print a " " c_sec[a] / c_count[a];
+                      print a " " c_sec[a];
                  }
              }
          ' '../log/run/timing_column.log' > $file

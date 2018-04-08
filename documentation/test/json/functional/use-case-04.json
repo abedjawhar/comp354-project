@@ -1,5 +1,5 @@
 {
-  "useCase" : "Remove Bank Account from a User Account",
+  "useCase" : "4. Remove Bank Account from a User Account",
   "testCases" : {
     "Remove a bank account from a user": {
       "description": "An existing bank account should be removed",

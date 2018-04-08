@@ -1,5 +1,5 @@
 {
-  "useCase" : "View Transactions for Specific Bank Account",
+  "useCase" : "5. View Transactions for Specific Bank Account",
   "testCases" : {
     "Selection of a bank account is mandatory" : {
       "description" : "The user select an exsiting bank account.",
@@ -7,13 +7,13 @@
         "Click a bank account from bank account list",
         "Click 'View All Transactions'"
       ],
-      "output": [       
+      "output": [
         "Transaction list is displayed for selected bank account",
         "Empty list is shown if there is no transactions"
       ]
     }
-    
-    
-    
+
+
+
   }
 }

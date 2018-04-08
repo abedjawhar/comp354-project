@@ -1,5 +1,5 @@
 {
-  "useCase": "Filter transactions by date range",
+  "useCase": "10. Filter transactions by date range",
   "testCases": {
     "Filter transactions with valid date range": {
       "description": "The user wants to see the transactions within a valid date range.",

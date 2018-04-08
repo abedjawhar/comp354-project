@@ -1,5 +1,5 @@
 {
-  "useCase": "Sort transactions by any attribute",
+  "useCase": "8. Sort transactions by any attribute",
   "testCases": {
     "Sort by Date": {
       "description": "The user wants to see the transactions sorted by date.",

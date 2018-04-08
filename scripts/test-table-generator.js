@@ -69,7 +69,8 @@ function generateTableTop() {
     for (let i = 0; i < maxTestVarCount; i++) {
         cols += 'l|';
     }
-    return `\\subsubsection{${json.className}.${json.methodName}}` + '\n'
+    const str = json.className.substring(json.className.lastIndexOf(".") + 1);
+    return `\\subsubsection{${str}.${json.methodName}}` + '\n'
         + `\\begin{longtable}{|m{${firstColSize}}|l|${cols}}` + '\n'
         + `\\caption[]{${json.methodName}}` + '\n'
         + `\\\\\\hline`;
