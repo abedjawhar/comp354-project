@@ -20,11 +20,22 @@ table += '\\end{longtable}\n\n';
 firstColSize = '9cm';
 dataColSize = '8cm';
 table += generateTableTop(titleTableColCount) + '\n';
-
+table +=  `\\cellcolor[HTML]{C0C0C0}\\textbf{Service method} & \\multicolumn{1}`
+      + `{p{${dataColSize}}|}{\\cellcolor[HTML]{C0C0C0}\\textbf{Time in seconds}}\\\\ \\hline` + '\n';
 const methodTimes = json["average running time in seconds for each service method"];
-Object.keys(methodTimes).forEach((method) => {
+      Object.keys(methodTimes).forEach((method) => {
+        const str = method.substring(method.lastIndexOf(".") + 1);
+         table += generateRow(str, methodTimes[method], titleTableColCount) + '\n'
+      });
+table += '\\end{longtable}\n\n';
+table += generateTableTop(titleTableColCount) + '\n';
+table +=  `\\cellcolor[HTML]{C0C0C0}\\textbf{Service class} & \\multicolumn{1}`
+      + `{p{${dataColSize}}|}{\\cellcolor[HTML]{C0C0C0}\\textbf{Time in seconds}}\\\\ \\hline` + '\n';
+
+const classTimes = json["average method running time in seconds for each class"];
+Object.keys(classTimes).forEach((method) => {
   const str = method.substring(method.lastIndexOf(".") + 1);
-   table += generateRow(str, methodTimes[method], titleTableColCount) + '\n'
+   table += generateRow(str, classTimes[method], titleTableColCount) + '\n'
 });
 
 table += '\\end{longtable}\n\n';
