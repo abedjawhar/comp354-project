@@ -1,0 +1,6 @@
+{
+  "CPU": "Central Processing Unit. Handles the instructions of a computer program",
+  "Memory": "Volatile memory used by the Operating System and software",
+  "Heap-memory": "Pool of memory from which a program can request memory",
+  "Thread": "Small sequence of programmed instructions"
+}

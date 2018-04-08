@@ -1,0 +1,40 @@
+{
+  "useCase" : "Add Bank Account to a User Account",
+  "testCases" : {
+    "Add a valid bank account to a user": {
+      "description": "A valid bank account should be added to the user",
+      "input": [
+        "Go to the main screen",
+        "Input an account ID in the 'Enter Account ID' field",
+        "Click the 'Add' button"
+      ],
+      "output": [
+        "A row should be added in the table of account"
+      ]
+    },
+    "Add a same account to a user": {
+      "description": "An account should not be added to the same user twice",
+      "input": [
+        "Go to the main screen",
+        "Input an account ID in the 'Enter Account ID' field",
+        "Click the 'Add' button"
+      ],
+      "output": [
+        "Failure, the account is not added",
+        "An error window displays all the errors"
+      ]
+    },
+    "Add an account used by another user": {
+      "description": "An account used by another user should not be added to another user",
+      "input": [
+        "Go to the main screen",
+        "Input an account ID in the 'Enter Account ID' field",
+        "Click the 'Add' button"
+      ],
+      "output": [
+        "Failure, the account is not added",
+        "An error window displays all the errors"
+      ]
+    }
+  }
+}
