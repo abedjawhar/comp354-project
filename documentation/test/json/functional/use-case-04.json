@@ -1,0 +1,26 @@
+{
+  "useCase" : "Remove Bank Account from a User Account",
+  "testCases" : {
+    "Remove a bank account from a user": {
+      "description": "An existing bank account should be removed",
+      "input": [
+        "Go to the main screen",
+        "Select a line on the accounts table",
+        "Click the 'Remove Selected' button"
+      ],
+      "output": [
+        "The row should be removed in the table of account"
+      ]
+    },
+    "Remove no bank account from a user": {
+      "description": "If no account is selected, no accounts should be removed",
+      "input": [
+        "Go to the main screen",
+        "Click the 'Remove Selected' button"
+      ],
+      "output": [
+        "Nothing happens because no account was selected"
+      ]
+    }
+  }
+}

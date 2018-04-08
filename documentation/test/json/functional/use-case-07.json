@@ -1,13 +1,12 @@
 {
-  "useCase" : "Update User Account",
-  "testCases" : {
+  "useCase": "Update User Account",
+  "testCases": {
     "First name is mendatory": {
       "description": "First name is required in user profile",
       "input": [
         "Click the textfield 'First anme'",
         "Input first name",
         "Click the button 'Save changes'"
-
       ],
       "output": [
         "New first name is saved if it is not empty",
@@ -26,7 +25,6 @@
         "Error message is shown if the text field is empty."
       ]
     },
-
     "First name is valid": {
       "description": "Validating first name",
       "input": [
@@ -35,111 +33,100 @@
         "Click the button 'Save changes'"
       ],
       "output": [
-            "New first name is saved if it is not empty",
-            "Error message is shown if the input does not pass the validation."
-          ]
+        "New first name is saved if it is not empty",
+        "Error message is shown if the input does not pass the validation."
+      ]
     },
-
     "Last name is valid": {
-        "description": "Validating last name",
-        "input": [
-          "Click the textfield 'Last anme'",
-          "Input last name",
-          "Click the button 'Save changes'"
-        ],
-        "output": [
-              "New last name is saved if it is not empty",
-              "Error message is shown if the input does not pass the validation."
-            ]
-      },
-
-      "Password input validation": {
-        "description": "Validate password input",
-        "input": [
-          "Click the textfield 'Update Password' or 'Confirm New Password'",
-          "Input new password"
-        ],
-        "output": [
-              "New password is accepted if the password is valid.",
-              "Error message is shown if the password is not valid."
-            ]
-      },
-
-      "Two password input matches": {
-        "description": "Input of two passwords should match",
-        "input": [
-          "Click the textfield 'Update Password'",
-          "Input new password",
-          "Click the textfield 'Confirm New Password'",
-          "Input new password the second time",
-          "Click the button 'Save changes'"
-        ],
-        "output": [
-              "New password is saved if two input matches",
-              "Error message is shown if two input does not match."
-            ]
-      },
-      
-      "Email address is valid": {
-        "description": "Validating email address",
-        "input": [
-          "Click the textfield 'Email'",
-          "Input email address",
-          "Click the button 'Save changes'"
-        ],
-        "output": [
-              "A valid email address is saved",
-              "Error message is shown if the input email address is not valid."
-            ]
-      },
-
-      "Phone number can be saved": {
-        "description": "A phone number can be saved to profile",
-        "input": [
-          "Click the textfield 'Phone Number'",
-          "Input a phone number",
-          "Click the button 'Save changes'"
-        ],
-        "output": [
-              "The phone number can be saved to user profile",
-              "Error message is shown if saving failed."
-            ]
-      },
-
-      "Current address can be saved": {
-        "description": "An address can be saved to profile",
-        "input": [
-          "Click the textfield 'Current address'",
-          "Input an address",
-          "Click the button 'Save changes'"
-        ],
-        "output": [
-              "The address can be saved to user profile",
-              "Error message is shown if saving failed."
-            ]
-      },
-
+      "description": "Validating last name",
+      "input": [
+        "Click the textfield 'Last anme'",
+        "Input last name",
+        "Click the button 'Save changes'"
+      ],
+      "output": [
+        "New last name is saved if it is not empty",
+        "Error message is shown if the input does not pass the validation."
+      ]
+    },
+    "Password input validation": {
+      "description": "Validate password input",
+      "input": [
+        "Click the textfield 'Update Password' or 'Confirm New Password'",
+        "Input new password"
+      ],
+      "output": [
+        "New password is accepted if the password is valid.",
+        "Error message is shown if the password is not valid."
+      ]
+    },
+    "Two password input matches": {
+      "description": "Input of two passwords should match",
+      "input": [
+        "Click the textfield 'Update Password'",
+        "Input new password",
+        "Click the textfield 'Confirm New Password'",
+        "Input new password the second time",
+        "Click the button 'Save changes'"
+      ],
+      "output": [
+        "New password is saved if two input matches",
+        "Error message is shown if two input does not match."
+      ]
+    },
+    "Email address is valid": {
+      "description": "Validating email address",
+      "input": [
+        "Click the textfield 'Email'",
+        "Input email address",
+        "Click the button 'Save changes'"
+      ],
+      "output": [
+        "A valid email address is saved",
+        "Error message is shown if the input email address is not valid."
+      ]
+    },
+    "Phone number can be saved": {
+      "description": "A phone number can be saved to profile",
+      "input": [
+        "Click the textfield 'Phone Number'",
+        "Input a phone number",
+        "Click the button 'Save changes'"
+      ],
+      "output": [
+        "The phone number can be saved to user profile",
+        "Error message is shown if saving failed."
+      ]
+    },
+    "Current address can be saved": {
+      "description": "An address can be saved to profile",
+      "input": [
+        "Click the textfield 'Current address'",
+        "Input an address",
+        "Click the button 'Save changes'"
+      ],
+      "output": [
+        "The address can be saved to user profile",
+        "Error message is shown if saving failed."
+      ]
+    },
     "Delete user account": {
       "description": "User profile is deleted",
       "input": [
         "Click the button 'Delete User'"
-        
       ],
       "output": [
         "User profile is removed from the database",
         "Error message is shown if deletion fails"
       ],
-
       "Cancel update": {
         "description": "Return to the page of account list",
         "input": [
           "Click the button 'Cancel'"
-        
         ],
         "output": [
-              "Cancel update and return to the page of account list",
-            
-            ]
+          "Cancel update and return to the page of account list"
+        ]
       }
     }
   }
