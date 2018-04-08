@@ -139,7 +139,7 @@ In week 7, the team studied the tasks that were to be done.
 
 \subsubsection{Team Meeting}
 \begin{itemize}
-    \item Discuss was done in the last 2 weeks. What is there left to do?
+    \item Discuss what was done in the last 2 weeks. What is there left to do?
     \item Documenters should discuss the sequence diagrams and how they will be made. 1 could be done as a team during the lab.
     \item Coders should ask questions about the codebase if there is something they need to be explained.
 \end{itemize}
@@ -150,7 +150,7 @@ In week 7, the team studied the tasks that were to be done.
 \end{itemize}
 
 \subsection{Week 8}
-Week 8 was demo week. As a team, we wanted to have about 75%-80% of the work done to present the new features and the Design Document.
+Week 8 was demo week. As a team, we wanted to have about 75\% to 80\% of the work done to present the new features and the Design Document.
 
 \subsubsection{Team Meeting}
 \begin{itemize}
@@ -206,7 +206,6 @@ We needed to complete the remaining tasks.
     \item Mar 6, 2018
         \subitem Create week08.md
         \subitem [DOC] Start Architectural Design in the Design Document
-        \subitem
     \item Mar 7, 2018
         \subitem [DOC] Update tasks for documenters
         \subitem Update iteration02\_tasks.md
@@ -236,8 +235,95 @@ We needed to complete the remaining tasks.
         \subitem [DOC] Add model.auth package class description
         \subitem [DOC] Add exceptions class description
         \subitem [DOC] Add DI terms to glossary
+        \subitem [DOC] Add MVC diagram
 \end{itemize}
 
-\section{Iteration 3}
+\section{Iteration 3: Documenter}
+As a documenter, I worked on the test document.
+Most of the tables that needed to be written were very similar, so I wrote scripts to parse the table information formatted in JSON. That way, it was easier to keep consistent looks and do modifications between everyone's work.
+
+\subsection{Week 10}
+Week 10 was the first week of the final iteration.
+Not much work was done because people studied for the quiz.
+
+\subsubsection{Team Meeting}
+\begin{itemize}
+    \item Choose new roles for the iteration
+    \item Separate the tasks to be done and use cases to be implemented
+    \item Find the best strategy on how to implement the use cases
+\end{itemize}
+
+\subsubsection{Tasks performed}
+\begin{itemize}
+    \item Create the issues in a Github project board to keep track of the statuses of the tasks
+\end{itemize}
+
+\subsection{Week 11}
+I mainly worked on creating a script in javascript to generate our Latex tables from JSON.
+
+\subsubsection{Team Meeting}
+
+We were only 4 present at the meeting.
+
+\begin{itemize}
+    \item Show the progress done in each task
+    \item Study for the quiz
+\end{itemize}
+
+\subsubsection{Tasks performed}
+\begin{itemize}
+    \item Format the template for the test document
+    \item Create script to generate unit test documentation tables
+    \item Write the unit test descriptions for all the test cases
+\end{itemize}
+
+\subsection{Week 12}
+Week 12 was demo week before handing in the project on Sunday.
+We presented the demo and asked many questions on how to write sections of the test document.
+
+\subsubsection{Team Meeting}
+\begin{itemize}
+    \item Present our work for the demo
+    \item Ask questions on functional vs acceptance and performance testing
+    \item Keep track on where everyone is at for their tasks
+\end{itemize}
+
+\subsubsection{Tasks performed}
+\begin{itemize}
+    \item Write functional tests
+    \item Write glossary items
+    \item Fix failing build due to code compilation error
+\end{itemize}
+
+\subsection{Commits}
+\begin{itemize}
+    \item Mar 28, 2018
+        \subitem [DOC] Add test table template
+    \item Mar 30, 2018
+        \subitem [DOC] Add json test definitions for UserService.createUser
+    \item Mar 31, 2018
+        \subitem  [FEAT] Start test table generator
+        \subitem  [FEAT] Complete test table script generator templating
+    \item Apr 1, 2018
+        \subitem [FIX] Fix hardcoded cline in test table generator
+        \subitem [FEAT] Read argument from command line
+        \subitem [DOC] Add delete bank account test doc
+        \subitem [DOC] Add delete bank account test doc latex and pdf
+        \subitem [DOC] Add delete account and update user test documentation
+        \subitem [DOC] Add login and logout session manager test doc
+    \item Apr 3, 2018
+        \subitem [DOC] Add remote account service test doc
+    \item Apr 5, 2018
+        \subitem [FIX] Add missing .java extension to SendMailController
+        \subitem [FIX] Compile errors in TransactionGenerateFileController
+        \subitem [REFACTOR] Append timestamp to generated csv file
+    \item Apr 6, 2018
+        \subitem [DOC] Add use case 11 functional testing
+        \subitem [DOC] Add use case 12 functional testing
+        \subitem [DOC] Add use case 13 functional testing
+    \item Apr 8, 2018
+        \subitem [DOC] Add glossary and glossary table scripts generator
+        \subitem [DOC] Add func test 3 and 4 and generate the func test tex file
+\end{itemize}
 
 \end{document}
