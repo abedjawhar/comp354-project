@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="INFO">
     <Properties>
-        <Property name="filename">log/run/log4j2.log</Property>
+        <Property name="default_filename">log/run/log4j2.log</Property>
+        <Property name="timing_json_filename">log/run/timing_json.log</Property>
+        <Property name="timing_column_filename">log/run/timing_column.log</Property>
     </Properties>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
         </Console>
-        <File name="LogFile" fileName="${filename}" append="false">
+        <File name="LogFile" fileName="${default_filename}" append="false">
             <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+        <File name="TimingJson" fileName="${timing_json_filename}" append="true">
+            <PatternLayout pattern="%msg,%n"/>
+        </File>
+        <File name="TimingColumn" fileName="${timing_column_filename}" append="true">
+            <PatternLayout pattern="%msg%n"/>
         </File>
     </Appenders>
     <Loggers>
@@ -16,5 +24,11 @@
             <AppenderRef ref="Console" />
             <AppenderRef ref="LogFile"/>
         </Root>
+        <logger level="trace" name="TimingJson">
+            <appender-ref ref="TimingJson"/>
+        </logger>
+        <logger level="trace" name="TimingColumn">
+            <appender-ref ref="TimingColumn"/>
+        </logger>
     </Loggers>
 </Configuration>

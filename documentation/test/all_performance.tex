@@ -1,0 +1,131 @@
+\begin{longtable}{|m{4cm}|l|}
+\hline
+\cellcolor[HTML]{C0C0C0}\textbf{Tester Name} & \multicolumn{1}{p{13cm}|}{Anne-Laure}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Test Date} & \multicolumn{1}{p{13cm}|}{5/4/18}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{1}{p{13cm}|}{This test suite contains the series of tests performed with yourKit Java Profiler.}\\ \hline
+\multicolumn{2}{|l|}{\cellcolor[HTML]{C0C0C0}\textbf{System specification}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{OS} & \multicolumn{1}{p{13cm}|}{GNU/Linux Fedora 27 x64, version 4.13.9-300}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{RAM} & \multicolumn{1}{p{13cm}|}{4GB}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Graphics Card} & \multicolumn{1}{p{13cm}|}{Intel Celeron 3205U @ 1.50GHz x 2}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{OpenJDK version} & \multicolumn{1}{p{13cm}|}{1.8.0\_144}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Profiler} & \multicolumn{1}{p{13cm}|}{YourKit Java Profiler 2017.02-b75}\\ \hline
+\end{longtable}
+
+\begin{longtable}{|m{4cm}|l|}
+\hline
+\multicolumn{2}{|l|}{control stress test: local database with 5 accounts and 5 transactions}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{CPU usage chart} & \multicolumn{1}{p{13cm}|}{CPU usage chart 1}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Thread Count chart} & \multicolumn{1}{p{13cm}|}{Thread Count chart 1}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Events} & \multicolumn{1}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}44m 38s: application launched\\ 44m 40s: login menu loaded\\ 44m 45s: logged in\\ 44m 47s: sorted accounts by type\\ 44m 53s: removed bank account 2\\ 44m 58s: added back account 2\\ 45m 02s: viewed all transactions\\ 45m 15s: shut down application\\ \end{tabular}}\\ \hline
+\end{longtable}
+
+\begin{tabularx}{18cm}{  |*{6}{Y|} }
+\cline{1-6}\multicolumn{6}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Memory}}\\ \hline
+\multicolumn{3}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Heap-Memory}}
+& \multicolumn{3}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Non-Heap Memory}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Used}
+& \cellcolor[HTML]{C0C0C0}\textbf{Allocated}
+& \cellcolor[HTML]{C0C0C0}\textbf{Limit}
+& \cellcolor[HTML]{C0C0C0}\textbf{Used}
+& \cellcolor[HTML]{C0C0C0}\textbf{Allocated}
+& \cellcolor[HTML]{C0C0C0}\textbf{Limit} \\\hline
+73MB
+& 140MB
+& 910MB
+& 65 MB
+& 65 MB
+& 65 MB\\ \hline
+\end{tabularx}
+\begin{tabularx}{18cm}{  |*{5}{Y|} }
+\cline{1-5}\multicolumn{5}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{CPU}}\\ \hline
+\multicolumn{1}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Classes}}
+& \multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Threads}}\\ \hline
+\multirow{2}{*}{8,415}& \cellcolor[HTML]{C0C0C0}\textbf{Currently live}
+& \cellcolor[HTML]{C0C0C0}\textbf{Currently live daemons}
+& \cellcolor[HTML]{C0C0C0}\textbf{Peak}
+& \cellcolor[HTML]{C0C0C0}\textbf{Total created} \\
+\cline{2-5}& 11
+& 5
+& 31
+& 53\\ \hline
+\end{tabularx}
+\break \break \break
+\begin{longtable}{|m{4cm}|l|}
+\hline
+\multicolumn{2}{|l|}{stress test: local database with 11,000 accounts and 5 transactions}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{CPU usage chart} & \multicolumn{1}{p{13cm}|}{CPU usage chart 2}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Thread Count chart} & \multicolumn{1}{p{13cm}|}{Thread Count chart 2}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Events} & \multicolumn{1}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}2m 43s: application launched\\ 2m 46s: login menu loaded\\ 2m 51s: logged in\\ 2m 52s: sorted accounts by type\\ 2m 53s: reversed sort of accounts by type\\ 2m 54s: sorted accounts by ID\\ 2m 55s: clicked on an account to view account details\\ 2m 57s: returned to account list\\ 3m 02s: viewed all transactions\\ 3m 15s: shut down application\\ \end{tabular}}\\ \hline
+\end{longtable}
+
+\begin{tabularx}{18cm}{  |*{6}{Y|} }
+\cline{1-6}\multicolumn{6}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Memory}}\\ \hline
+\multicolumn{3}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Heap-Memory}}
+& \multicolumn{3}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Non-Heap Memory}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Used}
+& \cellcolor[HTML]{C0C0C0}\textbf{Allocated}
+& \cellcolor[HTML]{C0C0C0}\textbf{Limit}
+& \cellcolor[HTML]{C0C0C0}\textbf{Used}
+& \cellcolor[HTML]{C0C0C0}\textbf{Allocated}
+& \cellcolor[HTML]{C0C0C0}\textbf{Limit} \\\hline
+123MB
+& 203MB
+& 910MB
+& 67 MB
+& 67 MB
+& 67 MB\\ \hline
+\end{tabularx}
+\begin{tabularx}{18cm}{  |*{5}{Y|} }
+\cline{1-5}\multicolumn{5}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{CPU}}\\ \hline
+\multicolumn{1}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Classes}}
+& \multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Threads}}\\ \hline
+\multirow{2}{*}{8,454}& \cellcolor[HTML]{C0C0C0}\textbf{Currently live}
+& \cellcolor[HTML]{C0C0C0}\textbf{Currently live daemons}
+& \cellcolor[HTML]{C0C0C0}\textbf{Peak}
+& \cellcolor[HTML]{C0C0C0}\textbf{Total created} \\
+\cline{2-5}& 14
+& 6
+& 31
+& 48\\ \hline
+\end{tabularx}
+\break \break \break
+\begin{longtable}{|m{4cm}|l|}
+\hline
+\multicolumn{2}{|l|}{stress test: local database with 11,000 accounts and 10,000 transactions}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{CPU usage chart} & \multicolumn{1}{p{13cm}|}{CPU usage chart 2}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Thread Count chart} & \multicolumn{1}{p{13cm}|}{Thread Count chart 2}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Events} & \multicolumn{1}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}34m 11s: application launched\\ 34m 14s: login menu loaded\\ 34m 18s: logged in\\ 34m 20s: sorted accounts by type\\ 34m 25s: reversed sort of accounts by type\\ 34m 27s: sorted accounts by ID\\ 34m 29s: clicked on an account to view account details\\ 34m 30s: returned to account list\\ 34m 34s: viewed all transactions\\ 34m 37s: returned to account list\\ 35m 1s: shut down application\\ \end{tabular}}\\ \hline
+\end{longtable}
+
+\begin{tabularx}{18cm}{  |*{6}{Y|} }
+\cline{1-6}\multicolumn{6}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Memory}}\\ \hline
+\multicolumn{3}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Heap-Memory}}
+& \multicolumn{3}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Non-Heap Memory}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Used}
+& \cellcolor[HTML]{C0C0C0}\textbf{Allocated}
+& \cellcolor[HTML]{C0C0C0}\textbf{Limit}
+& \cellcolor[HTML]{C0C0C0}\textbf{Used}
+& \cellcolor[HTML]{C0C0C0}\textbf{Allocated}
+& \cellcolor[HTML]{C0C0C0}\textbf{Limit} \\\hline
+158MB
+& 207MB
+& 910MB
+& 70 MB
+& 70 MB
+& 70 MB\\ \hline
+\end{tabularx}
+\begin{tabularx}{18cm}{  |*{5}{Y|} }
+\cline{1-5}\multicolumn{5}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{CPU}}\\ \hline
+\multicolumn{1}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Classes}}
+& \multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Threads}}\\ \hline
+\multirow{2}{*}{8,456}& \cellcolor[HTML]{C0C0C0}\textbf{Currently live}
+& \cellcolor[HTML]{C0C0C0}\textbf{Currently live daemons}
+& \cellcolor[HTML]{C0C0C0}\textbf{Peak}
+& \cellcolor[HTML]{C0C0C0}\textbf{Total created} \\
+\cline{2-5}& 14
+& 6
+& 31
+& 88\\ \hline
+\end{tabularx}
+\break \break \break
+

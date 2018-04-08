@@ -1,4 +1,4 @@
-\subsubsection{com.github.comp354project.model.account.AccountService.addAccount(request, user)}
+\subsubsection{AccountService.addAccount(request, user)}
 \begin{longtable}{|m{4cm}|l|l|l|l|}
 \caption[]{addAccount(request, user)}
 \\\hline
@@ -46,7 +46,7 @@
 \cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{3}{p{13cm}|}{Adding a valid account with a valid owner must succeed}\\ \hline
 \end{longtable}
 
-\subsubsection{com.github.comp354project.model.account.AccountService.deleteAccount(account)}
+\subsubsection{AccountService.deleteAccount(account)}
 \begin{longtable}{|m{4cm}|l|l|}
 \caption[]{deleteAccount(account)}
 \\\hline
@@ -94,7 +94,7 @@
 \cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{1}{p{13cm}|}{Deleting an existing account should delete all associated transactions}\\ \hline
 \end{longtable}
 
-\subsubsection{com.github.comp354project.model.account.AccountService.deleteAccountsForUser(user)}
+\subsubsection{AccountService.deleteAccountsForUser(user)}
 \begin{longtable}{|m{4cm}|l|l|l|}
 \caption[]{deleteAccountsForUser(user)}
 \\\hline
@@ -135,7 +135,7 @@
 \cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{2}{p{13cm}|}{Deleting the accounts of the user should also delete all the associated transactions.}\\ \hline
 \end{longtable}
 
-\subsubsection{com.github.comp354project.model.auth.AuthenticationService.authenticate(username, password)}
+\subsubsection{AuthenticationService.authenticate(username, password)}
 \begin{longtable}{|m{4cm}|l|l|l|l|}
 \caption[]{authenticate(username, password)}
 \\\hline
@@ -176,13 +176,13 @@
 \cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{3}{p{13cm}|}{Authentication with a valid username but an incorrect password should fail}\\ \hline
 \end{longtable}
 
-\subsubsection{com.github.comp354project.model.account.remote.getAccount(GetRemoteAccountRequest)}
+\subsubsection{RemoteAccountService.getAccount(GetRemoteAccountRequest)}
 \begin{longtable}{|m{4cm}|l|l|l|l|}
 \caption[]{getAccount(GetRemoteAccountRequest)}
 \\\hline
 \cellcolor[HTML]{C0C0C0}\textbf{Tester Name} & \multicolumn{3}{p{13cm}|}{Abed Jawhar}\\ \hline
 \cellcolor[HTML]{C0C0C0}\textbf{Test Date} & \multicolumn{3}{p{13cm}|}{3/13/18}\\ \hline
-\cellcolor[HTML]{C0C0C0}\textbf{Class Name} & \multicolumn{3}{p{13cm}|}{com.github.comp354project.model.account.remote}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Class Name} & \multicolumn{3}{p{13cm}|}{com.github.comp354project.model.account.remote.RemoteAccountService}\\ \hline
 \cellcolor[HTML]{C0C0C0}\textbf{Method Name} & \multicolumn{3}{p{13cm}|}{getAccount(GetRemoteAccountRequest)}\\ \hline
 \cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{3}{p{13cm}|}{This test suite tests fetching an account in the 'API' that connects to other systems}\\ \hline
 \cellcolor[HTML]{C0C0C0}\textbf{Use Cases} & \multicolumn{3}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}03\\ \end{tabular}}\\ \hline
@@ -210,7 +210,7 @@
 \cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{3}{p{13cm}|}{A valid account should be fetched}\\ \hline
 \end{longtable}
 
-\subsubsection{com.github.comp354project.model.auth.SessionManager.login(username, password)}
+\subsubsection{SessionManager.login(username, password)}
 \begin{longtable}{|m{4cm}|l|l|l|l|l|l|}
 \caption[]{login(username, password)}
 \\\hline
@@ -244,7 +244,7 @@
 \cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{5}{p{13cm}|}{A user that is already logged in should not be able to login again}\\ \hline
 \end{longtable}
 
-\subsubsection{com.github.comp354project.model.auth.SessionManager.logout()}
+\subsubsection{SessionManager.logout()}
 \begin{longtable}{|m{4cm}|l|l|l|l|l|}
 \caption[]{logout()}
 \\\hline
@@ -264,7 +264,7 @@
 \cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{4}{p{13cm}|}{A user should be completely logged out of the application}\\ \hline
 \end{longtable}
 
-\subsubsection{com.github.comp354project.model.account.TransactionService.updateTransactionCategory(transactionID, category)}
+\subsubsection{TransactionService.updateTransactionCategory(transactionID, category)}
 \begin{longtable}{|m{4cm}|l|l|l|}
 \caption[]{updateTransactionCategory(transactionID, category)}
 \\\hline
@@ -319,7 +319,7 @@
 \cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{2}{p{13cm}|}{Updating the category of a valid transaction to a an invalid value as determined by the business rules must fail}\\ \hline
 \end{longtable}
 
-\subsubsection{com.github.comp354project.model.user.UserService.createUser(User)}
+\subsubsection{UserService.createUser(User)}
 \begin{longtable}{|m{4cm}|l|l|l|}
 \caption[]{createUser(User)}
 \\\hline
@@ -360,7 +360,7 @@
 \cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{2}{p{13cm}|}{A user cannot be created if the username is already taken}\\ \hline
 \end{longtable}
 
-\subsubsection{com.github.comp354project.model.user.UserService.deleteBankAccount(Account)}
+\subsubsection{UserService.deleteBankAccount(Account)}
 \begin{longtable}{|m{4cm}|l|l|l|l|}
 \caption[]{deleteBankAccount(Account)}
 \\\hline
@@ -401,7 +401,7 @@
 \cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{3}{p{13cm}|}{An authenticated user should succeed in deleting his own bank accounts}\\ \hline
 \end{longtable}
 
-\subsubsection{com.github.comp354project.model.user.UserService.deleteUser(User)}
+\subsubsection{UserService.deleteUser(User)}
 \begin{longtable}{|m{4cm}|l|l|l|l|l|}
 \caption[]{deleteUser(User)}
 \\\hline
@@ -442,7 +442,7 @@
 \cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{4}{p{13cm}|}{A valid user should be deleted and his accounts also}\\ \hline
 \end{longtable}
 
-\subsubsection{com.github.comp354project.model.user.UserService.updateUser(User)}
+\subsubsection{UserService.updateUser(User)}
 \begin{longtable}{|m{4cm}|l|l|l|l|l|}
 \caption[]{updateUser(User)}
 \\\hline

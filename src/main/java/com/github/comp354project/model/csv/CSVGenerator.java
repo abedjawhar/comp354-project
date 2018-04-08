@@ -1,6 +1,7 @@
 package com.github.comp354project.model.csv;
 
 import com.github.comp354project.model.account.Transaction;
+import com.github.comp354project.utils.Timing;
 import com.github.comp354project.viewController.TransactionTableController;
 
 import javax.inject.Inject;
@@ -13,6 +14,7 @@ import java.time.Instant;
 import java.util.Collection;
 import java.util.Date;
 
+@Timing
 public class CSVGenerator implements ICSVGenerator {
     private static final SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SSS");
 
@@ -22,7 +24,12 @@ public class CSVGenerator implements ICSVGenerator {
     @Override
     public File generateCSV(Collection<TransactionTableController.TransactionDisplayModel> transactions) throws IOException {
         String date = format.format(new Date());
-        String filename = String.format("temp/%s.csv",date );
+        String dirName = "temp/";
+        File dir = new File(dirName);
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
+        String filename = String.format("%s%s.csv",dirName, date);
         File file = new File(filename);
         PrintWriter pw = new PrintWriter(file);
         pw.append(date).append("\n");
