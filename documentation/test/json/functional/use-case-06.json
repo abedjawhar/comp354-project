@@ -1,0 +1,25 @@
+{
+  "useCase" : "View All Transactions from all Bank Accounts",
+  "testCases" : {
+    "Display all transactions": {
+      "description": "Empty selection in bank account list return all transactions of exsiting bank accounts",
+      "input": [  
+        "Click the button 'View All Transactions'"        
+      ],
+      "output": [
+        "All transactions in bank account list are shown."
+      ]
+    },
+    "A selection of a bank account returns the transactions of this account": {
+      "description": "any selection in account list just returns the transaction of this account",
+      "input": [
+        "Selection in bank account list",
+        "Click 'View All Transactions"
+      ],
+      "output": [
+        "Only the transactions of the selected account are displayed"
+      ]
+    }
+    
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "useCase" : "View Transactions for Specific Bank Account",
+  "testCases" : {
+    "Selection of a bank account is mandatory" : {
+      "description" : "The user select an exsiting bank account.",
+      "input" : [
+        "Click a bank account from bank account list",
+        "Click 'View All Transactions'"
+      ],
+      "output": [       
+        "Transaction list is displayed for selected bank account",
+        "Empty list is shown if there is no transactions"
+      ]
+    },
+
+    "Empty selection should return all transactions in all accounts" : {
+      "description" : "When none bank account is select, all transactions in all accounts are displayed",
+      "input" : [
+        "No selection from bank account list",
+        "Click the button 'View All Transactions"
+        
+      ],
+      "output": [
+        "All transactions of all bank accounts are displayed",
+        "Empty list is shown if there is no transaction in all bank accounts"
+      ]
+    }
+    
+    
+  }
+}
