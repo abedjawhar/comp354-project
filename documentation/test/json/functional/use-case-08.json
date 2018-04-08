@@ -1,0 +1,45 @@
+{
+  "useCase": "Sort transactions by any attribute",
+  "testCases": {
+    "Sort by Date": {
+      "description": "The user wants to see the transactions sorted by date.",
+      "input": [
+        "click on 'View All Transactions' button or double click on a specific bank account from the Account List view ",
+        "click on the attribute 'Date' one time to sort in ascending order or two times for descending order"
+      ],
+      "output": [
+        "The transactions list is sorted in ascending or descending date order"
+      ]
+    },
+    "Sort by Amount": {
+      "description": "The user wants to see the transactions sorted by amount.",
+      "input": [
+        "click on 'View All Transactions' button or double click on a specific bank account from the Account List view ",
+        "click on the attribute 'Amount' one time to sort in ascending order or two times for descending order"
+      ],
+      "output": [
+        "The transactions list is sorted in ascending or descending amount order"
+      ]
+    },
+    "Sort by Type": {
+      "description": "The user wants to see the transactions sorted by type.",
+      "input": [
+        "click on 'View All Transactions' button or double click on a specific bank account from the Account List view ",
+        "click on the attribute 'Type' one time to sort in ascending order or two times for descending order"
+      ],
+      "output": [
+        "The transactions list is sorted in types of transactions"
+      ]
+    },
+    "Sort by Category": {
+      "description": "The user wants to see the transactions sorted by categories.",
+      "input": [
+        "click on 'View All Transactions' button or double click on a specific bank account from the Account List view ",
+        "click on the attribute 'Category' one time to sort in ascending order or two times for descending order"
+      ],
+      "output": [
+        "The transactions list is sorted in categories."
+      ]
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "useCase": "Filter transactions by date range",
+  "testCases": {
+    "Filter transactions with valid date range": {
+      "description": "The user wants to see the transactions within a valid date range.",
+      "input": [
+        "click on 'View All Transactions' button or double click on a specific bank account from the Account List view ",
+        "select a start date which is before at least one transaction.",
+        "select an end date or keep it blank if the desired date is the current date."
+      ],
+      "output": [
+        "The displayed transactions are withing the date range selected."
+      ]
+    },
+    "Select an invalid date range": {
+      "description": "The user sets an invalid date range.",
+      "input": [
+        "click on 'View All Transactions' button or double click on a specific bank account from the Account List view ",
+        "select a start date which is after any transaction."
+      ],
+      "output": [
+        "The list of transactions is empty."
+      ]
+    }
+  }
+
+}
