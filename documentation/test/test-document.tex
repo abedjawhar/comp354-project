@@ -158,30 +158,55 @@
 
 \section{Introduction}
 
-The aim of this document is to ensure that a coherent and accurate testing strategy is used by each member of the testing team. It seeks to test the implementation of the system described in the Design Plan, testing its validity, robustness, and reliableness as a software, as well as ensuring that the requirements in the Requirements Specification are met. It seeks to do this in a rigorous and justified manner.
-This document contains an overarching test plan, which seeks to outline each test subsystem, its strategy with regards to testing the associated requirements, and its execution strategy. This document then contains, for each subsystem, a detailed explanation of the set of tests included, and a test case for each individual test. Put together, the test subsystems group into a entire system test.
+The aim of this document is to ensure that a coherent and accurate testing strategy is used by the testing team. It looks at the implementation of the system described in the Design Plan, test its validity, robustness, and reliableness as a software, as well as ensuring that the requirements in the Requirements Specification are met. It seeks to do this in a rigorous and justified manner.
+This document contains an overarching test plan, which seeks to outline each test subsystem, their strategy with regards to testing the associated requirements, and their execution strategy. This document then contains, for each subsystem, a detailed explanation of the set of tests included, and a test case for each individual test. Put together, the test subsystems group into a entire system test.
 
 \section{Test Plan}
 
-The system test plan has been split into five subsystems:
+The system test plan has been split into five subsystem tests:
 
 \begin{itemize}
-    \item \textbf{Functional Testing:} This test subsystem seeks to certify the functionality of the software against the use cases in the Requirements Specification. This category will use black-box testing as its strategy, verifying the usability given different inputs and regardless of the implementation of the sfotware. In its execution, a developer running such a test will typically first identify how the software should perform. Then, he or she verifies the functionality and reliability of the software given valid user behaviour, and then checks for robustness given invalid user behaviour.
-    \item \textbf{Structural Testing:} This test subsystem seeks to verify the structure and code logic of the software. We ensure here that each part of the code functions as expected given both valid and invalid input, and test the behaviour of the system in unexpected states. This will let us confirm the valid flow of our code, and ensure logic faults are caught. For the execution of the test, we will use JUnit to create individual tests for each case. Each test will have an initial setup phase, a test phase, and a teardown phase, to ensure independence of state between each test. A test will also use Mockito, a mocking library, to ensure that the failure of some other, unrelated component of the code does not affect the performance of the tested component in each test.
+    \item \textbf{Functional Testing:} This test subsystem seeks to certify the functionality of the software against the use cases in the Requirements Specification. This category will use black-box testing as its strategy, verifying the usability given different inputs and regardless of the implementation of the sfotware. In its execution, a developer running such a test will typically first identify how the software should perform the functionality to be tested, in the given use case scenario. Then, he or she verifies the functionality, behaviour, and reliability of the software given valid user behaviour, and then checks for robustness given exceptional situations.
+    \item \textbf{Structural Testing:} This test subsystem seeks to verify the structure and code logic of the software. We ensure here that each part of the code functions as expected given both valid and invalid input, and test the behaviour of the system in unexpected states. This will let us confirm the validity of the code flow, and ensure logic faults are caught. For the execution of the test, we will use JUnit to create individual tests for each case. Each test will have an initial setup phase, a test phase, and a teardown phase, to ensure independence of state between each test. A test will also use Mockito, a mocking library, to ensure that the failure of some other, unrelated component of the code does not affect the performance of the tested component in each test.
     \item \textbf{Performance Testing:} This test subsystem seeks to measure the behaviour of the software in extreme states, when under particular workloads or dealing with extremely large datasets. It is useful for testing a number of our non-functional requirements, notably reliability, scalability, and, obviously, performance. In its execution, The tests measure performance statistics given a normal or 'control' environment, then compare it to the performance statistic given a particular dataset or workload.
-    \item \textbf{Acceptance Testing:} This test subsystem seeks to meet the requirements of the use cases in the requirements set in the Requirements Specification. This is also a black-box testing category, as in functional testing, but unlike the aforementioned, we are instead performing a validation of the system: is our system actually what the user needs? In its execution, the system is given to a user, who will assert whether his needs are met and correspond to what how he or she expects the software to function.
-    \item \textbf{Installation Testing:} This test subsystem seeks to verify that the installation process is both successful and easy in the platforms to be supported. This means ensuring that the choices taken by the user are respected (location of installation, installation just for one user or for whole computer...), verify that all dependent files and libraries are successfully linked and loaded, and valid configurations and connectivity to the database. The execution of this category is simply an activity wherein the installation process is attempted in a particular environment, testing all decisions and options available in the installation.
+    \item \textbf{Acceptance Testing:} This test subsystem seeks to meet the requirements set in the Requirements Specification, from the point of the view of a user. This is also a black-box testing category, as in functional testing, but unlike the aforementioned, we are instead performing a validation of the system through the perspective of the user, not the devloper: is our system actually what the user needs? In its execution, the system is given to a user, who will assert whether his needs are met by the system and if it corresponds to how he or she expects the software to function.
+    \item \textbf{Installation Testing:} This test subsystem seeks to verify that the installation process is both successful and easy in the platforms to be supported. This means ensuring that the choices taken by the user with regards to installation are respected (location of installation, installation just for one user or for whole computer...), verify that all dependent files and libraries are successfully linked and loaded, and valid configurations and connectivity to the database. The execution of this category is simply an activity wherein the installation process is attempted in a particular environment, testing all decisions and options available in the installation.
 \end{itemize}
 
 \section{Functional Testing}
+
+As aforementioned, each test here is directly related to a use case in the requirements document.
+
 \input{test/all_func}
 
 \section{Structural Testing}
 
-\subsection{Unit Test cases}
+As aforementioned, each test here is related to a particular unit of code. See the design document for information on how these units are organised, their function, behaviour, and association to one another.
 \input{test/all_unit}
 
 \section{Performance Testing}
+
+For performance testing, we seek to know the performance of the software in terms of resource usage, responsiveness, and general stability. We have split our performance testing into two parts: System resources, and responsiveness. We first list the requirements and manner of testing to measure how well our system meets those requirements, and then the tests results obtained.
+
+\textit{System Resources}
+
+\begin{longtable}{|m{4cm}|m{6cm}|l|}
+\hline
+\cellcolor[HTML]{C0C0C0}\textbf{Tester Name} & \multicolumn{2}{p{13cm}|}{Anne-Laure}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Test Date} & \multicolumn{2}{p{13cm}|}{7/4/18}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{2}{p{13cm}|}{Test suit containing the static testing of performance.}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Quality tested} & \cellcolor[HTML]{C0C0C0}\textbf{Expected value} & \cellcolor[HTML]{C0C0C0}\textbf{Actual value}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Zip file size} & <50MB & 21.6MB \\ \hline
+ \cellcolor[HTML]{C0C0C0}\textbf{full system size} & <50MB & 23.5MB + database size \\ \hline
+ \cellcolor[HTML]{C0C0C0}\textbf{Supported platforms} & Linux, Mac, Windows & Linux, Mac, Windows\\ \hline
+%   \cellcolor[HTML]{C0C0C0}\textbf{OpenJDK version} & \multicolumn{1}{p{13cm}|}{1.8.0\_144}\\ \hline
+%   \cellcolor[HTML]{C0C0C0}\textbf{Profiler} & \multicolumn{1}{p{13cm}|}{YourKit Java Profiler 2017.02-b75}\\ \hline
+\end{longtable}
+
+We opted for using a java heap profiler (YourKit Java Profiler) to profile the CPU and memory usage of the system given a particular database, and when applying modifications or queries to the database. We have created databases with an varying number of bank accounts and transactions, some exceeding what would be considered a "reasonable" quantity of accounts and transactions for an average user. We then compare statistics on the state of the system as various functionalities of the system (adding and removing accounts, sorting transactions, searching...) were used. We reached the conclusion that our application was extremely well capable of bearing a huge amount of accounts and transactions, and was efficient in its memory and CPU usage.
+Below is a set of charts connected to a stress test profiled with YourKit Java Profiler. See the list of test cases after the charts to read more about the conditions of each test.
+
+To ensure that we were also not only performing well in terms of system resources
 \input{test/all_performance}
 
 \section{Acceptance Testing}
