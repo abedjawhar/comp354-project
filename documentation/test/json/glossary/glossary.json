@@ -2,5 +2,15 @@
   "CPU": "Central Processing Unit. Handles the instructions of a computer program",
   "Memory": "Volatile memory used by the Operating System and software",
   "Heap-memory": "Pool of memory from which a program can request memory",
-  "Thread": "Small sequence of programmed instructions"
+  "Thread": "Small sequence of programmed instructions",
+  "Stopwatch test" : "A test aiming to measure the execution time of a code segment implemented using through timers in the code",
+  "YourKit Java Profiler" : "An application to profile the performance of Java and .NET applications",
+  "ValidationException" : "A Java custom exception class mainly thrown by the service layer that contain information about the occurred fault in the program",
+  "AuthenticationException" : "A Java custom exception class indicating an error in the user authentication",
+  "AuthorizationException" : "A Java custom exception class indicating an error in the user authorization",
+  "MB" : "Megabyte",
+  "Heap-Memory" : "The dynamically allocated memory in the program, in contrast to Non-Heap memory",
+  "Non-Heap Memory" : "The program memory consisting of the stack memory and static memory",
+  "Daemons" : "A computer program that runs as a background process",
+  "Onboarding" : "The action or process of integrating new users into the application"
 }

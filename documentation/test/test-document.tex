@@ -11,6 +11,7 @@
 \usepackage{url}
 \usepackage{import}
 \usepackage{longtable}
+\usepackage{hyperref}
 
 \makeatletter
 \g@addto@macro\UrlSpecials{\camelurl}
@@ -154,7 +155,6 @@
                 \tableofcontents
 \listoffigures
 \clearpage
-\listoftables
 
 \clearpage
 
@@ -265,14 +265,22 @@ Finally, the series of tests performed for responsiveness. Here, we used stopwat
 
 \section{References}
 
+\begin{itemize}
+    \item Craig Larman, Applying UML and Patterns: An Introduction to Object-Oriented Analysis and Design and Iterative Development, 3rd edition, Prentice-Hall, 2005.
+    \item Roger S Pressman, Software Engineering: A Practitioner's Approach, 7th edition, McGraw-Hill
+    \item Greg Butler's course COMP 354 content
+
+\end{itemize}
+
 \appendix
 
-\section{Description of Input Files}
+\subsection*{Description of File Format: Input}
 
-Describe/include test data from input files.
+The user enters plain text through the graphical user interface of the system.
 
-\section{Description of Output Files}
+\subsection*{Description of File Format: Output}
 
-Describe/include test expected output that are output files.
+The system displays information through the graphics user interface. The system also creates files (statements) in the user specified location
+in the filesystem. The system emails the files (statements) to the user specified email address.
 
 \end{document}
