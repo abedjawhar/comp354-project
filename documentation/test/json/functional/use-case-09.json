@@ -4,9 +4,9 @@
     "Categorize from predefined list": {
       "description": "The user wants to set the category of the transaction from the predefined categories.",
       "input": [
-        "click on 'View All Transactions' button or double click on a specific bank account from the Account List view ",
+        "click on 'View All Transactions' button or double click on a \\\\ specific bank account from the Account List view ",
         "select the desired transaction to be categorized.",
-        "press on the category option and choose the appropriate category from the drop down menu."
+        "press on the category option and choose the appropriate category \\\\ from the drop down menu."
       ],
       "output": [
         "The transaction's category is set to the one chosen by the user."
@@ -15,7 +15,7 @@
     "Create a new category": {
       "description": "The user wants to create a category for the transaction.",
       "input": [
-        "click on 'View All Transactions' button or double click on a specific bank account from the Account List view ",
+        "click on 'View All Transactions' button or double click on a \\\\ specific bank account from the Account List view ",
         "select the desired transaction to be categorized.",
         "press on the category option and type in the new category."
       ],
@@ -26,12 +26,12 @@
     "Category created is too long.": {
       "description": "The user wants to create a category for the transaction.",
       "input": [
-        "click on 'View All Transactions' button or double click on a specific bank account from the Account List view ",
+        "click on 'View All Transactions' button or double click on a specific \\\\ bank account from the Account List view ",
         "select the desired transaction to be categorized.",
-        "press on the category option and type in the new category which is longer than allowed."
+        "press on the category option and type in the new category which is \\\\ longer than allowed."
       ],
       "output": [
-        "The transaction's category is not set because the category entered is too long."
+        "The transaction's category is not set because the category entered \\\\ is too long."
       ]
     }
   }

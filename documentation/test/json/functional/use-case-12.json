@@ -9,7 +9,7 @@
         "Select the location of the generated file"
       ],
       "output": [
-        "A file named 'all-transactions-TIMESTAMP.csv' should be generated in the selected folder"
+        "A file named 'all-transactions-TIMESTAMP.csv' should be \\\\ generated in the selected folder"
       ]
     },
     "Generate statement from Account Details view": {
@@ -20,7 +20,7 @@
         "Select the location of the generated file"
       ],
       "output": [
-        "A file named 'transactions-TIMESTAMP.csv' should be generated in the selected folder"
+        "A file named 'transactions-TIMESTAMP.csv' should be generated \\\\ in the selected folder"
       ]
     },
     "Generate empty statement": {
@@ -31,7 +31,7 @@
         "Select the location of the generated file"
       ],
       "output": [
-        "A file named 'all-transactions-TIMESTAMP.csv' should be generated in the selected folder and should only have headers"
+        "A file named 'all-transactions-TIMESTAMP.csv' should be generated \\\\ in the selected folder and should only have headers"
       ]
     }
   }

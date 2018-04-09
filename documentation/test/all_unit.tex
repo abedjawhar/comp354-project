@@ -340,8 +340,8 @@
 \multicolumn{3}{|l|}{testCreateUser\_withInvalidUser\_shouldThrow}\\ \hline
 \rowcolor[HTML]{C0C0C0} &  user &  errors \\ \cline{2-3} 
 \multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\textbf{Input Specification}} & \begin{tabular}[c]{@{}l@{}}\end{tabular}& 4 \\ \hline
-\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ 4 exceptions are thrown because missing fields: username, password, firstname, lastname\\ \end{tabular}}\\ \hline
-\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ 4 exceptions are thrown because missing fields: username, password, firstname, lastname\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Expected Output} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ 4 exceptions are thrown because missing fields: \\ username, password, firstname, lastname\\ \end{tabular}}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Actual Output} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}ValidationException is thrown\\ 4 exceptions are thrown because missing fields: \\ username, password, firstname, lastname\\ \end{tabular}}\\ \hline
 \cellcolor[HTML]{C0C0C0}\textbf{Bug Found} & \multicolumn{2}{p{13cm}|}{false}\\ \hline
 \cellcolor[HTML]{C0C0C0}\textbf{Purpose} & \multicolumn{2}{p{13cm}|}{No empty value user can be saved in the database}\\ \hline
 \multicolumn{3}{|l|}{testCreateUser\_withValidUser\_shouldReturnUser}\\ \hline

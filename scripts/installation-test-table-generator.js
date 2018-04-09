@@ -34,7 +34,7 @@ function listToTable(list, ordered) {
     let itemStrings = '';
     let i = 1;
     list.forEach(function(item) {
-        itemStrings += (ordered ? `${i}. ${item}\\\\ ` : `$\\bullet$ ${item}\\\\ `);
+        itemStrings += (ordered ? `${i}. ${item}\\\\ ` : `${item}\\\\ `);
         i += 1;
     });
     return `\\begin{tabular}[c]{@{}l@{}}${itemStrings}\\end{tabular}`;
