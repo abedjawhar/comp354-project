@@ -1,0 +1,42 @@
+\title{COMP 354: Diary - Iteration 3}
+\author{
+        Hrachya Hakobyan \\
+        ID: 40041555}
+\date{\today}
+\setlength{\parindent}{0pt}
+\documentclass[12pt]{article}
+\begin{document}
+\maketitle
+
+\subsection*{March 25, 12:30-16:00 pm 2018}
+Went to the library with Anne, Dongyu and Kadeem. Showed code and and how the system is implemented, talked about email sending libraries and how to write a CVS file. 
+
+\subsection*{March 25, 16:00-18:00 pm 2018}
+Implemented use cases given to Eugeniy and Dongyu
+
+\subsection*{April 1st, 14:00-18:00 pm 2018}
+
+ Added unit test documentation for account service add and delete bank account, auth service and transaction service. Fixed a bunch of latex errors in the test-document.tex
+ 
+Updated test document with use case 01 tests
+
+Added a script to generate use-case structural testing tables
+
+\subsection*{April 1st, 13:00-17:00, 2018, }
+ Fixed the issue where the app froze when deleting a user account with lots of bank accounts thanks to performance tests written by Anne. Added a new API to AccountService and tests. Restructured the documentation directory for test document. Added bash scripts to automate unit test and functional test table generation. Refactored test-document.
+
+\subsection*{April 4th, 14:30-17:30 2018}
+ Went to the library with Anne where we discussed the way to do acceptance testing.
+ 
+\subsection*{April 5th, 10:30-13:00 pm 2018}
+ Refactored CSV generation. The user now is asked for a directory to save the CSV to and it verifies if the directory is accessible or not.
+ Also refactored email service.
+ 
+\subsection*{April 7th,  2018, 14:00 16:00}
+ Changed database configuration. Added a check to CSV generation to create a temp folder if such does not exist. Added gradle tasks to create a fat jar and zip the application.
+ Added timeboxing facility to service classes for stopwatch testing. Implemented through Java annotation, invocation handlers and proxies. (pretty proud of this one (8 )
+  Added awk script to analyze the performance logs 
+  
+\subsection*{April 8th,  2018, 10:00 24:00}
+ Fixes to the javascript scripts,  Added script for acceptance json 
+\end{document}
