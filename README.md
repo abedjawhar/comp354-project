@@ -70,3 +70,9 @@ or download it locally by executing `./gradlew` on OSX/Linux or `gradlew.bat` in
 * With Gradle wrapper:
   * Windows: `gradlew build`
   * OSX/Linux: `./gradlew build`
+
+#### Create jar
+* Gradle installed: `gradle zip`
+* With Gradle wrapper:
+  * Windows: `gradlew zip`
+  * OSX/Linux: `./gradlew zip`
