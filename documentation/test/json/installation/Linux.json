@@ -1,0 +1,25 @@
+{
+  "os": "Linux",
+  "requirements": [
+    "Java 8 or higher",
+    "1GB of RAM or more",
+    "Intel Celeron 3205U @ 1.50GHz x 2 or better",
+    "50 MB of hard disk space",
+    "Ubuntu 12.04 LTS or newer",
+    "Internet connectivity required to download the zip file",
+    "Internet connectivity required to send statements by email"
+  ],
+  "steps": [
+    "Download the zip file",
+    "Extract the zip file in the location you would like to install the system",
+    "Open up a terminal in that directory and run: java -jar MyMoney.jar"
+  ],
+  "functionalityTested": {
+    "Application runs": "valid",
+    "Entering user input": "valid",
+    "Writing to database": "valid",
+    "Saving database": "valid",
+    "Exporting CSV statement": "valid",
+    "Emailing CSV statement": "valid"
+  }
+}
