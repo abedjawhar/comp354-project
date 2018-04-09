@@ -20,7 +20,7 @@
         "Log out",
         "Go to 'Sign up'",
         "Fill in all the input fields",
-        "Set the username field to be the username of the user created in the first step",
+        "Set the username field to be the username of the \\\\ user created in the first step",
         "Click 'Sign Up'"
       ],
       "output": [

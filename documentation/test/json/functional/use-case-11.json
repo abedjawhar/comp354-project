@@ -8,7 +8,7 @@
         "Input a category in the 'category' field"
       ],
       "output": [
-        "Only the categories starting with what was inputted should be displayed"
+        "Only the categories starting with what was inputted should \\\\ be displayed"
       ]
     },
     "Filter transactions by category in detailed account view": {
@@ -18,7 +18,7 @@
         "Input a category in the 'category' field"
       ],
       "output": [
-        "Only the categories starting with what was inputted should be displayed"
+        "Only the categories starting with what was inputted should \\\\ be displayed"
       ]
     },
     "An empty search should return all transactions": {

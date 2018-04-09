@@ -20,7 +20,7 @@
       ],
       "output": [
         "The account is not deleted",
-        "An error window must appear notifying the user that the password was invalid"
+        "An error window must appear notifying the user that \\\\ the password was invalid"
       ]
     },
     "The account is successfully deleted" : {
@@ -32,7 +32,7 @@
       ],
       "output": [
         "The account is not deleted",
-        "An error window must appear notifying the user that the password was invalid"
+        "An error window must appear notifying the user that \\\\ the password was invalid"
       ]
     },
     "The user account is successfully created" : {

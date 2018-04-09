@@ -30,11 +30,11 @@
       },
       "expectedOutput": [
         "ValidationException is thrown",
-        "4 exceptions are thrown because missing fields: username, password, firstname, lastname"
+        "4 exceptions are thrown because missing fields: \\\\ username, password, firstname, lastname"
       ],
       "actualOutput": [
         "ValidationException is thrown",
-        "4 exceptions are thrown because missing fields: username, password, firstname, lastname"
+        "4 exceptions are thrown because missing fields: \\\\ username, password, firstname, lastname"
       ],
       "bugFound": false,
       "purpose": "No empty value user can be saved in the database"
