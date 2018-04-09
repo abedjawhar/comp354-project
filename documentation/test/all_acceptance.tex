@@ -1,3 +1,32 @@
+\subsubsection{1. Onboarding}
+\begin{longtable}{|m{7cm}|l|} 
+\caption[]{The initial setup when I launch the application for the first time.} 
+\\\hline 
+\multicolumn{1}{|p{7cm}|}{As a new user, I expect that the system will have some sort of initial setup asking me for my personal information. I expect this to be fast and precise in its requirements, and short in its demands.} & \multicolumn{1}{p{7cm}|}{As a new user, I see first that the launching screen is giving me an option to log in or signup. I click signup as this is my first time running the application, and reach an account creation screen asking me to fill in 6 text boxes. I do, click Sign Up, and I am taken back to the login menu.}\\ \hline
+\multicolumn{1}{|p{7cm}|}{As a new user, after having performed the intial setup, I expect for the system to bring me to the main application screen.} & \multicolumn{1}{p{7cm}|}{After having created my account, I am taken back to the login menu. I log in with the credentials of the account I just created, and am taken to the account list table.}\\ \hline
+\end{longtable}
+
+\begin{longtable}{|m{4cm}|l|}\hline 
+\cellcolor[HTML]{C0C0C0}\textbf{Scenario Satisfied} & \multicolumn{1}{p{13cm}|}{90\%}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Comments} & \multicolumn{1}{p{13cm}|}{It is difficult to know what the rules are for account creation before having broken them as they are only displayed if the information entered by the user to create a new account does not meet those requirements.}\\ \hline
+\end{longtable}
+
+
+\subsubsection{2. Bank Account Manipulation}
+\begin{longtable}{|m{7cm}|l|} 
+\caption[]{The bank account manipulation and management.} 
+\\\hline 
+\multicolumn{1}{|p{7cm}|}{As a person with bank accounts, I expect to be able to link my bank account to the system given some sort of unique and secure bank account identifier.} & \multicolumn{1}{p{7cm}|}{In the Account list view, there is a text field to enter in my bank account ID, and an Add button. I enter in my bank account ID, click Add,and see my bank account added to the list of accounts.}\\ \hline
+\multicolumn{1}{|p{7cm}|}{After having added some accounts, I expect to be able to sort through my list of accounts in a modular manner.} & \multicolumn{1}{p{7cm}|}{After having added some accounts, I can click on any column and sort my accounts by that column.}\\ \hline
+\multicolumn{1}{|p{7cm}|}{After having added some accounts, I expect some way of disassociating my bank account from the system, in case I wish to keep that information private.} & \multicolumn{1}{p{7cm}|}{I can select an account and click Remove Selected to remove the bank account from my list of accounts.}\\ \hline
+\end{longtable}
+
+\begin{longtable}{|m{4cm}|l|}\hline 
+\cellcolor[HTML]{C0C0C0}\textbf{Scenario Satisfied} & \multicolumn{1}{p{13cm}|}{90\%}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Comments} & \multicolumn{1}{p{13cm}|}{It would be great to have the Export to CSV functionality for the bank account list as well.}\\ \hline
+\end{longtable}
+
+
 \subsubsection{3. Transaction manipulation}
 \begin{longtable}{|m{7cm}|l|} 
 \caption[]{Application functionality concerned with viewing, editing and exporting account transactions} 
@@ -11,6 +40,20 @@
 \begin{longtable}{|m{4cm}|l|}\hline 
 \cellcolor[HTML]{C0C0C0}\textbf{Scenario Satisfied} & \multicolumn{1}{p{13cm}|}{80\%}\\ \hline
 \cellcolor[HTML]{C0C0C0}\textbf{Comments} & \multicolumn{1}{p{13cm}|}{The application does not allow to search the transactions by any other fields except for it's date and category. The statement can be exported only in CSV format and it does not contain bank account details.}\\ \hline
+\end{longtable}
+
+
+\subsubsection{4. User Information Manipulation}
+\begin{longtable}{|m{7cm}|l|} 
+\caption[]{The system user manipulation and management.} 
+\\\hline 
+\multicolumn{1}{|p{7cm}|}{As a user who has already gone through the onboarding scenario, I want a clear way of editing that system information} & \multicolumn{1}{p{7cm}|}{After having logged in, I can click Your Profile, where I can edit all user account information, then click Save Changes to save my changes.}\\ \hline
+\multicolumn{1}{|p{7cm}|}{As a user who has already gone through the onboarding scenario, I want a way of completely clearing the system of all my user and bank information, for security reasons.} & \multicolumn{1}{p{7cm}|}{I can click on Your Profile, and delete my user account to remove all my user and bank account information.}\\ \hline
+\end{longtable}
+
+\begin{longtable}{|m{4cm}|l|}\hline 
+\cellcolor[HTML]{C0C0C0}\textbf{Scenario Satisfied} & \multicolumn{1}{p{13cm}|}{100\%}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Comments} & \multicolumn{1}{p{13cm}|}{No Comment.}\\ \hline
 \end{longtable}
 
 

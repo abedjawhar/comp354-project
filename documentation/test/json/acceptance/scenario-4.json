@@ -1,9 +1,11 @@
 {"Acceptance Scenario": "4. User Information Manipulation",
   "description": "The system user manipulation and management.",
   "testCases": [
-      {"As a user who has already gone through the onboarding scenario, I want a clear way of editing that system information":"After having logged in, I can click Your Profile, where I can edit all user account information, then click Save Changes to save my changes."},
-      {"As a user who has already gone through the onboarding scenario, I want a way of completely clearing the system of all my user and bank information, for security reasons.": "I can click on Your Profile, and delete my user account to remove all my user and bank account information."},
+      {"expectation" : "As a user who has already gone through the onboarding scenario, I want a clear way of editing that system information",
+        "reality" : "After having logged in, I can click Your Profile, where I can edit all user account information, then click Save Changes to save my changes."},
+      {"expectation" : "As a user who has already gone through the onboarding scenario, I want a way of completely clearing the system of all my user and bank information, for security reasons.",
+        "reality" : "I can click on Your Profile, and delete my user account to remove all my user and bank account information."}
     ],
-    "Scenario Satisfied": "100%",
+    "Scenario Satisfied": "100\\%",
     "Comments": "No Comment."
   }

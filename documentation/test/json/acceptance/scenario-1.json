@@ -1,11 +1,11 @@
 {"Acceptance Scenario": "1. Onboarding",
   "description": "The initial setup when I launch the application for the first time.",
   "testCases": [
-      {"As a new user, I expect that the system will have some sort of initial setup asking me for my personal information. I expect this to be fast and precise in its requirements, and short in its demands.":"As a new user, I see first that the launching screen is giving me an option to log in or signup. I click signup as this is my first time running the application, and reach an account creation screen asking me to fill in 6 text boxes. I do, click Sign Up, and I am taken back to the login menu."},
-      {"As a new user, after having performed the intial setup, I expect for the system to bring me to the main application screen.": "After having created my account, I am taken back to the login menu. I log in with the credentials of the account I just created, and am taken to the account list table."},
-      {}
+      {"expectation" : "As a new user, I expect that the system will have some sort of initial setup asking me for my personal information. I expect this to be fast and precise in its requirements, and short in its demands.",
+        "reality" : "As a new user, I see first that the launching screen is giving me an option to log in or signup. I click signup as this is my first time running the application, and reach an account creation screen asking me to fill in 6 text boxes. I do, click Sign Up, and I am taken back to the login menu."},
+      {"expectation" : "As a new user, after having performed the intial setup, I expect for the system to bring me to the main application screen.",
+        "reality" : "After having created my account, I am taken back to the login menu. I log in with the credentials of the account I just created, and am taken to the account list table."}
     ],
-    "Scenario Satisfied": "90%",
+    "Scenario Satisfied": "90\\%",
     "Comments": "It is difficult to know what the rules are for account creation before having broken them as they are only displayed if the information entered by the user to create a new account does not meet those requirements."
-  }
 }

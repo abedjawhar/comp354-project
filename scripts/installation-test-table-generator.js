@@ -22,7 +22,7 @@ console.log(table);
 function generateTableTop(title) {
     return `\\begin{longtable}{|m{${firstColSize}}|l|l|}` + ' \n'
         + `\\caption[]{${title}}` + ' \n'
-        + `\\hline`;
+        + `\\\\\\hline`;
 }
 
 function generateRow(label, value) {
