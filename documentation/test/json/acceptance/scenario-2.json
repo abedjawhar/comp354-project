@@ -1,0 +1,11 @@
+{"Acceptance Scenario": "2. Bank Account Manipulation",
+  "description": "The bank account manipulation and management.",
+  "testCases": [
+      {"As a person with bank accounts, I expect to be able to link my bank account to the system given some sort of unique and secure bank account identifier.":"In the Account list view, there is a text field to enter in my bank account ID, and an Add button. I enter in my bank account ID, click Add,and see my bank account added to the list of accounts."},
+      {"After having added some accounts, I expect to be able to sort through my list of accounts in a modular manner.": "After having added some accounts, I can click on any column and sort my accounts by that column."},
+      {"After having added some accounts, I expect some way of disassociating my bank account from the system, in case I wish to keep that information private.": "I can select an account and click Remove Selected to remove the bank account from my list of accounts."}
+    ],
+    "Scenario Satisfied": "90%",
+    "Comments": "It would be great to have the Export to CSV functionality for the bank account list as well."
+  }
+}
