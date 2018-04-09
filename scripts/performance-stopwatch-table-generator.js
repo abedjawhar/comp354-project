@@ -12,8 +12,8 @@ let table = generateTableTop(titleTableColCount) + '\n'
     + generateRow('Purpose', json.purpose, titleTableColCount) + '\n'
     +`\\multicolumn{${titleTableColCount}}{|l|}{\\cellcolor[HTML]{C0C0C0}\\textbf{System specification}}\\\\ \\hline`  + '\n';
 
-Object.keys(json.systemSpec).forEach((spec) => {
-   table += generateRow(spec, json.systemSpec[spec], titleTableColCount) + '\n'
+Object.keys(json.testCases).forEach((expected) => {
+   table += generateRow(expected, json.testCases[expected], titleTableColCount) + '\n'
 });
 
 table += '\\end{longtable}\n\n';

@@ -1,26 +1,38 @@
 const path = process.argv[2];
 const json = JSON.parse(require('fs').readFileSync(path, 'utf8'));
 
-const firstColSize = '4cm';
-const dataColSize = '13cm';
+var firstColSize = '7cm';
+var dataColSize = '7cm';
 
-let table = `\\subsubsection{${json.useCase}}` + '\n'
-    + generateTableTop(json.useCase) + ' \n'
-    + generateRow('Use Case', json.useCase) + '\n'
-    + generateRow('Description', json.description) + '\n'
-    + generateRow('Description', listToTable(json.usability)) + '\n'
-    + '\\end{longtable}\n';
+let table = `\\subsubsection{${json["Acceptance Scenario"]}}` + '\n'
+    + generateTableTop(json["description"]) + ' \n';
+
+
+json.testCases.forEach((o) => {
+   table +=`\\multicolumn{1}{|p{${firstColSize}}|}{${o["expectation"]}} & \\multicolumn{1}`
+        + `{p{${dataColSize}}|}{${o["reality"]}}\\\\ \\hline` + '\n';
+});
+
+table += '\\end{longtable}\n\n';
+
+firstColSize = '4cm';
+dataColSize = '13cm';
+
+table += `\\begin{longtable}{|m{${firstColSize}}|l|}\\hline` + ' \n';
+table += generateRow('Scenario Satisfied', json['Scenario Satisfied']) + '\n'
+    + generateRow('Comments', json["Comments"]) + '\n';
+table += '\\end{longtable}\n\n';
 
 console.log(table);
 
 function generateTableTop(title) {
-    return `\\begin{longtable}{|m{${firstColSize}}|l|l|}` + ' \n'
+    return `\\begin{longtable}{|m{${firstColSize}}|l|}` + ' \n'
         + `\\caption[]{${title}}` + ' \n'
-        + `\\hline`;
+        + `\\\\\\hline`;
 }
 
 function generateRow(label, value) {
-    return `\\cellcolor[HTML]{C0C0C0}\\textbf{${label}} & \\multicolumn{2}`
+    return `\\cellcolor[HTML]{C0C0C0}\\textbf{${label}} & \\multicolumn{1}`
         + `{p{${dataColSize}}|}{${value}}\\\\ \\hline`;
 }
 

@@ -1,9 +1,16 @@
-\subsubsection{Create User Account}
-\begin{longtable}{|m{4cm}|l|l|} 
-\caption[]{Create User Account} 
-\hline 
-\cellcolor[HTML]{C0C0C0}\textbf{Use Case} & \multicolumn{2}{p{13cm}|}{Create User Account}\\ \hline
-\cellcolor[HTML]{C0C0C0}\textbf{Description} & \multicolumn{2}{p{13cm}|}{As a user, I would like to be able to create an account}\\ \hline
-\cellcolor[HTML]{C0C0C0}\textbf{Description} & \multicolumn{2}{p{13cm}|}{\begin{tabular}[c]{@{}l@{}}$\bullet$ The create account button is visible and easy to find\\ $\bullet$ Clear error codes were shown when errors were inputted\\ $\bullet$ The processing is fast enough\\ \end{tabular}}\\ \hline
+\subsubsection{3. Transaction manipulation}
+\begin{longtable}{|m{7cm}|l|} 
+\caption[]{Application functionality concerned with viewing, editing and exporting account transactions} 
+\\\hline 
+\multicolumn{1}{|p{7cm}|}{I expect a user-friendly access to my banks' accounts' transactions, where I can see all the details related to transactions.} & \multicolumn{1}{p{7cm}|}{The user can choose to view the transactions for a specific account or for all accounts. The transactions are displayed in a table view, where the user can sort the transactions by their attributes.}\\ \hline
+\multicolumn{1}{|p{7cm}|}{As a user I expect to have a way to order my transactions into group described by the nature of the transactions, such as payments, rent, etc} & \multicolumn{1}{p{7cm}|}{The transactions have an additional field Category which can be edited by the user to reflect the type of the transaction}\\ \hline
+\multicolumn{1}{|p{7cm}|}{Since the number of transactions can be large, I expect a functionality to search through my transactions} & \multicolumn{1}{p{7cm}|}{The transaction list can be filtered by the category name and by the transaction date.}\\ \hline
+\multicolumn{1}{|p{7cm}|}{As a user I must be able to export my bank account details and transaction information as a text, json or csv file} & \multicolumn{1}{p{7cm}|}{The transaction list currently displayed can be exported as a CSV file, but it does not include the bank account details. Also the user can choose to email the generated statement.}\\ \hline
 \end{longtable}
+
+\begin{longtable}{|m{4cm}|l|}\hline 
+\cellcolor[HTML]{C0C0C0}\textbf{Scenario Satisfied} & \multicolumn{1}{p{13cm}|}{80\%}\\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Comments} & \multicolumn{1}{p{13cm}|}{The application does not allow to search the transactions by any other fields except for it's date and category. The statement can be exported only in CSV format and it does not contain bank account details.}\\ \hline
+\end{longtable}
+
 

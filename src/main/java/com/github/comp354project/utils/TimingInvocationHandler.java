@@ -32,7 +32,7 @@ public class TimingInvocationHandler implements InvocationHandler {
         } catch (Throwable t){
             long elapsed = System.nanoTime() - start;
             logMessage(method, elapsed);
-            throw t;
+            throw t.getCause();
         }
     }
 

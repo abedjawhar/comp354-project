@@ -1,0 +1,21 @@
+{
+  "Acceptance Scenario": "3. Transaction manipulation",
+  "description": "Application functionality concerned with viewing, editing and exporting account transactions",
+  "testCases": [
+      {"expectation" :
+      "I expect a user-friendly access to my banks' accounts' transactions, where I can see all the details related to transactions.",
+        "reality" :
+      "The user can choose to view the transactions for a specific account or for all accounts. The transactions are displayed in a table view, where the user can sort the transactions by their attributes."},
+      {
+        "expectation" :
+        "As a user I expect to have a way to order my transactions into group described by the nature of the transactions, such as payments, rent, etc",
+       "reality" :
+       "The transactions have an additional field Category which can be edited by the user to reflect the type of the transaction" },
+      {"expectation" : "Since the number of transactions can be large, I expect a functionality to search through my transactions"
+       , "reality" : "The transaction list can be filtered by the category name and by the transaction date."},
+      {"expectation" : "As a user I must be able to export my bank account details and transaction information as a text, json or csv file"
+      , "reality" : "The transaction list currently displayed can be exported as a CSV file, but it does not include the bank account details. Also the user can choose to email the generated statement."}
+    ],
+    "Scenario Satisfied" : "80\\%",
+    "Comments" : "The application does not allow to search the transactions by any other fields except for it's date and category. The statement can be exported only in CSV format and it does not contain bank account details."
+}
