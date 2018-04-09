@@ -154,7 +154,20 @@ The com.github.comp354project.viewController package contains a number of contro
 \end{figure}
 The com.github.comp354project.model package contains both our application logic and our database.  As mentioned in the previous section, it is organised in a layered manner, wherein each layer handles its own services and use the services of the layer below it within worrying about that layer's implementation. Data validation and processing is offered by each service: The account service, for example, validate calls to add or delete bank accounts, edit a transaction's category, or query for specific accounts. It does this by querying the database using an account DAO, and ensuring data integrity and validity (with regards to the business rules). It does not, however, worry about user authorisation, and simply assumes the layer above it (The user service) will have handled it. The com.github.comp354project.viewController calls services within this package to update the view and the model.
 
-The com.github.comp354project.service package.account.remote package is a subsystem to our model which mocks an API call to remote servers of banks or credit card companies. In our case however, we don't actually have access to such systems. For this reason, the remote data exists in an SQLite database like our local one.
+\begin{itemize}
+\item The user module is a facade to the whole subsystem, and is called upon by the MVC controllers to pass the calls to the lower level layers.
+
+\item The account module handles account validation and verification, then passes the modification calls to the DAOs. Through the user package, it calls upon validation of authentication and authorisation of account modification calls.
+
+\item The auth module is the model which handles user authentication and session management, and is called upon by the user facade when other layers require a validation of user authentication. It also uses the DAOs to fetch the users from the database to validate the password and username during a login.
+
+\item The DAO module uses the SQLite module to create and return library DAOs to be used by the upper layers.
+
+\item The SQLite module provides connections to the underlying database.
+
+\end{itemize}
+
+We note that the com.github.comp354project.service package.account.remote package is a module to our model which mocks an API call to remote servers of banks or credit card companies. In our case however, we don't actually have access to such systems. For this reason, the remote data exists in an SQLite database like our local one. Hence, we don't truly consider it part of the architecture, instead it is merely an artifact of the implementation of this system.
 
 \clearpage
 
